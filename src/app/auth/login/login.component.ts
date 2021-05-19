@@ -11,7 +11,6 @@ export class LoginComponent implements OnInit {
 
   public form : FormGroup= Object.create(null);
 
-  public submitted = false;
   private returnUrl = '/';
   public showPassword = false;
 
@@ -29,10 +28,9 @@ export class LoginComponent implements OnInit {
   }
 
   public onSubmit(){
+    this.form.markAllAsTouched();
     if(this.form.valid){
       console.log('xd');
-    }else{
-      this.form.markAllAsTouched();
     }
   }
 

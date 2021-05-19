@@ -15,7 +15,7 @@
                                 placeholder="Ingresa tu usuario Interplex" class="form-control"
                                 [class]="getClass('username')">
                             <span
-                                *ngIf="form.controls['username'].hasError('required') && (form.controls['username'].touched || this.submitted)"
+                                *ngIf="form.controls['username'].hasError('required') && (form.controls['username'].touched)"
                                 class="invalid">
                                 Por favor, ingrese su nombre de usuario
                             </span>
@@ -39,7 +39,7 @@
                             </div>
 
                             <span
-                                *ngIf="form.controls['password'].hasError('required') && (form.controls['password'].touched || this.submitted)"
+                                *ngIf="form.controls['password'].hasError('required') && (form.controls['password'].touched )"
                                 class="invalid">
                                 La contraseña es requerida
                             </span>
@@ -58,7 +58,7 @@
                             </button>
                         </div>
                     </form>
-                    <a [routerLink]="['/authentication/recover']" class="login">
+                    <a [routerLink]="['/inicio/recuperar']" class="login">
                         ¿Olvidaste tu contraseña?
                     </a>
                 </div>

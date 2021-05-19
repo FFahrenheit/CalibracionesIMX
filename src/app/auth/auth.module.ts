@@ -5,12 +5,14 @@ import { RouterModule } from '@angular/router';
 import { AuthRoutes } from './auth.routing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { RecoverComponent } from './recover/recover.component';
 
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    RecoverComponent
   ],
   imports: [
     CommonModule,
