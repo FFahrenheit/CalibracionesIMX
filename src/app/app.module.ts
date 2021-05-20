@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { LoaderSpinerComponent } from './shared/loader-spiner/loader-spiner.component';
+import { DashboardComponent } from './layouts/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BlankComponent,
-    LoaderSpinerComponent
+    LoaderSpinerComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

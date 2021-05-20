@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   public onSubmit(){
     this.form.markAllAsTouched();
     if(this.form.valid){
-      console.log('xd');
+      this.router.navigate(['equipos','ver']);
     }
   }
 
