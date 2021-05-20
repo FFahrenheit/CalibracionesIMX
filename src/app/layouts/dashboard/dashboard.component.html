@@ -1,3 +1,60 @@
-<router-outlet>
-    
-</router-outlet>
+<div id="wrapper" class="d-flex">
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div (click)="goTo([''],0)" class="sidebar-heading menu-title title-link"> Equipos </div>
+        <div class="list-group list-group-flush">
+            <a *ngFor="let element of tests;let i = index"
+                class="list-group-item list-group-item-action bg-light clickable" (click)="goTo([''],i)"
+                [class.active-link]="selectedIndex === i">
+                {{ element }}
+            </a>
+        </div>
+    </div>
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <a (click)="shown = !shown" class="navbar-brand clickable" id="menu-toggle" data-toggle="tooltip"
+                data-placement="bottom" title="Click to toggle sidebar">
+                <i class="fas fa-bars mr-3 icon"></i>
+                <img src="../../../assets/icon.png" class="d-inline-block align-top nav-logo"
+                    alt="Click to toggle sidebar">
+                <span class="nav-logo title-logo"> Bitácora de Calibraciones </span>
+            </a>
+            <span class="navbar-text float-right ml-auto">
+
+                <div ngbDropdown class="">
+                    <button class="btn btn-light" id="dropdownBasic1" ngbDropdownToggle>
+                        <span class="signed-user px-2">
+                            <i class="fas fa-user px-2"></i> Ivan 
+                        </span>
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem (click)="'x'">
+                            <i class="fas fa-user-circle pr-1"></i>My profile
+                        </button>
+                        <button ngbDropdownItem (click)="'x'">
+                            <i class="fas fa-key pr-1"></i>Change password
+                        </button>
+                        <button ngbDropdownItem (click)="'x'">
+                            <i class="fas fa-sign-out-alt pr-1"></i> Log out
+                        </button>
+                        <button ngbDropdownItem>Something else</button>
+                        <div *ngIf="true">
+                            <div class="dropdown-divider"></div>
+                            <button ngbDropdownItem (click)="'x'">
+                                <i class="fas fa-users-cog pr-1"></i>Change managers
+                            </button>
+                            <button ngbDropdownItem (click)="'x'">
+                                <i class="fas fa-users pr-1"></i>Add user
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </span>
+        </nav>
+        <div class="container-fluid">
+            <router-outlet>
+
+            </router-outlet>
+        </div>
+    </div>
+</div>

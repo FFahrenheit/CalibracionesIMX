@@ -7,6 +7,7 @@ import { AppRoutes } from './app.routing';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { LoaderSpinerComponent } from './shared/loader-spiner/loader-spiner.component';
 import { DashboardComponent } from './layouts/dashboard/dashboard.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { DashboardComponent } from './layouts/dashboard/dashboard.component';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(AppRoutes)
+    RouterModule.forRoot(AppRoutes),
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
