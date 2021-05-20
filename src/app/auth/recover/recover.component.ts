@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 export class RecoverComponent implements OnInit {
 
   public form : FormGroup = Object.create(null);
-  public submitted = false;
 
   constructor(private router  : Router,
               private fb      : FormBuilder) { }
