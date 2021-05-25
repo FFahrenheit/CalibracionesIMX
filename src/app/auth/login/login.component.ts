@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb      : FormBuilder,
               private router  : Router,
-              private route   : ActivatedRoute) { }
+              private route   : ActivatedRoute,
+              private login   : LoginService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -30,7 +32,32 @@ export class LoginComponent implements OnInit {
   public onSubmit(){
     this.form.markAllAsTouched();
     if(this.form.valid){
-      this.router.navigate(['equipos','ver']);
+      let username = this.form.controls['username'].value;
+      let password = this.form.controls['password'].value;
+      this.login.login(username,password).subscribe(
+        resp=>{
+          /* Save logged user */
+          if(resp == null || resp){
+            if(this.form.controls['remember'].value){
+              localStorage.setItem("remember-user",username);
+            }
+            else{
+              if(localStorage.getItem("remember-user") == username){
+                localStorage.removeItem("remember-user");
+              }
+            }
+          } 
+
+          if(resp){
+            this.router.navigate(['equipos','ver']);
+          }else{
+            /* Error handling */
+          }
+        },
+        error=>{
+          /* Error handling */
+        }
+      )
     }
   }
 

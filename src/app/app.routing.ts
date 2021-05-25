@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { LoggedGuard } from "./guards/logged.guard";
 import { LoginGuard } from "./guards/login.guard";
 import { BlankComponent } from "./layouts/blank/blank.component";
 import { DashboardComponent } from "./layouts/dashboard/dashboard.component";
@@ -7,7 +8,7 @@ export const AppRoutes: Routes = [
     {
         path: '',
         component: DashboardComponent,
-        canActivate: [ LoginGuard ], //temp
+        canActivate: [ LoggedGuard ],
         children: [
             {
                 path: 'equipos',
