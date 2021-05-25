@@ -1,3 +1,6 @@
+const url = 'http://localhost:3300';
+
 export const environment = {
-  production: true
+  production: true,
+  base_url: url
 };

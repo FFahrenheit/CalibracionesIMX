@@ -73,8 +73,9 @@
 }
 
 .menu-title{
-	font-size: 30px !important;
-	font-style: bold;
+	font-size: 25px !important;
+	font-style: normal;
+  color: rgba(48,42,69,255);
 }
 
 .clickable{
@@ -100,6 +101,7 @@
 
 .title-link{
   cursor: pointer;
+  size: 20px;
 }
 
 .icon{
