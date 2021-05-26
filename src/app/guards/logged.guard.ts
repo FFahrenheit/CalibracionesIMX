@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { Observable } from 'rxjs';
 import { LoginService } from '../services/login.service';
 
 @Injectable({
@@ -12,11 +13,8 @@ export class LoggedGuard implements CanActivate {
   
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean{
-      if(!this.loginService.isLogged()){
-        this.router.navigate(['inicio','login'])
-      }
-      return true;
+    state: RouterStateSnapshot): Observable<boolean> | boolean{
+      return this.loginService.refresh(state);
   }
   
 }

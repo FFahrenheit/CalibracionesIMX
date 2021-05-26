@@ -11,7 +11,7 @@ export class LoginGuard implements CanActivate {
   
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean { 
+    state: RouterStateSnapshot): boolean {
       if(this.loginService.isLogged()){
         this.router.navigate(['equipos','ver']);
       }

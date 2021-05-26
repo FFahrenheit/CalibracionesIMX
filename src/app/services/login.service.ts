@@ -68,11 +68,12 @@ export class LoginService {
 
   private validate(name : string){
     let field = localStorage.getItem(name);
-    console.log(field);
     return field != "" && field != "undefined" && field != null;
   }
 
   public refresh(state : RouterStateSnapshot){
+    console.log(this.isLogged());
+    
     if(!this.isLogged()){
       this.router.navigate(['inicio','login'],{ queryParams: { returnUrl: state.url }});
     }
