@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   public form : FormGroup= Object.create(null);
 
-  private returnUrl = '/';
+  private returnUrl : any = '/' ;
   public showPassword = false;
 
   constructor(private fb      : FormBuilder,
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
           } 
 
           if(resp){
-            this.router.navigate(['equipos','ver']);
+            this.router.navigateByUrl(this.returnUrl);
           }else{
             /* Error handling */
           }

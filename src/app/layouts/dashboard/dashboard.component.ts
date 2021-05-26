@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as $ from 'jquery';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,8 @@ export class DashboardComponent implements OnInit {
   public selectedIndex : number = 0;
   public shown : boolean = true;
 
-  constructor(private router : Router) { }
+  constructor(private router  : Router,
+              private login  : LoginService) { }
 
   ngOnInit(): void {
     this.selectedIndex = Number(sessionStorage.getItem('index')) || 0;
@@ -28,6 +30,11 @@ export class DashboardComponent implements OnInit {
     sessionStorage.setItem('index',String(index));
     return;
     this.router.navigate(route);
+  }
+
+  public logout() : void {
+    this.login.logout();
+    this.router.navigate(['inicio','login']);
   }
 
 }
