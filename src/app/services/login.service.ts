@@ -13,6 +13,7 @@ const base_url = environment.base_url;
 })
 export class LoginService {
   private user : User | undefined;
+  private errorMessage : string = '';
 
   constructor(private http    : HttpClient,
               private router  : Router) { }
@@ -48,10 +49,12 @@ export class LoginService {
                       return true;
                       
                     }else{
+                      this.errorMessage = resp.error;
                       return false;
                     }
                   }),catchError(error=>{
                     console.log(error);
+                    this.errorMessage = 'Error de servidor';
                     return of(false);
                   })
                 );
@@ -61,7 +64,7 @@ export class LoginService {
     return this.user;
   }
 
-  isLogged() : boolean{
+  public isLogged() : boolean{
     return this.validate('username') && this.validate('email') 
     && this.validate('token') && this.validate('posicion');
   }
@@ -69,6 +72,10 @@ export class LoginService {
   private validate(name : string){
     let field = localStorage.getItem(name);
     return field != "" && field != "undefined" && field != null;
+  }
+
+  public getError() : string{
+    return this.errorMessage;
   }
 
   public refresh(state : RouterStateSnapshot){

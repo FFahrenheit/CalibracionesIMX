@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { AlertService } from 'src/app/shared/alert';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(private fb      : FormBuilder,
               private router  : Router,
               private route   : ActivatedRoute,
-              private login   : LoginService) { }
+              private login   : LoginService,
+              private alert   : AlertService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -30,6 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   public onSubmit(){
+    this.alert.clear();
     this.form.markAllAsTouched();
     if(this.form.valid){
       let username = this.form.controls['username'].value;
@@ -51,11 +54,11 @@ export class LoginComponent implements OnInit {
           if(resp){
             this.router.navigateByUrl(this.returnUrl);
           }else{
-            /* Error handling */
+            this.alert.error(this.login.getError(), { autoClose: false });
           }
         },
         error=>{
-          /* Error handling */
+          this.alert.warn(this.login.getError(), { autoClose: false });
         }
       )
     }
