@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as $ from 'jquery';
+import { User } from 'src/app/models/user.model';
 import { LoginService } from 'src/app/services/login.service';
+import { publicSidebar } from './dashoard.component.sidebar';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +15,9 @@ export class DashboardComponent implements OnInit {
   public tests = Array(8).fill(0).map(Number.call, Number);
   public selectedIndex : number = 0;
   public shown : boolean = true;
+  public user : User | undefined = Object.create(null);
+
+  public sidebar : any;
 
   constructor(private router  : Router,
               private login  : LoginService) { }
@@ -23,12 +28,17 @@ export class DashboardComponent implements OnInit {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
     });
+
+    this.user = this.login.getLoggedUser();
+
+    if(this.user?.posicion == 'usuario'){
+      this.sidebar = publicSidebar;
+    }
   }
 
   public goTo(route : string[],index : number) : void{
     this.selectedIndex = index;
     sessionStorage.setItem('index',String(index));
-    return;
     this.router.navigate(route);
   }
 

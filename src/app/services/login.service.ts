@@ -37,8 +37,8 @@ export class LoginService {
                       this.user = new User(
                         user.username,
                         user.email,
-                        user.position,
-                        user.name
+                        user.posicion,
+                        user.nombre
                       );
 
                       if(user['recover']){
@@ -72,7 +72,6 @@ export class LoginService {
   }
 
   public refresh(state : RouterStateSnapshot){
-    console.log(this.isLogged());
     
     if(!this.isLogged()){
       this.router.navigate(['inicio','login'],{ queryParams: { returnUrl: state.url }});
@@ -82,8 +81,6 @@ export class LoginService {
                .pipe(
                  map((resp:any)=>{
                    
-                  console.log(resp);
-
                   if(resp['ok']){
 
                       let user = resp.usuario;
@@ -96,8 +93,8 @@ export class LoginService {
                       this.user = new User(
                         user.username,
                         user.email,
-                        user.position,
-                        user.name
+                        user.posicion,
+                        user.nombre
                       );
  
                     return true;

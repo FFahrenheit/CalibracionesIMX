@@ -5,10 +5,10 @@
             Calibraciones
          </div>
         <div class="list-group list-group-flush bg-gradient">
-            <a *ngFor="let element of tests;let i = index"
-                class="list-group-item list-group-item-action bg-light clickable" (click)="goTo([''],i)"
+            <a *ngFor="let link of sidebar;let i = index"
+                class="list-group-item list-group-item-action bg-light clickable" (click)="goTo(['equipos','ver'],i)"
                 [class.active-link]="selectedIndex === i">
-                {{ element }}
+                {{ link.name }}
             </a>
         </div>
     </div>
@@ -19,7 +19,9 @@
                 <i class="fas fa-bars mr-3 icon"></i>
                 <img src="../../../assets/icon.png" class="d-inline-block align-top nav-logo"
                     alt="Click to toggle sidebar">
-                <span class="nav-logo title-logo"> Nueva ruta </span>
+                <span class="nav-logo title-logo"> 
+                    {{ sidebar[selectedIndex].detail }} 
+                </span>
             </a>
             <span class="navbar-text float-right ml-auto">
 
@@ -27,7 +29,7 @@
                 placement="bottom-right" display="dynamic">
                     <button class="btn btn-light " id="dropdownBasic1" ngbDropdownToggle>
                         <span class="signed-user px-2">
-                            <i class="fas fa-user px-2"></i> Ivan 
+                            <i class="fas fa-user px-2"></i> {{ user?.nombre || "Usuario"}}
                         </span>
                     </button>
                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
