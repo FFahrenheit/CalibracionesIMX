@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { Error500Component } from "./errors/error500/error500.component";
 import { LoggedGuard } from "./guards/logged.guard";
 import { LoginGuard } from "./guards/login.guard";
 import { BlankComponent } from "./layouts/blank/blank.component";
@@ -16,6 +17,11 @@ export const AppRoutes: Routes = [
                 import('./devices/devices.module').then(
                     (m) => m.DevicesModule
                 )
+            },
+            {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: 'equipos'
             }
         ]
     },
@@ -37,6 +43,10 @@ export const AppRoutes: Routes = [
                 redirectTo: 'inicio'
             }
         ]
+    },
+    {
+        path: '500',
+        component: Error500Component
     },
     {
         path: '**',

@@ -1,5 +1,6 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -8,7 +9,12 @@ import { catchError } from 'rxjs/operators';
 })
 export class InterceptorService implements HttpInterceptor{
 
-  constructor() { }
+  private retryCount : number;
+
+  constructor(private router : Router) {
+    this.retryCount = 0;
+   }
+  
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     const token = localStorage.getItem('token') || "";
@@ -20,7 +26,12 @@ export class InterceptorService implements HttpInterceptor{
 
     return next.handle(tokenizedRequest).pipe(
       catchError((error : any) => {
-        console.log('Error');
+        this.retryCount += 1;
+        console.log('Error: ' + this.retryCount + ' retries');
+
+        if(this.retryCount > 5){
+          this.router.navigate(['500'])
+        }
         console.warn(error);
         return throwError('Error');
       }));  

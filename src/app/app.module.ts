@@ -11,13 +11,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './services/interceptor.service';
+import { Error500Component } from './errors/error500/error500.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BlankComponent,
     LoaderSpinerComponent,
-    DashboardComponent
+    DashboardComponent,
+    Error500Component
   ],
   imports: [
     BrowserModule,

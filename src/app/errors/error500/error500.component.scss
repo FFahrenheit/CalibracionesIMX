@@ -1,0 +1,37 @@
+.big-404{
+    font-size: 180px;
+    color: rgb(85, 85, 85);
+}
+
+.logo{
+    width: 250px;
+    height: auto;
+    display: inline block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.logo:hover{
+    cursor: pointer;
+}
+
+.go-back{
+    color: rgb(112, 112, 112);
+    font-size: 30px;
+}
+
+.go-back:hover{
+    cursor: pointer;
+    color: rgb(63, 63, 63);
+    text-decoration: underline;
+}
+
+.error-content{
+    font-size: 50px;
+    color:rgb(51, 51, 51);
+}
+
+.body{
+    height: 100%;
+    display: block;
+}
