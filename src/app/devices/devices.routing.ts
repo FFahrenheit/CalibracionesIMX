@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { DevicesListComponent } from "./devices-list/devices-list.component";
 import { ViewDeviceComponent } from "./view-device/view-device.component";
 
 export const DevicesRoutes : Routes =  [
@@ -7,7 +8,7 @@ export const DevicesRoutes : Routes =  [
         children: [
             {
                 path: 'ver',
-                component: ViewDeviceComponent,
+                component: DevicesListComponent,
                 data: {
                     title: 'Consultar equipo'
                 }

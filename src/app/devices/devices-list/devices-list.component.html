@@ -1,0 +1,63 @@
+<div class="table-responsive container text-center">
+    <alert></alert>
+    <div class="table-responsive">
+        <table class="table table-borderless">
+            <tr>
+                <td>
+                    <h4 class="text-left my-1">Lista de equipos</h4>
+                </td>
+                <td>
+                    <div class="text-right">
+                        <!-- <filter [blocked]="['originator']" *ngIf="waivers != null" (apply)="filter($event)"> </filter> -->
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+    <table class="table table-hover table-bordered table-sm">
+        <thead>
+            <tr class="header">
+                <th scope="col">
+                    Id
+                </th>
+                <th scope="col">
+                    Descripcion
+                </th>
+                <th scope="col">
+                    Serie
+                </th>
+                <th scope="col">
+                    Estado
+                </th>
+                <th scope="col">
+                    Activo
+                </th>
+                <th scope="col">
+                    Ubicacion
+                </th>
+                <th scope="col">
+                    Ultima calibracion
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let t of tests">
+                <td>A</td>
+                <td>Una descripcion para el equipo</td>
+                <td>Serie19298193</td>
+                <td>Listo</td>
+                <td>Si</td>    
+                <td>Toolroom</td>
+                <td>10/10/2020</td>            
+            </tr>
+        </tbody>
+
+
+    </table>
+    <!-- <ng-template #empty_body>
+        <error-message type="empty" title="Nothing here..." description="You don't have any waiver request yet">
+        </error-message>
+    </ng-template> -->
+</div>

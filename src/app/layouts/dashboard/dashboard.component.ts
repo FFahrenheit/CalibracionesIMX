@@ -12,7 +12,6 @@ import { publicSidebar } from './dashoard.component.sidebar';
 })
 export class DashboardComponent implements OnInit {
 
-  public tests = Array(8).fill(0).map(Number.call, Number);
   public selectedIndex : number = 0;
   public shown : boolean = true;
   public user : User | undefined = Object.create(null);
