@@ -1,7 +1,7 @@
-<div *ngIf="exists" class="card my-1 pb-3">
+<div *ngIf="exists" class="card my-3 pb-3">
     <div class="container text-center pt-1">
         <div class="row">
-            <h4 class="text-left my-3"> {{ title }} {{ id }}</h4>
+            <h4 class="text-left my-3"> {{ device['descripcion'] || '' }} - {{ id }} </h4>
 
             <!-- <div class="col-md-8">
                 <h4 class="text-left my-3"> {{ title }} {{ id }}</h4>
@@ -13,15 +13,18 @@
 
         <div class="row justify-content-center">
             <div class="col-md-5">
+
                 <h5 class="text-left subtitle-att">Detalles del equipo</h5>
-                <attr name="id" value="value"></attr>
-                <attr name="id" value="value"></attr>
-                <attr name="id" value="value"></attr>
-                <attr name="id" value="value"></attr>
-                <attr name="id" value="value"></attr>
-                <attr name="id" value="value"></attr>
-                <attr name="id" value="value"></attr>
-                <attr name="id" value="value"></attr>
+                <attr name="ID" [value]="id"></attr>
+                <attr name="Descripcion" [value]="device.descripcion"></attr>
+                <attr name="Numero de serie" [value]="device.serie"></attr>
+                <attr name="Ubicacion" [value]="device.ubicacion"></attr>
+                <attr name="Tipo de calibracion" [value]="device.calibracion"></attr>
+                <attr name="Error" [value]=" '± ' + device.error"></attr>                
+                <attr name="Resolución" [value]="device.resInf + ' - ' + device.resSup"></attr>
+                <attr name="Estado del dispositivo" [value]="device.activo"></attr>
+                <attr name="Estado de calibracion" [value]="device.estado"></attr>
+
             </div>
             <div class="col-md-7 table-responsive container text-center">
                 <table class="table table-hover table-bordered table-sm">
