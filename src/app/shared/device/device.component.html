@@ -1,1 +1,66 @@
-<p>device {{ id }} works!</p>
+<div class="card my-1 pb-3">
+    <div class="container text-center pt-1">
+        <div class="row">
+            <h4 class="text-left my-3"> {{ title }} {{ id }}</h4>
+
+            <!-- <div class="col-md-8">
+                <h4 class="text-left my-3"> {{ title }} {{ id }}</h4>
+            </div>
+            <div class="col-md-4 text-right">
+                <waiver-actions [wr]="wr"></waiver-actions>
+            </div> -->
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <h5 class="text-left subtitle-att">Detalles del equipo</h5>
+                <attr name="id" value="value"></attr>
+                <attr name="id" value="value"></attr>
+                <attr name="id" value="value"></attr>
+                <attr name="id" value="value"></attr>
+                <attr name="id" value="value"></attr>
+                <attr name="id" value="value"></attr>
+                <attr name="id" value="value"></attr>
+                <attr name="id" value="value"></attr>
+            </div>
+            <div class="col-md-7 table-responsive container text-center">
+                <table class="table table-hover table-bordered table-sm">
+                    <thead>
+                        <tr class="header">
+                            <th scope="col">
+                                Id
+                            </th>
+                            <th scope="col">
+                                Descripcion
+                            </th>
+                            <th scope="col">
+                                Serie
+                            </th>
+                            <th scope="col">
+                                Estado
+                            </th>
+                            <th scope="col">
+                                Activo
+                            </th>
+                            <th scope="col">
+                                Ubicacion
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let t of tests">
+                            <td>A</td>
+                            <td>Una descripcion para el equipo</td>
+                            <td>Serie19298193</td>
+                            <td>Listo</td>
+                            <td>Si</td>
+                            <td>Toolroom</td>
+                        </tr>
+                    </tbody>
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
