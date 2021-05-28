@@ -11,7 +11,7 @@ import { SharedModule } from '../shared/shared.module';
 @NgModule({
   declarations: [
     ViewDeviceComponent,
-    DevicesListComponent
+    DevicesListComponent,
   ],
   imports: [
     CommonModule,

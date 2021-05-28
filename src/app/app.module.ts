@@ -19,7 +19,7 @@ import { Error500Component } from './errors/error500/error500.component';
     BlankComponent,
     LoaderSpinerComponent,
     DashboardComponent,
-    Error500Component
+    Error500Component,
   ],
   imports: [
     BrowserModule,

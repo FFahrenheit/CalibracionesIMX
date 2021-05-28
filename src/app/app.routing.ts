@@ -50,6 +50,6 @@ export const AppRoutes: Routes = [
     },
     {
         path: '**',
-        component: BlankComponent 
+        component: Error500Component 
     }
 ];

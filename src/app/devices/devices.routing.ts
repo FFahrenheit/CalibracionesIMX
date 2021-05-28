@@ -10,7 +10,14 @@ export const DevicesRoutes : Routes =  [
                 path: 'ver',
                 component: DevicesListComponent,
                 data: {
-                    title: 'Consultar equipo'
+                    title: 'Lista de equipos'
+                }
+            },
+            {
+                path: 'detalles/:id',
+                component: ViewDeviceComponent,
+                data: {
+                    title: 'Detalles de equipo'
                 }
             },
             {
