@@ -4,6 +4,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AlertComponent } from './alert/alert.component';
 import { AttributeComponent } from './attribute/attribute.component';
 import { DeviceComponent } from './device/device.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { DeviceComponent } from './device/device.component';
     DeviceComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    PipesModule.forRoot()
   ],
   exports: [
     AlertComponent,

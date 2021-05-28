@@ -20,8 +20,8 @@
                 <attr name="Numero de serie" [value]="device.serie"></attr>
                 <attr name="Ubicacion" [value]="device.ubicacion"></attr>
                 <attr name="Tipo de calibracion" [value]="device.calibracion"></attr>
-                <attr name="Error" [value]=" '± ' + device.error"></attr>                
-                <attr name="Resolución" [value]="device.resInf + ' - ' + device.resSup"></attr>
+                <attr name="Error" [value]="errorPipe.transform(device.error)"></attr>                
+                <attr name="Resolución" [value]="resolution.transform(device.resInf,device.resSup)"></attr>
                 <attr name="Estado del dispositivo" [value]="device.activo"></attr>
                 <attr name="Estado de calibracion" [value]="device.estado"></attr>
 

@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ErrorPipe } from 'src/app/pipes/error.pipe';
+import { ResolutionPipe } from 'src/app/pipes/resolution.pipe';
 import { GetDeviceService } from 'src/app/services/get-device.service';
 
 @Component({
@@ -17,7 +19,9 @@ export class DeviceComponent implements OnInit {
 
   public tests = Array(8).fill(0).map(Number.call, Number);
 
-  constructor(private deviceService : GetDeviceService) { 
+  constructor(private deviceService : GetDeviceService,
+              public errorPipe      : ErrorPipe,
+              public resolution     : ResolutionPipe) { 
   }
 
   ngOnInit(): void {
