@@ -17,7 +17,7 @@ export class DeviceComponent implements OnInit {
   public exists : boolean | null = null;
   public error : string | null = '';
 
-  public tests = Array(8).fill(0).map(Number.call, Number);
+  public tests = Array(5).fill(0).map(Number.call, Number);
 
   constructor(private deviceService : GetDeviceService,
               public errorPipe      : ErrorPipe,

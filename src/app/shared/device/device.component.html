@@ -15,54 +15,73 @@
             <div class="col-md-5">
 
                 <h5 class="text-left subtitle-att">Detalles del equipo</h5>
+
                 <attr name="ID" [value]="id"></attr>
                 <attr name="Descripcion" [value]="device.descripcion"></attr>
                 <attr name="Numero de serie" [value]="device.serie"></attr>
                 <attr name="Ubicacion" [value]="device.ubicacion"></attr>
                 <attr name="Tipo de calibracion" [value]="device.calibracion"></attr>
-                <attr name="Error" [value]="errorPipe.transform(device.error)"></attr>                
+                <attr name="Error" [value]="errorPipe.transform(device.error)"></attr>
                 <attr name="Resolución" [value]="resolution.transform(device.resInf,device.resSup)"></attr>
                 <attr name="Estado del dispositivo" [value]="device.activo"></attr>
                 <attr name="Estado de calibracion" [value]="device.estado"></attr>
 
             </div>
             <div class="col-md-7 table-responsive container text-center">
-                <table class="table table-hover table-bordered table-sm">
-                    <thead>
-                        <tr class="header">
-                            <th scope="col">
-                                Id
-                            </th>
-                            <th scope="col">
-                                Descripcion
-                            </th>
-                            <th scope="col">
-                                Serie
-                            </th>
-                            <th scope="col">
-                                Estado
-                            </th>
-                            <th scope="col">
-                                Activo
-                            </th>
-                            <th scope="col">
-                                Ubicacion
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let t of tests">
-                            <td>A</td>
-                            <td>Una descripcion para el equipo</td>
-                            <td>Serie19298193</td>
-                            <td>Listo</td>
-                            <td>Si</td>
-                            <td>Toolroom</td>
-                        </tr>
-                    </tbody>
+                <div>
+                    <h5 class="text-left subtitle-att">Responsables del equipo</h5>
+                    <ul class="dot-list">
+                        <li *ngFor="let r of device.responsables">
+                            {{ r.nombre }}
+                        </li>
+                    </ul>
+                </div>
 
-
-                </table>
+                <div>
+                    <h5 class="text-left subtitle-att">Calibradores del equipo</h5>
+                    <ul class="dot-list">
+                        <li *ngFor="let c of device.verificadores">
+                            {{ c.nombre }}
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-left subtitle-att">Historial de calibraciones</h5>
+                    <table class="table table-hover table-bordered table-sm">
+                        <thead>
+                            <tr class="header">
+                                <th scope="col">
+                                    Id
+                                </th>
+                                <th scope="col">
+                                    Descripcion
+                                </th>
+                                <th scope="col">
+                                    Serie
+                                </th>
+                                <th scope="col">
+                                    Estado
+                                </th>
+                                <th scope="col">
+                                    Activo
+                                </th>
+                                <th scope="col">
+                                    Ubicacion
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let t of tests">
+                                <td>A</td>
+                                <td>Una descripcion para el equipo</td>
+                                <td>Serie19298193</td>
+                                <td>Listo</td>
+                                <td>Si</td>
+                                <td>Toolroom</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
