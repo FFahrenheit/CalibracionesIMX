@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -12,6 +12,11 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './services/interceptor.service';
 import { Error500Component } from './errors/error500/error500.component';
+import { CommonModule, DatePipe, TitleCasePipe } from '@angular/common';
+
+import { registerLocaleData } from '@angular/common';
+import localeMX from '@angular/common/locales/es-MX';
+import localeMXExtra from '@angular/common/locales/extra/es-MX';
 
 @NgModule({
   declarations: [
@@ -23,12 +28,20 @@ import { Error500Component } from './errors/error500/error500.component';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     RouterModule.forRoot(AppRoutes),
     NgbModule,
     SharedModule,
     HttpClientModule,
   ],
   providers: [
+    DatePipe,
+    TitleCasePipe,
+    Title,
+    { 
+      provide: LOCALE_ID, 
+      useValue: 'es-MX' 
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
@@ -37,4 +50,8 @@ import { Error500Component } from './errors/error500/error500.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(){
+    registerLocaleData(localeMX, 'es-MX',localeMXExtra);
+  }
+}

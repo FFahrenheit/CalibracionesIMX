@@ -45,39 +45,32 @@
                         </li>
                     </ul>
                 </div>
+                
                 <div>
                     <h5 class="text-left subtitle-att">Historial de calibraciones</h5>
                     <table class="table table-hover table-bordered table-sm">
                         <thead>
                             <tr class="header">
                                 <th scope="col">
-                                    Id
+                                    Fecha
                                 </th>
                                 <th scope="col">
-                                    Descripcion
+                                    Prove-Calibracion
                                 </th>
                                 <th scope="col">
-                                    Serie
+                                    Verificó
                                 </th>
                                 <th scope="col">
-                                    Estado
-                                </th>
-                                <th scope="col">
-                                    Activo
-                                </th>
-                                <th scope="col">
-                                    Ubicacion
+                                    Verif. de etiqueta
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let t of tests">
-                                <td>A</td>
-                                <td>Una descripcion para el equipo</td>
-                                <td>Serie19298193</td>
-                                <td>Listo</td>
-                                <td>Si</td>
-                                <td>Toolroom</td>
+                            <tr *ngFor="let c of device.calibraciones">
+                                <td> {{ c.fecha| date:'mediumDate'  }}</td>
+                                <td> {{ c.calibrador }}</td>
+                                <td> {{ c.verifico }} </td>
+                                <td> OK </td>
                             </tr>
                         </tbody>
                     </table>
