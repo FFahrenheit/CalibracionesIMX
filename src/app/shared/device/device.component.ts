@@ -36,4 +36,27 @@ export class DeviceComponent implements OnInit {
         });
   }
 
+  public getStatus() : string{
+    if(this.device == null){
+      return ''
+    };
+
+    switch(this.device.estado){
+      case 'Calibración Aceptada':
+      case 'Referencia':
+        return 'ok';
+      case 'En Proceso de Calibración':
+        return 'waiting';
+      case 'Calibración Pendiente':
+        return 'warning';
+      case 'Reparacion':
+      case 'Desactivado':
+      case 'Baja':
+        return 'not-ok';
+      default:
+        return 'unknown';
+    }
+
+  }
+
 }

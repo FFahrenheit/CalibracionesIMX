@@ -24,7 +24,7 @@
                 <attr name="Error" [value]="errorPipe.transform(device.error)"></attr>
                 <attr name="Resolución" [value]="resolution.transform(device.resInf,device.resSup)"></attr>
                 <attr name="Estado del dispositivo" [value]="device.activo"></attr>
-                <attr name="Estado de calibracion" [value]="device.estado"></attr>
+                <attr name="Estado de calibracion" [value]="device.estado" [status]="getStatus()"></attr>
 
             </div>
             <div class="col-md-7 table-responsive container text-center">
