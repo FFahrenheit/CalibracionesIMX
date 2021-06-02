@@ -12,7 +12,7 @@
         </div>
 
         <div class="row justify-content-center">
-            <div class="col-md-5">
+            <div class="col-md-6">
 
                 <h5 class="text-left subtitle-att">Detalles del equipo</h5>
 
@@ -23,11 +23,11 @@
                 <attr name="Tipo de calibracion" [value]="device.calibracion"></attr>
                 <attr name="Error" [value]="errorPipe.transform(device.error)"></attr>
                 <attr name="Resolución" [value]="resolution.transform(device.resInf,device.resSup)"></attr>
-                <attr name="Estado del dispositivo" [value]="device.activo"></attr>
+                <attr name="Estado del dispositivo" [value]="device.activo" [status]="getActive()"></attr>
                 <attr name="Estado de calibracion" [value]="device.estado" [status]="getStatus()"></attr>
 
             </div>
-            <div class="col-md-7 table-responsive container text-center">
+            <div class="col-md-6 table-responsive container text-center">
                 <div>
                     <h5 class="text-left subtitle-att">Responsables del equipo</h5>
                     <ul class="dot-list">

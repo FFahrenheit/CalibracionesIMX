@@ -9,7 +9,7 @@ export class AttributeComponent implements OnInit {
 
   @Input() public name = 'Title';
   @Input() public value = 'Value';
-  @Input() public status = 'none';
+  @Input() public status = '';
   public icons = {
     'ok' : 'fas fa-check-circle ok',
     'warning' : 'fas fa-exclamation-circle warning',

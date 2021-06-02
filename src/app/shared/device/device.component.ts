@@ -36,6 +36,26 @@ export class DeviceComponent implements OnInit {
         });
   }
 
+  public getActive() : string{
+    if(this.device == null){
+      return ''
+    };
+
+    switch(this.device.activo){
+      case 'Activo':
+        return 'ok';
+      case 'Reparacion':
+        return 'waiting';
+      case 'Baja':
+      case 'Desactivado':
+      case 'Extraviado':
+        return 'not-ok';
+      default:
+        return 'unknown';
+    }
+
+  }
+
   public getStatus() : string{
     if(this.device == null){
       return ''
@@ -46,10 +66,10 @@ export class DeviceComponent implements OnInit {
       case 'Referencia':
         return 'ok';
       case 'En Proceso de Calibración':
+      case 'Reparacion':
         return 'waiting';
       case 'Calibración Pendiente':
         return 'warning';
-      case 'Reparacion':
       case 'Desactivado':
       case 'Baja':
         return 'not-ok';
