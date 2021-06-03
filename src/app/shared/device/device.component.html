@@ -25,7 +25,14 @@
                 <attr name="Resolución" [value]="resolution.transform(device.resInf,device.resSup)"></attr>
                 <attr name="Estado del dispositivo" [value]="device.activo" [status]="getActive()"></attr>
                 <attr name="Estado de calibracion" [value]="device.estado" [status]="getStatus()"></attr>
-
+                <div>
+                    <h5 class="text-left subtitle-att">Calibradores del equipo</h5>
+                    <ul class="dot-list">
+                        <li *ngFor="let c of device.verificadores">
+                            {{ c.nombre }}
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="col-md-6 table-responsive container text-center">
                 <div>
@@ -37,15 +44,36 @@
                     </ul>
                 </div>
 
-                <div>
+                <!-- <div>
                     <h5 class="text-left subtitle-att">Calibradores del equipo</h5>
                     <ul class="dot-list">
                         <li *ngFor="let c of device.verificadores">
                             {{ c.nombre }}
                         </li>
                     </ul>
+                </div> -->
+
+                <div *ngIf="device.activo=='Activo'">
+                    <h5 class="text-left subtitle-att">Calendario de calibración</h5>
+
+                    <attr name="Última calibración" [value]="datePipe.transform(device.calendario.ultimo,'longDate')">
+                    </attr>
+                    <attr name="Siguiente calibración"
+                        [value]="datePipe.transform(device.calendario.siguiente,'longDate')">
+                    </attr>
+                    <attr name="Aviso" [value]="datePipe.transform(device.calendario.aviso,'longDate')">
+                    </attr>
+
+
+                    <div class="m5-3 mt- mb-3">
+                        <p>Deadline próxima calibración
+                            <ngb-progressbar class="bar my-1" [type]="getDateType()" [value]="getDateValue()" height="25px">
+                            {{ status }}
+                            </ngb-progressbar>
+                        </p>
+                    </div>
                 </div>
-                
+
                 <div>
                     <h5 class="text-left subtitle-att">Historial de calibraciones</h5>
                     <table class="table table-hover table-bordered table-sm">
@@ -67,7 +95,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let c of device.calibraciones">
-                                <td> {{ c.fecha| date:'mediumDate'  }}</td>
+                                <td> {{ c.fecha| date:'mediumDate' }}</td>
                                 <td> {{ c.calibrador }}</td>
                                 <td> {{ c.verifico }} </td>
                                 <td> OK </td>

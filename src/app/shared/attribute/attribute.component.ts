@@ -15,7 +15,7 @@ export class AttributeComponent implements OnInit {
     'warning' : 'fas fa-exclamation-circle warning',
     'not-ok' : 'fas fa-exclamation-circle not-ok',
     'unknown' : 'fas fa-question-circle',
-    'waiting' : 'fas fa-history warning'
+    'waiting' : 'fas fa-clock warning'
   };
 
   constructor() { }

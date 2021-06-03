@@ -5,6 +5,7 @@ import { AlertComponent } from './alert/alert.component';
 import { AttributeComponent } from './attribute/attribute.component';
 import { DeviceComponent } from './device/device.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { PipesModule } from '../pipes/pipes.module';
   ],
   imports: [
     CommonModule,
-    PipesModule.forRoot()
+    PipesModule.forRoot(),
+    NgbModule
   ],
   exports: [
     AlertComponent,
