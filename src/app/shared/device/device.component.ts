@@ -86,16 +86,18 @@ export class DeviceComponent implements OnInit {
 
   public getDateType() : string{
     const today = new Date();
-    const deadLine = new Date(this.device.calendario.ultimo);
+    const deadLine = new Date(this.device.ultima);
     let daysDiff = Number(today) - Number(deadLine);
     daysDiff = Math.ceil(daysDiff / (1000 * 60 * 60 * 24));
     
-    if(daysDiff > (365-20)){
+    const periodo = this.device.periodo*365;
+
+    if(daysDiff > (periodo-20)){
       this.status = daysDiff < 365 ? 'Idealmente en proceso' : 'Idealmente calibrado';
       return 'danger';
     }
 
-    if(daysDiff > (365-20-20)){
+    if(daysDiff > (periodo-20-20)){
       this.status = 'Idealmente planeando calibración';
       return 'warning';
     }
@@ -105,10 +107,19 @@ export class DeviceComponent implements OnInit {
 
   public getDateValue() : number{
     const today = new Date();
-    const deadLine = new Date(this.device.calendario.ultimo);
+    const deadLine = new Date(this.device.ultima);
     let daysDiff = Number(today) - Number(deadLine);
     daysDiff = Math.ceil(daysDiff / (1000 * 60 * 60 * 24)); 
-    return daysDiff / 365 * 100;
+    return daysDiff / (Number(this.device.periodo)*365) * 100;
+  }
+
+  public getDays() : string {
+    const today = new Date();
+    const deadLine = new Date(this.device.siguiente);
+    let daysDiff = Number(deadLine) - Number(today);
+    daysDiff = Math.ceil(daysDiff / (1000 * 60 * 60 * 24))
+    
+    return daysDiff + ' días';
   }
 
 }

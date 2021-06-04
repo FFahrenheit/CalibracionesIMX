@@ -13,5 +13,16 @@
 }
 
 .bar{
-    -webkit-text-stroke: 1px rgb(44, 44, 44); /* width and color */
+    -webkit-text-stroke: 0.55px rgb(0, 0, 0); /* width and color */
+}
+
+.pbar i{
+    font-size: 24px;
+    padding-top: 2px;
+}
+
+.pbar p{
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 0px;
 }

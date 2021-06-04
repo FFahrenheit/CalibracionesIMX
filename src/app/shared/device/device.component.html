@@ -25,6 +25,8 @@
                 <attr name="Resolución" [value]="resolution.transform(device.resInf,device.resSup)"></attr>
                 <attr name="Estado del dispositivo" [value]="device.activo" [status]="getActive()"></attr>
                 <attr name="Estado de calibracion" [value]="device.estado" [status]="getStatus()"></attr>
+                <attr name="Periodo de calibración" [value]="device.periodo == 1 ? '1 año' : device.periodo + ' años'">
+                </attr>
                 <div>
                     <h5 class="text-left subtitle-att">Calibradores del equipo</h5>
                     <ul class="dot-list">
@@ -56,21 +58,35 @@
                 <div *ngIf="device.activo=='Activo'">
                     <h5 class="text-left subtitle-att">Calendario de calibración</h5>
 
-                    <attr name="Última calibración" [value]="datePipe.transform(device.calendario.ultimo,'longDate')">
+                    <attr name="Última calibración" [value]="datePipe.transform(device.ultima,'longDate')">
                     </attr>
-                    <attr name="Siguiente calibración"
-                        [value]="datePipe.transform(device.calendario.siguiente,'longDate')">
+                    <attr name="Siguiente calibración" [value]="datePipe.transform(device.siguiente,'longDate')">
                     </attr>
-                    <attr name="Aviso" [value]="datePipe.transform(device.calendario.aviso,'longDate')">
+                    <attr name="Aviso" [value]="datePipe.transform(device.aviso,'longDate')">
+                    </attr>
+                    <attr name="Días antes de siguiente calibración: " [value]="getDays()">
                     </attr>
 
 
                     <div class="m5-3 mt- mb-3">
-                        <p>Deadline próxima calibración
-                            <ngb-progressbar class="bar my-1" [type]="getDateType()" [value]="getDateValue()" height="25px">
-                            {{ status }}
-                            </ngb-progressbar>
-                        </p>
+                        <p>Deadline próxima calibración</p>
+                        <div class="row">
+                            <div class="col-2 pbar">
+                                <p>{{ device.ultima | date:'shortDate'}}</p>
+                                <i class="far fa-calendar-check"></i>
+                            </div>
+                            <div class="col-8">
+                                <ngb-progressbar [type]="getDateType()" [value]="getDateValue()"
+                                    [ngClass]="{'bar' : getDateType() == 'warning' }"
+                                    height="25px">
+                                    {{ status }}
+                                </ngb-progressbar>
+                            </div>
+                            <div class="col-2 pbar">
+                                <p>{{ device.siguiente | date:'shortDate' }}</p>
+                                <i class="far fa-calendar-times"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
