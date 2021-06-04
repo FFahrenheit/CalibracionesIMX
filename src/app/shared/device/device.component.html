@@ -1,4 +1,4 @@
-<div *ngIf="exists" class="card my-3 pb-3">
+<div *ngIf="exists; else not_found" class="card my-3 pb-3">
     <div class="container text-center pt-1">
         <div class="row">
             <h4 class="text-left my-3"> {{ device['descripcion'] || '' }} - {{ id }} </h4>
@@ -123,3 +123,8 @@
         </div>
     </div>
 </div>
+<ng-template #not_found>
+    <error-message type="error" title="ERROR" [loading]="exists"
+    description="No se encontró el dispositivo con el ID especificado">
+    </error-message>
+</ng-template>

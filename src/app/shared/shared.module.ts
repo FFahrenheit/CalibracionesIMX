@@ -6,23 +6,26 @@ import { AttributeComponent } from './attribute/attribute.component';
 import { DeviceComponent } from './device/device.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ErrorMessageComponent } from './error-message/error-message.component';
 
 @NgModule({
   declarations: [
     AlertComponent,
     FooterComponent,
     AttributeComponent,
-    DeviceComponent
+    DeviceComponent,
+    ErrorMessageComponent,
   ],
   imports: [
     CommonModule,
     PipesModule.forRoot(),
-    NgbModule
+    NgbModule,
   ],
   exports: [
     AlertComponent,
     FooterComponent,
-    DeviceComponent
+    DeviceComponent,
+    ErrorMessageComponent
   ]
 })
 export class SharedModule { }

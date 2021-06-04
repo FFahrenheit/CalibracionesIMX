@@ -1,0 +1,14 @@
+<div class="text-center" *ngIf="loading != null; else load_process" [ngClass]="{'body' : !type.includes('sub')}"
+    [class]="styles">
+    <img (click)="goBack()" class="my-1 logo" [src]="url">
+    <h1 class="big-404 mb-3">{{ title }}</h1>
+    <h2 class="error-content">{{ description }}</h2>
+    <span *ngIf="!type.includes('sub')" (click)="goBack()" class="go-back">Go back </span>
+</div>
+<ng-template #load_process>
+    <div class="text-center py-5">
+        <div class="spinner-border loading" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</ng-template>
