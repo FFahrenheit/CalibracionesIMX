@@ -39,6 +39,8 @@ export class DeviceComponent implements OnInit {
           }else{
             this.error = this.deviceService.getError();            
           }
+        },error=>{
+          this.exists = false;
         });
   }
 

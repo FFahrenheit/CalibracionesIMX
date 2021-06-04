@@ -28,7 +28,6 @@ import localeMXExtra from '@angular/common/locales/extra/es-MX';
   ],
   imports: [
     BrowserModule,
-    CommonModule,
     RouterModule.forRoot(AppRoutes),
     NgbModule,
     SharedModule,
