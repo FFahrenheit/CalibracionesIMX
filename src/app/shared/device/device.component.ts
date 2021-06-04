@@ -4,6 +4,7 @@ import { NgbProgressbar } from '@ng-bootstrap/ng-bootstrap';
 import { ErrorPipe } from 'src/app/pipes/error.pipe';
 import { ResolutionPipe } from 'src/app/pipes/resolution.pipe';
 import { GetDeviceService } from 'src/app/services/get-device.service';
+import { IconsAlert } from 'src/app/util/icons.alert';
 
 @Component({
   selector: 'device',
@@ -49,19 +50,7 @@ export class DeviceComponent implements OnInit {
       return ''
     };
 
-    switch(this.device.activo){
-      case 'Activo':
-        return 'ok';
-      case 'Reparacion':
-        return 'waiting';
-      case 'Baja':
-      case 'Desactivado':
-      case 'Extraviado':
-        return 'not-ok';
-      default:
-        return 'unknown';
-    }
-
+    return IconsAlert.getActive(this.device.activo);
   }
 
   public getStatus() : string{
@@ -69,21 +58,7 @@ export class DeviceComponent implements OnInit {
       return ''
     };
 
-    switch(this.device.estado){
-      case 'Calibración Aceptada':
-      case 'Referencia':
-        return 'ok';
-      case 'En Proceso de Calibración':
-      case 'Reparacion':
-        return 'waiting';
-      case 'Calibración Pendiente':
-        return 'warning';
-      case 'Desactivado':
-      case 'Baja':
-        return 'not-ok';
-      default:
-        return 'unknown';
-    }
+    return IconsAlert.getStatus(this.device.estado);
   }
 
   public getDateType() : string{

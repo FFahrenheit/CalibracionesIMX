@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { IconsAlert } from 'src/app/util/icons.alert';
 
 @Component({
   selector: 'attr',
@@ -10,13 +11,7 @@ export class AttributeComponent implements OnInit {
   @Input() public name = 'Title';
   @Input() public value = 'Value';
   @Input() public status = '';
-  public icons = {
-    'ok' : 'fas fa-check-circle ok',
-    'warning' : 'fas fa-exclamation-circle warning',
-    'not-ok' : 'fas fa-exclamation-circle not-ok',
-    'unknown' : 'fas fa-question-circle',
-    'waiting' : 'fas fa-clock warning'
-  };
+  public icons = IconsAlert.icons;
 
   constructor() { }
 

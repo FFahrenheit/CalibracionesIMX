@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DevicesService } from 'src/app/services/devices.service';
 import { AlertService } from 'src/app/shared/alert';
+import { IconsAlert } from 'src/app/util/icons.alert';
 
 @Component({
   selector: 'app-devices-list',
@@ -10,8 +11,8 @@ import { AlertService } from 'src/app/shared/alert';
 })
 export class DevicesListComponent implements OnInit {
 
-  public tests = Array(8).fill(0).map(Number.call, Number);
   public devices;
+  public icons = IconsAlert;
 
   constructor(private devicesService  : DevicesService,
               private router          : Router,

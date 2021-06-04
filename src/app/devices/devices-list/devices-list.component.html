@@ -32,7 +32,7 @@
                     Estado
                 </th>
                 <th scope="col" class="align-middle">
-                    Activo
+                    <span class="mx-3">Activo</span>
                 </th>
                 <th scope="col" class="align-middle">
                     Ubicación
@@ -50,8 +50,14 @@
                 <td> {{ d.id }}</td>
                 <td> {{ d.descripcion }} </td>
                 <td> {{ d.serie }}</td>
-                <td> {{ d.estado }} </td>
-                <td> {{ d.activo }} </td>    
+                <td>
+                     <i [class]="icons.estado(d.estado)"></i>
+                     {{ d.estado }} 
+                </td>
+                <td>
+                     <i [class]="icons.activo(d.activo)"></i>
+                     {{ d.activo }} 
+                </td>    
                 <td> {{ d.ubicacion}} </td>
                 <td> {{ d.ultima | date:'shortDate' }} </td>            
                 <td> {{ d.siguiente | date:'shortDate' }} </td>
