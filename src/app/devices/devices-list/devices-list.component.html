@@ -1,4 +1,4 @@
-<div class="table-responsive container text-center">
+<div class="table-responsive container text-center mb-5">
     <alert></alert>
     <div class="table-responsive">
         <table class="table table-borderless">
@@ -20,7 +20,7 @@
         <thead>
             <tr class="header">
                 <th scope="col">
-                    Id
+                    ID
                 </th>
                 <th scope="col">
                     Descripcion
@@ -35,22 +35,26 @@
                     Activo
                 </th>
                 <th scope="col">
-                    Ubicacion
+                    Ubicación
                 </th>
                 <th scope="col">
-                    Ultima calibracion
+                    Ultima calibración
+                </th>
+                <th scope="col">
+                    Siguiente calibración
                 </th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let t of tests">
-                <td>A</td>
-                <td>Una descripcion para el equipo</td>
-                <td>Serie19298193</td>
-                <td>Listo</td>
-                <td>Si</td>    
-                <td>Toolroom</td>
-                <td>10/10/2020</td>            
+            <tr *ngFor="let d of devices">
+                <td> {{ d.id }}</td>
+                <td> {{ d.descripcion }} </td>
+                <td> {{ d.serie }}</td>
+                <td> {{ d.estado }} </td>
+                <td> {{ d.activo }} </td>    
+                <td> {{ d.ubicacion}} </td>
+                <td> {{ d.ultima | date:'shortDate' }} </td>            
+                <td> {{ d.siguiente | date:'shortDate' }} </td>
             </tr>
         </tbody>
 
