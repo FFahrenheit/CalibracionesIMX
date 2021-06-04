@@ -1,10 +1,10 @@
 export class IconsAlert {
     public static icons = {
-        'ok': 'fas fa-check-circle ok',
-        'warning': 'fas fa-exclamation-circle warning',
-        'not-ok': 'fas fa-exclamation-circle not-ok',
+        'ok': 'fas fa-check-circle ok-icon-st',
+        'warning': 'fas fa-exclamation-circle warning-icon-st',
+        'not-ok': 'fas fa-exclamation-circle not-ok-icon-st',
         'unknown': 'fas fa-question-circle',
-        'waiting': 'fas fa-clock warning'
+        'waiting': 'fas fa-clock warning-icon-st'
     };
 
     constructor() {
