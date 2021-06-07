@@ -1,3 +1,4 @@
+import { TitleCasePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -46,8 +47,9 @@ export class FilterModalComponent implements OnInit {
     'Reparacion'
   ];
 
-  constructor(private modalService: NgbModal,
-    private fb: FormBuilder) { }
+  constructor(private modalService  : NgbModal,
+              private fb            : FormBuilder,
+              private titleCase     : TitleCasePipe) { }
 
   ngOnInit(): void {
     let saved: any = {}; //Once service  is created
@@ -71,7 +73,7 @@ export class FilterModalComponent implements OnInit {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(result => {
       switch (result) {
         case 'YES':
-          console.log('Yes');
+          const obj = this.getValues();
           break;
         case 'NO':
           console.log('No')
@@ -93,5 +95,49 @@ export class FilterModalComponent implements OnInit {
   public getClass(ctrl: string): string {
     const control = this.filterForm.controls[ctrl];
     return !control.touched || control.value == '' ? '' : 'is-valid';
+  }
+
+  private  getValues(){
+    let filterObject : any = {};
+    this.filters = [];
+
+    Object.keys(this.filterForm.controls).forEach(key=>{
+      let control = this.filterForm.controls[key].value;
+      
+      if(control != null && control != ''){
+
+        filterObject[key] = control;
+        
+        let filter;
+
+        switch(key){
+          case 'fromUltima':
+            filter = 'Ultima desde : ' + control;
+            break;
+          case 'toUltima':
+            filter = 'Ultima hasta : ' + control;
+            break;
+          case 'fromSiguiente':
+            filter = 'Siguiente desde : ' + control;
+            break;
+          case 'toSiguiente':
+            filter = 'Siguiente hasta : ' + control;
+            break;
+          case 'periodo':
+            filter = 'Calibración cada ' + control + ' años';
+            break;
+          case 'id':
+            filter = 'ID : ' + control;
+            break;
+          default:
+            filter = this.titleCase.transform(key + ' : ' + control);
+            break;
+        }
+        
+        this.filters.push(filter);
+      }
+    });
+
+    return filterObject;
   }
 }

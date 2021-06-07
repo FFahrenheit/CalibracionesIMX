@@ -4,7 +4,7 @@
     </button>
     <div *ngIf="filters?.length != 0; else empty_body">
         <span *ngFor="let filter of filters; let i = index" class="badge badge-dark mx-1"
-            [style]="'background-color : rgb(0,0,' + (255 - i*(180/(9 - blocked.length))) + ');'">
+            [style]="'background-color : rgb(0,0,' + (255 - i*(180/(filters.length))) + ');'">
             {{ filter }}
         </span>
     </div>
@@ -81,27 +81,43 @@
                     </div>
                 </div>
 
-                <div class="form-group row pt-0">
-                    <label for="" class="col-md-4 col-form-label has-error has-feedback">Periodo de calibración</label>
-                    <div class="col-md-8">
-                        <input formControlName="periodo" type="number" min="0" max="10" class="form-control"
-                            [class]="getClass('periodo')" placeholder="Periodo en años">
-                    </div>
-                </div>
-
                 <div class="form-group pt-0" *ngIf="!blocked.includes('fromUltima')">
                     <span>Última calibración</span>
                     <div class="row pt-0">
                         <label for="" class="col-md-1 col-form-label">De</label>
                         <div class="col-md-5">
-                            <input [class]="getClass('fromUltima')" formControlName="fromUltima"
-                                class="form-control" type="date">
+                            <input [class]="getClass('fromUltima')" formControlName="fromUltima" class="form-control"
+                                type="date">
                         </div>
                         <label for="" class="col-md-1 col-form-label">A</label>
                         <div class="col-md-5">
                             <input [min]="filterForm.controls['toUltima'].value" formControlName="toUltima"
                                 [class]="getClass('toUltima')" class="form-control" type="date">
                         </div>
+                    </div>
+                </div>
+
+                <div class="form-group pt-0" *ngIf="!blocked.includes('fromSiguiente')">
+                    <span>Siguiente calibración</span>
+                    <div class="row pt-0">
+                        <label for="" class="col-md-1 col-form-label">De</label>
+                        <div class="col-md-5">
+                            <input [class]="getClass('fromSiguiente')" formControlName="fromSiguiente"
+                                class="form-control" type="date">
+                        </div>
+                        <label for="" class="col-md-1 col-form-label">A</label>
+                        <div class="col-md-5">
+                            <input [min]="filterForm.controls['fromSiguiente'].value" formControlName="toSiguiente"
+                                [class]="getClass('toSiguiente')" class="form-control" type="date">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row pt-3">
+                    <label for="" class="col-md-4 col-form-label has-error has-feedback">Periodo de calibración</label>
+                    <div class="col-md-8">
+                        <input formControlName="periodo" type="number" min="0" max="10" class="form-control"
+                            [class]="getClass('periodo')" placeholder="Periodo en años">
                     </div>
                 </div>
 
