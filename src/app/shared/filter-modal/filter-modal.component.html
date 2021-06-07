@@ -1,0 +1,33 @@
+<div>
+    <button class="btn btn-md btn-secondary" (click)="open(filterModal)">
+        {{ trigger }}
+    </button>
+    <div *ngIf="filters?.length != 0; else empty_body">
+        <span *ngFor="let filter of filters; let i = index" class="badge badge-dark mx-1"
+            [style]="'background-color : rgb(0,0,' + (255 - i*(180/(9 - blocked.length))) + ');'">
+            {{ filter }}
+        </span>
+    </div>
+    <ng-template #empty_body>
+        <br><span *ngIf="touched">Sin filtros aplicados</span>
+    </ng-template>
+</div>
+
+<ng-template #filterModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title m-title" id="modal-basic-title"> {{ title }} </h4>
+        <button type="button" class="close" style="outline:none;" aria-label="Close" (click)="modal.dismiss('CANCEL')">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+
+    <div class="modal-body m-content mx-3">
+        <h3>Hola mundo</h3>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success px-3" (click)="modal.close('YES')">Aplicar</button>
+        <button type="button" class="btn btn-primary px-3" (click)="resetForm()">Borrar filtros</button>
+        <button type="button" class="btn btn-secondary px-3" (click)="modal.close('')">Cancelar</button>
+    </div>
+</ng-template>

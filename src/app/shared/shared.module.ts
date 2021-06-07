@@ -7,6 +7,8 @@ import { DeviceComponent } from './device/device.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ErrorMessageComponent } from './error-message/error-message.component';
+import { FilterModalComponent } from './filter-modal/filter-modal.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,17 +17,21 @@ import { ErrorMessageComponent } from './error-message/error-message.component';
     AttributeComponent,
     DeviceComponent,
     ErrorMessageComponent,
+    FilterModalComponent,
   ],
   imports: [
     CommonModule,
     PipesModule.forRoot(),
     NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     AlertComponent,
     FooterComponent,
     DeviceComponent,
-    ErrorMessageComponent
+    ErrorMessageComponent,
+    FilterModalComponent
   ]
 })
 export class SharedModule { }
