@@ -23,7 +23,6 @@ export class IconsAlert {
     }
 
     public static getStatus(status): string {
-        console.log(status);
         if (status == null) {
             return ''
         };

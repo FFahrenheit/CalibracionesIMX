@@ -22,7 +22,91 @@
     </div>
 
     <div class="modal-body m-content mx-3">
-        <h3>Hola mundo</h3>
+        <form [formGroup]="filterForm">
+            <h6>
+                {{ message }}
+            </h6>
+
+            <div class="col-md-12">
+                <div class="form-group row pt-0">
+                    <label for="" class="col-md-4 col-form-label has-error has-feedback">ID</label>
+                    <div class="col-md-8">
+                        <input formControlName="id" type="text" class="form-control" [class]="getClass('id')"
+                            placeholder="ID del dispositivo">
+                    </div>
+                </div>
+
+                <div class="form-group row pt-0">
+                    <label for="" class="col-md-4 col-form-label has-error has-feedback">No. de serie</label>
+                    <div class="col-md-8">
+                        <input formControlName="serie" type="text" class="form-control" [class]="getClass('serie')"
+                            placeholder="No. de serie">
+                    </div>
+                </div>
+
+                <div class="form-group row pt-0">
+                    <label for="" class="col-md-4 col-form-label has-error has-feedback">Descripción</label>
+                    <div class="col-md-8">
+                        <input formControlName="descripcion" type="text" class="form-control"
+                            [class]="getClass('descripcion')" placeholder="Descripcion del dispositivo">
+                    </div>
+                </div>
+
+                <div class="form-group row pt-0" *ngIf="!blocked.includes('estado')">
+                    <label for="" class="col-md-4 col-form-label">Estado</label>
+                    <div class="col-md-8">
+                        <select [class]="getClass('estado')" formControlName="estado"
+                            class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                            <option *ngFor="let e of estados" [value]="e"> {{ e }}</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="form-group row pt-0" *ngIf="!blocked.includes('activo')">
+                    <label for="" class="col-md-4 col-form-label">Activo</label>
+                    <div class="col-md-8">
+                        <select [class]="getClass('estado')" formControlName="activo"
+                            class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                            <option *ngFor="let a of activos" [value]="a"> {{ a }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row pt-0">
+                    <label for="" class="col-md-4 col-form-label has-error has-feedback">Ubicación</label>
+                    <div class="col-md-8">
+                        <input formControlName="ubicacion" type="text" class="form-control"
+                            [class]="getClass('ubicacion')" placeholder="Ubicación del equipo">
+                    </div>
+                </div>
+
+                <div class="form-group row pt-0">
+                    <label for="" class="col-md-4 col-form-label has-error has-feedback">Periodo de calibración</label>
+                    <div class="col-md-8">
+                        <input formControlName="periodo" type="number" min="0" max="10" class="form-control"
+                            [class]="getClass('periodo')" placeholder="Periodo en años">
+                    </div>
+                </div>
+
+                <div class="form-group pt-0" *ngIf="!blocked.includes('fromUltima')">
+                    <span>Última calibración</span>
+                    <div class="row pt-0">
+                        <label for="" class="col-md-1 col-form-label">De</label>
+                        <div class="col-md-5">
+                            <input [class]="getClass('fromUltima')" formControlName="fromUltima"
+                                class="form-control" type="date">
+                        </div>
+                        <label for="" class="col-md-1 col-form-label">A</label>
+                        <div class="col-md-5">
+                            <input [min]="filterForm.controls['toUltima'].value" formControlName="toUltima"
+                                [class]="getClass('toUltima')" class="form-control" type="date">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
     </div>
 
     <div class="modal-footer">
