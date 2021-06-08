@@ -60,17 +60,18 @@
                     <div class="col-md-8">
                         <select [class]="getClass('estado')" formControlName="estado"
                             class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                            <option value='' disabled selected>Estado de calibración</option>
                             <option *ngFor="let e of estados" [value]="e"> {{ e }}</option>
                         </select>
                     </div>
                 </div>
 
-
                 <div class="form-group row pt-0" *ngIf="!blocked.includes('activo')">
                     <label for="" class="col-md-4 col-form-label">Activo</label>
                     <div class="col-md-8">
-                        <select [class]="getClass('estado')" formControlName="activo"
+                        <select [class]="getClass('activo')" formControlName="activo"
                             class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                            <option value='' disabled selected>Estado del equipo</option>
                             <option *ngFor="let a of activos" [value]="a"> {{ a }}</option>
                         </select>
                     </div>
@@ -89,13 +90,13 @@
                     <div class="row pt-0">
                         <label for="" class="col-md-1 col-form-label">De</label>
                         <div class="col-md-5">
-                            <input [class]="getClass('fromUltima')" formControlName="fromUltima" class="form-control"
-                                type="date">
+                            <input [class]="getClass('fromUltima')" formControlName="fromUltima" 
+                                class="form-control date-short" type="date">
                         </div>
                         <label for="" class="col-md-1 col-form-label">A</label>
                         <div class="col-md-5">
                             <input [min]="filterForm.controls['toUltima'].value" formControlName="toUltima"
-                                [class]="getClass('toUltima')" class="form-control" type="date">
+                                [class]="getClass('toUltima')" class="form-control date-short" type="date">
                         </div>
                     </div>
                 </div>
@@ -106,12 +107,12 @@
                         <label for="" class="col-md-1 col-form-label">De</label>
                         <div class="col-md-5">
                             <input [class]="getClass('fromSiguiente')" formControlName="fromSiguiente"
-                                class="form-control" type="date">
+                                class="form-control date-short" type="date">
                         </div>
                         <label for="" class="col-md-1 col-form-label">A</label>
                         <div class="col-md-5">
                             <input [min]="filterForm.controls['fromSiguiente'].value" formControlName="toSiguiente"
-                                [class]="getClass('toSiguiente')" class="form-control" type="date">
+                                [class]="getClass('toSiguiente')" class="form-control date-short" type="date">
                         </div>
                     </div>
                 </div>

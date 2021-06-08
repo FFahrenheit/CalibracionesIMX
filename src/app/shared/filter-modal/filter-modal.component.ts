@@ -25,7 +25,6 @@ export class FilterModalComponent implements OnInit {
   @Output() public reset = new EventEmitter<any>();
 
   public estados = [
-    '',
     'Baja',
     'Calibración Aceptada',
     'Calibración Pendiente',
@@ -38,7 +37,6 @@ export class FilterModalComponent implements OnInit {
   ];
 
   public activos = [
-    '',
     'Activo',
     'Baja',
     'Desactivado',

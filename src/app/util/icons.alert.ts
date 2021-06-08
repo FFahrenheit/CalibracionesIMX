@@ -10,6 +10,10 @@ export class IconsAlert {
     constructor() {
     }
 
+    public static calibrado(fecha){
+        return (Date.parse(fecha) - Date.parse((new Date()).toString()) < 0) ? this.icons['not-ok'] : this.icons['ok'];
+    }
+
     public static estado(estado){
         return this.icon(this.getStatus(estado));
     }
