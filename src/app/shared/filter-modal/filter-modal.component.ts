@@ -14,11 +14,11 @@ export class FilterModalComponent implements OnInit {
   public filterForm: FormGroup = Object.create(null);
   public filters: string[];
   public touched = false;
-  public blocked: string[] = [];
 
   @Input() public trigger = 'Aplicar filtros';
   @Input() public title = 'Filtrar equipos';
   @Input() public message = 'Seleccione los filtros a aplicar a los equipos';
+  @Input() public blocked: string[] = [];
 
   @Output() public apply = new EventEmitter<any>();
   @Output() public cancel = new EventEmitter<any>();

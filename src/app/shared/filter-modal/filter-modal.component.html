@@ -4,7 +4,9 @@
     </button>
     <div *ngIf="filters?.length != 0; else empty_body">
         <span *ngFor="let filter of filters; let i = index" class="badge badge-dark mx-1"
-            [style]="'background-color : rgb(0,0,' + (255 - i*(180/(filters.length))) + ');'">
+            [style]="'background-color : rgb(' + 
+            (170 - i*(255/(filters.length))) + ',' + (170 - i*(255/(filters.length))) + ',' + (170- i*(255/(filters.length))) + 
+            ');'">
             {{ filter }}
         </span>
     </div>

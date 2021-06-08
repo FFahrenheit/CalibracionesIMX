@@ -27,7 +27,7 @@ export class NextDevicesComponent implements OnInit {
   }
 
   private loadDevices(req = null) : void{
-    this.devicesService.loadDevices(req)
+    this.devicesService.loadDevices(req,'next')
         .subscribe(resp=>{
           if(resp){
             this.devices = this.devicesService.getDevices();

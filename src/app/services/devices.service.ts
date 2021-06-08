@@ -19,10 +19,10 @@ export class DevicesService {
   constructor(private http    : HttpClient,
               private router  : Router) { }
 
-  public loadDevices(body = null){
+  public loadDevices(body = null, route = 'all'){
     let query = this.applyFilters(body);
 
-    return this.http.get(`${ base_url }/devices/all${ query }`)
+    return this.http.get(`${ base_url }/devices/${route}${ query }`)
                 .pipe(
                   map((resp:any)=>{
                     console.log(resp);
