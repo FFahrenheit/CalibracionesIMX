@@ -12,7 +12,7 @@ export let publicSidebar = [
     },
     {
         name: 'En proceso de calibración',
-        route: ['calibraciones','proceso'],
+        route: ['equipos','proceso'],
         detail: 'Equipos en proceso'
     },
     {

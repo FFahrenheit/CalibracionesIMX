@@ -6,6 +6,7 @@ import { DevicesRoutes } from './devices.routing';
 import { DevicesListComponent } from './devices-list/devices-list.component';
 import { SharedModule } from '../shared/shared.module';
 import { NextDevicesComponent } from './next-devices/next-devices.component';
+import { ProcessDevicesComponent } from './process-devices/process-devices.component';
 
 
 
@@ -14,6 +15,7 @@ import { NextDevicesComponent } from './next-devices/next-devices.component';
     ViewDeviceComponent,
     DevicesListComponent,
     NextDevicesComponent,
+    ProcessDevicesComponent,
   ],
   imports: [
     CommonModule,

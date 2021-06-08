@@ -1,6 +1,7 @@
 import { Routes } from "@angular/router";
 import { DevicesListComponent } from "./devices-list/devices-list.component";
 import { NextDevicesComponent } from "./next-devices/next-devices.component";
+import { ProcessDevicesComponent } from "./process-devices/process-devices.component";
 import { ViewDeviceComponent } from "./view-device/view-device.component";
 
 export const DevicesRoutes : Routes =  [
@@ -19,6 +20,13 @@ export const DevicesRoutes : Routes =  [
                 component: NextDevicesComponent,
                 data: {
                     title: 'Equipos próximos a calibrar'
+                }
+            },
+            {
+                path: 'proceso',
+                component: ProcessDevicesComponent,
+                data: {
+                    title: 'Equipos en proceso de calibración'
                 }
             },
             {

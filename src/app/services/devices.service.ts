@@ -68,6 +68,12 @@ export class DevicesService {
     return this.errorMessage;
   }
 
+  /**
+   * Since  we have the same instantiated service and we 
+   * want to filter different lists on the same service, 
+   * we  use a hash map to store the filters based on 
+   * the location of the caller
+   */
   public getSavedFilters(){
     return this.filters[this.router.url] || {};
   }
