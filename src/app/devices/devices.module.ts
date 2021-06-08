@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { DevicesRoutes } from './devices.routing';
 import { DevicesListComponent } from './devices-list/devices-list.component';
 import { SharedModule } from '../shared/shared.module';
+import { NextDevicesComponent } from './next-devices/next-devices.component';
 
 
 
@@ -12,6 +13,7 @@ import { SharedModule } from '../shared/shared.module';
   declarations: [
     ViewDeviceComponent,
     DevicesListComponent,
+    NextDevicesComponent,
   ],
   imports: [
     CommonModule,

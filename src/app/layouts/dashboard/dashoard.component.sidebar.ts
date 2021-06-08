@@ -7,7 +7,7 @@ export let publicSidebar = [
     },
     {
         name: 'Calibraciones próximas',
-        route: ['calibraciones','proximas'],
+        route: ['equipos','proximos'],
         detail: 'Equipos próximos'
     },
     {

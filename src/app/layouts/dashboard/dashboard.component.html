@@ -6,7 +6,7 @@
          </div>
         <div class="list-group list-group-flush bg-gradient">
             <a *ngFor="let link of sidebar;let i = index"
-                class="list-group-item list-group-item-action bg-light clickable" (click)="goTo(['equipos','ver'],i)"
+                class="list-group-item list-group-item-action bg-light clickable" (click)="goTo(link.route,i)"
                 [class.active-link]="selectedIndex === i">
                 {{ link.name }}
             </a>
