@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { Error404Component } from "./errors/error404/error404.component";
 import { Error500Component } from "./errors/error500/error500.component";
 import { LoggedGuard } from "./guards/logged.guard";
 import { LoginGuard } from "./guards/login.guard";
@@ -50,6 +51,6 @@ export const AppRoutes: Routes = [
     },
     {
         path: '**',
-        component: Error500Component 
+        component: Error404Component 
     }
 ];

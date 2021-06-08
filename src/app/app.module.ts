@@ -17,6 +17,7 @@ import { CommonModule, DatePipe, TitleCasePipe } from '@angular/common';
 import { registerLocaleData } from '@angular/common';
 import localeMX from '@angular/common/locales/es-MX';
 import localeMXExtra from '@angular/common/locales/extra/es-MX';
+import { Error404Component } from './errors/error404/error404.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import localeMXExtra from '@angular/common/locales/extra/es-MX';
     LoaderSpinerComponent,
     DashboardComponent,
     Error500Component,
+    Error404Component,
   ],
   imports: [
     BrowserModule,
