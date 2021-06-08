@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'error-message',
@@ -13,6 +13,10 @@ export class ErrorMessageComponent implements OnInit {
   @Input() public type = 'error';
   @Input() public styles = '';
   @Input() public loading = true;
+  @Input() public action = 'Regresar';
+  @Input() public customAction = false;
+
+  @Output() public back = new EventEmitter<any>(); 
 
   constructor(public location : Location) { }
   
@@ -36,7 +40,12 @@ export class ErrorMessageComponent implements OnInit {
   }
 
   public goBack(){
-    this.location.back();
+    if(this.customAction){
+      this.back.emit();
+    }
+    else{
+      this.location.back();
+    }
   }
 
 }

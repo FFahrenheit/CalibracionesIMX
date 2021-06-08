@@ -13,7 +13,7 @@ import { IconsAlert } from 'src/app/util/icons.alert';
 })
 export class DevicesListComponent implements OnInit {
 
-  public devices;
+  public devices = null;
   public icons = IconsAlert;
 
   constructor(private devicesService  : DevicesService,
