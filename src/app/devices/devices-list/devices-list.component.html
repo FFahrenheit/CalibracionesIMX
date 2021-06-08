@@ -19,28 +19,37 @@
     <table class="table table-hover table-bordered table-sm">
         <thead>
             <tr class="header">
-                <th scope="col" class="align-middle">
+                <th scope="col" [appSort]="devices" data-order="desc" data-name="id" class="align-middle">
+                    <i class="fas fa-sort"></i>
                     ID
                 </th>
-                <th scope="col" class="align-middle">
+                <th scope="col" [appSort]="devices" data-order="desc" data-name="descripcion" class="align-middle">
+                    <i class="fas fa-sort"></i>
                     Descripción
                 </th>
-                <th scope="col" class="align-middle">
+                <th scope="col" [appSort]="devices" data-order="desc" data-name="serie" class="align-middle">
+                    <i class="fas fa-sort"></i>
                     No. serie
                 </th>
-                <th scope="col" class="align-middle">
+                <th scope="col" [appSort]="devices" data-order="desc" data-name="estado" class="align-middle">
+                    <i class="fas fa-sort"></i>
                     Estado
                 </th>
-                <th scope="col" class="align-middle">
-                    <span class="mx-3">Activo</span>
+                <th scope="col" [appSort]="devices" data-order="desc" data-name="activo" class="align-middle">
+                    <span class="mx-1 no-wrap">
+                        <i class="fas fa-sort mr-1"></i>Activo
+                    </span>
                 </th>
-                <th scope="col" class="align-middle">
+                <th scope="col" [appSort]="devices" data-order="desc" data-name="ubicacion" class="align-middle">
+                    <i class="fas fa-sort"></i>
                     Ubicación
                 </th>
-                <th scope="col" class="align-middle">
+                <th scope="col" [appSort]="devices" data-order="desc" data-name="ultima" class="align-middle">
+                    <i class="fas fa-sort"></i>
                     Ultima calibración
                 </th>
-                <th scope="col" class="align-middle">
+                <th scope="col" [appSort]="devices" data-order="desc" data-name="siguiente" class="align-middle">
+                    <i class="fas fa-sort"></i>
                     Siguiente calibración
                 </th>
             </tr>

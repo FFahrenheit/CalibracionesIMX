@@ -9,6 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ErrorMessageComponent } from './error-message/error-message.component';
 import { FilterModalComponent } from './filter-modal/filter-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SortDirective } from '../directives/sort.directive';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DeviceComponent,
     ErrorMessageComponent,
     FilterModalComponent,
+    SortDirective,
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FooterComponent,
     DeviceComponent,
     ErrorMessageComponent,
-    FilterModalComponent
+    FilterModalComponent,
+    SortDirective
   ]
 })
 export class SharedModule { }

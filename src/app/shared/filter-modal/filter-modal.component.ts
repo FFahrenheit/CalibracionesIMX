@@ -91,7 +91,6 @@ export class FilterModalComponent implements OnInit {
   }
 
   public resetForm(): void {
-    this.reset.emit();
     this.filterForm.reset();
   }
 
