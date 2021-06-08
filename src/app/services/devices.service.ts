@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -13,13 +14,13 @@ export class DevicesService {
 
   private devicesList = [];
   private errorMessage = 'Error de servidor';
-  private filters : any = {};
+  private filters : any[] = [];
 
-  constructor(private http  : HttpClient) { }
+  constructor(private http    : HttpClient,
+              private router  : Router) { }
 
   public loadDevices(body = null){
     let query = this.applyFilters(body);
-    console.log(query);
 
     return this.http.get(`${ base_url }/devices/all${ query }`)
                 .pipe(
@@ -41,19 +42,17 @@ export class DevicesService {
   }
 
   private applyFilters(obj) : string{
-    console.log(['obj',obj]);
-    this.filters = obj;
-    if(obj == null){
+    if(obj === null){
       return '';
     }
+    this.filters[this.router.url] = obj;
+
     let filters = [];
 
     Object.keys(obj).forEach(k=>{
       let query = k + '=' + obj[k];
       filters.push(query);
     });
-
-    console.log(filters);
 
     if(filters.length != 0){
       return '?'+filters.join('&');
@@ -67,5 +66,9 @@ export class DevicesService {
 
   public getError(){
     return this.errorMessage;
+  }
+
+  public getSavedFilters(){
+    return this.filters[this.router.url] || {};
   }
 }

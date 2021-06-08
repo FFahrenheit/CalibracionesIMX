@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DevicesService } from 'src/app/services/devices.service';
 import { AlertService } from 'src/app/shared/alert';
@@ -7,9 +7,7 @@ import { IconsAlert } from 'src/app/util/icons.alert';
 @Component({
   selector: 'app-devices-list',
   templateUrl: './devices-list.component.html',
-  styleUrls: ['./devices-list.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  providers: [ DevicesService ]
+  styleUrls: ['./devices-list.component.scss']
 })
 export class DevicesListComponent implements OnInit {
 

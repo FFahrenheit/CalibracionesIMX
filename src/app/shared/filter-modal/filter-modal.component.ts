@@ -2,6 +2,7 @@ import { TitleCasePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DevicesService } from 'src/app/services/devices.service';
 
 @Component({
   selector: 'filter',
@@ -47,12 +48,13 @@ export class FilterModalComponent implements OnInit {
     'Reparacion'
   ];
 
-  constructor(private modalService  : NgbModal,
-              private fb            : FormBuilder,
-              private titleCase     : TitleCasePipe) { }
+  constructor(private modalService    : NgbModal,
+              private fb              : FormBuilder,
+              private titleCase       : TitleCasePipe,
+              private devicesService  : DevicesService) { }
 
   ngOnInit(): void {
-    let saved: any = {}; //Once service  is created
+    let saved = this.devicesService.getSavedFilters();
 
     this.filterForm = this.fb.group({
       id: [saved?.id || ''],
