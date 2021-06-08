@@ -12,13 +12,14 @@ const base_url = environment.base_url;
 export class DevicesService {
 
   private devicesList = [];
-
   private errorMessage = 'Error de servidor';
+  private filters : any = {};
 
   constructor(private http  : HttpClient) { }
 
   public loadDevices(body = null){
     let query = this.applyFilters(body);
+    console.log(query);
 
     return this.http.get(`${ base_url }/devices/all${ query }`)
                 .pipe(
@@ -40,6 +41,8 @@ export class DevicesService {
   }
 
   private applyFilters(obj) : string{
+    console.log(['obj',obj]);
+    this.filters = obj;
     if(obj == null){
       return '';
     }
@@ -50,8 +53,10 @@ export class DevicesService {
       filters.push(query);
     });
 
+    console.log(filters);
+
     if(filters.length != 0){
-      return filters.join('&');
+      return '?'+filters.join('&');
     }
     return '';
   }

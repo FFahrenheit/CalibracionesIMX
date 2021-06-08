@@ -8,7 +8,7 @@
                 </td>
                 <td>
                     <div class="text-right">
-                        <filter> </filter>
+                        <filter (apply)="appyFilters($event)" (reset)="resetFilters()"> </filter>
                     </div>
                 </td>
             </tr>

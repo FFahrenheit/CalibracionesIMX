@@ -3,7 +3,7 @@
     <img (click)="goBack()" class="my-1 logo" [src]="url">
     <h1 class="big-404 mb-3">{{ title }}</h1>
     <h2 class="error-content">{{ description }}</h2>
-    <span *ngIf="!type.includes('sub')" (click)="goBack()" class="go-back">Go back </span>
+    <span *ngIf="!type.includes('sub')" (click)="goBack()" class="go-back">Regresar</span>
 </div>
 <ng-template #load_process>
     <div class="text-center py-5">

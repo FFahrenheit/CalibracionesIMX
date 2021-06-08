@@ -67,6 +67,8 @@ export class FilterModalComponent implements OnInit {
       fromSiguiente: [saved?.fromSiguiente || ''],
       toSiguiente: [saved?.toSiguiente || '']
     });
+
+    this.apply.emit(this.getValues());
   }
 
   public open(content) {
@@ -74,9 +76,10 @@ export class FilterModalComponent implements OnInit {
       switch (result) {
         case 'YES':
           const obj = this.getValues();
+          this.apply.emit(obj);
+          this.touched = true;
           break;
         case 'NO':
-          console.log('No')
           break;
         default:
           console.log('Cancel');
