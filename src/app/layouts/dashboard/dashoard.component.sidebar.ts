@@ -16,6 +16,11 @@ export let publicSidebar = [
         detail: 'Equipos en proceso'
     },
     {
+        name: 'Calibraciones pendientes',
+        route: ['equipos','pendientes'],
+        detail: 'Equipos con calibración pendiente'
+    },
+    {
         name: 'Actualizar estado',
         route: ['equipos','actualizar'],
         detail: 'Estado de equipo'
