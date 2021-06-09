@@ -20,6 +20,13 @@ export const AppRoutes: Routes = [
                 )
             },
             {
+                path: 'calibraciones',
+                loadChildren: () =>
+                import('./calibrations/calibrations.module').then(
+                    (m) => m.CalibrationsModule
+                )
+            },
+            {
                 path: '',
                 pathMatch: 'full',
                 redirectTo: 'equipos'
