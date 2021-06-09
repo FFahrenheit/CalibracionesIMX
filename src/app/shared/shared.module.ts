@@ -10,6 +10,7 @@ import { ErrorMessageComponent } from './error-message/error-message.component';
 import { FilterModalComponent } from './filter-modal/filter-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SortDirective } from '../directives/sort.directive';
+import { StatusModalComponent } from './status-modal/status-modal.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { SortDirective } from '../directives/sort.directive';
     ErrorMessageComponent,
     FilterModalComponent,
     SortDirective,
+    StatusModalComponent,
   ],
   imports: [
     CommonModule,
@@ -34,7 +36,8 @@ import { SortDirective } from '../directives/sort.directive';
     DeviceComponent,
     ErrorMessageComponent,
     FilterModalComponent,
-    SortDirective
+    SortDirective,
+    StatusModalComponent,
   ]
 })
 export class SharedModule { }

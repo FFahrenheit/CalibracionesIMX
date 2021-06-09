@@ -27,24 +27,26 @@
                 <attr name="Estado de calibracion" [value]="device.estado" [status]="getStatus()"></attr>
                 <attr name="Periodo de calibración" [value]="device.periodo == 1 ? '1 año' : device.periodo + ' años'">
                 </attr>
+
                 <div>
-                    <h5 class="text-left subtitle-att">Calibradores del equipo</h5>
+                    <h6 class="text-left subtitle-att">Calibradores del equipo</h6>
                     <ul class="dot-list">
                         <li *ngFor="let c of device.verificadores">
                             {{ c.nombre }}
                         </li>
                     </ul>
                 </div>
-            </div>
-            <div class="col-md-6 table-responsive container text-center">
+
                 <div>
-                    <h5 class="text-left subtitle-att">Responsables del equipo</h5>
+                    <h6 class="text-left subtitle-att">Responsables del equipo</h6>
                     <ul class="dot-list">
                         <li *ngFor="let r of device.responsables">
                             {{ r.nombre }}
                         </li>
                     </ul>
                 </div>
+            </div>
+            <div class="col-md-6 table-responsive container text-center">
 
                 <div *ngIf="device.activo=='Activo'">
                     <h5 class="text-left subtitle-att">Calendario de calibración</h5>
