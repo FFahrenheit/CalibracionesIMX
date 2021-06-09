@@ -21,10 +21,9 @@ export class DeviceComponent implements OnInit {
   public exists : boolean | null = null;
   public error : string | null = '';
 
-  public tests = Array(5).fill(0).map(Number.call, Number);
   public status = '';
 
-  @Output() public receive = new EventEmitter<boolean>();
+  @Output() public receive = new EventEmitter<any>();
 
   constructor(private deviceService : GetDeviceService,
               public errorPipe      : ErrorPipe,
@@ -42,12 +41,12 @@ export class DeviceComponent implements OnInit {
           }else{
             this.error = this.deviceService.getError();            
           }
-          this.receive.emit(this.exists);
+          this.receive.emit(this.device || null);
         },error=>{
           this.exists = false;
           this.receive.emit(this.exists);
         });
-    this.receive.emit(this.exists);
+    this.receive.emit(this.device);
   }
 
   public getActive() : string{

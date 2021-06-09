@@ -10,6 +10,7 @@ export class BeginCalibrationComponent implements OnInit {
 
   public id : string | null = '';
   public show = false;
+  public options = ['Calibración Pendiente','En Proceso de Calibración'];
 
   constructor(private route:  ActivatedRoute) { }
 
@@ -20,8 +21,7 @@ export class BeginCalibrationComponent implements OnInit {
   }
 
   exists($event){
-    console.log($event);
-    this.show = $event;
+    this.show = $event != null;
   }
 
 }
