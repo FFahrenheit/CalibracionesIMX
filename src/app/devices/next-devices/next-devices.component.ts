@@ -31,6 +31,13 @@ export class NextDevicesComponent implements OnInit {
         .subscribe(resp=>{
           if(resp){
             this.devices = this.devicesService.getDevices();
+            this.devices.forEach(d => {
+              const today = new Date();
+              const deadLine = new Date(d.siguiente);
+              let daysDiff = Number(deadLine) - Number(today);
+              daysDiff = Math.ceil(daysDiff / (1000 * 60 * 60 * 24));
+              d['dias'] = daysDiff;
+            });
           }else{
             this.alert.error(this.devicesService.getError());
           }

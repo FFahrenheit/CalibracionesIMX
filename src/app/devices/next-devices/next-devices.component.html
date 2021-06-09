@@ -16,6 +16,10 @@
         </table>
     </div>
 
+    <span class="text-left float-left mt-0 mb-1">
+        Haga click en la fila para empezar trámite de calibración
+    </span>
+
     <table class="table table-hover table-bordered table-sm" *ngIf="devices?.length > 0;else empty_body">
         <thead>
             <tr class="header">
@@ -52,6 +56,10 @@
                     <i class="fas fa-sort float-left"></i>
                     Siguiente calibración
                 </th>
+                <th scope="col" [appSort]="devices" data-order="desc" data-name="dias" class="align-middle">
+                    <i class="fas fa-sort float-left"></i>
+                    Días faltantes
+                </th>
             </tr>
         </thead>
         <tbody class="click">
@@ -73,6 +81,7 @@
                     <i [class]="icons.calibrado(d.siguiente)"></i>
                     {{ d.siguiente | date:'shortDate' }}
                 </td>
+                <td> {{ d.dias || 0 }} días</td>
             </tr>
         </tbody>
 
