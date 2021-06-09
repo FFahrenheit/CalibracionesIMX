@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbProgressbar } from '@ng-bootstrap/ng-bootstrap';
 import { ErrorPipe } from 'src/app/pipes/error.pipe';
 import { ResolutionPipe } from 'src/app/pipes/resolution.pipe';
@@ -14,8 +14,8 @@ import { IconsAlert } from 'src/app/util/icons.alert';
 })
 export class DeviceComponent implements OnInit {
 
-  @Input() id : string | null = '';
-  @Input() title : string = 'Ver';
+  @Input() public id : string | null = '';
+  @Input() public title : string = 'Ver';
 
   public device = null;
   public exists : boolean | null = null;
@@ -23,6 +23,8 @@ export class DeviceComponent implements OnInit {
 
   public tests = Array(5).fill(0).map(Number.call, Number);
   public status = '';
+
+  @Output() public receive = new EventEmitter<boolean>();
 
   constructor(private deviceService : GetDeviceService,
               public errorPipe      : ErrorPipe,
@@ -40,9 +42,12 @@ export class DeviceComponent implements OnInit {
           }else{
             this.error = this.deviceService.getError();            
           }
+          this.receive.emit(this.exists);
         },error=>{
           this.exists = false;
+          this.receive.emit(this.exists);
         });
+    this.receive.emit(this.exists);
   }
 
   public getActive() : string{

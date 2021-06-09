@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 export class BeginCalibrationComponent implements OnInit {
 
   public id : string | null = '';
+  public show = false;
 
   constructor(private route:  ActivatedRoute) { }
 
@@ -16,6 +17,11 @@ export class BeginCalibrationComponent implements OnInit {
     this.route.paramMap.subscribe(params=> {
       this.id = params.get('id');
     });
+  }
+
+  exists($event){
+    console.log($event);
+    this.show = $event;
   }
 
 }
