@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DevicesService } from 'src/app/services/devices.service';
+import { estados, activos } from 'src/app/resources/device.component.statuses'
 
 @Component({
   selector: 'filter',
@@ -24,27 +25,8 @@ export class FilterModalComponent implements OnInit {
   @Output() public cancel = new EventEmitter<any>();
   @Output() public reset = new EventEmitter<any>();
 
-  public estados = [
-    'Baja',
-    'Calibración Aceptada',
-    'Calibración Pendiente',
-    'Desactivado',
-    'En Proceso de Calibración',
-    'Extraviado',
-    'N/A',
-    'Referencia',
-    'Reparacion'
-  ];
-
-  public activos = [
-    'Activo',
-    'Baja',
-    'Desactivado',
-    'Extraviado',
-    'N/A',
-    'Referencia',
-    'Reparacion'
-  ];
+  public estados = estados;
+  public activos = activos;
 
   constructor(private modalService    : NgbModal,
               private fb              : FormBuilder,

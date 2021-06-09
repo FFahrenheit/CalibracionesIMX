@@ -1,5 +1,5 @@
 
-export let publicSidebar = [
+export const publicSidebar = [
     {
         name: 'Consultar equipos',
         route: ['equipos','ver'],

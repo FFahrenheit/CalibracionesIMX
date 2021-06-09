@@ -62,6 +62,7 @@
                             class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
                             <option value='' disabled selected>Estado de calibración</option>
                             <option *ngFor="let e of estados" [value]="e"> {{ e }}</option>
+                            <option value=''></option>
                         </select>
                     </div>
                 </div>
@@ -73,6 +74,7 @@
                             class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
                             <option value='' disabled selected>Estado del equipo</option>
                             <option *ngFor="let a of activos" [value]="a"> {{ a }}</option>
+                            <option value=''></option>
                         </select>
                     </div>
                 </div>

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import * as $ from 'jquery';
 import { User } from 'src/app/models/user.model';
 import { LoginService } from 'src/app/services/login.service';
-import { publicSidebar } from './dashoard.component.sidebar';
+import { publicSidebar } from 'src/app/resources/dashboard.component.sidebar';
 
 @Component({
   selector: 'app-dashboard',
