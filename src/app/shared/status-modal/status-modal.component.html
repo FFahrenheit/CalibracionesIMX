@@ -1,1 +1,40 @@
-<p>status-modal works!</p>
+<div class="containter-fluid pb-5 d-flex flex-row-reverse">
+    <button class="btn btn-md btn-dark" [ngClass]="{'btn-disabled': isDisabled }" [class]="myClass"
+        (click)="open(confirmModal)">
+        {{ trigger }}
+    </button>
+</div>
+<ng-template #confirmModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title m-title" id="modal-basic-title"> {{ title }} </h4>
+        <button type="button" class="close" style="outline:none;" aria-label="Close" (click)="modal.dismiss('CANCEL')">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body m-content">
+        {{ content }}
+        <form [formGroup]="form">
+
+            <div class="row d-flex justify-content-center">
+
+                <div class="col-md-12">
+                    <div class="form-group row pt-2 has-error has-feedback">
+                        <label for="" class="col-md-4 col-form-label">Nuevo estado</label>
+                        <div class="col-md-12">
+                            <select [class]="getClass('estado')" formControlName="estado"
+                                class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                                <option value="" selected disabled>Seleccione el nuevo estado</option>
+                                <option *ngFor="let e of options" [value]="e"> {{ e }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" [ngClass]="{'disabled':!form.valid}" class="btn px-3 btn-primary" (click)="submit()">Actualizar
+            estado</button>
+        <button type="button" class="btn btn-secondary px-3" (click)="modal.close('NO')">Cancel</button>
+    </div>
+</ng-template>
