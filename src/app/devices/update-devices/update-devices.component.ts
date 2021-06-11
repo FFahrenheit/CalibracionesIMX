@@ -22,11 +22,11 @@ export class UpdateDevicesComponent implements OnInit {
   }
 
   public deviceDetails(id: string) {
-    this.router.navigate(['equipos', 'detalles', id]);
+    this.router.navigate(['calibraciones','actualizar',id]);
   }
 
   private loadDevices(req = null): void {
-    this.devicesService.loadDevices(req)
+    this.devicesService.loadDevices(req,'complete')
       .subscribe(resp => {
         if (resp) {
           this.devices = this.devicesService.getDevices();

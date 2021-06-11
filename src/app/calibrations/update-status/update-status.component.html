@@ -1,0 +1,12 @@
+<device [id]="id"
+(receive)= "exists($event)">
+</device>
+
+<status-option
+    *ngIf="show"
+    title="Empezar de calibración"
+    content="Seleccione el estado que más describe la situación con la calibración.
+    Si desea dar de baja el dispositivo o marcarlo como calibrado diríjase a Actualizar equipos"
+    trigger="Actualizar">
+
+</status-option>
