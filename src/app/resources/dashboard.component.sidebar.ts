@@ -21,7 +21,7 @@ export const publicSidebar = [
         detail: 'Equipos con calibración pendiente'
     },
     {
-        name: 'Actualizar estado',
+        name: 'Actualizar calibración',
         route: ['equipos','actualizar'],
         detail: 'Estado de equipo'
     }

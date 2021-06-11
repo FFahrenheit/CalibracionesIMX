@@ -3,6 +3,7 @@ import { DevicesListComponent } from "./devices-list/devices-list.component";
 import { NextDevicesComponent } from "./next-devices/next-devices.component";
 import { PendingDevicesComponent } from "./pending-devices/pending-devices.component";
 import { ProcessDevicesComponent } from "./process-devices/process-devices.component";
+import { UpdateDevicesComponent } from "./update-devices/update-devices.component";
 import { ViewDeviceComponent } from "./view-device/view-device.component";
 
 export const DevicesRoutes : Routes =  [
@@ -42,6 +43,13 @@ export const DevicesRoutes : Routes =  [
                 component: ViewDeviceComponent,
                 data: {
                     title: 'Detalles de equipo'
+                }
+            },
+            {
+                path: 'actualizar',
+                component: UpdateDevicesComponent,
+                data: {
+                    title: 'Actualizar estado de equipos'
                 }
             },
             {

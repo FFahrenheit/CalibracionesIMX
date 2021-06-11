@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { NextDevicesComponent } from './next-devices/next-devices.component';
 import { ProcessDevicesComponent } from './process-devices/process-devices.component';
 import { PendingDevicesComponent } from './pending-devices/pending-devices.component';
+import { UpdateDevicesComponent } from './update-devices/update-devices.component';
 
 
 
@@ -18,6 +19,7 @@ import { PendingDevicesComponent } from './pending-devices/pending-devices.compo
     NextDevicesComponent,
     ProcessDevicesComponent,
     PendingDevicesComponent,
+    UpdateDevicesComponent,
   ],
   imports: [
     CommonModule,

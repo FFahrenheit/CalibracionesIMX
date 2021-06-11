@@ -32,6 +32,8 @@ export class DashboardComponent implements OnInit {
 
     if(this.user?.posicion == 'usuario'){
       this.sidebar = publicSidebar;
+    }else{
+      this.sidebar = publicSidebar;
     }
   }
 
