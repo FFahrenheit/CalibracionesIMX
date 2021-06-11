@@ -39,7 +39,7 @@ export class StatusModalComponent implements OnInit {
       this.modalReference.result.then(result => {
         switch (result) {
           case 'YES':
-            this.send.emit('');
+            this.send.emit(this.form.controls['estado'].value);
             break;
           case 'NO':
             this.reject.emit();

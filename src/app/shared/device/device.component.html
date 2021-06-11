@@ -54,39 +54,43 @@
             </div>
             <div class="col-md-6 table-responsive container text-center">
 
-                <div *ngIf="device.activo=='Activo'">
+                <div>
                     <h5 class="text-left subtitle-att">Calendario de calibración</h5>
 
-                    <attr name="Última calibración" [value]="datePipe.transform(device.ultima,'longDate')">
-                    </attr>
-                    <attr name="Siguiente calibración" [value]="datePipe.transform(device.siguiente,'longDate')">
-                    </attr>
-                    <attr name="Aviso" [value]="datePipe.transform(device.aviso,'longDate')">
-                    </attr>
-                    <attr name="Días antes de siguiente calibración: " [value]="getDays()">
-                    </attr>
+                    <div *ngIf="device.activo=='Activo'; else empty_calendario">
+                        <attr name="Última calibración" [value]="datePipe.transform(device.ultima,'longDate')">
+                        </attr>
+                        <attr name="Siguiente calibración" [value]="datePipe.transform(device.siguiente,'longDate')">
+                        </attr>
+                        <attr name="Aviso" [value]="datePipe.transform(device.aviso,'longDate')">
+                        </attr>
+                        <attr name="Días antes de siguiente calibración: " [value]="getDays()">
+                        </attr>
 
 
-                    <div class="m5-3 mt- mb-3">
-                        <p>Deadline próxima calibración</p>
-                        <div class="row">
-                            <div class="col-2 pbar">
-                                <p>{{ device.ultima | date:'shortDate'}}</p>
-                                <i class="far fa-calendar-check"></i>
-                            </div>
-                            <div class="col-8">
-                                <ngb-progressbar [type]="getDateType()" [value]="getDateValue()"
-                                    [ngClass]="{'bar' : getDateType() == 'warning' }"
-                                    height="25px">
-                                    {{ status }}
-                                </ngb-progressbar>
-                            </div>
-                            <div class="col-2 pbar">
-                                <p>{{ device.siguiente | date:'shortDate' }}</p>
-                                <i class="far fa-calendar-times"></i>
+                        <div class="m5-3 mt- mb-3">
+                            <p>Deadline próxima calibración</p>
+                            <div class="row">
+                                <div class="col-2 pbar">
+                                    <p>{{ device.ultima | date:'shortDate'}}</p>
+                                    <i class="far fa-calendar-check"></i>
+                                </div>
+                                <div class="col-8">
+                                    <ngb-progressbar [type]="getDateType()" [value]="getDateValue()"
+                                        [ngClass]="{'bar' : getDateType() == 'warning' }" height="25px">
+                                        {{ status }}
+                                    </ngb-progressbar>
+                                </div>
+                                <div class="col-2 pbar">
+                                    <p>{{ device.siguiente | date:'shortDate' }}</p>
+                                    <i class="far fa-calendar-times"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <ng-template #empty_calendario>
+                        <span class="empty text">Dispositivo inactivo, sin próxima calibración planeada</span>
+                    </ng-template>
                 </div>
 
                 <div>
@@ -119,7 +123,8 @@
                         </tbody>
                     </table>
                     <ng-template #empty_calibraciones>
-                        <span class="empty text"> No hay información del historial de calibraciones de este equipo</span>
+                        <span class="empty text"> No hay información del historial de calibraciones de este
+                            equipo</span>
                     </ng-template>
                 </div>
             </div>
@@ -128,6 +133,6 @@
 </div>
 <ng-template #not_found>
     <error-message type="error" title="ERROR" [loading]="exists"
-    description="No se encontró el dispositivo con el ID especificado">
+        description="No se encontró el dispositivo con el ID especificado">
     </error-message>
 </ng-template>
