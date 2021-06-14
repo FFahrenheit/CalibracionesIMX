@@ -1,0 +1,38 @@
+<div>
+    <button class="btn btn-md" [ngClass]="{'btn-disabled btn-secondary': isDisabled, 'btn-success' : !isDisabled}" [class]="myClass"
+        (click)="open(confirmModal)">
+        {{ trigger }}
+    </button>
+</div>
+<ng-template #confirmModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title m-title" id="modal-basic-title"> {{ title }} </h4>
+        <button type="button" class="close" style="outline:none;" aria-label="Close" (click)="modal.dismiss('CANCEL')">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body m-content">
+        <div *ngIf="!isDisabled; else reason_content">
+            {{ content }}
+        </div>
+        <ng-template #reason_content>
+            <div *ngIf="areReasons();else one_reason">
+                You can't perfom this action due these reason(s): <br>
+                <p *ngFor="let r of reason" class="reasons">
+                    * {{ r }}
+                </p>
+            </div>
+            <ng-template #one_reason>
+                You can't perform this action: 
+                <span class="reasons">
+                    {{ reason }}
+                </span>
+            </ng-template>
+        </ng-template>
+    </div>
+    <div class="modal-footer">
+        <button *ngIf="!isDisabled" type="button" class="btn btn-success px-3" (click)="modal.close('YES')">Yes</button>
+        <button *ngIf="!isDisabled" type="button" class="btn btn-danger px-3" (click)="modal.close('NO')">No</button>
+        <button *ngIf="isDisabled" type="button" class="btn btn-primary px-3" (click)="modal.close('')">Ok</button>
+    </div>
+</ng-template>

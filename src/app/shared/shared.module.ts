@@ -11,6 +11,7 @@ import { FilterModalComponent } from './filter-modal/filter-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SortDirective } from '../directives/sort.directive';
 import { StatusModalComponent } from './status-modal/status-modal.component';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { StatusModalComponent } from './status-modal/status-modal.component';
     FilterModalComponent,
     SortDirective,
     StatusModalComponent,
+    ConfirmModalComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +40,7 @@ import { StatusModalComponent } from './status-modal/status-modal.component';
     FilterModalComponent,
     SortDirective,
     StatusModalComponent,
+    ConfirmModalComponent
   ]
 })
 export class SharedModule { }
