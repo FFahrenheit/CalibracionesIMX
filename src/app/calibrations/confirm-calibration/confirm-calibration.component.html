@@ -2,3 +2,11 @@
 <device [id]="id"
 (receive)= "exists($event)">
 </device>
+
+<confirm-modal
+(accept)="confirmCalibration()"
+*ngIf="show"
+[content]="'¿Confirma la calibración correcta del equipo ' + id + ' y su respectiva verificación de etiqueta?'"
+title="Confirmar calibración"
+trigger="Calibración aceptada">
+</confirm-modal>

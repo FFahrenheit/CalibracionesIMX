@@ -28,8 +28,8 @@ export class ConfirmCalibrationComponent implements OnInit {
     this.show = $event != null;
   }
 
-  changeStatus($event  : string){
-    this.status.updateStatus(this.id,$event).subscribe(
+  confirmCalibration(){
+    this.status.updateStatus(this.id,'').subscribe(
       resp=>{
         if(resp){
           this.alert.success('Se ha cambiado el estado');

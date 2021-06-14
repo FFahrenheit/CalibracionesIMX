@@ -1,4 +1,4 @@
-<div>
+<div class="containter-fluid pb-5 d-flex flex-row-reverse">
     <button class="btn btn-md" [ngClass]="{'btn-disabled btn-secondary': isDisabled, 'btn-success' : !isDisabled}" [class]="myClass"
         (click)="open(confirmModal)">
         {{ trigger }}
@@ -31,7 +31,7 @@
         </ng-template>
     </div>
     <div class="modal-footer">
-        <button *ngIf="!isDisabled" type="button" class="btn btn-success px-3" (click)="modal.close('YES')">Yes</button>
+        <button *ngIf="!isDisabled" type="button" class="btn btn-success px-3" (click)="modal.close('YES')">Sí</button>
         <button *ngIf="!isDisabled" type="button" class="btn btn-danger px-3" (click)="modal.close('NO')">No</button>
         <button *ngIf="isDisabled" type="button" class="btn btn-primary px-3" (click)="modal.close('')">Ok</button>
     </div>

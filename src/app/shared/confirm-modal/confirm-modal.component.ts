@@ -11,7 +11,7 @@ export class ConfirmModalComponent implements OnInit {
   @Input() public title = 'Confirmar acción';
   @Input() public content = '¿Deseas confirmar esta acción?';
   @Input() public trigger = 'Confirmar';
-  @Input() public myClass = 'float-right px-5 mx-3 my-3';
+  @Input() public myClass = 'px-5 m-3';
   @Input() public isDisabled = false;
   @Input() public reason = 'Está actualmente deshabilitado';
 
