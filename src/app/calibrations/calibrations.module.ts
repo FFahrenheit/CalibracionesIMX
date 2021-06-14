@@ -6,6 +6,7 @@ import { CalibrationsRoutes } from './calibrations.routing';
 import { BeginCalibrationComponent } from './begin-calibration/begin-calibration.component';
 import { UpdateStatusComponent } from './update-status/update-status.component';
 import { ConfirmCalibrationComponent } from './confirm-calibration/confirm-calibration.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,9 @@ import { ConfirmCalibrationComponent } from './confirm-calibration/confirm-calib
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule.forChild(CalibrationsRoutes)
+    RouterModule.forChild(CalibrationsRoutes),
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class CalibrationsModule { }

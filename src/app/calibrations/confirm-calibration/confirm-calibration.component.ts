@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UpdateDeviceService } from 'src/app/services/update-device.service';
 import { AlertService } from 'src/app/shared/alert';
@@ -13,15 +14,21 @@ export class ConfirmCalibrationComponent implements OnInit {
   public id : string | null = '';
   public show = false;
   public device = null;
+  public form : FormGroup = Object.create(null);
 
   constructor(private route   : ActivatedRoute,
               private status  : UpdateDeviceService,
               private alert   : AlertService,
-              private router  : Router) { }
+              private router  : Router,
+              private fb      : FormBuilder) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params=> {
       this.id = params.get('id');
+    });
+
+    this.form = this.fb.group({
+      calibrador: ['']
     });
   }
 
@@ -31,10 +38,20 @@ export class ConfirmCalibrationComponent implements OnInit {
   }
 
   confirmCalibration(){
-    this.status.updateStatus(this.id,'').subscribe(
+
+    let calibrador;
+    if(this.device.calibracion == 'INTERNO'){
+      calibrador = 'Interplex';
+    }else if(this.form.controls['calibrador'].value != ''){
+      calibrador = this.form.controls['calibrador'].value;
+    }else{
+      calibrador = '';
+    }
+
+    this.status.acceptCalibration(this.id,calibrador).subscribe(
       resp=>{
         if(resp){
-          this.alert.success('Se ha cambiado el estado');
+          this.alert.success('Calibración aceptada');
           setTimeout(() => {
             this.router.navigate(['equipos','detalles',this.id]);
           }, 2500);

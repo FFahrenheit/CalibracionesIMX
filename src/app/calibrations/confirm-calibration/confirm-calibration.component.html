@@ -9,8 +9,10 @@
             <div class="row" *ngIf="device?.calibracion == 'EXTERNO'">
                 <label for="" class="col-md-4 col-form-label has-error has-feedback">Prove-Calibración</label>
                 <div class="col-md-8">
-                    <input formControlName="calibrador" type="text" class="form-control"
-                        placeholder="Nombre del calibrador">
+                    <form [formGroup]="form">
+                        <input formControlName="calibrador" type="text" class="form-control"
+                            placeholder="Nombre del calibrador">
+                    </form>
                 </div>
             </div>
         </div>

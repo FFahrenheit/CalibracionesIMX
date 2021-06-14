@@ -15,13 +15,14 @@ export class UpdateDeviceService {
 
   constructor(private http: HttpClient) { }
 
-  public acceptCalibration(equipo : string, fecha = new Date(), calibrador = 'N/I'){
+  public acceptCalibration(equipo : string, calibrador = 'N/I', fecha = new Date()){
     const data = {
       equipo,
       fecha,
       calibrador
     };
-    return this.http.post(`${base_url}/device/status/${ equipo }`, data)
+
+    return this.http.post(`${base_url}/device/calibrated`, data)
               .pipe(
                 map((resp:any)=>{
                   console.log(resp);
