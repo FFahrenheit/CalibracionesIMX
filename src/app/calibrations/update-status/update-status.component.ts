@@ -29,6 +29,11 @@ export class UpdateStatusComponent implements OnInit {
   }
 
   changeStatus($event  : string){
+    if($event == 'Calibración Aceptada'){
+      this.router.navigate(['calibraciones','confirmar',this.id]);
+      return;
+    }
+
     this.status.updateStatus(this.id,$event).subscribe(
       resp=>{
         if(resp){
@@ -42,6 +47,6 @@ export class UpdateStatusComponent implements OnInit {
       },error=>{
         this.alert.error(this.status.geError());
       }
-    )
+    );
   }
 }

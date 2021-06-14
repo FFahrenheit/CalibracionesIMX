@@ -18,6 +18,7 @@ import { registerLocaleData } from '@angular/common';
 import localeMX from '@angular/common/locales/es-MX';
 import localeMXExtra from '@angular/common/locales/extra/es-MX';
 import { Error404Component } from './errors/error404/error404.component';
+import { PendingCalibrationComponent } from './pending-calibration/pending-calibration.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { Error404Component } from './errors/error404/error404.component';
     DashboardComponent,
     Error500Component,
     Error404Component,
+    PendingCalibrationComponent,
   ],
   imports: [
     BrowserModule,
