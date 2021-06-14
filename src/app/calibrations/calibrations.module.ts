@@ -5,11 +5,13 @@ import { RouterModule } from '@angular/router';
 import { CalibrationsRoutes } from './calibrations.routing';
 import { BeginCalibrationComponent } from './begin-calibration/begin-calibration.component';
 import { UpdateStatusComponent } from './update-status/update-status.component';
+import { ConfirmCalibrationComponent } from './confirm-calibration/confirm-calibration.component';
 
 @NgModule({
   declarations: [
     BeginCalibrationComponent,
-    UpdateStatusComponent
+    UpdateStatusComponent,
+    ConfirmCalibrationComponent
   ],
   imports: [
     CommonModule,

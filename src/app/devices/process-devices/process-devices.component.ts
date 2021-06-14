@@ -23,7 +23,7 @@ export class ProcessDevicesComponent implements OnInit {
   }
 
   public deviceDetails(id : string){
-    this.router.navigate(['equipos','detalles',id]);
+    this.router.navigate(['calibraciones','confirmar',id]);
   }
 
   private loadDevices(req = null) : void{
