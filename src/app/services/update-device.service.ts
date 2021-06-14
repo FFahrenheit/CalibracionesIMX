@@ -15,6 +15,30 @@ export class UpdateDeviceService {
 
   constructor(private http: HttpClient) { }
 
+  public acceptCalibration(equipo : string, fecha = new Date(), calibrador = 'N/I'){
+    const data = {
+      equipo,
+      fecha,
+      calibrador
+    };
+    return this.http.post(`${base_url}/device/status/${ equipo }`, data)
+              .pipe(
+                map((resp:any)=>{
+                  console.log(resp);
+                  if(resp['ok']){
+                    return true;
+                  }
+
+                  this.errorMessage = 'No se pudo completar la operación';
+                  return false;
+                }),catchError(error=>{
+                  console.log(error);
+                  this.errorMessage = 'Error con el servidor';
+                  return of(false);
+                })
+              );
+  }
+
   public updateStatus(id : string, estado : string){
     const data = {
       estado,

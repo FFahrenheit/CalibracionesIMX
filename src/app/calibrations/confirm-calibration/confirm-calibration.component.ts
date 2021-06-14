@@ -12,6 +12,7 @@ export class ConfirmCalibrationComponent implements OnInit {
 
   public id : string | null = '';
   public show = false;
+  public device = null;
 
   constructor(private route   : ActivatedRoute,
               private status  : UpdateDeviceService,
@@ -26,6 +27,7 @@ export class ConfirmCalibrationComponent implements OnInit {
 
   exists($event){
     this.show = $event != null;
+    this.device = $event;
   }
 
   confirmCalibration(){
@@ -42,7 +44,7 @@ export class ConfirmCalibrationComponent implements OnInit {
       },error=>{
         this.alert.error(this.status.geError());
       }
-    )
+    );
   }
 
 }
