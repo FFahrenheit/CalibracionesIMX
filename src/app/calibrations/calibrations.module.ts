@@ -12,7 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [
     BeginCalibrationComponent,
     UpdateStatusComponent,
-    ConfirmCalibrationComponent
+    ConfirmCalibrationComponent,
   ],
   imports: [
     CommonModule,

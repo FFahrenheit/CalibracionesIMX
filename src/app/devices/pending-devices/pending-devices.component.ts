@@ -23,7 +23,7 @@ export class PendingDevicesComponent implements OnInit {
   }
 
   public deviceDetails(id : string){
-    this.router.navigate(['equipos','detalles',id]);
+    this.router.navigate(['equipos','empezar',id]);
   }
 
   private loadDevices(req = null) : void{
