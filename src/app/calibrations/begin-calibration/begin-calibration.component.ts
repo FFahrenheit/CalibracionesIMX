@@ -24,4 +24,10 @@ export class BeginCalibrationComponent implements OnInit {
     this.show = $event != null;
   }
 
+  public getHtmlContent(){
+    return `Seleccione el estado que más describe la situación con la calibración.
+    Si desea dar de baja el dispositivo o marcarlo como calibrado diríjase a 
+    <a style="color:rgb(0, 2, 141);" href="/calibraciones/actualizar/${ this.id }"> Actualizar equipos </a>`;
+  }
+
 }

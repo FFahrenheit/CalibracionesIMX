@@ -19,6 +19,7 @@ import localeMX from '@angular/common/locales/es-MX';
 import localeMXExtra from '@angular/common/locales/extra/es-MX';
 import { Error404Component } from './errors/error404/error404.component';
 import { PendingCalibrationComponent } from './pending-calibration/pending-calibration.component';
+import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { PendingCalibrationComponent } from './pending-calibration/pending-calib
     NgbModule,
     SharedModule,
     HttpClientModule,
+    PipesModule
   ],
   providers: [
     DatePipe,

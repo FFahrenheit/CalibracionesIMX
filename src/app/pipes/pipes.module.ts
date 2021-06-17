@@ -2,24 +2,28 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ErrorPipe } from './error.pipe';
 import { ResolutionPipe } from './resolution.pipe';
+import { SanitizeHtmlPipe } from './sanitize-html.pipe';
 
 
 
 @NgModule({
   declarations: [
     ErrorPipe,
-    ResolutionPipe
+    ResolutionPipe,
+    SanitizeHtmlPipe
   ],
   imports: [
     CommonModule
   ],
   exports: [
     ErrorPipe,
-    ResolutionPipe
+    ResolutionPipe,
+    SanitizeHtmlPipe
   ],
   providers: [
     ErrorPipe,
-    ResolutionPipe
+    ResolutionPipe,
+    SanitizeHtmlPipe
   ]
 })
 export class PipesModule { 

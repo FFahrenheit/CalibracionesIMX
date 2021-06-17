@@ -5,8 +5,7 @@
 <status-option
     *ngIf="show"
     title="Empezar de calibración"
-    content="Seleccione el estado que más describe la situación con la calibración.
-    Si desea dar de baja el dispositivo o marcarlo como calibrado diríjase a Actualizar equipos"
+    [HtmlContent]="getHtmlContent()"
     trigger="Actualizar estado de calibración"
     [options]="options">
 

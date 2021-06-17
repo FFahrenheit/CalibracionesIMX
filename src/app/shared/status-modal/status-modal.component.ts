@@ -16,6 +16,7 @@ export class StatusModalComponent implements OnInit {
   @Input() public myClass = 'px-5 m-3';
   @Input() public isDisabled = false;
   @Input() public options = estados;
+  @Input() public HtmlContent = '';
 
   @Output() public send = new EventEmitter<string>();
   @Output() public cancel = new EventEmitter<string>();

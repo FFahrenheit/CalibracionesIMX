@@ -13,6 +13,7 @@
     </div>
     <div class="modal-body m-content">
         {{ content }}
+        <div [innerHTML]=" HtmlContent | sanitizeHtml "></div>
         <form [formGroup]="form">
 
             <div class="row d-flex justify-content-center">
