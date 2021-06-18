@@ -73,17 +73,27 @@ export class DeviceComponent implements OnInit {
     
     const periodo = this.device.periodo*365;
 
-    if(daysDiff > (periodo-20)){
-      this.status = daysDiff < 365 ? 'Idealmente en proceso' : 'Idealmente calibrado';
+    const daysLeft = periodo - daysDiff;
+
+    console.log(daysLeft);
+
+    if(daysLeft <= 0){
+      this.status = 'Idealmente calibrado';
       return 'danger';
     }
 
-    if(daysDiff > (periodo-20-20)){
-      this.status = 'Idealmente planeando calibración';
+    if(daysLeft <= 10){
+      this.status = 'Idealmente en proceso'
       return 'warning';
     }
 
-    return 'dark';
+    if(daysLeft <= 20){
+      this.status = 'Idealmente planeando calibración'
+      return 'warning';
+    }
+
+    this.status = 'Calibración vigente';
+    return 'success';
   }
 
   public getDateValue() : number{
@@ -101,6 +111,23 @@ export class DeviceComponent implements OnInit {
     daysDiff = Math.ceil(daysDiff / (1000 * 60 * 60 * 24))
     
     return daysDiff + ' días';
+  }
+
+  public daysIcon() : string{
+    const today = new Date();
+    const deadLine = new Date(this.device.siguiente);
+    let daysDiff = Number(deadLine) - Number(today);
+    daysDiff = Math.ceil(daysDiff / (1000 * 60 * 60 * 24));
+
+    if(daysDiff<=0){
+      return 'not-ok';
+    }
+
+    if(daysDiff<=20){
+      return 'warning';
+    }
+
+    return 'ok';
   }
 
 }

@@ -68,7 +68,7 @@ export class ConfirmCalibrationModalComponent implements OnInit {
     this.touched = true;
     if(this.form.valid){
       this.modalReference.close();
-      // this.accept.emit();
+      this.accept.emit();
     }
   }
 }
