@@ -43,6 +43,7 @@ export class FilterModalComponent implements OnInit {
       estado: [saved?.estado || ''],
       activo: [saved?.activo || ''],
       ubicacion: [saved?.ubicacion || ''],
+      calibracion: [saved?.calibracion || ''],
       periodo: [saved?.periodo || ''],
       fromUltima: [saved?.fromUltima || ''],
       toUltima: [saved?.toUltima || ''],

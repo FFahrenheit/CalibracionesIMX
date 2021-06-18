@@ -80,6 +80,19 @@
                 </div>
 
                 <div class="form-group row pt-0">
+                    <label for="" class="col-md-4 col-form-label">Calibración</label>
+                    <div class="col-md-8">
+                        <select [class]="getClass('calibracion')" formControlName="calibracion"
+                            class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                            <option value='' disabled selected>Interna o externa</option>
+                            <option value='INTERNO'>Interna</option>
+                            <option value='EXTERNO'>Externa</option>
+                            <option value=''></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row pt-0">
                     <label for="" class="col-md-4 col-form-label has-error has-feedback">Ubicación</label>
                     <div class="col-md-8">
                         <input formControlName="ubicacion" type="text" class="form-control"
@@ -120,8 +133,8 @@
                 </div>
 
                 <div class="form-group row pt-3">
-                    <label for="" class="col-md-4 col-form-label has-error has-feedback">Periodo de calibración</label>
-                    <div class="col-md-8">
+                    <label for="" class="col-md-6 col-form-label has-error has-feedback">Periodo de calibración</label>
+                    <div class="col-md-6">
                         <input formControlName="periodo" type="number" min="0" max="10" class="form-control"
                             [class]="getClass('periodo')" placeholder="Periodo en años">
                     </div>
