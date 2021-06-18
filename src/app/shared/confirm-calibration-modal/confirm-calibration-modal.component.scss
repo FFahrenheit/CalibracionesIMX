@@ -1,0 +1,28 @@
+.error{
+    color: rgb(173, 0, 0);
+}
+
+.btn-disabled{
+    background-color: rgb(145, 145, 145);
+    border-color: rgb(161, 161, 161);
+}
+
+.btn-disabled:hover{
+    cursor: default;
+}
+
+.btn-disabled:focus{
+    background-color: rgb(126, 125, 125);
+    border-color: rgb(158, 158, 158);
+}
+
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(1.5); /* IE */
+  -moz-transform: scale(1.5); /* FF */
+  -webkit-transform: scale(1.5); /* Safari and Chrome */
+  -o-transform: scale(1.5); /* Opera */
+  transform: scale(1.5);
+  padding: 10px;
+}

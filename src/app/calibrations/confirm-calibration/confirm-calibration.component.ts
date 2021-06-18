@@ -45,7 +45,7 @@ export class ConfirmCalibrationComponent implements OnInit {
     }else if(this.form.controls['calibrador'].value != ''){
       calibrador = this.form.controls['calibrador'].value;
     }else{
-      calibrador = '';
+      calibrador = 'N/I';
     }
 
     this.status.acceptCalibration(this.id,calibrador).subscribe(

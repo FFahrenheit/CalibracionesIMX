@@ -13,7 +13,24 @@
     </div>
     <div class="modal-body m-content">
         <div *ngIf="!isDisabled; else reason_content">
-            Hola
+            {{ content }}
+            <form [formGroup]="form">
+                <div class="form-check my-2">
+                    <input formControlName="calibration" class="form-check-input" type="checkbox" id="calibration">
+                    <label class="form-check-label" for="calibration">
+                        La calibración del equipo fue completada correctamente
+                    </label>
+                </div>
+                <div class="form-check my-2">
+                    <input formControlName="label" class="form-check-input" type="checkbox" id="label">
+                    <label class="form-check-label" for="label">
+                        Se verificó los datos en la etiqueta sean correctos
+                    </label>
+                </div>
+            </form>
+            <span class="error" *ngIf="touched && !form.valid">
+                La verificación de los requerimientos es obligatoria
+            </span>
         </div>
         <ng-template #reason_content>
             <div *ngIf="areReasons();else one_reason">
@@ -31,8 +48,12 @@
         </ng-template>
     </div>
     <div class="modal-footer">
-        <button *ngIf="!isDisabled" type="button" class="btn btn-success px-3" (click)="modal.close('YES')">Sí</button>
-        <button *ngIf="!isDisabled" type="button" class="btn btn-danger px-3" (click)="modal.close('NO')">No</button>
+        <button *ngIf="!isDisabled" type="button" class="btn px-3" (click)="confirm()"
+            [ngClass]="{'btn-disabled btn-secondary': !form.valid, 'btn-success' : form.valid}">
+            Continuar
+        </button>
+        <button *ngIf="!isDisabled" type="button" class="btn btn-danger px-3"
+            (click)="modal.close('NO')">Cancelar</button>
         <button *ngIf="isDisabled" type="button" class="btn btn-primary px-3" (click)="modal.close('')">Ok</button>
     </div>
 </ng-template>
