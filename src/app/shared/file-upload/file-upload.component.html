@@ -1,0 +1,55 @@
+<div class="table-responsive container text-center pt-2">
+    <h5 class="text-left my-1">Upload {{type}}s </h5>
+    <div class="row">
+        <div class="col-md-5">
+            <form enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="example-input-file"> </label>
+                    <input (change)="addFile($event)" type="file" name="multi-files" multiple
+                        class="form-control-file border" />
+                </div>
+            </form>
+            <h5 class="suggestion">Upload up to {{maxFiles}} files with an unique name. Max size is {{maxSize|size}}</h5>
+            <!-- <p title="Clear warning" *ngFor="let skip of skipped; let index = i" class="skip" (click)="deleteSkip(i)"> 
+                <i class="fas fa-exclamation-triangle"></i>
+                {{ skip.name }} skipped: {{ skip.reason }} 
+            </p> -->
+        </div>
+
+        <div class="col-md-7 table-responsive">
+            <div class="table-responsive" *ngIf="files.length > 0;else no_files">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Size</th>
+                            <th scope="col">Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let file of files; let i = index">
+                            <td>
+                                {{ file.name }}
+                            </td>
+                            <td>
+                                {{ file.size|size}} 
+                            </td>
+                            <td>
+                                <button (click)="clearFile(i)" type="button" class="btn btn-danger">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ng-template #no_files>
+                <h5 class="file-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Please attach at least one {{ type }}
+                </h5>
+            </ng-template>
+        </div>
+    </div>
+</div>

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ErrorPipe } from './error.pipe';
 import { ResolutionPipe } from './resolution.pipe';
 import { SanitizeHtmlPipe } from './sanitize-html.pipe';
+import { SizePipe } from './size.pipe';
+import { FilenamePipe } from './filename.pipe';
 
 
 
@@ -10,7 +12,9 @@ import { SanitizeHtmlPipe } from './sanitize-html.pipe';
   declarations: [
     ErrorPipe,
     ResolutionPipe,
-    SanitizeHtmlPipe
+    SanitizeHtmlPipe,
+    SizePipe,
+    FilenamePipe
   ],
   imports: [
     CommonModule
@@ -18,12 +22,16 @@ import { SanitizeHtmlPipe } from './sanitize-html.pipe';
   exports: [
     ErrorPipe,
     ResolutionPipe,
-    SanitizeHtmlPipe
+    SanitizeHtmlPipe,
+    SizePipe,
+    FilenamePipe
   ],
   providers: [
     ErrorPipe,
     ResolutionPipe,
-    SanitizeHtmlPipe
+    SanitizeHtmlPipe,
+    SizePipe,
+    FilenamePipe
   ]
 })
 export class PipesModule { 

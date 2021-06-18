@@ -13,6 +13,7 @@ import { SortDirective } from '../directives/sort.directive';
 import { StatusModalComponent } from './status-modal/status-modal.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { ConfirmCalibrationModalComponent } from './confirm-calibration-modal/confirm-calibration-modal.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ConfirmCalibrationModalComponent } from './confirm-calibration-modal/co
     StatusModalComponent,
     ConfirmModalComponent,
     ConfirmCalibrationModalComponent,
+    FileUploadComponent,
   ],
   imports: [
     CommonModule,
@@ -43,7 +45,8 @@ import { ConfirmCalibrationModalComponent } from './confirm-calibration-modal/co
     SortDirective,
     StatusModalComponent,
     ConfirmModalComponent,
-    ConfirmCalibrationModalComponent
+    ConfirmCalibrationModalComponent,
+    FileUploadComponent
   ]
 })
 export class SharedModule { }

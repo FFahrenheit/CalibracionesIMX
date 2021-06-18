@@ -1,0 +1,28 @@
+.file-warning{
+    color: rgb(22, 22, 22);
+}
+
+.file-warning i{
+    color: rgb(254,164,0);
+    margin-right: 10px;
+}
+
+.suggestion{
+    color:rgb(22, 22, 22);
+    font-size: 18px;
+}
+
+.skip{
+    color: rgb(22, 22, 22);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.skip i{
+    color: red;   
+}
+
+.skip p{
+    margin-top: 0.6em;
+    margin-bottom: 0;
+}
