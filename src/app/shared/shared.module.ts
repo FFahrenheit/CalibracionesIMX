@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SortDirective } from '../directives/sort.directive';
 import { StatusModalComponent } from './status-modal/status-modal.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { ConfirmCalibrationModalComponent } from './confirm-calibration-modal/confirm-calibration-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
     SortDirective,
     StatusModalComponent,
     ConfirmModalComponent,
+    ConfirmCalibrationModalComponent,
   ],
   imports: [
     CommonModule,
@@ -40,7 +42,8 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
     FilterModalComponent,
     SortDirective,
     StatusModalComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    ConfirmCalibrationModalComponent
   ]
 })
 export class SharedModule { }

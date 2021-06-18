@@ -1,6 +1,6 @@
 <div class="containter-fluid pb-5 d-flex flex-row-reverse">
-    <button class="btn btn-md" [ngClass]="{'btn-disabled btn-secondary': isDisabled, 'btn-success' : !isDisabled}" [class]="myClass"
-        (click)="open(confirmModal)">
+    <button class="btn btn-md" [ngClass]="{'btn-disabled btn-secondary': isDisabled, 'btn-success' : !isDisabled}"
+        [class]="myClass" (click)="open(confirmModal)">
         {{ trigger }}
     </button>
 </div>
@@ -13,7 +13,7 @@
     </div>
     <div class="modal-body m-content">
         <div *ngIf="!isDisabled; else reason_content">
-            {{ content }}
+            Hola
         </div>
         <ng-template #reason_content>
             <div *ngIf="areReasons();else one_reason">
