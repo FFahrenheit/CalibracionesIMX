@@ -57,7 +57,7 @@
                 <div>
                     <h5 class="text-left subtitle-att">Calendario de calibración</h5>
 
-                    <div *ngIf="device.activo=='Activo'; else empty_calendario">
+                    <div *ngIf="device.activo=='Activo' || device.activo == 'Inactivo'; else empty_calendario">
                         <attr name="Última calibración" [value]="datePipe.transform(device.ultima,'longDate')">
                         </attr>
                         <attr name="Siguiente calibración" [value]="datePipe.transform(device.siguiente,'longDate')">
@@ -88,7 +88,7 @@
                         </div>
                     </div>
                     <ng-template #empty_calendario>
-                        <span class="empty text">Dispositivo inactivo, sin próxima calibración planeada</span>
+                        <span class="empty text">Dispositivo desactivado, sin próxima calibración planeada</span>
                     </ng-template>
                 </div>
 
