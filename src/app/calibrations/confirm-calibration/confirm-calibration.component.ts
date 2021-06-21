@@ -15,6 +15,7 @@ export class ConfirmCalibrationComponent implements OnInit {
   public show = false;
   public device = null;
   public form : FormGroup = Object.create(null);
+  public evidences : FormGroup = Object.create(null);
 
   constructor(private route   : ActivatedRoute,
               private status  : UpdateDeviceService,
@@ -29,6 +30,10 @@ export class ConfirmCalibrationComponent implements OnInit {
 
     this.form = this.fb.group({
       calibrador: ['']
+    });
+
+    this.evidences =  this.fb.group({
+      
     });
   }
 

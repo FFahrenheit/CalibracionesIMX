@@ -10,10 +10,10 @@
                 </div>
             </form>
             <h5 class="suggestion">Upload up to {{maxFiles}} files with an unique name. Max size is {{maxSize|size}}</h5>
-            <!-- <p title="Clear warning" *ngFor="let skip of skipped; let index = i" class="skip" (click)="deleteSkip(i)"> 
+            <p title="Clear warning" *ngFor="let skip of skipped; let i = index" class="skip" (click)="deleteSkip(i)"> 
                 <i class="fas fa-exclamation-triangle"></i>
                 {{ skip.name }} skipped: {{ skip.reason }} 
-            </p> -->
+            </p>
         </div>
 
         <div class="col-md-7 table-responsive">

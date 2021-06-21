@@ -5,7 +5,6 @@ export const estados = [
     'Desactivado',
     'En Proceso de Calibración',
     'Extraviado',
-    'N/A',
     'Referencia',
     'Reparacion'
 ];
@@ -15,7 +14,8 @@ export const activos = [
     'Baja',
     'Desactivado',
     'Extraviado',
+    'Inactivo',
     'N/A',
     'Referencia',
-    'Reparacion'
+    'Reparacion',
 ];

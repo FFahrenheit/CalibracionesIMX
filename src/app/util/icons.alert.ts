@@ -57,6 +57,7 @@ export class IconsAlert {
             case 'Activo':
                 return 'ok';
             case 'Reparacion':
+            case 'Inactivo':
                 return 'waiting';
             case 'Baja':
             case 'Desactivado':

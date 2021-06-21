@@ -6,8 +6,6 @@ import { SanitizeHtmlPipe } from './sanitize-html.pipe';
 import { SizePipe } from './size.pipe';
 import { FilenamePipe } from './filename.pipe';
 
-
-
 @NgModule({
   declarations: [
     ErrorPipe,
