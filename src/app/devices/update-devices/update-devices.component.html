@@ -20,7 +20,7 @@
     </span>
 
     <span class="text-right float-right mt-0 mb-1">
-        Mostrando {{devices.length}} {{ devices.length == 1 ? 'resultado':'resultados'}}
+        Mostrando {{devices?.length}} {{ devices?.length == 1 ? 'resultado':'resultados'}}
     </span>
 
     <table class="table table-hover table-bordered table-sm" *ngIf="devices?.length > 0;else empty_body">

@@ -48,7 +48,9 @@ export class FilterModalComponent implements OnInit {
       fromUltima: [saved?.fromUltima || ''],
       toUltima: [saved?.toUltima || ''],
       fromSiguiente: [saved?.fromSiguiente || ''],
-      toSiguiente: [saved?.toSiguiente || '']
+      toSiguiente: [saved?.toSiguiente || ''],
+      fromRemaining: [saved?.fromRemaining || ''],
+      toRemaining: [saved?.toRemaining || '']
     });
 
     this.apply.emit(this.getValues());
@@ -96,6 +98,12 @@ export class FilterModalComponent implements OnInit {
         let filter;
 
         switch(key){
+          case 'fromRemaining':
+            filter = 'Calibracion desde dentro de : ' + control + ' días';
+            break;
+          case 'toRemaining':
+            filter = 'Calibracion hasta dentro de : ' + control + ' días';
+            break;
           case 'fromUltima':
             filter = 'Ultima desde : ' + control;
             break;

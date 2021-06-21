@@ -132,7 +132,24 @@
                     </div>
                 </div>
 
-                <div class="form-group row pt-3">
+                
+                <div class="form-group pt-0" *ngIf="blocked?.length > 0">
+                    <span>Calibración dentro de</span>
+                    <div class="row pt-0">
+                        <label for="" class="col-md-2 col-form-label">Desde</label>
+                        <div class="col-md-4">
+                            <input [class]="getClass('fromRemaining')" formControlName="fromRemaining" 
+                                class="form-control" type="number" placeholder="Dias">
+                        </div>
+                        <label for="" class="col-md-2 col-form-label">Hasta</label>
+                        <div class="col-md-4">
+                            <input [min]="filterForm.controls['fromRemaining'].value" formControlName="toRemaining"
+                                [class]="getClass('toRemaining')" class="form-control" type="number" placeholder="Dias"> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row pt-1">
                     <label for="" class="col-md-6 col-form-label has-error has-feedback">Periodo de calibración</label>
                     <div class="col-md-6">
                         <input formControlName="periodo" type="number" min="0" max="10" class="form-control"

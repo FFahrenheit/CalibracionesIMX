@@ -92,7 +92,7 @@ export class DeviceComponent implements OnInit {
       return 'warning';
     }
 
-    this.status = 'Calibración vigente';
+    this.status = this.getDateValue() > 50 ?  'Calibración vigente' : '';
     return 'success';
   }
 
