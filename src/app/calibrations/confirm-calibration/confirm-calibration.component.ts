@@ -33,7 +33,10 @@ export class ConfirmCalibrationComponent implements OnInit {
     });
 
     this.evidences =  this.fb.group({
-      
+      hasRyr: [false],
+      hasCertificate: [false],
+      ryr: [''],
+      certificate: [''],
     });
   }
 

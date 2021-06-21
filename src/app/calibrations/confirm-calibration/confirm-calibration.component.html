@@ -5,8 +5,30 @@
 <div *ngIf="show">
     <h5>Confirmación de calibración</h5>
     <div class="row py-2">
-        <form>
-            
+        <form [formGroup]="evidences" class="ml-3">
+            <div class="form-check my-2">
+                <input formControlName="hasCertificate" class="form-check-input" type="checkbox" id="hasCertificate">
+                <label class="form-check-label label-attach" for="hasCertificate">
+                    Adjuntar certificado de calibración
+                </label>
+            </div>
+
+            <div class="form-group" *ngIf="evidences.controls['hasCertificate'].value">
+                <label for="certificate">Suba el PDF o Excel de RYR</label>
+                <input type="file" class="form-control-file" id="certificate" formControlName="certificate">
+            </div>
+
+            <div class="form-check my-2">
+                <input formControlName="hasRyr" class="form-check-input" type="checkbox" id="hasRyr">
+                <label class="form-check-label label-attach" for="hasRyr">
+                    Adjuntar pruebas RYR
+                </label>
+            </div>
+
+            <div class="form-group" *ngIf="evidences.controls['hasRyr'].value">
+                <label for="ryr">Suba el certificado de calibración en PDF</label>
+                <input type="file" class="form-control-file" id="ryr" formControlName="ryr">
+            </div>
         </form>
     </div>
     <div class="row py-2">
