@@ -25,7 +25,8 @@
             <div class="form-group" *ngIf="form.controls['hasCertificate'].value"
             [ngClass]="{'was-validated': form.controls['certificate'].touched}">
                 <label for="certificate">Suba el PDF o Excel de RYR</label>
-                <input type="file" required class="form-control file-input" id="certificate" formControlName="certificate">
+                <input type="file" required class="form-control file-input" 
+                (change) = "certificateEvent($event)"id="certificate" formControlName="certificate">
             </div>
 
             <div class="form-check my-2" (click)="goDown()">
@@ -38,7 +39,8 @@
             <div class="form-group" *ngIf="form.controls['hasRyr'].value"
             [ngClass]="{'was-validated': form.controls['ryr'].touched}">
                 <label for="ryr">Suba el certificado de calibración en PDF</label>
-                <input type="file" class="form-control file-input" id="ryr" formControlName="ryr" required>
+                <input type="file" class="form-control file-input" id="ryr" 
+                (change)="ryrEvent($event)" formControlName="ryr" required>
             </div>
         </form>
     </div>

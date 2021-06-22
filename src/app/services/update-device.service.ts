@@ -22,7 +22,7 @@ export class UpdateDeviceService {
       fecha,
       calibrador
     };
-
+ 
     return this.http.post(`${base_url}/device/calibrated`, data)
               .pipe(
                 map((resp:any)=>{
@@ -43,13 +43,14 @@ export class UpdateDeviceService {
   }
 
   public uploadRyr(equipo : string, file : File){
+    console.log(file)
     let headers = new HttpHeaders();
-    headers.set('Conent-Type','multipart/form-data');
-    let formData = new FormData;
+    headers.set('Content-Type','multipart/form-data');
+    let formData = new FormData();
     formData.append('ryr',file);
 
     return this.http.post(
-      `${base_url}/upload/${equipo}/${this.calibrationId}`,
+      `${base_url}/upload/ryr/${equipo}/${this.calibrationId}`,
       formData,
       {
         headers: headers
@@ -58,13 +59,14 @@ export class UpdateDeviceService {
   }
 
   public uploadCertificate(equipo : string, file : File){
+    console.log(file);
     let headers = new HttpHeaders();
-    headers.set('Conent-Type','multipart/form-data');
-    let formData = new FormData;
+    headers.set('Content-Type','multipart/form-data');
+    let formData = new FormData();
     formData.append('certificate',file);
 
     return this.http.post(
-      `${base_url}/upload/${equipo}/${this.calibrationId}`,
+      `${base_url}/upload/certificate/${equipo}/${this.calibrationId}`,
       formData,
       {
         headers: headers

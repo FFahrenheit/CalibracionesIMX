@@ -16,6 +16,8 @@ export class ConfirmCalibrationComponent implements OnInit {
   public device = null;
   public form: FormGroup = Object.create(null);
   public reasons: string[];
+  public ryr : File;
+  public certificate : File;
 
   constructor(private route: ActivatedRoute,
     private status: UpdateDeviceService,
@@ -35,6 +37,20 @@ export class ConfirmCalibrationComponent implements OnInit {
       ryr: [''],
       certificate: [''],
     });
+  }
+
+  ryrEvent($event){
+    if($event.target.files.length > 0) 
+    {
+      this.ryr = $event.target.files[0];
+    }
+  }
+
+  certificateEvent($event){
+    if($event.target.files.length > 0) 
+    {
+      this.certificate = $event.target.files[0]
+    }
   }
 
   exists($event) {
@@ -61,7 +77,7 @@ export class ConfirmCalibrationComponent implements OnInit {
         if (resp) {
           if (this.form.controls['hasRyr'].value) {
             //UPLOAD RYR 
-            this.status.uploadRyr(this.id,this.form.controls['ryr'].value)
+            this.status.uploadRyr(this.id,this.ryr)
                   .subscribe(resp=>{
                     if(resp['ok']){
                       myCount += 1;
@@ -78,7 +94,7 @@ export class ConfirmCalibrationComponent implements OnInit {
           if (this.form.controls['hasCertificate'].value) {
 
             //UPLOAD CERTIFICATE
-            this.status.uploadCertificate(this.id,this.form.controls['certificate'].value)
+            this.status.uploadCertificate(this.id,this.certificate)
                   .subscribe(resp=>{
                     if(resp['ok']){
                       myCount += 1;
