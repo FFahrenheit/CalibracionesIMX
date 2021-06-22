@@ -11,24 +11,24 @@ import { AlertService } from 'src/app/shared/alert';
 })
 export class ConfirmCalibrationComponent implements OnInit {
 
-  public id : string | null = '';
+  public id: string | null = '';
   public show = false;
   public device = null;
-  public form : FormGroup = Object.create(null);
-  public reasons : string[];
+  public form: FormGroup = Object.create(null);
+  public reasons: string[];
 
-  constructor(private route   : ActivatedRoute,
-              private status  : UpdateDeviceService,
-              private alert   : AlertService,
-              private router  : Router,
-              private fb      : FormBuilder) { }
+  constructor(private route: ActivatedRoute,
+    private status: UpdateDeviceService,
+    private alert: AlertService,
+    private router: Router,
+    private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params=> {
+    this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
     });
 
-    this.form =  this.fb.group({
+    this.form = this.fb.group({
       calibrador: [''],
       hasRyr: [false],
       hasCertificate: [false],
@@ -37,59 +37,103 @@ export class ConfirmCalibrationComponent implements OnInit {
     });
   }
 
-  exists($event){
+  exists($event) {
     this.show = $event != null;
     this.device = $event;
   }
 
-  confirmCalibration(){
+  confirmCalibration() {
 
     let calibrador;
-    if(this.device.calibracion == 'INTERNO'){
+    if (this.device.calibracion == 'INTERNO') {
       calibrador = 'Interplex';
-    }else if(this.form.controls['calibrador'].value != ''){
+    } else if (this.form.controls['calibrador'].value != '') {
       calibrador = this.form.controls['calibrador'].value;
-    }else{
+    } else {
       calibrador = 'N/I';
     }
 
-    this.status.acceptCalibration(this.id,calibrador).subscribe(
-      resp=>{
-        if(resp){
-          this.alert.success('Calibración aceptada');
-          setTimeout(() => {
-            this.router.navigate(['equipos','detalles',this.id]);
-          }, 2500);
-        }else{
+    let fileCount = this.form.controls['hasRyr'].value + this.form.controls['hasCertificate'].value;
+    console.log('File count : ' + fileCount);
+    let myCount = 0;
+    this.status.acceptCalibration(this.id, calibrador).subscribe(
+      resp => {
+        if (resp) {
+          if (this.form.controls['hasRyr'].value) {
+            //UPLOAD RYR 
+            this.status.uploadRyr(this.id,this.form.controls['ryr'].value)
+                  .subscribe(resp=>{
+                    if(resp['ok']){
+                      myCount += 1;
+                      if(myCount == fileCount){
+                        this.navigate();
+                      }
+                    }else{
+                      this.alert.error('No se pudo subir el RYR');
+                    }
+                  },error=>{
+                    this.alert.error('Error al subir RYR');
+                  });
+          }
+          if (this.form.controls['hasCertificate'].value) {
+
+            //UPLOAD CERTIFICATE
+            this.status.uploadCertificate(this.id,this.form.controls['certificate'].value)
+                  .subscribe(resp=>{
+                    if(resp['ok']){
+                      myCount += 1;
+                      if(myCount == fileCount){
+                        this.navigate();
+                      }
+                    }else{
+                      this.alert.error('No se pudo subir el certificado');
+                    }
+                  },error=>{
+                    this.alert.error('Error al subir certificado');
+                  });
+
+          }
+          if (fileCount == 0) {
+            this.navigate();
+          }
+
+        } else {
           this.alert.error(this.status.geError());
         }
-      },error=>{
+      }, error => {
         this.alert.error(this.status.geError());
       }
     );
   }
 
-  needsEvidence(){
+  private navigate() {
+    this.alert.success('Calibración aceptada');
+    setTimeout(() => {
+      this.router.navigate(['equipos', 'detalles', this.id]);
+    }, 2500);
+  }
+
+  needsEvidence() {
     this.reasons = [];
     let status = false;
-    if(!this.form.controls['hasRyr'].value && !this.form.controls['hasCertificate'].value){
+    if (!this.form.controls['hasRyr'].value && !this.form.controls['hasCertificate'].value) {
       return false;
     }
-    if(this.form.controls['hasCertificate'].value && this.form.controls['certificate'].value == ''){
+    if (this.form.controls['hasCertificate'].value && this.form.controls['certificate'].value == '') {
       this.reasons.push('No se ha adjuntado el certificado de calibración');
       status = true;
     }
     // console.log([this.form.controls['hasCertificate'].value, this.form.controls['certificate'].value == ''])
-    if(this.form.controls['hasRyr'].value && this.form.controls['ryr'].value == ''){
+    if (this.form.controls['hasRyr'].value && this.form.controls['ryr'].value == '') {
       this.reasons.push('No se ha adjuntado el archivo RYR');
       status = true;
     }
     return status;
   }
 
-  goDown(){
+  goDown() {
     setTimeout(() => {
-      window.scrollTo(0,document.body.scrollHeight);
+      window.scrollTo(0, document.body.scrollHeight);
     }, 1);
   }
 }

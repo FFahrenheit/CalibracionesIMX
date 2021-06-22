@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -11,6 +11,7 @@ const base_url = environment.base_url;
 })
 export class UpdateDeviceService {
 
+  private calibrationId;
   private errorMessage = 'Error de servidor';
 
   constructor(private http: HttpClient) { }
@@ -27,6 +28,7 @@ export class UpdateDeviceService {
                 map((resp:any)=>{
                   console.log(resp);
                   if(resp['ok']){
+                    this.calibrationId = resp['id'];
                     return true;
                   }
 
@@ -38,6 +40,36 @@ export class UpdateDeviceService {
                   return of(false);
                 })
               );
+  }
+
+  public uploadRyr(equipo : string, file : File){
+    let headers = new HttpHeaders();
+    headers.set('Conent-Type','multipart/form-data');
+    let formData = new FormData;
+    formData.append('ryr',file);
+
+    return this.http.post(
+      `${base_url}/upload/${equipo}/${this.calibrationId}`,
+      formData,
+      {
+        headers: headers
+      }
+    );
+  }
+
+  public uploadCertificate(equipo : string, file : File){
+    let headers = new HttpHeaders();
+    headers.set('Conent-Type','multipart/form-data');
+    let formData = new FormData;
+    formData.append('certificate',file);
+
+    return this.http.post(
+      `${base_url}/upload/${equipo}/${this.calibrationId}`,
+      formData,
+      {
+        headers: headers
+      }
+    );
   }
 
   public updateStatus(id : string, estado : string){
