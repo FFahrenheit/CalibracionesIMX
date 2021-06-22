@@ -14,7 +14,7 @@ export class ConfirmCalibrationModalComponent implements OnInit {
   @Input() public trigger = 'Confirmar';
   @Input() public myClass = 'px-5 m-3';
   @Input() public isDisabled = false;
-  @Input() public reason = 'Está actualmente deshabilitado';
+  @Input() public reason : string | string[] = 'Está actualmente deshabilitado';
 
   @Output() public accept = new EventEmitter<void>();
   @Output() public cancel = new EventEmitter<void>();

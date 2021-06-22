@@ -75,8 +75,6 @@ export class DeviceComponent implements OnInit {
 
     const daysLeft = periodo - daysDiff;
 
-    console.log(daysLeft);
-
     if(daysLeft <= 0){
       this.status = 'Idealmente calibrado';
       return 'danger';

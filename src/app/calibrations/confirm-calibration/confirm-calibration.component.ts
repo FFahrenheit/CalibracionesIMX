@@ -15,7 +15,7 @@ export class ConfirmCalibrationComponent implements OnInit {
   public show = false;
   public device = null;
   public form : FormGroup = Object.create(null);
-  public evidences : FormGroup = Object.create(null);
+  public reasons : string[];
 
   constructor(private route   : ActivatedRoute,
               private status  : UpdateDeviceService,
@@ -28,11 +28,8 @@ export class ConfirmCalibrationComponent implements OnInit {
       this.id = params.get('id');
     });
 
-    this.form = this.fb.group({
-      calibrador: ['']
-    });
-
-    this.evidences =  this.fb.group({
+    this.form =  this.fb.group({
+      calibrador: [''],
       hasRyr: [false],
       hasCertificate: [false],
       ryr: [''],
@@ -72,4 +69,27 @@ export class ConfirmCalibrationComponent implements OnInit {
     );
   }
 
+  needsEvidence(){
+    this.reasons = [];
+    let status = false;
+    if(!this.form.controls['hasRyr'].value && !this.form.controls['hasCertificate'].value){
+      return false;
+    }
+    if(this.form.controls['hasCertificate'].value && this.form.controls['certificate'].value == ''){
+      this.reasons.push('No se ha adjuntado el certificado de calibración');
+      status = true;
+    }
+    // console.log([this.form.controls['hasCertificate'].value, this.form.controls['certificate'].value == ''])
+    if(this.form.controls['hasRyr'].value && this.form.controls['ryr'].value == ''){
+      this.reasons.push('No se ha adjuntado el archivo RYR');
+      status = true;
+    }
+    return status;
+  }
+
+  goDown(){
+    setTimeout(() => {
+      window.scrollTo(0,document.body.scrollHeight);
+    }, 1);
+  }
 }
