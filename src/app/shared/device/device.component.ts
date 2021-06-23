@@ -132,4 +132,8 @@ export class DeviceComponent implements OnInit {
     return this.deviceService.downloadFile(filename);
   }
 
+  public getBorrow(){
+    return '/prestamos/detalles/INT001';
+  }
+
 }

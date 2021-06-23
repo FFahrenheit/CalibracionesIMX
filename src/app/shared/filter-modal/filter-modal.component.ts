@@ -98,6 +98,12 @@ export class FilterModalComponent implements OnInit {
         let filter;
 
         switch(key){
+          case 'estado':
+            filter = 'Estado de calibración : ' + control;
+            break;
+          case 'activo':
+            filter = 'Estado de equipo : ' + control;
+            break;
           case 'fromRemaining':
             filter = 'Calibracion desde dentro de : ' + control + ' días';
             break;

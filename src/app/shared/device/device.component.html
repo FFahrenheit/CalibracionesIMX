@@ -14,43 +14,51 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
 
-                <h5 class="text-left subtitle-att">Detalles del equipo</h5>
-
-                <attr name="ID" [value]="id"></attr>
-                <attr name="Descripcion" [value]="device.descripcion"></attr>
-                <attr name="Numero de serie" [value]="device.serie"></attr>
-                <attr name="Ubicacion" [value]="device.ubicacion"></attr>
-                <attr name="Tipo de calibracion" [value]="device.calibracion"></attr>
-                <attr name="Error" [value]="errorPipe.transform(device.error)"></attr>
-                <attr name="Resolución" [value]="resolution.transform(device.resInf,device.resSup)"></attr>
-                <attr name="Estado del dispositivo" [value]="device.activo" [status]="getActive()"></attr>
-                <attr name="Estado de calibracion" [value]="device.estado" [status]="getStatus()"></attr>
-                <attr name="Periodo de calibración" [value]="device.periodo == 1 ? '1 año' : device.periodo + ' años'">
-                </attr>
-
                 <div>
-                    <h6 class="text-left subtitle-att">Calibradores del equipo</h6>
-                    <ul class="dot-list" *ngIf="device.verificadores.length > 0;else empty_calibradores">
-                        <li *ngFor="let c of device.verificadores">
-                            {{ c.nombre }}
-                        </li>
-                    </ul>
-                    <ng-template #empty_calibradores>
-                        <span class="empty text"> No hay información de los calibradores de este equipo</span>
-                    </ng-template>
+                    <h5 class="text-left subtitle-att">Detalles del equipo</h5>
+
+                    <attr name="ID" [value]="id"></attr>
+                    <attr name="Descripcion" [value]="device.descripcion"></attr>
+                    <attr name="Numero de serie" [value]="device.serie"></attr>
+                    <attr name="Ubicacion" [value]="device.ubicacion"></attr>
+                    <attr name="Tipo de calibracion" [value]="device.calibracion"></attr>
+                    <attr name="Error" [value]="errorPipe.transform(device.error)"></attr>
+                    <attr name="Resolución" [value]="resolution.transform(device.resInf,device.resSup)"></attr>
+                    <attr name="Estado del dispositivo" [value]="device.activo" [status]="getActive()"></attr>
+                    <attr name="Estado de calibracion" [value]="device.estado" [status]="getStatus()"></attr>
+                    <attr name="Periodo de calibración"
+                        [value]="device.periodo == 1 ? '1 año' : device.periodo + ' años'">
+                    </attr>
+
+                    <div>
+                        <h6 class="text-left subtitle-att">Responsables del equipo</h6>
+                        <ul class="dot-list" *ngIf="device.responsables.length > 0; else empty_responsables">
+                            <li *ngFor="let r of device.responsables">
+                                {{ r.nombre }}
+                            </li>
+                        </ul>
+                        <ng-template #empty_responsables>
+                            <span class="empty text"> No hay información de los responsables de este equipo</span>
+                        </ng-template>
+                    </div>
                 </div>
 
                 <div>
-                    <h6 class="text-left subtitle-att">Responsables del equipo</h6>
-                    <ul class="dot-list" *ngIf="device.responsables.length > 0; else empty_responsables">
-                        <li *ngFor="let r of device.responsables">
-                            {{ r.nombre }}
-                        </li>
-                    </ul>
-                    <ng-template #empty_responsables>
-                        <span class="empty text"> No hay información de los responsables de este equipo</span>
+                    <a [href]="getBorrow()" class="black-link" target="_blak" title="Ver préstamos del equipo">
+                        <h5 class="text-left subtitle-att">
+                            Préstamos
+                            <i class="fas fa-external-link-alt"></i>
+                        </h5>
+                    </a>
+                    <div *ngIf="device.prestatario == null; else not_available">
+                        <attr name="Estado del equipo" value="Disponible" status="ok"></attr>
+                    </div>
+                    <ng-template #not_available>
+                        <attr name="Estado del equipo" value="No disponible" status="not-ok"></attr>
+                        <attr name="Prestatario" [value]="device.nombrePrestatario + ' (' + device.prestatario + ')'"></attr>
                     </ng-template>
                 </div>
+
             </div>
             <div class="col-md-6 table-responsive container text-center">
 
@@ -114,7 +122,10 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let c of device.calibraciones">
-                                <td> {{ c.fecha| date:'medium' }}</td>
+                                <td>
+                                    {{ c.fecha| date:'mediumDate' }}
+                                    {{ c.fecha| date:'shortTime' }}
+                                </td>
                                 <td>
                                     <a *ngIf="c.ryr != null; else just_ryr" title="Ver pruebas RYR"
                                         [href]="downloadFile(c.ryr)" target="_blank" class="black-link">
@@ -142,6 +153,18 @@
                     <ng-template #empty_calibraciones>
                         <span class="empty text"> No hay información del historial de calibraciones de este
                             equipo</span>
+                    </ng-template>
+                </div>
+
+                <div>
+                    <h6 class="text-left subtitle-att">Calibradores del equipo</h6>
+                    <ul class="dot-list" *ngIf="device.verificadores.length > 0;else empty_calibradores">
+                        <li *ngFor="let c of device.verificadores">
+                            {{ c.nombre }}
+                        </li>
+                    </ul>
+                    <ng-template #empty_calibradores>
+                        <span class="empty text"> No hay información de los calibradores de este equipo</span>
                     </ng-template>
                 </div>
             </div>
