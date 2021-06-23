@@ -45,7 +45,6 @@ export class GetDeviceService {
 
   public downloadFile(file : string){
     file = file.replace(/\\/g,'*');
-    console.log(encodeURI(`${ base_url }/files/${ file }`));
     return encodeURI(`${ base_url }/files/${ file }`);
   }
 }
