@@ -100,6 +100,9 @@ export class FilterModalComponent implements OnInit {
         let filter;
 
         switch(key){
+          case 'calibracion':
+            filter = 'Tipo de calibración : ' + this.titleCase.transform(control);
+            break;
           case 'estado':
             filter = 'Estado de calibración : ' + control;
             break;
