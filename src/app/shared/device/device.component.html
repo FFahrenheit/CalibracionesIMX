@@ -117,7 +117,16 @@
                                 <td> {{ c.fecha| date:'medium' }}</td>
                                 <td> {{ c.calibrador }}</td>
                                 <td> {{ c.verifico }} </td>
-                                <td> OK </td>
+                                <td>
+                                    <a *ngIf="c.certificado != null; else just_ok" title="Ver certificado"
+                                    [href]="downloadFile(c.certificado)" target = "_blank" class="black-link">
+                                        Ok
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <ng-template #just_ok>
+                                        Ok
+                                    </ng-template>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

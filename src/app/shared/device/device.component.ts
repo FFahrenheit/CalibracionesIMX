@@ -128,4 +128,8 @@ export class DeviceComponent implements OnInit {
     return 'ok';
   }
 
+  public downloadFile(filename : string){
+    return this.deviceService.downloadFile(filename);
+  }
+
 }
