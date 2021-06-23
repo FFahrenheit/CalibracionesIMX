@@ -29,5 +29,10 @@ export const publicSidebar = [
         name: 'Prestar equipos',
         route: ['equipos','prestar'],
         detail: 'Prestar equipos'
+    },
+    {
+        name: 'Equipos prestados',
+        route: ['equipos','prestados'],
+        detail: 'Equipos prestados'
     }
 ];

@@ -20,6 +20,7 @@ export class FilterModalComponent implements OnInit {
   @Input() public title = 'Filtrar equipos';
   @Input() public message = 'Seleccione los filtros a aplicar a los equipos';
   @Input() public blocked: string[] = [];
+  @Input() public isBorrow = false;
 
   @Output() public apply = new EventEmitter<any>();
   @Output() public cancel = new EventEmitter<any>();
@@ -50,7 +51,8 @@ export class FilterModalComponent implements OnInit {
       fromSiguiente: [saved?.fromSiguiente || ''],
       toSiguiente: [saved?.toSiguiente || ''],
       fromRemaining: [saved?.fromRemaining || ''],
-      toRemaining: [saved?.toRemaining || '']
+      toRemaining: [saved?.toRemaining || ''],
+      prestatario: [saved?.prestatario],
     });
 
     this.apply.emit(this.getValues());

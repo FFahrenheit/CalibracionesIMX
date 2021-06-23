@@ -51,11 +51,12 @@
                         </h5>
                     </a>
                     <div *ngIf="device.prestatario == null; else not_available">
-                        <attr name="Estado del equipo" value="Disponible" status="ok"></attr>
+                        <attr name="Estado del equipo" value="Disponible para préstamo" status="ok"></attr>
                     </div>
                     <ng-template #not_available>
-                        <attr name="Estado del equipo" value="No disponible" status="not-ok"></attr>
-                        <attr name="Prestatario" [value]="device.nombrePrestatario + ' (' + device.prestatario + ')'"></attr>
+                        <attr name="Estado del equipo" value="Prestado" status="not-ok"></attr>
+                        <attr name="Prestatario" [value]="device.nombrePrestatario + ' (' + device.prestatario + ')'">
+                        </attr>
                     </ng-template>
                 </div>
 
@@ -160,7 +161,14 @@
                     <h6 class="text-left subtitle-att">Calibradores del equipo</h6>
                     <ul class="dot-list" *ngIf="device.verificadores.length > 0;else empty_calibradores">
                         <li *ngFor="let c of device.verificadores">
-                            {{ c.nombre }}
+                            <a *ngIf="c.nombre.startsWith('INT'); else just_name" title="Consultar equipo"
+                                [href]="'/equipos/detalles/' + c.nombre" target="_blak" class="black-link">
+                                {{ c.nombre }}
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <ng-template #just_name>
+                                {{ c.nombre }}
+                            </ng-template>
                         </li>
                     </ul>
                     <ng-template #empty_calibradores>
