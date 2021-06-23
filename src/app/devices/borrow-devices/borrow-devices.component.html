@@ -1,1 +1,102 @@
-<p>borrow-devices works!</p>
+<div class="table-responsive container text-center mb-5">
+    <alert></alert>
+    <div class="table-responsive">
+        <table class="table table-borderless">
+            <tr>
+                <td>
+                    <h4 class="text-left my-1">Equipos disponibles a préstamos</h4>
+                </td>
+                <td>
+                    <div class="text-right">
+                        <filter (apply)="appyFilters($event)" (reset)="resetFilters()" [blocked]="['estado','activo']">
+                        </filter>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <span class="text-left float-left mt-0 mb-1">
+        Haga click en la fila para empezar proceso de préstamo
+    </span>
+
+    <span class="text-right float-right mt-0 mb-1">
+        Mostrando {{devices?.length}} {{ devices?.length == 1 ? 'resultado':'resultados'}}
+    </span>
+
+    <table class="table table-hover table-bordered table-sm" *ngIf="devices?.length > 0;else empty_body">
+        <thead>
+            <tr class="header">
+                <th scope="col" [appSort]="devices" data-order="desc" data-name="id" class="align-middle">
+                    <i class="fas fa-sort float-left"></i>
+                    ID
+                </th>
+                <th scope="col" [appSort]="devices" data-order="desc" data-name="descripcion" class="align-middle">
+                    <i class="fas fa-sort float-left"></i>
+                    Descripción
+                </th>
+                <th scope="col" [appSort]="devices" data-order="desc" data-name="serie" class="align-middle">
+                    <i class="fas fa-sort float-left"></i>
+                    No. serie
+                </th>
+                <th scope="col" [appSort]="devices" data-order="desc" data-name="estado" class="align-middle">
+                    <i class="fas fa-sort float-left"></i>
+                    Estado calibración
+                </th>
+                <th scope="col" [appSort]="devices" data-order="desc" data-name="activo" class="align-middle">
+                    <i class="fas fa-sort float-left mr-1"></i>
+                    Estado equipo
+                </th>
+                <th scope="col" [appSort]="devices" data-order="desc" data-name="ubicacion" class="align-middle">
+                    <i class="fas fa-sort float-left"></i>
+                    Ubicación
+                </th>
+                <th scope="col" [appSort]="devices" data-order="desc" data-name="ultima" class="align-middle">
+                    <i class="fas fa-sort float-left"></i>
+                    Ultima calibración
+                </th>
+                <th scope="col" [appSort]="devices" data-order="desc" data-name="siguiente" class="align-middle">
+                    <i class="fas fa-sort float-left"></i>
+                    Siguiente calibración
+                </th>
+                <th scope="col" class="align-middle">
+                    <i class="fas fa-sort float-left"></i>
+                    Estado de préstamo
+                </th>
+            </tr>
+        </thead>
+        <tbody class="click">
+            <tr *ngFor="let d of devices" (click)="deviceDetails(d.id)">
+                <td> {{ d.id }}</td>
+                <td> {{ d.descripcion }} </td>
+                <td> {{ d.serie }}</td>
+                <td>
+                    <i [class]="icons.estado(d.estado)"></i>
+                    {{ d.estado }}
+                </td>
+                <td>
+                    <i [class]="icons.activo(d.activo)"></i>
+                    {{ d.activo }}
+                </td>
+                <td> {{ d.ubicacion}} </td>
+                <td> {{ d.ultima | date:'shortDate' }} </td>
+                <td>
+                    <i [class]="icons.calibrado(d.siguiente)"></i>
+                    {{ d.siguiente | date:'shortDate' }}
+                </td>
+                <td>
+                    <i class="fas fa-check-circle ok-icon-st"></i>
+                    Disponible
+                </td>
+            </tr>
+        </tbody>
+
+
+    </table>
+    <ng-template #empty_body>
+        <error-message [loading]="devices == null ? null : true" title="No hay resultados"
+            description="No se encontraron resultados para los filtros aplicados" action="Aplicar otros filtros"
+            [customAction]="true" action="Cargar lista de equipos" (back)="resetFilters()">
+        </error-message>
+    </ng-template>
+</div>
