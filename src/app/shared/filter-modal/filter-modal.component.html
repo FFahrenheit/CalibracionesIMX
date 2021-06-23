@@ -39,6 +39,14 @@
                     </div>
                 </div>
 
+                <div class="form-group row pt-0" *ngIf="blocked.includes('disponible')">
+                    <label for="" class="col-md-4 col-form-label has-error has-feedback">Prestatario</label>
+                    <div class="col-md-8">
+                        <input formControlName="prestatario" type="text" class="form-control" [class]="getClass('prestatario')"
+                            placeholder="Nombre o nombre de usuario">
+                    </div>
+                </div>
+
                 <div class="form-group row pt-0">
                     <label for="" class="col-md-4 col-form-label has-error has-feedback">No. de serie</label>
                     <div class="col-md-8">

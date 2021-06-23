@@ -8,7 +8,8 @@
                 </td>
                 <td>
                     <div class="text-right">
-                        <filter (apply)="appyFilters($event)" (reset)="resetFilters()" [blocked]="['estado','activo']">
+                        <filter (apply)="appyFilters($event)" (reset)="resetFilters()" 
+                        [blocked]="['estado','activo','disponible']">
                         </filter>
                     </div>
                 </td>

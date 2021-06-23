@@ -20,7 +20,6 @@ export class FilterModalComponent implements OnInit {
   @Input() public title = 'Filtrar equipos';
   @Input() public message = 'Seleccione los filtros a aplicar a los equipos';
   @Input() public blocked: string[] = [];
-  @Input() public isBorrow = false;
 
   @Output() public apply = new EventEmitter<any>();
   @Output() public cancel = new EventEmitter<any>();
