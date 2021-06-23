@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { BorrowDevicesComponent } from "./borrow-devices/borrow-devices.component";
 import { DevicesListComponent } from "./devices-list/devices-list.component";
 import { NextDevicesComponent } from "./next-devices/next-devices.component";
 import { PendingDevicesComponent } from "./pending-devices/pending-devices.component";
@@ -50,6 +51,13 @@ export const DevicesRoutes : Routes =  [
                 component: UpdateDevicesComponent,
                 data: {
                     title: 'Actualizar estado de equipos'
+                }
+            },
+            {
+                path: 'prestar',
+                component: BorrowDevicesComponent,
+                data: {
+                    title: 'Préstamo de equipos'
                 }
             },
             {

@@ -24,5 +24,10 @@ export const publicSidebar = [
         name: 'Actualizar calibración',
         route: ['equipos','actualizar'],
         detail: 'Estado de equipo'
+    },
+    {
+        name: 'Prestar equipos',
+        route: ['equipos','prestar'],
+        detail: 'Prestar equipos'
     }
 ];

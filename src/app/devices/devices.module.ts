@@ -9,6 +9,7 @@ import { NextDevicesComponent } from './next-devices/next-devices.component';
 import { ProcessDevicesComponent } from './process-devices/process-devices.component';
 import { PendingDevicesComponent } from './pending-devices/pending-devices.component';
 import { UpdateDevicesComponent } from './update-devices/update-devices.component';
+import { BorrowDevicesComponent } from './borrow-devices/borrow-devices.component';
 
 
 
@@ -20,6 +21,7 @@ import { UpdateDevicesComponent } from './update-devices/update-devices.componen
     ProcessDevicesComponent,
     PendingDevicesComponent,
     UpdateDevicesComponent,
+    BorrowDevicesComponent,
   ],
   imports: [
     CommonModule,
