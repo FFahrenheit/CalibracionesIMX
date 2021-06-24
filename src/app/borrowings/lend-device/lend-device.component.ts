@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { delay } from 'rxjs/operators';
 import { UsersService } from 'src/app/services/users.service';
 import { AlertService } from 'src/app/shared/alert';
 import { UserInputComponent } from 'src/app/shared/user-input/user-input.component';
@@ -15,6 +16,7 @@ export class LendDeviceComponent implements OnInit {
   public id : string | null = '';
   public show = false;
   public device = null;
+  public validInput = false;
 
   @ViewChild('prestatario') prestatario : UserInputComponent;
 
@@ -49,10 +51,24 @@ export class LendDeviceComponent implements OnInit {
         })
   }
 
+  valid(){
+    this.validInput = true;
+  }
+
   public setValues(data){
-    if(data.username != null){
+    if(data != null && data.username != null){
+      console.log('Valid!');
+      this.validInput = true;
       this.form.controls['prestatario'].setValue(data.name);
       this.form.controls['username'].setValue(data.username);
+      this.form.updateValueAndValidity({ onlySelf: true, emitEvent: true });
+
+    }else{
+      console.log('Invalid');
+      this.validInput = false;
+      this.form.controls['prestatario'].setValue('');
+      this.form.controls['username'].setValue('');    
+      this.form.updateValueAndValidity({ onlySelf: true, emitEvent: true });
     }
   }
 
@@ -70,5 +86,17 @@ export class LendDeviceComponent implements OnInit {
   markAsTouched(){
     this.form.markAllAsTouched();
     this.prestatario.markAsTouched();
+  }
+
+  public isValid(){
+    console.log(!this.validInput);
+    return !this.validInput;
+  }
+
+  getValidity(){
+    if (this.prestatario != null){
+      return this.prestatario.getValidity();
+    }
+    return false;
   }
 }

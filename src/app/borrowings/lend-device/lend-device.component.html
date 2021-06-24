@@ -8,7 +8,7 @@
         <form [formGroup]="form" class="ml-3 col-md-4">
             <div class="form-group row">
                 <label for="" class="col-md-5 col-form-label has-error has-feedback">Prestatario</label>
-                <user-input #prestatario (update)="setValues($event)" [users]="users" [index]="0">
+                <user-input #prestatario (update)="setValues($event)" [users]="users">
                 </user-input>
             </div>
         </form>
@@ -21,6 +21,7 @@
 
         <div class="col-md-6">
             <confirm-modal myClass="px-5 m-3 float-left"
+                [isDisabled]="!getValidity()"
                 title="Confirmar prestado" trigger="Prestar equipo" 
                  (triggered)="markAsTouched()">
             </confirm-modal>

@@ -1,7 +1,7 @@
 import { AfterContentInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { debounceTime, delay, distinctUntilChanged, map } from 'rxjs/operators';
 
 @Component({
   selector: 'user-input',
@@ -18,9 +18,10 @@ export class UserInputComponent implements OnInit, AfterContentInit {
   @Input() public users = [];
   @Input() public index = 0;
   @Input() public placeholder = 'Usuario';
-
   @Input() public defaultUser = {};
+  
   @Output() public update = new EventEmitter();
+  @Output() public valid = new EventEmitter();
 
   constructor(public fb : FormBuilder,
               private cdRef: ChangeDetectorRef) { 
@@ -57,24 +58,14 @@ export class UserInputComponent implements OnInit, AfterContentInit {
 
   formatter = (x: {name: string}) => x.name;
 
-  getStyle(){
-    this.name.updateValueAndValidity({ onlySelf: true, emitEvent: true });
-
-    if(!this.name.touched){
-      return '';
-    }
-    this.isValid();
-    return (this.name.valid && !this.name.hasError('incorrect')) ? 'is-valid' : 'is-invalid';
-  }
-
-  isValid(){
+  getValidity(){
     let uName = this.name.value;
 
     this.name.setErrors({
       'incorrect': true
-    });    
+    });
 
-    if(typeof uName === 'object' && uName !== null    ){
+    if(typeof uName === 'object' && typeof uName.name !== 'undefined'){
       this.name.setErrors(null);
       this.savedUser = uName;
     }
@@ -86,14 +77,54 @@ export class UserInputComponent implements OnInit, AfterContentInit {
       }
     });
 
-    let data = this.savedUser;
-    data['index'] = this.index;
+    return this.name.valid && !this.name.hasError('incorrect');
+  }
 
-    this.update.emit(data);
+  getStyle(){
+    this.name.updateValueAndValidity({ onlySelf: true, emitEvent: true });
+
+    if(!this.name.touched){
+      return '';
+    }
+    this.isValid();
+    let value = (this.name.valid && !this.name.hasError('incorrect')) ? 'is-valid' : 'is-invalid';
+    if(value == 'is-valid'){
+      this.valid.emit();
+    }
+    return value;
+  }
+
+  isValid(){
+    let uName = this.name.value;
+
+    this.name.setErrors({
+      'incorrect': true
+    });
+
+    if(typeof uName === 'object' && typeof uName.name !== 'undefined'){
+      this.name.setErrors(null);
+      this.savedUser = uName;
+    }
+
+    this.users?.forEach(u=>{
+      if(u.name == uName){
+        this.name.setErrors(null);
+        this.savedUser = u;
+      }
+    });
+
+    if(this.name.valid && !this.name.hasError('incorrect')){
+      let data = this.savedUser;
+      data['index'] = this.index;
+      this.update.emit(data);
+    }else {
+      this.update.emit(null);
+    }
   }
 
   markAsTouched(){
     this.form.markAllAsTouched();
   }
+
 
 }
