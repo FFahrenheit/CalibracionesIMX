@@ -27,6 +27,13 @@ export const AppRoutes: Routes = [
                 )
             },
             {
+                path: 'prestamos',
+                loadChildren: () =>
+                import('./borrowings/borrowings.module').then(
+                    (m) => m.BorrowingsModule
+                )
+            },
+            {
                 path: '',
                 pathMatch: 'full',
                 redirectTo: 'equipos'

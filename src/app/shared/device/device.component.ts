@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbProgressbar } from '@ng-bootstrap/ng-bootstrap';
 import { ErrorPipe } from 'src/app/pipes/error.pipe';
 import { ResolutionPipe } from 'src/app/pipes/resolution.pipe';
@@ -29,7 +30,8 @@ export class DeviceComponent implements OnInit {
               public errorPipe      : ErrorPipe,
               public resolution     : ResolutionPipe,
               public datePipe       : DatePipe,
-              public progressBar    : NgbProgressbar) { 
+              public progressBar    : NgbProgressbar,
+              private router        : Router) { 
   }
 
   ngOnInit(): void {
@@ -133,7 +135,7 @@ export class DeviceComponent implements OnInit {
   }
 
   public getBorrow(){
-    return '/prestamos/detalles/INT001';
+    this.router.navigate(['prestamos','detalles',this.id]);
   }
 
 }

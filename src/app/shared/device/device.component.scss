@@ -36,3 +36,8 @@
 .black-link{
     color: rgb(46, 46, 46);
 }
+
+.black-link:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
