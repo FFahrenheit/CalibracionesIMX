@@ -8,15 +8,14 @@ import { GetDeviceService } from 'src/app/services/get-device.service';
 import { IconsAlert } from 'src/app/util/icons.alert';
 
 @Component({
-  selector: 'device',
-  templateUrl: './device.component.html',
-  styleUrls: ['./device.component.scss'],
-  providers: [ NgbProgressbar ]
+  selector: 'device-borrows',
+  templateUrl: './device-borrows.component.html',
+  styleUrls: ['./device-borrows.component.scss']
 })
-export class DeviceComponent implements OnInit {
+export class DeviceBorrowsComponent implements OnInit {
 
   @Input() public id : string | null = '';
-  @Input() public title : string = '';
+  @Input() public title : string = 'Ver';
 
   public device = null;
   public exists : boolean | null = null;
@@ -30,7 +29,6 @@ export class DeviceComponent implements OnInit {
               public errorPipe      : ErrorPipe,
               public resolution     : ResolutionPipe,
               public datePipe       : DatePipe,
-              public progressBar    : NgbProgressbar,
               private router        : Router) { 
   }
 
