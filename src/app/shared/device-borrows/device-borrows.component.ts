@@ -15,13 +15,10 @@ import { IconsAlert } from 'src/app/util/icons.alert';
 export class DeviceBorrowsComponent implements OnInit {
 
   @Input() public id : string | null = '';
-  @Input() public title : string = 'Ver';
 
   public device = null;
   public exists : boolean | null = null;
   public error : string | null = '';
-
-  public status = '';
 
   @Output() public receive = new EventEmitter<any>();
 
@@ -65,75 +62,12 @@ export class DeviceBorrowsComponent implements OnInit {
     return IconsAlert.getStatus(this.device.estado);
   }
 
-  public getDateType() : string{
-    const today = new Date();
-    const deadLine = new Date(this.device.ultima);
-    let daysDiff = Number(today) - Number(deadLine);
-    daysDiff = Math.ceil(daysDiff / (1000 * 60 * 60 * 24));
-    
-    const periodo = this.device.periodo*365;
-
-    const daysLeft = periodo - daysDiff;
-
-    if(daysLeft <= 0){
-      this.status = 'Idealmente calibrado';
-      return 'danger';
-    }
-
-    if(daysLeft <= 10){
-      this.status = 'Idealmente en proceso'
-      return 'warning';
-    }
-
-    if(daysLeft <= 20){
-      this.status = 'Idealmente planeando calibración'
-      return 'warning';
-    }
-
-    this.status = this.getDateValue() > 50 ?  'Calibración vigente' : '';
-    return 'success';
-  }
-
-  public getDateValue() : number{
-    const today = new Date();
-    const deadLine = new Date(this.device.ultima);
-    let daysDiff = Number(today) - Number(deadLine);
-    daysDiff = Math.ceil(daysDiff / (1000 * 60 * 60 * 24)); 
-    return daysDiff / (Number(this.device.periodo)*365) * 100;
-  }
-
-  public getDays() : string {
-    const today = new Date();
-    const deadLine = new Date(this.device.siguiente);
-    let daysDiff = Number(deadLine) - Number(today);
-    daysDiff = Math.ceil(daysDiff / (1000 * 60 * 60 * 24))
-    
-    return daysDiff + ' días';
-  }
-
-  public daysIcon() : string{
-    const today = new Date();
-    const deadLine = new Date(this.device.siguiente);
-    let daysDiff = Number(deadLine) - Number(today);
-    daysDiff = Math.ceil(daysDiff / (1000 * 60 * 60 * 24));
-
-    if(daysDiff<=0){
-      return 'not-ok';
-    }
-
-    if(daysDiff<=20){
-      return 'warning';
-    }
-
-    return 'ok';
-  }
-
   public downloadFile(filename : string){
     return this.deviceService.downloadFile(filename);
   }
 
-  public getBorrow(){
-    this.router.navigate(['prestamos','detalles',this.id]);
+  public getDetails(){
+    this.router.navigate(['equipos','detalles',this.id]);
   }
 
 }
