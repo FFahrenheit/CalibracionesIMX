@@ -16,7 +16,7 @@ export class UserInputComponent implements OnInit, AfterContentInit {
   public model : any;
 
   @Input() public users = [];
-  @Input() public index;
+  @Input() public index = 0;
   @Input() public placeholder = 'Usuario';
 
   @Input() public defaultUser = {};

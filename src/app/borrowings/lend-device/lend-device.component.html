@@ -3,7 +3,27 @@
 </device-borrows>
 
 <div *ngIf="show">
-    <h5>Confirmación de calibración</h5>
+    <h5>Préstamo del equipo</h5>
     <div class="row py-2">
+        <form [formGroup]="form" class="ml-3 col-md-4">
+            <div class="form-group row">
+                <label for="" class="col-md-5 col-form-label has-error has-feedback">Prestatario</label>
+                <user-input #prestatario (update)="setValues($event)" [users]="users" [index]="0">
+                </user-input>
+            </div>
+        </form>
+    </div>
+
+    <div class="row py-2">
+        <div class="col-md-6">
+
+        </div>
+
+        <div class="col-md-6">
+            <confirm-modal myClass="px-5 m-3 float-left"
+                title="Confirmar prestado" trigger="Prestar equipo" 
+                 (triggered)="markAsTouched()">
+            </confirm-modal>
+        </div>
     </div>
 </div>
