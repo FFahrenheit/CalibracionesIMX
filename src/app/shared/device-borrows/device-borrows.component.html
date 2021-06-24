@@ -5,7 +5,7 @@
         </div>
 
         <div class="row justify-content-center">
-            <div class="col-md-5">
+            <div class="col-md-4">
 
                 <div>
                     <a (click)="getDetails()" class="black-link" title="Ver detalles del equipo">
@@ -44,7 +44,7 @@
                 <div class="mb-2">
                     <h5 class="text-left subtitle-att"> Estado de préstamo </h5>
                     <div *ngIf="device.prestatario == null; else not_available">
-                        <attr name="Estado del equipo" value="Disponible para préstamo" status="ok"></attr>
+                        <attr name="Estado del equipo" value="Disponible" status="ok"></attr>
                     </div>
                     <ng-template #not_available>
                         <attr name="Estado del equipo" value="Prestado" status="not-ok"></attr>
@@ -54,61 +54,60 @@
                 </div>
 
             </div>
-            <div class="col-md-7 table-responsive container text-center">
-
+            
+            <div class="col-md-8 table-responsive container text-center">
 
                 <div>
                     <h5 class="text-left subtitle-att">Historial de préstamos</h5>
                     <table class="table table-hover table-bordered table-sm"
-                        *ngIf="device.calibraciones.length > 0; else empty_calibraciones">
+                        *ngIf="device.prestamos.length > 0; else empty_prestamos">
                         <thead>
                             <tr class="header">
                                 <th scope="col">
-                                    Fecha
+                                    Fecha préstamo
                                 </th>
                                 <th scope="col">
-                                    Prove-Calibración
+                                    Prestatario
                                 </th>
                                 <th scope="col">
-                                    Verificó
+                                    Estado
                                 </th>
                                 <th scope="col">
-                                    Verif. de etiqueta
+                                    Notas
+                                </th>
+                                <th>
+                                    Entregó
+                                </th>
+                                <th>
+                                    Recibió
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let c of device.calibraciones">
+                            <tr *ngFor="let c of device.prestamos">
                                 <td>
-                                    {{ c.fecha| date:'mediumDate' }}
-                                    {{ c.fecha| date:'shortTime' }}
+                                    29/03/21
                                 </td>
                                 <td>
-                                    <a *ngIf="c.ryr != null; else just_ryr" title="Ver pruebas RYR"
-                                        [href]="downloadFile(c.ryr)" target="_blank" class="black-link">
-                                        {{ c.calibrador }}
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </a>
-                                    <ng-template #just_ryr>
-                                        {{ c.calibrador }}
-                                    </ng-template>
+                                    Ivan Lopez
                                 </td>
-                                <td> {{ c.verifico }} </td>
                                 <td>
-                                    <a *ngIf="c.certificado != null; else just_ok" title="Ver certificado"
-                                        [href]="downloadFile(c.certificado)" target="_blank" class="black-link">
-                                        Ok
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </a>
-                                    <ng-template #just_ok>
-                                        Ok
-                                    </ng-template>
+                                    Entregado 
+                                </td>
+                                <td>
+                                    Sin notas
+                                </td>
+                                <td>
+                                    Ivan Lopez
+                                </td>
+                                <td>
+                                    Ivan Lopez
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <ng-template #empty_calibraciones>
-                        <span class="empty text"> No hay información del historial de calibraciones de este
+                    <ng-template #empty_prestamos>
+                        <span class="empty text"> No hay información del historial de préstamos de este
                             equipo</span>
                     </ng-template>
                 </div>

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgbProgressbar } from '@ng-bootstrap/ng-bootstrap';
 import { ErrorPipe } from 'src/app/pipes/error.pipe';
 import { ResolutionPipe } from 'src/app/pipes/resolution.pipe';
+import { GetBorrowService } from 'src/app/services/get-borrow.service';
 import { GetDeviceService } from 'src/app/services/get-device.service';
 import { IconsAlert } from 'src/app/util/icons.alert';
 
@@ -22,7 +23,7 @@ export class DeviceBorrowsComponent implements OnInit {
 
   @Output() public receive = new EventEmitter<any>();
 
-  constructor(private deviceService : GetDeviceService,
+  constructor(private deviceService : GetBorrowService,
               public errorPipe      : ErrorPipe,
               public resolution     : ResolutionPipe,
               public datePipe       : DatePipe,
@@ -60,10 +61,6 @@ export class DeviceBorrowsComponent implements OnInit {
     };
 
     return IconsAlert.getStatus(this.device.estado);
-  }
-
-  public downloadFile(filename : string){
-    return this.deviceService.downloadFile(filename);
   }
 
   public getDetails(){
