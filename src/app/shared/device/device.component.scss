@@ -37,7 +37,15 @@
     color: rgb(46, 46, 46);
 }
 
+.black-link i{
+    font-size: 75%;
+}
+
 .black-link:hover{
     cursor: pointer;
     text-decoration: underline;
+}
+
+.hide-button:hover{
+    cursor: pointer;
 }

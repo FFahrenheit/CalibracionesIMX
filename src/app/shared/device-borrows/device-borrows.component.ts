@@ -16,10 +16,12 @@ import { IconsAlert } from 'src/app/util/icons.alert';
 export class DeviceBorrowsComponent implements OnInit {
 
   @Input() public id : string | null = '';
+  @Input() public canHide = false;
 
   public device = null;
   public exists : boolean | null = null;
   public error : string | null = '';
+  public show = true;
 
   @Output() public receive = new EventEmitter<any>();
 

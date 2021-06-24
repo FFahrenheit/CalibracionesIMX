@@ -1,5 +1,5 @@
 <alert></alert>
-<device [id]="id" (receive)="exists($event)">
+<device [id]="id" (receive)="exists($event)" [canHide]="true">
 </device>
 
 <div *ngIf="show">

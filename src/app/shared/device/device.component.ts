@@ -17,12 +17,14 @@ export class DeviceComponent implements OnInit {
 
   @Input() public id : string | null = '';
   @Input() public title : string = '';
+  @Input() public canHide = false;
 
   public device = null;
   public exists : boolean | null = null;
   public error : string | null = '';
 
   public status = '';
+  public show = true;
 
   @Output() public receive = new EventEmitter<any>();
 

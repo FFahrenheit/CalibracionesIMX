@@ -1,10 +1,14 @@
 <div *ngIf="exists; else not_found" class="card my-3 pb-3">
     <div class="container text-center pt-1">
         <div class="row ml-1">
-            <h4 class="text-left my-3"> {{ device['descripcion'] || '' }} - {{ id }} </h4>
+            <h4 class="text-left my-3">
+                <i *ngIf="canHide" title="Mostrar / ocultar" [ngClass]="{'fa-chevron-down':!show,'fa-chevron-up':show}"
+                    class="fas hide-button" (click)="show = !show"></i>
+                {{ device['descripcion'] || '' }} - {{ id }}
+            </h4>
         </div>
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" *ngIf="show">
             <div class="col-md-4">
 
                 <div>
@@ -54,7 +58,7 @@
                 </div>
 
             </div>
-            
+
             <div class="col-md-8 table-responsive container text-center">
 
                 <div>
@@ -92,7 +96,7 @@
                                     Ivan Lopez
                                 </td>
                                 <td>
-                                    Entregado 
+                                    Entregado
                                 </td>
                                 <td>
                                     Sin notas
