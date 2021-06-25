@@ -21,8 +21,11 @@
 
         <div class="col-md-6">
             <confirm-modal myClass="px-5 m-3 float-left"
-                [isDisabled]="!getValidity()"
-                title="Confirmar prestado" trigger="Prestar equipo" 
+                [isDisabled]="!getValidity()" (accept)="confirm()"
+                [content]="'¿Confirma el préstamo del equipo ' + id + '?'"
+                title="Confirmar préstamo" trigger="Prestar equipo" 
+                [reason]="device.prestatario == null ? 
+                'No ha seleccionado el prestatario' : 'El equipo no está disponible para préstamo'" 
                  (triggered)="markAsTouched()">
             </confirm-modal>
         </div>

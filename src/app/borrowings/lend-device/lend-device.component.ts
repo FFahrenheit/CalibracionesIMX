@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { delay } from 'rxjs/operators';
+import { BorrowsService } from 'src/app/services/borrows.service';
 import { UsersService } from 'src/app/services/users.service';
 import { AlertService } from 'src/app/shared/alert';
 import { UserInputComponent } from 'src/app/shared/user-input/user-input.component';
@@ -26,7 +27,9 @@ export class LendDeviceComponent implements OnInit {
   constructor(private route       : ActivatedRoute,
               private alert       : AlertService,
               private fb          : FormBuilder,
-              private userService : UsersService) { }
+              private userService : UsersService,
+              private borrow      : BorrowsService,
+              private router      : Router) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params=> {
@@ -49,10 +52,6 @@ export class LendDeviceComponent implements OnInit {
           console.log('Error retrieving users');
           console.log(error);
         })
-  }
-
-  valid(){
-    this.validInput = true;
   }
 
   public setValues(data){
@@ -88,15 +87,30 @@ export class LendDeviceComponent implements OnInit {
     this.prestatario.markAsTouched();
   }
 
-  public isValid(){
-    console.log(!this.validInput);
-    return !this.validInput;
-  }
-
   getValidity(){
+    if(this.device.prestatario != null){
+      return false;
+    }
     if (this.prestatario != null){
       return this.prestatario.getValidity();
     }
     return false;
+  }
+
+  public confirm(){
+    this.borrow.borrowDevice(this.id, this.form.controls['username'].value)
+        .subscribe(resp=>{
+          if(resp){
+            this.alert.success('Equipo correctamente prestado');
+            setTimeout(() => {
+              this.router.navigate(['prestamos','detalles',this.id]);
+            }, 2500);
+          }
+          else{
+            this.alert.error(this.borrow.getError());
+          }
+        },error=>{
+          this.alert.error(this.borrow.getError());
+        });    
   }
 }
