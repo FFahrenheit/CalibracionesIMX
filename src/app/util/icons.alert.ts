@@ -10,6 +10,19 @@ export class IconsAlert {
     constructor() {
     }
 
+    public static prestamo(estado){
+        switch(estado){
+            case 'Devuelto':
+                return this.icons['ok'];
+            case 'Entregado':
+                return this.icons['waiting'];
+            case 'Dañado':
+                return this.icons['warning'];
+            default:
+                return this.icons['unknown'];
+        }
+    }
+
     public static calibrado(fecha){
         return (Date.parse(fecha) - Date.parse((new Date()).toString()) < 0) ? this.icons['not-ok'] : this.icons['ok'];
     }

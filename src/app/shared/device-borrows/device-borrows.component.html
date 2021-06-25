@@ -67,25 +67,25 @@
                         *ngIf="device.prestamos.length > 0; else empty_prestamos">
                         <thead>
                             <tr class="header">
-                                <th scope="col">
+                                <th scope="col" class="align-middle">
                                     Fecha préstamo
                                 </th>
-                                <th scope="col">
+                                <th scope="col" class="align-middle">
                                     Prestatario
                                 </th>
-                                <th scope="col">
+                                <th scope="col" class="align-middle">
                                     Entregó
                                 </th>
-                                <th scope="col">
+                                <th scope="col" class="align-middle">
                                     Estado
                                 </th>
-                                <th scope="col">
+                                <th scope="col" class="align-middle">
                                     Fecha retorno
                                 </th>
-                                <th scope="col">
+                                <th scope="col" class="align-middle">
                                     Notas
                                 </th>
-                                <th scope="col">
+                                <th scope="col" class="align-middle">
                                     Recibió
                                 </th>
                             </tr>
@@ -102,8 +102,11 @@
                                 <td>
                                     {{ p.nombreEntrega }}
                                 </td>
-                                <td>
-                                    {{ p.estado }}
+                                <td style="white-space: nowrap">
+                                    <span>
+                                        {{ p.estado }}
+                                        <i [class]="getIcon(p.estado)"></i>
+                                    </span>
                                 </td>
                                 <td *ngIf="p.estado != 'Entregado'">
                                     {{ p.fechaRetorno | date:'mediumDate' }}

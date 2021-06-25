@@ -69,4 +69,9 @@ export class DeviceBorrowsComponent implements OnInit {
     this.router.navigate(['equipos','detalles',this.id]);
   }
 
+  public getIcon(estado){
+    console.log(IconsAlert.prestamo(estado));
+    return IconsAlert.prestamo(estado);
+  }
+
 }
