@@ -3,15 +3,41 @@
 </device-borrows>
 
 <div *ngIf="show">
-    <h5>Préstamo del equipo</h5>
-    <div class="row py-2">
-        <form [formGroup]="form" class="ml-3 col-md-4">
+    <h5>Regresar equipo</h5>
+    <div class="row py-2" *ngIf="device?.prestatario != null; else no_return">
+        <form [formGroup]="form" class="ml-3 col-md-6">
+
             <div class="form-group row">
-                <label for="" class="col-md-5 col-form-label has-error has-feedback">Prestatario</label>
-                <input type="text">
+                <label for="" class="col-md-4 col-form-label has-error has-feedback">Prestatario</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" disabled
+                        [value] = "device.nombrePrestatario">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="" class="col-md-4 col-form-label has-error has-feedback">Estado de entrega</label>
+                <div class="col-md-8">
+                    <select [class]="getClass('estado')" formControlName="estado"
+                        class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                        <option value='' disabled selected>Estado de entrega</option>
+                        <option value='Devuelto'>Devuelto correctamente</option>
+                        <option value='Dañado'>Devuelto con falla</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="" class="col-md-4 col-form-label">Notas</label>
+                <div class="col-md-8">
+                    <textarea [class]="getClass('notas')" class="form-control area" formControlName="notas"
+                        placeholder="Notas de retorno" rows="3"></textarea>
+                </div>
             </div>
         </form>
     </div>
+    <ng-template #no_return>
+        <h6 class="note">El equipo no está prestado</h6>
+    </ng-template>
 
     <div class="row py-2">
         <div class="col-md-6">
@@ -19,13 +45,11 @@
         </div>
 
         <div class="col-md-6">
-            <confirm-modal myClass="px-5 m-3 float-left"
-                [isDisabled]="!getValidity()" (accept)="confirm()"
-                [content]="'¿Confirma el préstamo del equipo ' + id + '?'"
-                title="Confirmar préstamo" trigger="Prestar equipo" 
-                [reason]="device.prestatario == null ? 
-                'No ha seleccionado el prestatario' : 'El equipo no está disponible para préstamo'" 
-                 (triggered)="markAsTouched()">
+            <confirm-modal myClass="px-5 m-3 float-left" [isDisabled]="!getValidity()" (accept)="confirm()"
+                [content]="'¿Confirma la devolución del equipo ' + id + '?'" title="Devolución de equipo prestado"
+                trigger="Confirmar devolución" [reason]="device.prestatario == null ? 
+                'El equipo no está prestado' : 'No ha llenado el formulario completamente'"
+                (triggered)="markAsTouched()">
             </confirm-modal>
         </div>
     </div>

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BorrowsService } from 'src/app/services/borrows.service';
-import { UsersService } from 'src/app/services/users.service';
 import { AlertService } from 'src/app/shared/alert';
 
 @Component({
@@ -21,7 +20,6 @@ export class ReturnDeviceComponent implements OnInit {
   constructor(private route       : ActivatedRoute,
               private alert       : AlertService,
               private fb          : FormBuilder,
-              private userService : UsersService,
               private borrow      : BorrowsService,
               private router      : Router) { }
 
@@ -31,8 +29,8 @@ export class ReturnDeviceComponent implements OnInit {
     });
 
     this.form = this.fb.group({
-      prestatario : ['', Validators.compose([Validators.required])],
-      username : ['']
+      estado : ['', Validators.compose([Validators.required])],
+      notas : ['']
     });
 
   }
@@ -47,7 +45,17 @@ export class ReturnDeviceComponent implements OnInit {
     this.form.markAllAsTouched();
   }
 
+  get(control){
+    return this.form.controls[control].value;
+  }
+
   getValidity(){
+    if(this.form.valid){
+      if(this.get('estado') != 'Devuelto'){
+        return this.get('notas') != ''; 
+      }
+      return true;
+    }
     return false;
   }
 
@@ -66,6 +74,17 @@ export class ReturnDeviceComponent implements OnInit {
         },error=>{
           this.alert.error(this.borrow.getError());
         });    
+  }
+
+  public getClass(ctrl : string){
+    const control = this.form.controls[ctrl];
+    if(!control.touched){
+      return ''
+    }
+    if(ctrl == 'notas' && this.form.controls['estado'].value == 'Devuelto'){      
+      return 'is-valid';
+    }
+    return control.value == '' ? 'is-invalid' : 'is-valid';
   }
 
 }
