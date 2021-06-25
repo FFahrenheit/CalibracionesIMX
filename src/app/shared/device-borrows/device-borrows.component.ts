@@ -1,11 +1,9 @@
 import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbProgressbar } from '@ng-bootstrap/ng-bootstrap';
 import { ErrorPipe } from 'src/app/pipes/error.pipe';
 import { ResolutionPipe } from 'src/app/pipes/resolution.pipe';
 import { GetBorrowService } from 'src/app/services/get-borrow.service';
-import { GetDeviceService } from 'src/app/services/get-device.service';
 import { IconsAlert } from 'src/app/util/icons.alert';
 
 @Component({

@@ -17,7 +17,7 @@ export class IconsAlert {
             case 'Entregado':
                 return this.icons['waiting'];
             case 'Dañado':
-                return this.icons['warning'];
+                return this.icons['not-ok'];
             default:
                 return this.icons['unknown'];
         }

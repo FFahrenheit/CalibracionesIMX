@@ -45,12 +45,11 @@
         </div>
 
         <div class="col-md-6">
-            <confirm-modal myClass="px-5 m-3 float-left" [isDisabled]="!getValidity()" (accept)="confirm()"
-                [content]="'¿Confirma la devolución del equipo ' + id + '?'" title="Devolución de equipo prestado"
-                trigger="Confirmar devolución" [reason]="device.prestatario == null ? 
-                'El equipo no está prestado' : 'No ha llenado el formulario completamente'"
-                (accept)="confirm()"
-                (triggered)="markAsTouched()">
+            <confirm-modal myClass="px-5 m-3 float-left" [isDisabled]="!getValidity()"
+                [content]="'¿Confirma la devolución del equipo ' + id + ' por parte de '+ device.nombrePrestatario + '?'" 
+                title="Devolución de equipo prestado" trigger="Confirmar devolución" 
+                [reason]="device.prestatario == null ? 'El equipo no está prestado' : 'No ha llenado el formulario completamente'"
+                (accept)="confirm()" (triggered)="markAsTouched()">
             </confirm-modal>
         </div>
     </div>
