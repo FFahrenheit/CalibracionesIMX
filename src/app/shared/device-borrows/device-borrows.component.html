@@ -9,7 +9,7 @@
         </div>
 
         <div class="row justify-content-center" *ngIf="show">
-            <div class="col-md-4">
+            <div class="col-md-5">
 
                 <div>
                     <a (click)="getDetails()" class="black-link" title="Ver detalles del equipo">
@@ -59,7 +59,7 @@
 
             </div>
 
-            <div class="col-md-8 table-responsive container text-center">
+            <div class="col-md-7 table-responsive container text-center">
 
                 <div>
                     <h5 class="text-left subtitle-att">Historial de préstamos</h5>
@@ -91,7 +91,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let p of device.prestamos">
+                            <tr *ngFor="let p of device.prestamos; let i = index">
                                 <td>
                                     {{ p.fechaEntrega | date:'mediumDate' }}
                                     {{ p.fechaEntrega | date:'shortTime' }}
@@ -106,20 +106,22 @@
                                     {{ p.estado }}
                                 </td>
                                 <td *ngIf="p.estado != 'Entregado'">
-                                    a
                                     {{ p.fechaRetorno | date:'mediumDate' }}
                                     {{ p.fechaRetorno | date:'shortTime' }}
                                 </td>
                                 <td *ngIf="p.estado != 'Entregado'">
-                                    b
-                                    {{ p.notas }}
+                                    {{ p.notas == '' ? '-' : p.notas }}
                                 </td>
                                 <td *ngIf="p.estado != 'Entregado'">
-                                    c
                                     {{ p.nombreRecibe }}
                                 </td>
-                                <td colspan="3" *ngIf="p.estado == 'Entregado'"> 
-                                    Aún no devuelto
+                                <td colspan="3" *ngIf="p.estado == 'Entregado'">
+                                    <span *ngIf="i == 0; else no_info">
+                                        Aún no devuelto
+                                    </span> 
+                                    <ng-template #no_info>
+                                        Sin información
+                                    </ng-template>
                                 </td>
                             </tr>
                         </tbody>

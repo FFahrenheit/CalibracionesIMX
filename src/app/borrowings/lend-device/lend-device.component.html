@@ -5,9 +5,9 @@
 <div *ngIf="show">
     <h5>Préstamo del equipo</h5>
     <div class="row py-2">
-        <form [formGroup]="form" class="ml-3 col-md-4">
+        <form [formGroup]="form" class="ml-3 col-md-6">
             <div class="form-group row">
-                <label for="" class="col-md-5 col-form-label has-error has-feedback">Prestatario</label>
+                <label for="" class="col-md-4 col-form-label has-error has-feedback">Prestatario</label>
                 <user-input #prestatario (update)="setValues($event)" [users]="users">
                 </user-input>
             </div>

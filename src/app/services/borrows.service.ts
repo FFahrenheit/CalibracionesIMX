@@ -15,6 +15,30 @@ export class BorrowsService {
 
   constructor(private http  : HttpClient) { }
 
+  public returnDevice(id : string, estado : string, notas = '', fecha = new Date()){
+    const body = {
+      id,
+      estado,
+      notas,
+      fecha
+    };
+    
+    return this.http.put(`${ base_url }/borrow`,body)
+    .pipe(
+      map((resp : any) => {
+        if(resp['ok']){
+          return true;
+        }
+        this.errorMessage = 'No se pudo prestar el equipo';
+        return false;
+      }),
+      catchError((error: any)=>{
+        this.errorMessage = 'Error en el servidor, intente de nuevo';
+        return of(false);
+      })
+    ); 
+  }
+
   public borrowDevice(id : string, prestatario : string, fecha = new Date()){
     const body = {
       id,

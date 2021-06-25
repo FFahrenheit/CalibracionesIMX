@@ -60,7 +60,9 @@ export class ReturnDeviceComponent implements OnInit {
   }
 
   public confirm(){
-    this.borrow.borrowDevice(this.id, this.form.controls['username'].value)
+    const id = this.device.prestamos[0].id;
+    console.log(id);
+    this.borrow.returnDevice(id, this.get('estado'), this.get('notas'))
         .subscribe(resp=>{
           if(resp){
             this.alert.success('Equipo correctamente prestado');

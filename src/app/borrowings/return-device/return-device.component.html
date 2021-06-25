@@ -49,6 +49,7 @@
                 [content]="'¿Confirma la devolución del equipo ' + id + '?'" title="Devolución de equipo prestado"
                 trigger="Confirmar devolución" [reason]="device.prestatario == null ? 
                 'El equipo no está prestado' : 'No ha llenado el formulario completamente'"
+                (accept)="confirm()"
                 (triggered)="markAsTouched()">
             </confirm-modal>
         </div>
