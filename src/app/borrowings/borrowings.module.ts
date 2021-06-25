@@ -6,13 +6,15 @@ import { RouterModule } from '@angular/router';
 import { BorrowingsRoutes } from './borrowings.routes';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LendDeviceComponent } from './lend-device/lend-device.component';
+import { ReturnDeviceComponent } from './return-device/return-device.component';
 
 
 
 @NgModule({
   declarations: [
     BorrowDetailsComponent,
-    LendDeviceComponent
+    LendDeviceComponent,
+    ReturnDeviceComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,32 @@
+<alert></alert>
+<device-borrows [id]="id" [canHide]="true" (receive)="exists($event)">
+</device-borrows>
+
+<div *ngIf="show">
+    <h5>Préstamo del equipo</h5>
+    <div class="row py-2">
+        <form [formGroup]="form" class="ml-3 col-md-4">
+            <div class="form-group row">
+                <label for="" class="col-md-5 col-form-label has-error has-feedback">Prestatario</label>
+                <input type="text">
+            </div>
+        </form>
+    </div>
+
+    <div class="row py-2">
+        <div class="col-md-6">
+
+        </div>
+
+        <div class="col-md-6">
+            <confirm-modal myClass="px-5 m-3 float-left"
+                [isDisabled]="!getValidity()" (accept)="confirm()"
+                [content]="'¿Confirma el préstamo del equipo ' + id + '?'"
+                title="Confirmar préstamo" trigger="Prestar equipo" 
+                [reason]="device.prestatario == null ? 
+                'No ha seleccionado el prestatario' : 'El equipo no está disponible para préstamo'" 
+                 (triggered)="markAsTouched()">
+            </confirm-modal>
+        </div>
+    </div>
+</div>

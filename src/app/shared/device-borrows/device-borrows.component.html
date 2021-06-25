@@ -74,38 +74,52 @@
                                     Prestatario
                                 </th>
                                 <th scope="col">
+                                    Entregó
+                                </th>
+                                <th scope="col">
                                     Estado
+                                </th>
+                                <th scope="col">
+                                    Fecha retorno
                                 </th>
                                 <th scope="col">
                                     Notas
                                 </th>
-                                <th>
-                                    Entregó
-                                </th>
-                                <th>
+                                <th scope="col">
                                     Recibió
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let c of device.prestamos">
+                            <tr *ngFor="let p of device.prestamos">
                                 <td>
-                                    29/03/21
+                                    {{ p.fechaEntrega | date:'mediumDate' }}
+                                    {{ p.fechaEntrega | date:'shortTime' }}
                                 </td>
                                 <td>
-                                    Ivan Lopez
+                                    {{ p.nombrePrestatario }}
                                 </td>
                                 <td>
-                                    Entregado
+                                    {{ p.nombreEntrega }}
                                 </td>
                                 <td>
-                                    Sin notas
+                                    {{ p.estado }}
                                 </td>
-                                <td>
-                                    Ivan Lopez
+                                <td *ngIf="p.estado != 'Entregado'">
+                                    a
+                                    {{ p.fechaRetorno | date:'mediumDate' }}
+                                    {{ p.fechaRetorno | date:'shortTime' }}
                                 </td>
-                                <td>
-                                    Ivan Lopez
+                                <td *ngIf="p.estado != 'Entregado'">
+                                    b
+                                    {{ p.notas }}
+                                </td>
+                                <td *ngIf="p.estado != 'Entregado'">
+                                    c
+                                    {{ p.nombreRecibe }}
+                                </td>
+                                <td colspan="3" *ngIf="p.estado == 'Entregado'"> 
+                                    Aún no devuelto
                                 </td>
                             </tr>
                         </tbody>

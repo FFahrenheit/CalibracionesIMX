@@ -1,6 +1,7 @@
 import { Routes } from "@angular/router";
 import { BorrowDetailsComponent } from "./borrow-details/borrow-details.component";
 import { LendDeviceComponent } from "./lend-device/lend-device.component";
+import { ReturnDeviceComponent } from "./return-device/return-device.component";
 
 export const BorrowingsRoutes: Routes = [
     {
@@ -19,6 +20,18 @@ export const BorrowingsRoutes: Routes = [
                 data: {
                     title: 'Prestar equipo'
                 }
+            },
+            {
+                path: 'regresar/:id',
+                component: ReturnDeviceComponent,
+                data: {
+                    title: 'Regresar equipo'
+                }
+            },
+            {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: 'detalles'
             }
         ]
     }
