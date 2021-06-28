@@ -34,23 +34,16 @@
                         </span>
                     </button>
                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <button ngbDropdownItem (click)="'x'">
-                            <i class="fas fa-user-circle pr-1"></i>Mi perfil
+                        <button ngbDropdownItem *ngFor="let o of publicDropdown" (click)="handleClick(o.listener)">
+                            <i [class]="o.icon"></i>
+                            {{ o.title }}
                         </button>
-                        <button ngbDropdownItem (click)="'x'">
-                            <i class="fas fa-key pr-1"></i>Cambiar contraseña
-                        </button>
-                        <button ngbDropdownItem (click)="logout()">
-                            <i class="fas fa-sign-out-alt pr-1"></i> Cerrar sesión
-                        </button>
-                        <button ngbDropdownItem>Something else</button>
-                        <div *ngIf="true">
+
+                        <div *ngIf="isAdmin">
                             <div class="dropdown-divider"></div>
-                            <button ngbDropdownItem (click)="'x'">
-                                <i class="fas fa-users-cog pr-1"></i>Funcion 1
-                            </button>
-                            <button ngbDropdownItem (click)="'x'">
-                                <i class="fas fa-users pr-1"></i>Funcion 2
+                            <button ngbDropdownItem *ngFor="let o of adminDropdown" (click)="handleClick(o.listener)">
+                                <i [class]="o.icon"></i>
+                                {{ o.title }}
                             </button>
                         </div>
                     </div>

@@ -4,6 +4,7 @@ import * as $ from 'jquery';
 import { User } from 'src/app/models/user.model';
 import { LoginService } from 'src/app/services/login.service';
 import { publicSidebar } from 'src/app/resources/dashboard.component.sidebar';
+import { profileOptions, adminOptions } from 'src/app/resources/dashboard.component.options';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,6 +16,9 @@ export class DashboardComponent implements OnInit {
   public selectedIndex : number = 0;
   public shown : boolean = true;
   public user : User | undefined = Object.create(null);
+  public isAdmin = false;
+  public publicDropdown;
+  public adminDropdown;
 
   public sidebar : any;
 
@@ -30,11 +34,18 @@ export class DashboardComponent implements OnInit {
 
     this.user = this.login.getLoggedUser();
 
-    if(this.user?.posicion == 'usuario'){
+    this.isAdmin = this.login.isAdmin();
+
+    if(this.isAdmin){
       this.sidebar = publicSidebar;
+      this.adminDropdown = adminOptions;
+      this.publicDropdown = profileOptions;
     }else{
       this.sidebar = publicSidebar;
+      this.adminDropdown = adminOptions;
+      this.publicDropdown = profileOptions;
     }
+
   }
 
   public goTo(route : string[],index : number) : void{
@@ -46,6 +57,19 @@ export class DashboardComponent implements OnInit {
   public logout() : void {
     this.login.logout();
     this.router.navigate(['inicio','login']);
+  }
+
+  public handleClick(event : string){
+    switch(event){
+      case 'logout':
+        this.logout();
+        break;
+      case 'admins':
+        console.log('Waiting...!');
+        break;
+      default:
+        console.log('Not yet implemented');
+    }
   }
 
 }

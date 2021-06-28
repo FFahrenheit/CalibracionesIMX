@@ -64,6 +64,10 @@ export class LoginService {
     return this.user;
   }
 
+  public isAdmin() : boolean{
+    return this.user.posicion != 'usuario';
+  }
+
   public isLogged() : boolean{
     return this.validate('username') && this.validate('email') 
     && this.validate('token') && this.validate('posicion');
