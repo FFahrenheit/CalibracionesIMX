@@ -7,12 +7,12 @@
     <div class="row py-2">
         <form [formGroup]="form" class="ml-3 col-md-8">
             <div class="form-group row">
-                <label for="" class="col-md-4 col-form-label has-error has-feedback">Nuevo encargado</label>
-                <div class="col-md-4">
+                <label for="" class="col-md-3 col-form-label has-error has-feedback">Nuevo encargado</label>
+                <div class="col-md-6">
                     <user-input #usuario (update)="setValues($event)" [users]="users">
                     </user-input>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <button class="btn" (click)="addUser()"
                         [ngClass]="{'btn-primary': getValidity(),'btn-secondary disabled' : !getValidity() }">
                         Agregar
@@ -21,11 +21,11 @@
             </div>
         </form>
         <div class="table-responsive px-3 text-center">
-            <table class="table table-hover table-bordered">
+            <table class="table table-hover table-bordered" *ngIf="show">
                 <thead>
                     <tr class="header">
                         <th scope="col">
-                            Usuario
+                            Encargado
                         </th>
                         <th scope="col">
                             Nombre de usuario
@@ -39,11 +39,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let t of tests">
-                        <td>Holas</td>
-                        <td>cdsaf</td>
-                        <td>dasffe</td>
-                        <td>dsad</td>
+                    <tr *ngFor="let e of encargados">
+                        <td>
+                            {{ e.name }}
+                        </td>
+                        <td>
+                            {{ e.username }}
+                        </td>
+                        <td> 
+                            {{ e.email }}
+                        </td>
+                        <td>
+                            N/A
+                        </td>
                     </tr>
                 </tbody>
             </table>

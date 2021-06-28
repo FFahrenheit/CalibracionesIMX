@@ -126,5 +126,8 @@ export class UserInputComponent implements OnInit, AfterContentInit {
     this.form.markAllAsTouched();
   }
 
-
+  public reset(){
+    this.form.controls['name'].setValue('');
+    this.form.markAsUntouched();
+  }
 }
