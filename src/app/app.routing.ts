@@ -34,6 +34,13 @@ export const AppRoutes: Routes = [
                 )
             },
             {
+                path: 'usuarios',
+                loadChildren: () =>
+                import('./crew/crew.module').then(
+                    (m) => m.CrewModule
+                )
+            },
+            {
                 path: '',
                 pathMatch: 'full',
                 redirectTo: 'equipos'
