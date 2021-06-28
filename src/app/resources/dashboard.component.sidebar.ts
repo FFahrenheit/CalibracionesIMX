@@ -34,5 +34,10 @@ export const publicSidebar = [
         name: 'Equipos prestados',
         route: ['equipos','prestados'],
         detail: 'Equipos prestados'
+    },
+    {
+        name: 'Administrar equipos',
+        route: ['equipos','administrar'],
+        detail: 'Modificar y agregar equipos'
     }
 ];

@@ -11,6 +11,7 @@ import { PendingDevicesComponent } from './pending-devices/pending-devices.compo
 import { UpdateDevicesComponent } from './update-devices/update-devices.component';
 import { BorrowDevicesComponent } from './borrow-devices/borrow-devices.component';
 import { BorrowedDevicesComponent } from './borrowed-devices/borrowed-devices.component';
+import { AdminDevicesComponent } from './admin-devices/admin-devices.component';
 
 
 
@@ -24,6 +25,7 @@ import { BorrowedDevicesComponent } from './borrowed-devices/borrowed-devices.co
     UpdateDevicesComponent,
     BorrowDevicesComponent,
     BorrowedDevicesComponent,
+    AdminDevicesComponent,
   ],
   imports: [
     CommonModule,

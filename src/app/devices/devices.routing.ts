@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { AdminDevicesComponent } from "./admin-devices/admin-devices.component";
 import { BorrowDevicesComponent } from "./borrow-devices/borrow-devices.component";
 import { BorrowedDevicesComponent } from "./borrowed-devices/borrowed-devices.component";
 import { DevicesListComponent } from "./devices-list/devices-list.component";
@@ -66,6 +67,13 @@ export const DevicesRoutes : Routes =  [
                 component: BorrowedDevicesComponent,
                 data: {
                     title: 'Equipos prestados'
+                }
+            },
+            {
+                path: 'administrar',
+                component: AdminDevicesComponent,
+                data: {
+                    title: 'Agregar o modificar equipos'
                 }
             },
             {
