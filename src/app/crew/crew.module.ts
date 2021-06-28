@@ -4,6 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { CrewRoutes } from './crew.routing';
 import { BackupUsersComponent } from './backup-users/backup-users.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { BackupUsersComponent } from './backup-users/backup-users.component';
   imports: [
     CommonModule,
     SharedModule,
+    ReactiveFormsModule,
     RouterModule.forChild(CrewRoutes)
   ]
 })

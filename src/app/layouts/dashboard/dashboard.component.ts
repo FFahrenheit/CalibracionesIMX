@@ -59,13 +59,17 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['inicio','login']);
   }
 
+  public goToAdmins(){
+    this.router.navigate(['usuarios','encargados']);
+  }
+
   public handleClick(event : string){
     switch(event){
       case 'logout':
         this.logout();
         break;
       case 'admins':
-        console.log('Waiting...!');
+        this.goToAdmins();
         break;
       default:
         console.log('Not yet implemented');

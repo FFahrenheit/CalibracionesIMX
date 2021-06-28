@@ -1,1 +1,55 @@
-<p>backup-users works!</p>
+<div class="containter text-left pt-2 mx-2">
+    <alert></alert>
+    <h4 class="text-left my-3">Administrar encargados</h4>
+    <span class="text-left mt-0 mb-1">
+        En este apartado puede administrar los usuarios que pueden manejar el sistema como administrador.
+    </span>
+    <div class="row py-2">
+        <form [formGroup]="form" class="ml-3 col-md-8">
+            <div class="form-group row">
+                <label for="" class="col-md-4 col-form-label has-error has-feedback">Nuevo encargado</label>
+                <div class="col-md-4">
+                    <user-input #usuario (update)="setValues($event)" [users]="users">
+                    </user-input>
+                </div>
+                <div class="col-md-4">
+                    <button class="btn" (click)="addUser()"
+                        [ngClass]="{'btn-primary': getValidity(),'btn-secondary disabled' : !getValidity() }">
+                        Agregar
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div class="table-responsive px-3 text-center">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr class="header">
+                        <th scope="col">
+                            Usuario
+                        </th>
+                        <th scope="col">
+                            Nombre de usuario
+                        </th>
+                        <th scope="col">
+                            Correo asociado
+                        </th>
+                        <th scope="col">
+                            Acciones
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let t of tests">
+                        <td>Holas</td>
+                        <td>cdsaf</td>
+                        <td>dasffe</td>
+                        <td>dsad</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <confirm-modal trigger="Guardar cambios">
+        
+    </confirm-modal>
+</div>
