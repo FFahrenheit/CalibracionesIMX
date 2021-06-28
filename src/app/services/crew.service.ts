@@ -12,8 +12,27 @@ const base_url = environment.base_url;
 export class CrewService {
 
   private managers;
+  private errorMessage = 'Error de servicio';
 
   constructor(private http  : HttpClient) { }
+
+  public updateEncargados(managerList){
+    return this.http.put(`${base_url}/mandated`,{ users : managerList})
+    .pipe(
+      map(resp=>{
+        console.log(resp);
+        if(resp['ok']){
+          return true;
+        }
+        this.errorMessage = 'No se han podido actualizar los encargados';
+        return false;
+      }),
+      catchError(error=>{
+        this.errorMessage = 'Error de servidor';
+        return of(false);
+      })
+    );
+  }
 
   public loadEncargados(){
     return this.http.get(`${base_url}/mandated`)
@@ -29,10 +48,14 @@ export class CrewService {
                 catchError(error=>{
                   return of(false);
                 })
-              )
+              );
   }
 
   public getEncargados(){
     return this.managers;
+  }
+
+  public getError(){
+    return this.errorMessage;
   }
 }

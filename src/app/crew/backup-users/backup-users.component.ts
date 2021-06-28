@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CrewService } from 'src/app/services/crew.service';
+import { LoginService } from 'src/app/services/login.service';
 import { UsersService } from 'src/app/services/users.service';
 import { AlertService } from 'src/app/shared/alert';
 import { UserInputComponent } from 'src/app/shared/user-input/user-input.component';
@@ -16,8 +17,8 @@ export class BackupUsersComponent implements OnInit {
   public users;
   public show = false;
   public encargados;
-
-  public tests = [1,2,3,4,5];
+  public myUser;
+  public changesDone = 0;
 
   public validInput = false;
 
@@ -26,9 +27,12 @@ export class BackupUsersComponent implements OnInit {
   constructor(private fb          : FormBuilder,
               private userService : UsersService,
               private crewService : CrewService,
-              private alert       : AlertService) { }
+              private alert       : AlertService,
+              private user        : LoginService) { }
 
   ngOnInit(): void {
+    this.myUser = this.user.getLoggedUser().username;
+
     this.form = this.fb.group({
       name: ['', Validators.required],
       username: [''],
@@ -61,9 +65,7 @@ export class BackupUsersComponent implements OnInit {
   }
 
   public setValues(data){
-    console.log(data);
     if(data != null && data.username != null){
-      console.log('Valid!');
       this.validInput = true;
       this.form.controls['name'].setValue(data.name);
       this.form.controls['username'].setValue(data.username);
@@ -71,7 +73,6 @@ export class BackupUsersComponent implements OnInit {
       this.form.updateValueAndValidity({ onlySelf: true, emitEvent: true });
 
     }else{
-      console.log('Invalid');
       this.validInput = false;
       this.form.controls['name'].setValue('');
       this.form.controls['username'].setValue('');    
@@ -106,10 +107,11 @@ export class BackupUsersComponent implements OnInit {
       });
 
       if(!repeated){
-        this.alert.info('Usuario añadido');
+        this.alert.info(newElement.name + ' añadido');
         this.encargados.push(newElement);
+        this.changesDone += 1;
       }else{
-        this.alert.warn('El usuario ya es encargado');
+        this.alert.warn(newElement.name + 'ya es encargado');
       }
       this.usuario.reset();
     }else{
@@ -118,7 +120,26 @@ export class BackupUsersComponent implements OnInit {
   }
 
   public confirm(){
-    console.log('Here we go...');
+    let list = this.encargados.map(e => e.username);
+    this.crewService.updateEncargados(list)
+        .subscribe(resp=>{
+          if(resp){
+            this.alert.success('Lista actualizada');
+            setTimeout(() => {
+              window.location.reload();
+            }, 2500);
+          }else{
+            this.alert.error(this.crewService.getError());
+          }
+        },error=>{
+          this.alert.error(this.crewService.getError());
+        })
+  }
+
+  remove(index : number){
+    this.alert.info(this.encargados[index].name + ' removido')
+    this.encargados.splice(index,1);
+    this.changesDone += 1;
   }
 
 }

@@ -3,6 +3,11 @@
     <h4 class="text-left my-3">Administrar encargados</h4>
     <span class="text-left mt-0 mb-1">
         En este apartado puede administrar los usuarios que pueden manejar el sistema como administrador.
+        Los cambios se guardarán hasta que presione el botón de guardar cambios.
+    </span>
+    <br>
+    <span>
+        {{ changesDone }} cambios hechos
     </span>
     <div class="row py-2">
         <form [formGroup]="form" class="ml-3 col-md-8">
@@ -39,25 +44,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let e of encargados">
+                    <tr *ngFor="let e of encargados; let i = index">
                         <td>
                             {{ e.name }}
                         </td>
                         <td>
                             {{ e.username }}
                         </td>
-                        <td> 
+                        <td>
                             {{ e.email }}
                         </td>
                         <td>
-                            N/A
+                            <button *ngIf="e.username != myUser; else no_user" title="Remover encargado"
+                                class="btn btn-danger fas fa-user-times" (click)="remove(i)">
+                            </button>
+                            <ng-template #no_user>N/A</ng-template>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <confirm-modal trigger="Guardar cambios">
-        
+    <confirm-modal trigger="Guardar cambios" title="Confirmar encargados"
+    content="¿Desea guardar los cambios hechos a la lista de encargados?"
+    (accept)="confirm()" [isDisabled]="changesDone == 0" reason="No ha hecho cambios">
     </confirm-modal>
 </div>
