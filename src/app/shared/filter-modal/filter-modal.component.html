@@ -68,7 +68,7 @@
                     <div class="col-md-8">
                         <select [class]="getClass('estado')" formControlName="estado"
                             class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-                            <option value='' disabled selected>Estado de calibración</option>
+                            <option [value]='null' disabled selected>Estado de calibración</option>
                             <option *ngFor="let e of estados" [value]="e"> {{ e }}</option>
                             <option value=''></option>
                         </select>
@@ -80,7 +80,7 @@
                     <div class="col-md-8">
                         <select [class]="getClass('activo')" formControlName="activo"
                             class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-                            <option value='' disabled selected>Estado del equipo</option>
+                            <option [value]='null' disabled selected>Estado del equipo</option>
                             <option *ngFor="let a of activos" [value]="a"> {{ a }}</option>
                             <option value=''></option>
                         </select>
@@ -92,7 +92,7 @@
                     <div class="col-md-8">
                         <select [class]="getClass('calibracion')" formControlName="calibracion"
                             class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-                            <option value='' disabled selected>Interna o externa</option>
+                            <option [value]='null' disabled selected>Interna o externa</option>
                             <option value='INTERNO'>Interna</option>
                             <option value='EXTERNO'>Externa</option>
                             <option value=''></option>
@@ -108,9 +108,30 @@
                     </div>
                 </div>
 
-                <div class="form-group pt-0" *ngIf="!blocked.includes('fromUltima')">
+                <div class="form-group row pt-0" *ngIf="blocked.length == 0">
+                    <label for="" class="col-md-4 col-form-label">Préstamo</label>
+                    <div class="col-md-8">
+                        <select [class]="getClass('prestado')" formControlName="prestado"
+                            class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                            <option [value]='null' disabled selected>Estado de préstamo</option>
+                            <option value='IS NOT NULL'>Prestado</option>
+                            <option value='IS NULL'>Disponible</option>
+                            <option value=''></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row pb-0">
+                    <label for="" class="col-md-6 col-form-label has-error has-feedback">Periodo de calibración</label>
+                    <div class="col-md-6">
+                        <input formControlName="periodo" type="number" min="0" max="10" class="form-control"
+                            [class]="getClass('periodo')" placeholder="Periodo en años">
+                    </div>
+                </div>
+
+                <div class="form-group py-0 closer" *ngIf="!blocked.includes('fromUltima')">
                     <span>Última calibración</span>
-                    <div class="row pt-0">
+                    <div class="row py-0">
                         <label for="" class="col-md-1 col-form-label">De</label>
                         <div class="col-md-5">
                             <input [class]="getClass('fromUltima')" formControlName="fromUltima" 
@@ -124,9 +145,9 @@
                     </div>
                 </div>
 
-                <div class="form-group pt-0" *ngIf="!blocked.includes('fromSiguiente')">
+                <div class="form-group py-0" *ngIf="!blocked.includes('fromSiguiente')">
                     <span>Siguiente calibración</span>
-                    <div class="row pt-0">
+                    <div class="row py-0">
                         <label for="" class="col-md-1 col-form-label">De</label>
                         <div class="col-md-5">
                             <input [class]="getClass('fromSiguiente')" formControlName="fromSiguiente"
@@ -140,7 +161,6 @@
                     </div>
                 </div>
 
-                
                 <div class="form-group pt-0" *ngIf="blocked?.length > 0">
                     <span>Calibración dentro de</span>
                     <div class="row pt-0">
@@ -154,14 +174,6 @@
                             <input [min]="filterForm.controls['fromRemaining'].value" formControlName="toRemaining"
                                 [class]="getClass('toRemaining')" class="form-control" type="number" placeholder="Dias"> 
                         </div>
-                    </div>
-                </div>
-
-                <div class="form-group row pt-1">
-                    <label for="" class="col-md-6 col-form-label has-error has-feedback">Periodo de calibración</label>
-                    <div class="col-md-6">
-                        <input formControlName="periodo" type="number" min="0" max="10" class="form-control"
-                            [class]="getClass('periodo')" placeholder="Periodo en años">
                     </div>
                 </div>
 

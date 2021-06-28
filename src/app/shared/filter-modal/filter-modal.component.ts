@@ -40,10 +40,10 @@ export class FilterModalComponent implements OnInit {
       id: [saved?.id || ''],
       serie: [saved?.serie || ''],
       descripcion: [saved?.descripcion || ''],
-      estado: [saved?.estado || ''],
-      activo: [saved?.activo || ''],
+      estado: [saved?.estado || null],
+      activo: [saved?.activo || null],
       ubicacion: [saved?.ubicacion || ''],
-      calibracion: [saved?.calibracion || ''],
+      calibracion: [saved?.calibracion || null],
       periodo: [saved?.periodo || ''],
       fromUltima: [saved?.fromUltima || ''],
       toUltima: [saved?.toUltima || ''],
@@ -52,6 +52,7 @@ export class FilterModalComponent implements OnInit {
       fromRemaining: [saved?.fromRemaining || ''],
       toRemaining: [saved?.toRemaining || ''],
       prestatario: [saved?.prestatario],
+      prestado: [saved.prestado || null],
     });
 
     this.apply.emit(this.getValues());
@@ -99,6 +100,9 @@ export class FilterModalComponent implements OnInit {
         let filter;
 
         switch(key){
+          case 'prestado':
+            filter = control == 'IS NULL' ? 'Disponible para préstamo' : 'Prestado';
+            break;
           case 'calibracion':
             filter = 'Tipo de calibración : ' + this.titleCase.transform(control);
             break;
