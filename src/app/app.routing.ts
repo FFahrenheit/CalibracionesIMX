@@ -41,6 +41,13 @@ export const AppRoutes: Routes = [
                 )
             },
             {
+                path: 'nuevo',
+                loadChildren: () =>
+                import('./new-device/new-device.module').then(
+                    (m) => m.NewDeviceModule
+                )
+            },
+            {
                 path: '',
                 pathMatch: 'full',
                 redirectTo: 'equipos'

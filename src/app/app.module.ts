@@ -12,13 +12,12 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './services/interceptor.service';
 import { Error500Component } from './errors/error500/error500.component';
-import { CommonModule, DatePipe, TitleCasePipe } from '@angular/common';
+import { DatePipe, TitleCasePipe } from '@angular/common';
 
 import { registerLocaleData } from '@angular/common';
 import localeMX from '@angular/common/locales/es-MX';
 import localeMXExtra from '@angular/common/locales/extra/es-MX';
 import { Error404Component } from './errors/error404/error404.component';
-import { PendingCalibrationComponent } from './pending-calibration/pending-calibration.component';
 import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
@@ -29,7 +28,6 @@ import { PipesModule } from './pipes/pipes.module';
     DashboardComponent,
     Error500Component,
     Error404Component,
-    PendingCalibrationComponent,
   ],
   imports: [
     BrowserModule,
