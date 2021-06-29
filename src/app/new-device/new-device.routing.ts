@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { CalibratorsResponsablesComponent } from "./calibrators-responsables/calibrators-responsables.component";
 import { DetailsComponent } from "./details/details.component";
 
 export const NewDeviceRoutes: Routes = [
@@ -11,6 +12,18 @@ export const NewDeviceRoutes: Routes = [
                 data: {
                     title: 'Nuevo equipo'
                 }
+            },
+            {
+                path: 'responsables',
+                component: CalibratorsResponsablesComponent,
+                data: {
+                    title: 'Responsables y calibradores'
+                }
+            },
+            {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: 'detalles'
             }
         ]
     }

@@ -5,10 +5,12 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { NewDeviceRoutes } from './new-device.routing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CalibratorsResponsablesComponent } from './calibrators-responsables/calibrators-responsables.component';
 
 @NgModule({
   declarations: [
-    DetailsComponent
+    DetailsComponent,
+    CalibratorsResponsablesComponent
   ],
   imports: [
     CommonModule,
