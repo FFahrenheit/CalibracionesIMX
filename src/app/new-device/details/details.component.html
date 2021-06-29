@@ -1,0 +1,104 @@
+<div class="containter text-center pt-2 mb-5 mx-3">
+    <alert></alert>
+    <h4 class="text-left my-3">Dar de alta nuevo equipo</h4>
+    <form [formGroup]="form">
+        <div class="row d-flex justify-content-center">
+
+            <div class="col-md-6">
+
+                <h5 class="text-left">Detalles del equipo</h5>
+
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">Descripción</label>
+                    <div class="col-md-8">
+                        <input formControlName="descripcion" type="text" class="form-control" placeholder="Descripción del equipo" [class]="getClass('descripcion')">
+                    </div>
+                </div>
+
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">No. de serie</label>
+                    <div class="col-md-8">
+                        <input formControlName="serie" type="text" class="form-control" placeholder="Numero de serie" [class]="getClass('serie')">
+                    </div>
+                </div>
+
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">Ubicación</label>
+                    <div class="col-md-8">
+                        <input formControlName="ubicacion" type="text" class="form-control" placeholder="Ubicacion donde estará" [class]="getClass('ubicacion')">
+                    </div>
+                </div>
+
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">Margen de error</label>
+                    <span class="col-md-1 more-less"> ± </span>
+                    <div class="col-md-7">
+                        <input formControlName="error" type="text" class="form-control" placeholder="Error (deje vacío si no aplica)" [class]="getClass('error')">
+                    </div>
+                </div>
+
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-2 col-form-label">Resolucion</label>
+                    <div class="col-md-5">
+                        <input formControlName="resInf" type="text" class="form-control" placeholder="Resolucion inferior" [class]="getClass('resInf')">
+                    </div>
+                    <div class="col-md-5">
+                        <input formControlName="resSup" type="text" class="form-control" placeholder="Resolucion superior" [class]="getClass('resSup')">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <h5 class="text-left">Detalles de calibración</h5>
+
+                <div class="form-group row pt-2">
+                    <legend class="col-form-label col-md-4 pt-0">Tipo de calibración</legend>
+                    <div class="col-md-8">
+                        <div class="form-check">
+                            <input formControlName="calibracion" class="form-check-input" type="radio" name="calibracion" id="c1"
+                                value="INTERNO">
+                            <label class="form-check-label" for="c1">
+                                Interna
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input formControlName="calibracion" class="form-check-input" type="radio" name="calibracion" id="c2"
+                                value="EXTERNO">
+                            <label class="form-check-label" for="c2">
+                                Externa
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-6 col-form-label">Periodo de calibración (años)</label>
+                    <div class="col-md-6">
+                        <input formControlName="periodo" type="number" class="form-control" placeholder="Cada cuánto tiempo se calibra" [class]="getClass('periodo')">
+                    </div>
+                </div>
+
+                <div class="form-group row pt-2">
+                    <label for="" class="col-md-4 col-form-label">Fecha de calibrado</label>
+                    <div class="col-md-8">
+                        <input [class] = "getClass('fechaCalibracion')" class="form-control" formControlName="fechaCalibracion" type="date">
+                    </div>
+                </div>
+
+                
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">Prove - calibración</label>
+                    <div class="col-md-8">
+                        <input formControlName="calibradorCalibracion" type="text" class="form-control" placeholder="Nombre de quien calibró" [class]="getClass('calibradorCalibracion')">
+                    </div>
+                </div>
+
+                <button [ngClass]="{'no-ok btn-secondary' : !form.valid , 'btn-success' : form.valid }" type="button" (click)="next()" class="btn px-5 float-right">Siguiente</button>
+
+            </div>
+
+        </div>
+    </form>
+</div>

@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { DetailsComponent } from "./details/details.component";
 
 export const NewDeviceRoutes: Routes = [
     {
@@ -6,8 +7,9 @@ export const NewDeviceRoutes: Routes = [
         children: [
             {
                 path: 'detalles',
+                component: DetailsComponent,
                 data: {
-                    title: ''
+                    title: 'Nuevo equipo'
                 }
             }
         ]
