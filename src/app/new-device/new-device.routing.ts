@@ -1,5 +1,6 @@
 import { Routes } from "@angular/router";
 import { CalibratorsResponsablesComponent } from "./calibrators-responsables/calibrators-responsables.component";
+import { CalibratorsComponent } from "./calibrators/calibrators.component";
 import { DetailsComponent } from "./details/details.component";
 
 export const NewDeviceRoutes: Routes = [
@@ -18,6 +19,13 @@ export const NewDeviceRoutes: Routes = [
                 component: CalibratorsResponsablesComponent,
                 data: {
                     title: 'Responsables y calibradores'
+                }
+            },
+            {
+                path: 'proveedores',
+                component: CalibratorsComponent,
+                data: {
+                    title: 'Proveedores certificados'
                 }
             },
             {

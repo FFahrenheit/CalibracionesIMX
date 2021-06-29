@@ -1,0 +1,98 @@
+<div class="containter text-center pt-2 mb-5 mx-3">
+    <alert></alert>
+    <h4 class="text-left my-3">Dar de alta nuevo equipo</h4>
+    <form [formGroup]="form">
+        <div class="row d-flex justify-content-center">
+
+            <div class="col-md-12">
+
+                <h5 class="text-left">Proveedores certificados</h5>
+                <span class="text-left">
+                    Agregue aqui los proveedores certificados para la calibración de este equipo.
+                    Esta información es opcional, puede adjuntar su certificado ISO17025 para tenerlo
+                    almacenado en el sistema
+                </span>
+
+                <div class="row my-3">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label for="" class="col-md-5 col-form-label has-error has-feedback">Nombre del
+                                proveedor</label>
+                            <div class="col-md-7">
+                                <input formControlName="nombre" type="text" class="form-control" placeholder="Proveedor"
+                                    [class]="getClass('nombre')">
+                            </div>
+                        </div>
+
+                        <div class="form-check my-2">
+                            <input formControlName="hasCertificado" class="form-check-input" type="checkbox"
+                                id="hasCertificado">
+                            <label class="form-check-label label-attach" for="hasCertificado">
+                                Adjuntar Certificado ISO17025
+                            </label>
+                        </div>
+
+                        <div class="form-group" *ngIf="form.controls['hasCertificado'].value"
+                            [ngClass]="{'was-validated': form.controls['certificado'].touched}">
+
+                            <label for="certificad">Suba el Certificado ISO17025 en formato PDF</label>
+                            <input type="file" required class="form-control file-input"
+                                (change)="certificateEvent($event)" id="certificado" formControlName="certificado">
+
+                        </div>
+
+                        <button class="btn px-3" [class]="getValidity()" (click)="addProveedor()"> Agregar </button>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="table-responsive px-3 text-center py-3">
+                            <table class="table table-hover table-bordered table-sm"
+                                *ngIf="proveedores.length > 0;else empty_calibradores">
+                                <thead>
+                                    <tr class="header">
+                                        <th scope="col">
+                                            Proveedor
+                                        </th>
+                                        <th scope="col">
+                                            Certificado
+                                        </th>
+                                        <th scope="col">
+                                            Acciones
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let p of proveedores; let i = index">
+                                        <td>
+                                            {{ p.nombre }}
+                                        </td>
+                                        <td *ngIf="p.certificado">
+                                            {{ p.certificado.name }}
+                                        </td>
+                                        <td *ngIf="!p.certificado" class="no-attach">
+                                            No se adjuntó
+                                        </td>
+                                        <td>
+                                            <button title="Remover calibrador" class="btn btn-danger fas fa-trash-alt"
+                                                (click)="removeProveedor(i)">
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ng-template #empty_calibradores>
+                            <p class="my-3">No hay proveedores registrados</p>
+                        </ng-template>
+                    </div>
+                </div>
+
+                <button type="button" (click)="next()" class="btn px-5 float-right btn-primary">
+                    Continuar</button>
+
+            </div>
+
+        </div>
+    </form>
+</div>

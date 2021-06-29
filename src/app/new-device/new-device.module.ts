@@ -6,11 +6,13 @@ import { RouterModule } from '@angular/router';
 import { NewDeviceRoutes } from './new-device.routing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CalibratorsResponsablesComponent } from './calibrators-responsables/calibrators-responsables.component';
+import { CalibratorsComponent } from './calibrators/calibrators.component';
 
 @NgModule({
   declarations: [
     DetailsComponent,
-    CalibratorsResponsablesComponent
+    CalibratorsResponsablesComponent,
+    CalibratorsComponent
   ],
   imports: [
     CommonModule,

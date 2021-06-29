@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 import { AlertService } from 'src/app/shared/alert';
 import { UserInputComponent } from 'src/app/shared/user-input/user-input.component';
@@ -21,7 +22,8 @@ export class CalibratorsResponsablesComponent implements OnInit {
 
   constructor(private userService : UsersService,
               private fb          : FormBuilder,
-              private alert       : AlertService) { }
+              private alert       : AlertService,
+              private router      : Router) { }
 
   ngOnInit(): void {
     this.userService.getUsers()
@@ -46,6 +48,7 @@ export class CalibratorsResponsablesComponent implements OnInit {
   }
 
   public next(){
+    this.router.navigate(['nuevo','proveedores']);
     if(this.calibradores.length > 0 && this.responsables.length > 0){
 
     }else{

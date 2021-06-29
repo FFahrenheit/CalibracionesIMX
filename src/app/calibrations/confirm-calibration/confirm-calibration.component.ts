@@ -40,8 +40,7 @@ export class ConfirmCalibrationComponent implements OnInit {
   }
 
   ryrEvent($event){
-    if($event.target.files.length > 0) 
-    {
+    if($event.target.files.length > 0) {
       this.ryr = $event.target.files[0];
     }
   }
