@@ -11,14 +11,19 @@ export interface Device {
     ultima? : Date,
     calibraciones? : Calibracion[],
     responsables? : Responsable[],
-    verificadores? : string[],
+    verificadores? : Verificacion[],
     proveedores? : Proveedor[]
+}
+
+export interface Verificacion {
+    nombre? : string,
 }
 
 export interface Calibracion {
     calibrador? : string, 
     fecha? : Date,
     verificador? : string,
+    verifico? : string
 }
 
 export interface Responsable {

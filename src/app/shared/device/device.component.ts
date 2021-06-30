@@ -18,6 +18,7 @@ export class DeviceComponent implements OnInit {
   @Input() public id : string | null = '';
   @Input() public title : string = '';
   @Input() public canHide = false;
+  @Input() public loadedDevice = null;
 
   public device = null;
   public exists : boolean | null = null;
@@ -37,19 +38,24 @@ export class DeviceComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.deviceService.loadDevice(this.id!)
-        .subscribe( resp=>{
-          this.exists = resp;
-          if(this.exists){
-            this.device = this.deviceService.getDevice();
-          }else{
-            this.error = this.deviceService.getError();            
-          }
-          this.receive.emit(this.device || null);
-        },error=>{
-          this.exists = false;
-          this.receive.emit(this.exists);
-        });
+    if(this.loadedDevice != null){
+      this.device = this.loadedDevice;
+      this.exists = true;
+    }else{
+      this.deviceService.loadDevice(this.id!)
+      .subscribe( resp=>{
+        this.exists = resp;
+        if(this.exists){
+          this.device = this.deviceService.getDevice();
+        }else{
+          this.error = this.deviceService.getError();            
+        }
+        this.receive.emit(this.device || null);
+      },error=>{
+        this.exists = false;
+        this.receive.emit(this.exists);
+      });
+    }
     this.receive.emit(this.device);
   }
 

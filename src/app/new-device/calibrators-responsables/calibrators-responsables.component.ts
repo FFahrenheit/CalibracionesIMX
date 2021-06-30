@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Responsable } from 'src/app/interfaces/new-device.interface';
+import { Calibracion, Responsable, Verificacion } from 'src/app/interfaces/new-device.interface';
 import { NewDeviceService } from 'src/app/services/new-device.service';
 import { UsersService } from 'src/app/services/users.service';
 import { AlertService } from 'src/app/shared/alert';
@@ -63,14 +63,26 @@ export class CalibratorsResponsablesComponent implements OnInit, OnDestroy {
       this.responsables.push(resp);
     });
 
-    this.calibradores = device?.verificadores || [];
+    this.calibradores = device?.verificadores.map( d => d.nombre);
   }
 
   ngOnDestroy(){
-    this.create.setVerificadores(this.calibradores);
+    this.create.setVerificadores(this.getCalibradores());
     this.create.setResponsables(this.getResponsables());
     console.log(this.create.getDevice());
     this.router.navigate(['nuevo','proveedores']);
+  }
+
+  private getCalibradores() : Verificacion[]{
+    let calibraciones : Verificacion[] = [];
+
+    this.calibradores.forEach(c=>{
+      calibraciones.push({
+        nombre: c
+      });
+    });
+
+    return calibraciones;
   }
 
   private getResponsables() : Responsable[]{

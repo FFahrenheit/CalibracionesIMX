@@ -50,7 +50,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
     const calibracion : Calibracion = {
       fecha : this.get('fechaCalibracion').value,
       calibrador: this.get('calibradorCalibracion').value,
-      verificador: this.login.getLoggedUser().username
+      verificador: this.login.getLoggedUser().username,
+      verifico: this.login.getLoggedUser().nombre
     };
 
     return [ calibracion ]; 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Calibracion, Device, Proveedor, Responsable } from '../interfaces/new-device.interface';
+import { Calibracion, Device, Proveedor, Responsable, Verificacion } from '../interfaces/new-device.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,7 @@ export class NewDeviceService {
     this.device.responsables = responsables;
   }
 
-  public setVerificadores(verificadores : string[]){
+  public setVerificadores(verificadores : Verificacion[]){
     this.device.verificadores = verificadores;
   }
 

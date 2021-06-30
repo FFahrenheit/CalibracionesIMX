@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Device } from 'src/app/interfaces/new-device.interface';
+import { NewDeviceService } from 'src/app/services/new-device.service';
+import { AlertService } from 'src/app/shared/alert';
 
 @Component({
   selector: 'app-confirm',
@@ -7,9 +11,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfirmComponent implements OnInit {
 
-  constructor() { }
+  public device : Device;
+
+  constructor(private create  : NewDeviceService,
+              private router  : Router,
+              private alert   : AlertService) { }
 
   ngOnInit(): void {
+    this.device = this.create.getDevice();
+  }
+  
+  confirm(){
+    console.log('CONFIRMADO');
   }
 
 }

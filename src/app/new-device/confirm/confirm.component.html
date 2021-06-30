@@ -1,1 +1,9 @@
-<p>confirm works!</p>
+<alert></alert>
+<device [loadedDevice]="device">
+
+</device>
+<confirm-modal trigger="Dar de alta"
+title="Nuevo dispositivo"
+content="¿Dar de alta el nuevo equipo? Su ID será generado automaticamente"
+(confirm)="confirm()">
+</confirm-modal>
