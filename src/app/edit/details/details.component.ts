@@ -24,7 +24,7 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit(): void {
     let saved; 
-    if((saved = this.edit.get()) == null){
+    if((saved = this.edit.get()) == null || saved.id != this.edit.getId()){
       saved = this.edit.getDevice();
     }    
     this.form = this.fb.group({

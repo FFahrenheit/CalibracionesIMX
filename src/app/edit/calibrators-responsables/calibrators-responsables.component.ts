@@ -52,7 +52,7 @@ export class CalibratorsResponsablesComponent implements OnInit {
 
   private setDefaults(){
     let device; 
-    if((device = this.edit.get()) == null){
+    if((device = this.edit.get()) == null || device.id != this.edit.getId()){
       device = this.edit.getDevice();
     }
 

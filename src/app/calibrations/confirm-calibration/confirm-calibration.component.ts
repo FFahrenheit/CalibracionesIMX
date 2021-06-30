@@ -46,8 +46,7 @@ export class ConfirmCalibrationComponent implements OnInit {
   }
 
   certificateEvent($event){
-    if($event.target.files.length > 0) 
-    {
+    if($event.target.files.length > 0) {
       this.certificate = $event.target.files[0]
     }
   }

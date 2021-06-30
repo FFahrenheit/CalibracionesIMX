@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { GetDeviceService } from './get-device.service';
+import { UploadCertificateService } from './upload-certificate.service';
 
 const base_url = environment.base_url;
 
@@ -17,18 +18,24 @@ export class EditService {
   private error = 'Error de servicio';
 
   constructor(private deviceService  : GetDeviceService,
-              private http           : HttpClient) { }
+              private http           : HttpClient,
+              private upload         : UploadCertificateService) { }
 
   public editDevice() {
     let body = this.prepare();
 
-    return this.http.put(`${base_url}/device/edit`, body)
+    return this.http.put(`${base_url}/device/${this.id}`, body)
       .pipe(
         map
         (resp => {
           console.log(resp);
           if (resp['ok']) {
-            return true;
+            this.upload.uploadCertificates(this.device.proveedores, this.id)
+                .subscribe(resp=>{
+                  return resp;
+                },error=>{
+                  return false;
+                });
           }
           this.error = 'Error al crear';
           return false;
@@ -46,6 +53,7 @@ export class EditService {
     if(device == null || device.id != deviceId){
       return this.deviceService.loadDevice(this.id);
     }
+    this.device = device;
     return true;
   }
 
@@ -156,5 +164,9 @@ export class EditService {
 
   public getError(){
     return this.error;
+  }
+
+  public getId(){
+    return this.id;
   }
 }
