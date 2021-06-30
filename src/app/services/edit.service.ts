@@ -53,4 +53,26 @@ export class EditService {
       });
     })
   }
+
+  public setProviders(providers){
+    this.device.proveedores  = providers;
+    this.device._proveedores = [];
+    this.device.__proveedores = [];
+    providers.forEach(p=>{
+      if(p?.new){
+        if(p?.certificado){
+          this.device._proveedores.push({
+            nombre: p.nombre,
+            certificado: p.certificado
+          });
+        }else{
+          this.device._proveedores.push({
+            nombre: p.nombre,
+          });
+        }
+      }else{
+        this.device.__proveedores.push(p.id);
+      }
+    });
+  }
 }

@@ -71,6 +71,7 @@ export class CalibratorsResponsablesComponent implements OnInit {
     this.edit.setResponsables(this.responsables);
     this.edit.setVerificadores(this.verificadores);
     console.log(this.edit.get());
+    this.router.navigate(['editar',this.edit.get().id,'proveedores']);
   }
 
   public next(){
