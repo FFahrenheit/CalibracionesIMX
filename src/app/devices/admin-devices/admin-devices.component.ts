@@ -44,7 +44,7 @@ export class AdminDevicesComponent implements OnInit {
   }
 
   public deviceDetails(id : string){
-    this.router.navigate(['modificar',id,'detalles']);
+    this.router.navigate(['editar',id,'empezar']);
   }
 
   public newDevice(){

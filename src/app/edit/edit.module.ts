@@ -4,11 +4,14 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { EditRoutes } from './edit.routing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BeginComponent } from './begin/begin.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    BeginComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,
