@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { ProveedoresGuard } from "../guards/create/proveedores.guard";
 import { ResponsablesGuard } from "../guards/create/responsables.guard";
 import { CalibratorsResponsablesComponent } from "./calibrators-responsables/calibrators-responsables.component";
 import { CalibratorsComponent } from "./calibrators/calibrators.component";
@@ -26,6 +27,7 @@ export const NewDeviceRoutes: Routes = [
             {
                 path: 'proveedores',
                 component: CalibratorsComponent,
+                canActivate: [ ProveedoresGuard ],
                 data: {
                     title: 'Proveedores certificados'
                 }

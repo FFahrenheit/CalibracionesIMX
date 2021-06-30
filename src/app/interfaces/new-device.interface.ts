@@ -28,5 +28,6 @@ export interface Responsable {
 }
 
 export interface Proveedor {
-
+    nombre? : string,
+    certificado? : File
 }

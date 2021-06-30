@@ -34,7 +34,6 @@ export class CalibratorsResponsablesComponent implements OnInit, OnDestroy {
       console.log(resp);
       if(resp['ok']){
         this.users = resp.usuarios;
-        console.log(this.users);
       }
     },(error)=>{
       console.log('Error retrieving users');
@@ -53,7 +52,18 @@ export class CalibratorsResponsablesComponent implements OnInit, OnDestroy {
   }
 
   private setDefaults(){
+    let device = this.create.getDevice();
 
+    device.responsables?.forEach(r=>{
+      const resp = {
+        email: r.email,
+        name: r.name,
+        username: r.username
+      };
+      this.responsables.push(resp);
+    });
+
+    this.calibradores = device?.verificadores || [];
   }
 
   ngOnDestroy(){

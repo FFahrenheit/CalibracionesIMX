@@ -37,4 +37,11 @@ export class NewDeviceService {
     const descripcion = this.device?.descripcion || '';
     return descripcion != '';
   }
+
+  public hasSecondStep(){
+    if(typeof this.device == 'undefined'){
+      return false;
+    }
+    return this.device.responsables?.length > 0;
+  }
 }
