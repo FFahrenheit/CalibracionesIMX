@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Calibracion, Device, Proveedor, Responsable, Verificacion } from '../interfaces/new-device.interface';
+import { UploadCertificateService } from './upload-certificate.service';
 
 const base_url = environment.base_url;
 
@@ -16,7 +17,8 @@ export class NewDeviceService {
   private id: string = '';
   private error = 'Error de servicio';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http    : HttpClient,
+              private upload  : UploadCertificateService) { }
 
   public getDevice() {
     return this.device;
@@ -31,10 +33,16 @@ export class NewDeviceService {
           console.log(resp);
           if (resp['ok']) {
             this.id = resp['id'];
-            return true;
+            return this.upload.uploadCertificates(this.device.proveedores,this.id)
+                .subscribe(resp=>{
+                  return resp;
+                },error=>{
+                  return false;
+                });
+          }else{
+            this.error = 'Error al crear';
+            return false;
           }
-          this.error = 'Error al crear';
-          return false;
         }), catchError(error => {
           console.log(error);
           this.error = 'Error en servidor';
