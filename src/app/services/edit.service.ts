@@ -1,6 +1,4 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
-import { DevicesService } from './devices.service';
 import { GetDeviceService } from './get-device.service';
 
 @Injectable({
@@ -9,7 +7,7 @@ import { GetDeviceService } from './get-device.service';
 export class EditService {
   
   private id : string;
-  private device;
+  private device = null;
 
   constructor(private deviceService  : GetDeviceService) { }
 
@@ -35,5 +33,24 @@ export class EditService {
     Object.keys(device).forEach(key=>{
       this.device[key] = device[key];
     });
+  }
+
+  public setResponsables(responsables){
+    this.device.responsables = [];
+    responsables.forEach(r=>{
+      this.device.responsables.push({
+        nombre: r.name,
+        username: r.username
+      })
+    })
+  }
+
+  public setVerificadores(verificadores){
+    this.device.verificadores = [];
+    verificadores.forEach(v=>{
+      this.device.verificadores.push({
+        nombre: v
+      });
+    })
   }
 }

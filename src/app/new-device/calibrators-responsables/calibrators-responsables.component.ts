@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Calibracion, Responsable, Verificacion } from 'src/app/interfaces/new-device.interface';
+import { Responsable, Verificacion } from 'src/app/interfaces/new-device.interface';
 import { NewDeviceService } from 'src/app/services/new-device.service';
 import { UsersService } from 'src/app/services/users.service';
 import { AlertService } from 'src/app/shared/alert';

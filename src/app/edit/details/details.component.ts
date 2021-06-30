@@ -23,7 +23,10 @@ export class DetailsComponent implements OnInit {
               private alert   : AlertService) { }
 
   ngOnInit(): void {
-    let saved = this.edit.getDevice();
+    let saved; 
+    if((saved = this.edit.get()) == null){
+      saved = this.edit.getDevice();
+    }    
     this.form = this.fb.group({
       descripcion : [saved?.descripcion || '', Validators.required],
       serie : [saved?.serie || '', Validators.required],
@@ -33,7 +36,7 @@ export class DetailsComponent implements OnInit {
       resInf : [saved?.resInf || ''],
       resSup : [saved?.resSup ||''],
       periodo : [saved?.periodo || '', Validators.compose([Validators.required, Validators.min(1)])],
-      activo : [saved?.activo || '', Validators.required],    //MUST BE ''
+      activo : [saved?.activo || '', Validators.required],
       estado : [saved?.estado || '', Validators.required]
     });
   }
@@ -41,7 +44,7 @@ export class DetailsComponent implements OnInit {
   ngOnDestroy(){
     this.edit.setDetailChanges(this.getForm());
     console.log(this.edit.get());
-    // this.router.navigate(['nuevo','responsables']);
+    this.router.navigate(['editar', this.edit.get().id ,'responsables']);
   }
 
 

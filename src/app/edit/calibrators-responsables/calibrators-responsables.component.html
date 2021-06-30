@@ -1,1 +1,124 @@
-<p>calibrators-responsables works!</p>
+<div class="containter text-center pt-2 mb-5 mx-3">
+    <alert></alert>
+    <h4 class="text-left my-3">Dar de alta nuevo equipo</h4>
+    <form [formGroup]="form">
+        <div class="row d-flex justify-content-center">
+
+            <div class="col-md-7">
+
+                <h5 class="text-left">Responsables</h5>
+                <span class="text-left"> Agregue a los responsables del equipo </span>
+
+                <div class="mx-5 mt-3 row">
+                    <div class="col-md-8">
+                        <user-input #usuario (update)="setValues($event)" [users]="users"
+                            placeholder="Nombre del responsable">
+                        </user-input>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn" (click)="addUser()"
+                            [ngClass]="{'btn-primary': getValidity(),'btn-secondary disabled' : !getValidity() }">
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-responsive px-3 text-center py-3">
+                    <table class="table table-hover table-bordered table-sm"
+                        *ngIf="responsables.length > 0;else empty_responsables">
+                        <thead>
+                            <tr class="header">
+                                <th scope="col">
+                                    Responsable
+                                </th>
+                                <th scope="col">
+                                    Usuario
+                                </th>
+                                <th scope="col">
+                                    Acciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let r of responsables; let i = index">
+                                <td>
+                                    {{ r.name }}
+                                </td>
+                                <td>
+                                    {{ r.username }}
+                                </td>
+                                <td>
+                                    <button title="Remover encargado" class="btn btn-danger fas fa-user-times"
+                                        (click)="removeResponsable(i)">
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ng-template #empty_responsables>
+                        <p class="my-3">Agregue al menos un responsable</p>
+                    </ng-template>
+                </div>
+
+            </div>
+
+            <div class="col-md-5">
+
+                <h5 class="text-left">Verificadores</h5>
+                <span class="text-left"> Agregue verificadores del equipo</span>
+
+
+                <div class="mx-5 mt-3 row">
+                    <div class="col-md-8">
+                        <input formControlName="calibrador" [class]="getClass('calibrador')" class="form-control"
+                            type="text" placeholder="Nombre del calibrador">
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn" (click)="addCalibrador()"
+                            [ngClass]="{'btn-primary': get('calibrador').valid ,'btn-secondary disabled' : !get('calibrador').valid}">
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-responsive px-3 text-center py-3">
+                    <table class="table table-hover table-bordered table-sm"
+                        *ngIf="verificadores.length > 0;else empty_verificadores">
+                        <thead>
+                            <tr class="header">
+                                <th scope="col">
+                                    Verificador
+                                </th>
+                                <th scope="col">
+                                    Acciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let c of verificadores; let i = index">
+                                <td>
+                                    {{ c }}
+                                </td>
+                                <td>
+                                    <button title="Remover calibrador" class="btn btn-danger fas fa-trash-alt"
+                                        (click)="removeCalibrador(i)">
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <ng-template #empty_verificadores>
+                    <p class="my-3">Agregue al menos un calibrador</p>
+                </ng-template>
+
+
+                <button [ngClass]="{'no-ok btn-secondary' : verificadores.length == 0 || responsables.length == 0 , 
+                                    'btn-success' : verificadores.length > 0 && responsables.length > 0 }" type="button"
+                    (click)="next()" class="btn px-5 float-right">Siguiente</button>
+
+            </div>
+
+        </div>
+    </form>
+</div>

@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Verificacion } from 'src/app/interfaces/new-device.interface';
+import { EditService } from 'src/app/services/edit.service';
+import { UsersService } from 'src/app/services/users.service';
+import { AlertService } from 'src/app/shared/alert';
+import { UserInputComponent } from 'src/app/shared/user-input/user-input.component';
 
 @Component({
   selector: 'app-calibrators-responsables',
@@ -7,9 +14,146 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalibratorsResponsablesComponent implements OnInit {
 
-  constructor() { }
+  public form : FormGroup;
+  public responsables = [];
+  public verificadores : string[] = [];
+
+  public users;
+
+  @ViewChild('usuario') usuario : UserInputComponent;
+
+  constructor(private userService : UsersService,
+              private fb          : FormBuilder,
+              private alert       : AlertService,
+              private router      : Router,
+              private edit        : EditService) { }
 
   ngOnInit(): void {
+    this.userService.getUsers()
+    .subscribe((resp:any)=>{
+      console.log(resp);
+      if(resp['ok']){
+        this.users = resp.usuarios;
+      }
+    },(error)=>{
+      console.log('Error retrieving users');
+      console.log(error);
+    });
+
+    this.form = this.fb.group({
+      name: ['', Validators.required],
+      username: [''],
+      calibrador: ['',Validators.required],
+    });
+
+    this.setDefaults()
+
   }
 
+  private setDefaults(){
+    let device; 
+    if((device = this.edit.get()) == null){
+      device = this.edit.getDevice();
+    }
+
+    device.responsables?.forEach(r=>{
+      const resp = {
+        name: r.nombre,
+        username: r.username
+      };
+      this.responsables.push(resp);
+    });
+
+    this.verificadores = device?.verificadores.map( v => v.nombre);
+  }
+
+  ngOnDestroy(){
+    this.edit.setResponsables(this.responsables);
+    this.edit.setVerificadores(this.verificadores);
+    console.log(this.edit.get());
+  }
+
+  public next(){
+    if(this.verificadores.length > 0 && this.responsables.length > 0){
+      this.ngOnDestroy();
+    }else{
+      this.alert.warn('Agregue al menos un responsable y un calibrador');
+    }
+  }
+
+  getValidity(){
+    if (this.usuario != null){
+      return this.usuario.getValidity();
+    }
+    return false;
+  }
+
+  public addUser(){
+    if(this.getValidity()){
+      const newElement = this.form.value;
+      console.log(newElement);
+
+      let repeated = false;
+      this.responsables.forEach(e => {
+        if(newElement.username == e.username){
+          repeated = true;
+        }
+      });
+
+      if(!repeated){
+        this.responsables.push(newElement);
+      }else{
+        this.alert.warn(newElement.name + 'ya es responsable');
+      }
+      this.usuario.reset();
+    }else{
+      this.usuario.markAsTouched();
+    }
+  }
+
+  public setValues(data){
+    if(data != null && data.username != null){
+      this.form.controls['name'].setValue(data.name);
+      this.form.controls['username'].setValue(data.username);
+      this.form.updateValueAndValidity({ onlySelf: true, emitEvent: true });
+
+    }else{
+      this.form.controls['name'].setValue('');
+      this.form.controls['username'].setValue('');    
+      this.form.updateValueAndValidity({ onlySelf: true, emitEvent: true });
+    }
+  }
+
+  public get(ctrl : string){
+    return this.form.controls[ctrl];
+  }
+
+  public getClass(ctrl : string) : string { 
+    if(!this.get(ctrl).touched){
+      return '';
+    }
+    return this.get(ctrl).valid ? 'is-valid' : 'is-invalid';
+  }
+
+  addCalibrador(){
+    let calibrador = this.get('calibrador');
+    calibrador.markAsTouched();
+    if(calibrador.valid){
+      if(this.verificadores.includes(calibrador.value)){
+        this.alert.warn(calibrador.value + ' ya agregado')
+      }else{
+        this.verificadores.push(calibrador.value);
+        calibrador.setValue('');
+        calibrador.markAsUntouched();
+      }
+    }
+  }
+
+  public removeResponsable(index : number){
+    this.responsables.splice(index,1);
+  }
+
+  public removeCalibrador(index : number){
+    this.verificadores.splice(index,1);
+  }
 }
