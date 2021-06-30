@@ -26,18 +26,18 @@ export class ConfirmComponent implements OnInit {
   
   confirm(){
     this.edit.editDevice()
-        // .subscribe(resp=>{
-        //   if(resp){
-        //     this.alert.success('Dispositivo dado de alta');
-        //     setTimeout(() => {
-        //       this.router.navigate(['equipos','detalles',this.edit.get().id]);
-        //     }, 2500);
-        //   }else{
-        //     this.alert.error(this.edit.getError());
-        //   }
-        // },error=>{
-        //   this.alert.error(this.edit.getError());
-        // });
+        .subscribe(resp=>{
+          if(resp){
+            this.alert.success('Dispositivo modificado');
+            setTimeout(() => {
+              this.router.navigate(['equipos','detalles',this.edit.get().id]);
+            }, 2500);
+          }else{
+            this.alert.error(this.edit.getError());
+          }
+        },error=>{
+          this.alert.error(this.edit.getError());
+        });
   }
 
 }

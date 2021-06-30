@@ -43,17 +43,32 @@ export class ProvidersComponent implements OnInit {
     }
 
     device.proveedores?.forEach(p => {
-      if(p.certificado){
-        this.proveedores.push({
-          nombre: p.nombre,
-          certificado: 'ISO17025 - ' + p.nombre,
-          id: p.id
-        });
+      if(!p.id){
+        if(p.certificado){
+          this.proveedores.push({
+            nombre: p.nombre,
+            certificado: p.certificado.name ,
+            new: true,
+          });
+        }else{
+          this.proveedores.push({
+            nombre: p.nombre,
+            new: true
+          });
+        }
       }else{
-        this.proveedores.push({
-          nombre: p.nombre,
-          id: p.id
-        });
+        if(p.certificado){
+          this.proveedores.push({
+            nombre: p.nombre,
+            certificado: 'ISO17025 - ' + p.nombre,
+            id: p.id
+          });
+        }else{
+          this.proveedores.push({
+            nombre: p.nombre,
+            id: p.id
+          });
+        }
       }
     });
   }
