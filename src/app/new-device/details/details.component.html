@@ -30,6 +30,16 @@
                 </div>
 
                 <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">Estado del dispositivo</label>
+                    <div class="col-md-8">
+                        <select formControlName="activo" [class]="getClass('activo')" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                            <option [value]='""' disabled selected>Estado actual</option>
+                            <option *ngFor="let a of activos" [value]="a"> {{ a }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row pt-2 has-error has-feedback">
                     <label for="" class="col-md-4 col-form-label">Margen de error</label>
                     <span class="col-md-1 more-less"> ± </span>
                     <div class="col-md-7">
@@ -77,6 +87,16 @@
                     <label for="" class="col-md-6 col-form-label">Periodo de calibración (años)</label>
                     <div class="col-md-6">
                         <input formControlName="periodo" type="number" class="form-control" placeholder="Cada cuánto tiempo se calibra" [class]="getClass('periodo')">
+                    </div>
+                </div>
+
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">Estado de calibracion</label>
+                    <div class="col-md-8">
+                        <select formControlName="estado" [class]="getClass('estado')" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                            <option [value]='""' disabled selected>Estado actual</option>
+                            <option *ngFor="let e of estados" [value]="e"> {{ e }}</option>
+                        </select>
                     </div>
                 </div>
 

@@ -18,7 +18,7 @@ export class ConfirmComponent implements OnInit {
               private alert   : AlertService) { }
 
   ngOnInit(): void {
-    this.device = this.create.getDevice();
+    this.device = this.create.loadDevice();
   }
   
   confirm(){

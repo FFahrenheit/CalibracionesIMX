@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Calibracion, Device } from 'src/app/interfaces/new-device.interface';
+import { activos, estados } from 'src/app/resources/device.component.statuses';
 import { LoginService } from 'src/app/services/login.service';
 import { NewDeviceService } from 'src/app/services/new-device.service';
 import { AlertService } from 'src/app/shared/alert';
@@ -14,6 +15,9 @@ import { AlertService } from 'src/app/shared/alert';
 export class DetailsComponent implements OnInit, OnDestroy {
 
   public form : FormGroup;
+
+  public estados = estados;
+  public activos = activos;
 
   constructor(private fb      : FormBuilder,
               private alert   : AlertService,
@@ -34,7 +38,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
       resSup : [saved?.resSup ||''],
       periodo : [saved?.periodo || '', Validators.compose([Validators.required, Validators.min(1)])],
       fechaCalibracion : [saved?.calibraciones[0]?.fecha || '',Validators.required],
-      calibradorCalibracion : [saved?.calibraciones[0]?.calibrador || '', Validators.required]
+      calibradorCalibracion : [saved?.calibraciones[0]?.calibrador || '', Validators.required],
+      activo : [saved?.activo || 'Activo', Validators.required],    //MUST BE ''
+      estado : [saved?.estado || '', Validators.required]
     });
   }
 
@@ -68,7 +74,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
       periodo: this.get('periodo').value,
       resInf: this.getValue('resInf'),
       resSup: this.getValue('resSup'),
-      ultima: this.get('fechaCalibracion').value
+      ultima: this.get('fechaCalibracion').value,
+      activo: this.get('activo').value,
+      estado: this.get('estado').value
     };
 
     return device;

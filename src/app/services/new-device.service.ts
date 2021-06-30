@@ -50,7 +50,7 @@ export class NewDeviceService {
   }
 
   public loadDevice(){
-    let ultima = this.device.ultima;
+    let ultima = new Date(this.device.ultima);
     let periodo : number = parseInt(this.device.periodo);
 
     let siguiente = ultima;
@@ -60,6 +60,8 @@ export class NewDeviceService {
     let aviso = siguiente;
     aviso.setDate(aviso.getDate() - 20);
     this.device.aviso = aviso;
+
+    this.device.id = 'Por asignar';
 
     return this.device;
   }
