@@ -6,11 +6,13 @@ import { EditRoutes } from './edit.routing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BeginComponent } from './begin/begin.component';
 import { DetailsComponent } from './details/details.component';
+import { CalibratorsResponsablesComponent } from './calibrators-responsables/calibrators-responsables.component';
 
 @NgModule({
   declarations: [
     BeginComponent,
-    DetailsComponent
+    DetailsComponent,
+    CalibratorsResponsablesComponent
   ],
   imports: [
     CommonModule,
