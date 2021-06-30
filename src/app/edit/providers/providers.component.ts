@@ -33,6 +33,7 @@ export class ProvidersComponent implements OnInit {
   ngOnDestroy(){
     this.edit.setProviders(this.proveedores);
     console.log(this.edit.get());
+    this.router.navigate(['editar',this.edit.get().id, 'confirmar']);
   }
 
   private loadProveedores(){

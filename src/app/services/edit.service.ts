@@ -8,6 +8,7 @@ export class EditService {
   
   private id : string;
   private device = null;
+  private error = 'Error de servicio';
 
   constructor(private deviceService  : GetDeviceService) { }
 
@@ -74,5 +75,14 @@ export class EditService {
         this.device.__proveedores.push(p.id);
       }
     });
+  }
+
+  public editDevice(){
+    let body = this.prepare();
+    console.log(body);
+  }
+
+  private prepare(){
+    return '';
   }
 }

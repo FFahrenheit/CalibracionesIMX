@@ -2,6 +2,7 @@ import { Routes } from "@angular/router";
 import { EditGuard } from "../guards/edit.guard";
 import { BeginComponent } from "./begin/begin.component";
 import { CalibratorsResponsablesComponent } from "./calibrators-responsables/calibrators-responsables.component";
+import { ConfirmComponent } from "./confirm/confirm.component";
 import { DetailsComponent } from "./details/details.component";
 import { ProvidersComponent } from "./providers/providers.component";
 
@@ -36,6 +37,13 @@ export const EditRoutes : Routes = [
                 component: ProvidersComponent,
                 data: {
                     title: 'Editar proveedores certificados'
+                }
+            },
+            {
+                path: 'confirmar',
+                component: ConfirmComponent,
+                data: {
+                    title: 'Confirmar cambios'
                 }
             },
             {
