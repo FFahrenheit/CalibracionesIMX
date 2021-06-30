@@ -44,7 +44,12 @@ export class NewDeviceService {
   }
 
   public setDetails(device: Device) {
+    let old = this.device;
     this.device = device;
+    this.device.calibraciones = old?.calibraciones;
+    this.device.proveedores = old?.proveedores;
+    this.device.responsables = old?.responsables;
+    this.device.verificadores = old?.verificadores;
   }
 
   public setCalibraciones(calibraciones: Calibracion[]) {
@@ -114,15 +119,24 @@ export class NewDeviceService {
     });
 
     device._proveedores = [];
-
     device.proveedores.forEach(p => {
       device._proveedores.push({
         nombre: p.nombre
       });
     });
 
+    device._calibraciones = [];
+    device.calibraciones.forEach(c => {
+      device._calibraciones.push({
+        calibrador: c.calibrador,
+        fecha: c.fecha,
+        verificador: c.verificador
+      });
+    });
+
     delete device.responsables;
     delete device.proveedores;
+    delete device.calibraciones;
 
     console.log(device);
 
@@ -131,15 +145,19 @@ export class NewDeviceService {
       proveedores : device._proveedores,
       responsables : device._responsables,
       verificadores : device.verificadores,
-      calibraciones : device.calibraciones
+      calibraciones : device._calibraciones,
     }
 
     delete body.device.id;
     delete body.device._proveedores;
     delete body.device._responsables;
+    delete  body.device._calibraciones
     delete body.device.verificadores;
-    delete body.device.calibraciones;
 
     return body;
+  }
+
+  public reset(){
+    this.device = null;
   }
 }

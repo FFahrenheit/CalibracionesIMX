@@ -26,6 +26,10 @@ export class ConfirmComponent implements OnInit {
         .subscribe(resp=>{
           if(resp){
             this.alert.success('Dispositivo dado de alta');
+            setTimeout(() => {
+              this.create.reset();
+              this.router.navigate(['equipos','detalles',this.create.getId()]);
+            }, 2500);
           }else{
             this.alert.error(this.create.getError());
           }

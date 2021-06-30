@@ -27,6 +27,8 @@ export class CalibratorsComponent implements OnInit, OnDestroy {
       hasCertificado : [false, Validators.required],
       certificado : ['', Validators.required]
     });
+
+    this.loadProveedores();
   }
 
   ngOnDestroy(){
@@ -48,6 +50,22 @@ export class CalibratorsComponent implements OnInit, OnDestroy {
     });
 
     return proveedores;
+  }
+
+  private loadProveedores(){
+    let device = this.create.getDevice();
+    device.proveedores?.forEach(p => {
+      if(p.certificado){
+        this.proveedores.push({
+          nombre: p.nombre,
+          certificado: p.certificado
+        });
+      }else{
+        this.proveedores.push({
+          nombre: p.nombre
+        });
+      }
+    });
   }
 
   next(){

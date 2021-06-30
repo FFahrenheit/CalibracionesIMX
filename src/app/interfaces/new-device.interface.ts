@@ -19,6 +19,7 @@ export interface Device {
     activo ? : string,
     _responsables ? : Responsable[],
     _proveedores ? : _Proveedor[],
+    _calibraciones ? :Calibracion[]
 }
 
 export interface _Responsable{
@@ -27,6 +28,12 @@ export interface _Responsable{
 
 export interface _Proveedor{
     nombre ? : string
+}
+
+export interface _Calibracion{
+    calibrador? : string, 
+    fecha? : Date,
+    verificador? : string,
 }
 
 export interface Verificacion {

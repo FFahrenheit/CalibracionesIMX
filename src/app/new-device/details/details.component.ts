@@ -39,7 +39,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       periodo : [saved?.periodo || '', Validators.compose([Validators.required, Validators.min(1)])],
       fechaCalibracion : [saved?.calibraciones[0]?.fecha || '',Validators.required],
       calibradorCalibracion : [saved?.calibraciones[0]?.calibrador || '', Validators.required],
-      activo : [saved?.activo || 'Activo', Validators.required],    //MUST BE ''
+      activo : [saved?.activo || '', Validators.required],    //MUST BE ''
       estado : [saved?.estado || '', Validators.required]
     });
   }
