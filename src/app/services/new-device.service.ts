@@ -48,4 +48,19 @@ export class NewDeviceService {
     }
     return this.device.responsables?.length > 0;
   }
+
+  public loadDevice(){
+    let ultima = this.device.ultima;
+    let periodo : number = parseInt(this.device.periodo);
+
+    let siguiente = ultima;
+    siguiente.setFullYear(ultima.getFullYear() + periodo);
+    this.device.siguiente = siguiente;
+
+    let aviso = siguiente;
+    aviso.setDate(aviso.getDate() - 20);
+    this.device.aviso = aviso;
+
+    return this.device;
+  }
 }

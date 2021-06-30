@@ -67,7 +67,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
       error: this.getValue('error'),
       periodo: this.get('periodo').value,
       resInf: this.getValue('resInf'),
-      resSup: this.getValue('resSup')
+      resSup: this.getValue('resSup'),
+      ultima: this.get('fechaCalibracion').value
     };
 
     return device;

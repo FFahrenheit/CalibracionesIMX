@@ -57,8 +57,8 @@ export class CalibratorsResponsablesComponent implements OnInit, OnDestroy {
     device.responsables?.forEach(r=>{
       const resp = {
         email: r.email,
-        name: r.name,
-        username: r.username
+        name: r.nombre,
+        username: r.usuario
       };
       this.responsables.push(resp);
     });
@@ -90,8 +90,8 @@ export class CalibratorsResponsablesComponent implements OnInit, OnDestroy {
     this.responsables.forEach(r => {
       const resp : Responsable = {
         email: r.email,
-        name: r.name,
-        username: r.username
+        nombre: r.name,
+        usuario: r.username
       };
       responsables.push(resp);
     });
