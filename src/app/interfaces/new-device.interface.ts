@@ -17,6 +17,16 @@ export interface Device {
     proveedores? : Proveedor[]
     estado ? : string,
     activo ? : string,
+    _responsables ? : Responsable[],
+    _proveedores ? : _Proveedor[],
+}
+
+export interface _Responsable{
+    usuario ? : string
+}
+
+export interface _Proveedor{
+    nombre ? : string
 }
 
 export interface Verificacion {

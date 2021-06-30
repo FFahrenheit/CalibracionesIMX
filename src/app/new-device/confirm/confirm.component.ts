@@ -22,7 +22,16 @@ export class ConfirmComponent implements OnInit {
   }
   
   confirm(){
-    console.log('CONFIRMADO');
+    this.create.createDevice()
+        .subscribe(resp=>{
+          if(resp){
+            this.alert.success('Dispositivo dado de alta');
+          }else{
+            this.alert.error(this.create.getError());
+          }
+        },error=>{
+          this.alert.error(this.create.getError());
+        });
   }
 
 }
