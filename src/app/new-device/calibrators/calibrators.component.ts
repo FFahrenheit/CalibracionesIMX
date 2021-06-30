@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Proveedor } from 'src/app/interfaces/new-device.interface';
+import { NewDeviceService } from 'src/app/services/new-device.service';
 import { AlertService } from 'src/app/shared/alert';
 
 @Component({
@@ -8,7 +10,7 @@ import { AlertService } from 'src/app/shared/alert';
   templateUrl: './calibrators.component.html',
   styleUrls: ['./calibrators.component.scss']
 })
-export class CalibratorsComponent implements OnInit {
+export class CalibratorsComponent implements OnInit, OnDestroy {
 
   public form : FormGroup;
   public proveedores = []; 
@@ -16,7 +18,8 @@ export class CalibratorsComponent implements OnInit {
 
   constructor(private router  : Router,
               private alert   : AlertService,
-              private fb      : FormBuilder) { }
+              private fb      : FormBuilder,
+              private create  : NewDeviceService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -26,8 +29,29 @@ export class CalibratorsComponent implements OnInit {
     });
   }
 
-  next(){
+  ngOnDestroy(){
+    this.create.setProveedores(this.getProveedores());
+    console.log(this.create.getDevice());
+    this.router.navigate(['nuevo','confirmar']);
+  }
 
+  private getProveedores() : Proveedor[]{
+    let proveedores : Proveedor[] = []
+    this.proveedores.forEach(p=>{
+      let proveedor : Proveedor = {
+        nombre: p.nombre
+      };
+      if(p.certificado){
+        proveedor.certificado = p.certificado;
+      }
+      proveedores.push(proveedor);
+    });
+
+    return proveedores;
+  }
+
+  next(){
+    this.ngOnDestroy();
   }
 
   public certificateEvent($event){
@@ -76,15 +100,26 @@ export class CalibratorsComponent implements OnInit {
   addProveedor(){
     this.form.markAllAsTouched();
     if(this.isValid()){
-      let proveedor = Object.create(null);
-      proveedor.nombre = this.get('nombre').value;
-      if(this.get('hasCertificado').value){
-        proveedor.certificado = this.archivo;
-      }
-      this.proveedores.push(proveedor);
-      console.log(this.proveedores);
+      let repeated = false;
+      let nombre = this.get('nombre').value;
+      this.proveedores.forEach(p=>{
+        if(p.nombre == nombre){
+          repeated = true;
+        }
+      });
 
-      this.form.reset();
+      if(!repeated){
+        let proveedor = Object.create(null);
+        proveedor.nombre = nombre;
+        if(this.get('hasCertificado').value){
+          proveedor.certificado = this.archivo;
+        }
+        this.proveedores.push(proveedor);
+  
+        this.form.reset();
+      }else{
+        this.alert.warn(nombre + ' ya registrado');
+      }
     }
   }
 
