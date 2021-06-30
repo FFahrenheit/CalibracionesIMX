@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Responsable } from 'src/app/interfaces/new-device.interface';
+import { NewDeviceService } from 'src/app/services/new-device.service';
 import { UsersService } from 'src/app/services/users.service';
 import { AlertService } from 'src/app/shared/alert';
 import { UserInputComponent } from 'src/app/shared/user-input/user-input.component';
@@ -10,11 +12,11 @@ import { UserInputComponent } from 'src/app/shared/user-input/user-input.compone
   templateUrl: './calibrators-responsables.component.html',
   styleUrls: ['./calibrators-responsables.component.scss']
 })
-export class CalibratorsResponsablesComponent implements OnInit {
+export class CalibratorsResponsablesComponent implements OnInit, OnDestroy {
 
   public form : FormGroup;
   public responsables = [];
-  public calibradores : String[] = [];
+  public calibradores : string[] = [];
 
   public users;
 
@@ -23,7 +25,8 @@ export class CalibratorsResponsablesComponent implements OnInit {
   constructor(private userService : UsersService,
               private fb          : FormBuilder,
               private alert       : AlertService,
-              private router      : Router) { }
+              private router      : Router,
+              private create      : NewDeviceService) { }
 
   ngOnInit(): void {
     this.userService.getUsers()
@@ -45,12 +48,37 @@ export class CalibratorsResponsablesComponent implements OnInit {
       calibrador: ['',Validators.required],
     });
 
+    this.setDefaults()
+
+  }
+
+  private setDefaults(){
+
+  }
+
+  ngOnDestroy(){
+    this.create.setVerificadores(this.calibradores);
+    this.create.setResponsables(this.getResponsables());
+    console.log(this.create.getDevice());
+    this.router.navigate(['nuevo','proveedores']);
+  }
+
+  private getResponsables() : Responsable[]{
+    let responsables : Responsable[] = [];
+    this.responsables.forEach(r => {
+      const resp : Responsable = {
+        email: r.email,
+        name: r.name,
+        username: r.username
+      };
+      responsables.push(resp);
+    });
+    return responsables;
   }
 
   public next(){
-    this.router.navigate(['nuevo','proveedores']);
     if(this.calibradores.length > 0 && this.responsables.length > 0){
-
+      this.ngOnDestroy();
     }else{
       this.alert.warn('Agregue al menos un responsable y un calibrador');
     }
@@ -116,9 +144,13 @@ export class CalibratorsResponsablesComponent implements OnInit {
     let calibrador = this.get('calibrador');
     calibrador.markAsTouched();
     if(calibrador.valid){
-      this.calibradores.push(calibrador.value);
-      calibrador.setValue('');
-      calibrador.markAsUntouched();
+      if(this.calibradores.includes(calibrador.value)){
+        this.alert.warn(calibrador.value + ' ya agregado')
+      }else{
+        this.calibradores.push(calibrador.value);
+        calibrador.setValue('');
+        calibrador.markAsUntouched();
+      }
     }
   }
 

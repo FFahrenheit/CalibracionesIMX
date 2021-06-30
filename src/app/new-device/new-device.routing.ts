@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { ResponsablesGuard } from "../guards/create/responsables.guard";
 import { CalibratorsResponsablesComponent } from "./calibrators-responsables/calibrators-responsables.component";
 import { CalibratorsComponent } from "./calibrators/calibrators.component";
 import { DetailsComponent } from "./details/details.component";
@@ -17,6 +18,7 @@ export const NewDeviceRoutes: Routes = [
             {
                 path: 'responsables',
                 component: CalibratorsResponsablesComponent,
+                canActivate: [ ResponsablesGuard ],
                 data: {
                     title: 'Responsables y calibradores'
                 }

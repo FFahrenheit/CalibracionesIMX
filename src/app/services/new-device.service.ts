@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Calibracion, Device } from '../interfaces/new-device.interface';
+import { Calibracion, Device, Responsable } from '../interfaces/new-device.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +20,21 @@ export class NewDeviceService {
 
   public getDevice(){
     return this.device;
+  }
+
+  public setResponsables(responsables : Responsable[]){
+    this.device.responsables = responsables;
+  }
+
+  public setVerificadores(verificadores : string[]){
+    this.device.verificadores = verificadores;
+  }
+
+  public hasFirstStep(){
+    if(typeof this.device == 'undefined'){
+      return false;
+    }
+    const descripcion = this.device?.descripcion || '';
+    return descripcion != '';
   }
 }
