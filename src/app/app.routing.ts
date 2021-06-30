@@ -48,6 +48,13 @@ export const AppRoutes: Routes = [
                 )
             },
             {
+                path: 'editar/:id',
+                loadChildren: ()=>
+                import('./edit/edit.module').then(
+                    (m) => m.EditModule
+                )
+            },
+            {
                 path: '',
                 pathMatch: 'full',
                 redirectTo: 'equipos'

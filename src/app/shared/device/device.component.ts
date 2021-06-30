@@ -146,4 +146,8 @@ export class DeviceComponent implements OnInit {
     this.router.navigate(['prestamos','detalles',this.id]);
   }
 
+  seeCertificate(url : string){
+    console.log(url);
+  }
+
 }

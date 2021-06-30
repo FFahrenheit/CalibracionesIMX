@@ -34,6 +34,23 @@
                     </attr>
 
                     <div>
+                        <a (click)="getBorrow()" class="black-link" title="Ver préstamos del equipo">
+                            <h5 class="text-left subtitle-att mb-0">
+                                Préstamos
+                                <i class="fas fa-external-link-alt"></i>
+                            </h5>
+                        </a>
+                        <div *ngIf="device.prestatario == null; else not_available">
+                            <attr name="Estado del equipo" value="Disponible para préstamo" status="ok"></attr>
+                        </div>
+                        <ng-template #not_available>
+                            <attr name="Estado del equipo" value="Prestado" status="not-ok"></attr>
+                            <attr name="Prestatario" [value]="device.nombrePrestatario + ' (' + device.prestatario + ')'">
+                            </attr>
+                        </ng-template>
+                    </div>
+
+                    <div>
                         <h6 class="text-left subtitle-att">Responsables del equipo</h6>
                         <ul class="dot-list" *ngIf="device.responsables.length > 0; else empty_responsables">
                             <li *ngFor="let r of device.responsables">
@@ -46,20 +63,22 @@
                     </div>
                 </div>
 
-                <div>
-                    <a (click)="getBorrow()" class="black-link" title="Ver préstamos del equipo">
-                        <h5 class="text-left subtitle-att">
-                            Préstamos
-                            <i class="fas fa-external-link-alt"></i>
-                        </h5>
-                    </a>
-                    <div *ngIf="device.prestatario == null; else not_available">
-                        <attr name="Estado del equipo" value="Disponible para préstamo" status="ok"></attr>
-                    </div>
-                    <ng-template #not_available>
-                        <attr name="Estado del equipo" value="Prestado" status="not-ok"></attr>
-                        <attr name="Prestatario" [value]="device.nombrePrestatario + ' (' + device.prestatario + ')'">
-                        </attr>
+                <div class="mb-3">
+                    <h6 class="text-left subtitle-att">Calibradores del equipo</h6>
+                    <ul class="dot-list" *ngIf="device.verificadores.length > 0;else empty_calibradores">
+                        <li *ngFor="let c of device.verificadores">
+                            <a *ngIf="c.nombre.startsWith('INT'); else just_name" title="Consultar equipo"
+                                [href]="'/equipos/detalles/' + c.nombre" target="_blank" class="black-link">
+                                {{ c.nombre }}
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <ng-template #just_name>
+                                {{ c.nombre }}
+                            </ng-template>
+                        </li>
+                    </ul>
+                    <ng-template #empty_calibradores>
+                        <span class="empty text"> No hay información de los calibradores de este equipo</span>
                     </ng-template>
                 </div>
 
@@ -161,21 +180,21 @@
                 </div>
 
                 <div class="mb-3">
-                    <h6 class="text-left subtitle-att">Calibradores del equipo</h6>
-                    <ul class="dot-list" *ngIf="device.verificadores.length > 0;else empty_calibradores">
-                        <li *ngFor="let c of device.verificadores">
-                            <a *ngIf="c.nombre.startsWith('INT'); else just_name" title="Consultar equipo"
-                                [href]="'/equipos/detalles/' + c.nombre" target="_blank" class="black-link">
-                                {{ c.nombre }}
+                    <h6 class="text-left subtitle-att">Proveedores de calibración</h6>
+                    <ul class="dot-list" *ngIf="device.proveedores.length > 0;else empty_proveedores">
+                        <li *ngFor="let p of device.proveedores">
+                            <a *ngIf="p.certificado;else just_name_p" title="Ver certificado ISO17025"
+                                (click)="seeCertificate(p.certificado)" target="_blank" class="black-link">
+                                {{ p.nombre }}
                                 <i class="fas fa-external-link-alt"></i>
                             </a>
-                            <ng-template #just_name>
-                                {{ c.nombre }}
+                            <ng-template #just_name_p>
+                                {{ p.nombre }}
                             </ng-template>
                         </li>
                     </ul>
-                    <ng-template #empty_calibradores>
-                        <span class="empty text"> No hay información de los calibradores de este equipo</span>
+                    <ng-template #empty_proveedores>
+                        <span class="empty text"> No hay información de los proveedores de calibración</span>
                     </ng-template>
                 </div>
             </div>
