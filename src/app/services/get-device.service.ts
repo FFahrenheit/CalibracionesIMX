@@ -43,8 +43,13 @@ export class GetDeviceService {
     return this.errorMessage;
   }
 
-  public downloadFile(file : string){
+  public downloadFiles(file : string){
     file = file.replace(/\\/g,'*');
     return encodeURI(`${ base_url }/files/${ file }`);
+  }
+
+  public downloadFile(file : string){
+    file = file.replace(/\\/g,'*');
+    return encodeURI(`${ base_url }/file/${ file }`);
   }
 }

@@ -183,11 +183,18 @@
                     <h6 class="text-left subtitle-att">Proveedores de calibración</h6>
                     <ul class="dot-list" *ngIf="device.proveedores.length > 0;else empty_proveedores">
                         <li *ngFor="let p of device.proveedores">
-                            <a *ngIf="p.certificado;else just_name_p" title="Ver certificado ISO17025"
-                                (click)="seeCertificate(p.certificado)" target="_blank" class="black-link">
-                                {{ p.nombre }}
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
+                            <div  *ngIf="p.certificado;else just_name_p" title="Ver certificado ISO17025">
+                                <a *ngIf="p.id; else not_uploaded" [href]="seeCertificate(p.certificado, p.id)" target="_blank" class="black-link">
+                                    {{ p.nombre }}
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <ng-template #not_uploaded>
+                                    <span class="black-link no-cursor">
+                                        {{ p.nombre }}
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </span>
+                                </ng-template>
+                            </div>
                             <ng-template #just_name_p>
                                 {{ p.nombre }}
                             </ng-template>

@@ -139,15 +139,19 @@ export class DeviceComponent implements OnInit {
   }
 
   public downloadFile(filename : string){
-    return this.deviceService.downloadFile(filename);
+    return this.deviceService.downloadFiles(filename);
   }
 
   public getBorrow(){
     this.router.navigate(['prestamos','detalles',this.id]);
   }
 
-  seeCertificate(url : string){
-    console.log(url);
+  seeCertificate(filename : string, id = null){
+    if(id){
+      return this.deviceService.downloadFile(filename);
+    }else{
+      return '';
+    }
   }
 
 }

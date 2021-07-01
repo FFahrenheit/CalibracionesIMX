@@ -30,8 +30,7 @@ export class ConfirmComponent implements OnInit {
           if(resp){
             this.alert.success('Dispositivo modificado');
             setTimeout(() => {
-              console.log('Umhhh');
-              // this.router.navigate(['equipos','detalles',this.edit.get().id]);
+              this.router.navigate(['equipos','detalles',this.edit.get().id]);
             }, 2500);
           }else{
             this.alert.error(this.edit.getError());

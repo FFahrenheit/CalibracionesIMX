@@ -49,3 +49,7 @@
 .hide-button:hover{
     cursor: pointer;
 }
+
+.no-cursor:hover{
+    cursor: default !important;
+}
