@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UpdateDeviceService } from 'src/app/services/update-device.service';
+import { AlertService } from 'src/app/shared/alert';
 
 @Component({
   selector: 'app-begin-calibration',
@@ -12,7 +14,10 @@ export class BeginCalibrationComponent implements OnInit {
   public show = false;
   public options = ['Calibración Pendiente','En Proceso de Calibración'];
 
-  constructor(private route:  ActivatedRoute) { }
+  constructor(private route   : ActivatedRoute,
+              private status  : UpdateDeviceService,
+              private alert   : AlertService,
+              private router  : Router) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params=> {
@@ -30,4 +35,20 @@ export class BeginCalibrationComponent implements OnInit {
     <a style="color:rgb(0, 2, 141);" href="/calibraciones/actualizar/${ this.id }"> Actualizar equipos </a>`;
   }
 
+  public changeStatus($event : string){
+    this.status.updateStatus(this.id,$event).subscribe(
+      resp=>{
+        if(resp){
+          this.alert.success('Se ha actualizado el estado de calibración');
+          setTimeout(() => {
+            this.router.navigate(['equipos','detalles',this.id]);
+          }, 2500);
+        }else{
+          this.alert.error(this.status.geError());
+        }
+      },error=>{
+        this.alert.error(this.status.geError());
+      }
+    );
+  }
 }

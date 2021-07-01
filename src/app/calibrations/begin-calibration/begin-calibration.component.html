@@ -1,3 +1,4 @@
+<alert></alert>
 <device [id]="id"
 (receive)= "exists($event)">
 </device>
@@ -7,6 +8,7 @@
     title="Empezar de calibración"
     [HtmlContent]="getHtmlContent()"
     trigger="Actualizar estado de calibración"
-    [options]="options">
+    [options]="options"
+    (send)="changeStatus($event)">
 
 </status-option>
