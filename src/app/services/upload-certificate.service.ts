@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -11,35 +11,42 @@ const base_url = environment.base_url;
 })
 export class UploadCertificateService {
 
-  constructor(private http  : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  public uploadCertificates(certificados, id){
+  public uploadCertificates(certificados, id) {
     console.log(certificados);
     let calls = [];
 
-    certificados.forEach(c=>{
-      if(c.certificado && !c?.id){
-        const url = `${base_url}/device/${id}`;
-        calls.push(this.http.get(url));
+    certificados.forEach(c => {
+      if (c.certificado && !c?.id) {
+        const url = `${base_url}/upload/iso/${id}/${c.nombre}`;
+        
+        let headers = new HttpHeaders();
+        headers.set('Content-Type', 'multipart/form-data');
+        
+        let formData = new FormData();
+        formData.append('iso', c.certificado);
+        
+        calls.push(this.http.post(url, formData, {headers: headers}));
       }
     });
 
     console.log(calls);
 
-    if(calls.length == 0){
+    if (calls.length == 0) {
       return of(true);
     }
 
     return forkJoin(calls).pipe(
-      map(resps=>{
+      map(resps => {
         console.log(resps);
         let count = 0;
-        resps.forEach(r=>{
+        resps.forEach(r => {
           count += r['ok'];
         });
         return count == resps.length;
 
-      },catchError(e=>{
+      }, catchError(e => {
         console.log('Error');
         return of(false);
       }))
