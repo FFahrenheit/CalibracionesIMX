@@ -14,6 +14,7 @@ export class ConfirmModalComponent implements OnInit {
   @Input() public myClass = 'px-5 m-3';
   @Input() public isDisabled = false;
   @Input() public reason = 'Está actualmente deshabilitado';
+  @Input() public myStyle = 'success';
 
   @Output() public accept = new EventEmitter<void>();
   @Output() public cancel = new EventEmitter<void>();

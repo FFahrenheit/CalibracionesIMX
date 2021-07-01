@@ -9,7 +9,10 @@
                 <td>
                     <div class="text-right">
                         <filter (apply)="appyFilters($event)" (reset)="resetFilters()"> </filter>
-                        <button class="btn btn-success mt-3" (click)="newDevice()">Agregar nuevo equipo</button>
+                        <button class="btn btn-success mt-3" (click)="newDevice()">
+                            <i class="fas fa-plus-circle mr-1"></i>
+                            Agregar nuevo equipo
+                        </button>
                     </div>
                 </td>
             </tr>

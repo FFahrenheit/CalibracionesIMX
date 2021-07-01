@@ -28,4 +28,8 @@ export class BeginComponent implements OnInit {
     this.router.navigate(['editar',this.id,'detalles']);
   }
 
+  providers(){
+    this.router.navigate(['editar',this.id,'proveedores']);
+  }
+
 }

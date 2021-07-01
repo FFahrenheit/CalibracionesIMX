@@ -1,6 +1,6 @@
 <div class="containter-fluid pb-5 d-flex flex-row-reverse">
-    <button class="btn btn-md" [ngClass]="{'btn-disabled btn-secondary': isDisabled, 'btn-success' : !isDisabled}" [class]="myClass"
-        (click)="open(confirmModal)">
+    <button class="btn btn-md" [class]="myClass"
+        (click)="open(confirmModal)" [ngClass]="isDisabled ? 'btn-disabled btn-secondary' : 'btn-'+ myStyle">
         {{ trigger }}
     </button>
 </div>

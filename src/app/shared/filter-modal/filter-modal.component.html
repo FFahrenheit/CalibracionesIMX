@@ -1,5 +1,6 @@
 <div>
     <button class="btn btn-md btn-secondary" (click)="open(filterModal)">
+        <i class="fas fa-filter mr-1"></i>
         {{ trigger }}
     </button>
     <div *ngIf="filters?.length != 0; else empty_body">

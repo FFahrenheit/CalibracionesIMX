@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -14,9 +15,10 @@ export class GetDeviceService {
   private device = null;
   private errorMessage = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http    : HttpClient,
+              private router  : Router) { }
 
-  public loadDevice(id? : string){
+  public loadDevice(id? : string, isGuard = false){
     this.device = null;
     return this.http.get(`${ base_url }/device/${ id }`)
               .pipe(
@@ -27,6 +29,9 @@ export class GetDeviceService {
                     return true;
                   }
                   this.errorMessage = resp['error'];
+                  if(isGuard){
+                    this.router.navigate(['404']);
+                  }
                   return false;
               }),
               catchError(error=>{

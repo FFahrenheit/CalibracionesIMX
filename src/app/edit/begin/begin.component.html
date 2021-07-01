@@ -1,5 +1,14 @@
 <device [id]="id" (receive)="exists($event)" [canHide]="true">
 </device>
-<confirm-modal *ngIf="show" trigger="Editar detalles" (accept)="edit()"
-title="Editar equipo" content="¿Desea modificar los detalles de este equipo?">
-</confirm-modal>
+<div class="outer">
+    <div class="inner">
+        <confirm-modal *ngIf="show" trigger="Administrar proveedores" (accept)="providers()" myStyle="primary"
+        title="Proveedores certificados" content="¿Desea editar la lista de proveedores certificados?">
+        </confirm-modal>
+    </div>
+    <div class="inner">
+        <confirm-modal *ngIf="show" trigger="Editar detalles" (accept)="edit()"
+        title="Editar equipo" content="¿Desea modificar los detalles de este equipo?">
+        </confirm-modal>  
+    </div>
+</div>

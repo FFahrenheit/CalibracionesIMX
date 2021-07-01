@@ -52,7 +52,7 @@ export class EditService {
     this.id = deviceId;
     let device = this.deviceService.getDevice();
     if(device == null || device.id != deviceId){
-      return this.deviceService.loadDevice(this.id);
+      return this.deviceService.loadDevice(this.id, true);
     }
     this.device = device;
     return true;
