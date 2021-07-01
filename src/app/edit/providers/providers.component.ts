@@ -12,7 +12,8 @@ import { AlertService } from 'src/app/shared/alert';
 export class ProvidersComponent implements OnInit {
 
   public form : FormGroup;
-  public proveedores = []; 
+  public proveedores = [];
+  public id; 
   private archivo : File;
 
   constructor(private router  : Router,
@@ -41,6 +42,7 @@ export class ProvidersComponent implements OnInit {
     if((device = this.edit.get()) == null || device.id != this.edit.getId()){
       device = this.edit.getDevice();
     }
+    this.id = device.id;
 
     device.proveedores?.forEach(p => {
       if(!p.id){

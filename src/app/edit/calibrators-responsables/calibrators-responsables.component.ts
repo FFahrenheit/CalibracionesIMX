@@ -18,6 +18,8 @@ export class CalibratorsResponsablesComponent implements OnInit {
   public responsables = [];
   public verificadores : string[] = [];
 
+  public id;
+
   public users;
 
   @ViewChild('usuario') usuario : UserInputComponent;
@@ -55,6 +57,7 @@ export class CalibratorsResponsablesComponent implements OnInit {
     if((device = this.edit.get()) == null || device.id != this.edit.getId()){
       device = this.edit.getDevice();
     }
+    this.id = device.id;
 
     device.responsables?.forEach(r=>{
       const resp = {

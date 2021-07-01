@@ -16,6 +16,7 @@ export class DetailsComponent implements OnInit {
 
   public activos = activos;
   public estados = estados;
+  public id;
 
   constructor(private router  : Router,
               private edit    : EditService,
@@ -27,6 +28,7 @@ export class DetailsComponent implements OnInit {
     if((saved = this.edit.get()) == null || saved.id != this.edit.getId()){
       saved = this.edit.getDevice();
     }    
+    this.id = saved.id;
     this.form = this.fb.group({
       descripcion : [saved?.descripcion || '', Validators.required],
       serie : [saved?.serie || '', Validators.required],
