@@ -45,7 +45,8 @@
                         </div>
                         <ng-template #not_available>
                             <attr name="Estado del equipo" value="Prestado" status="not-ok"></attr>
-                            <attr name="Prestatario" [value]="device.nombrePrestatario + ' (' + device.prestatario + ')'">
+                            <attr name="Prestatario"
+                                [value]="device.nombrePrestatario + ' (' + device.prestatario + ')'">
                             </attr>
                         </ng-template>
                     </div>
@@ -129,17 +130,23 @@
                         *ngIf="device.calibraciones.length > 0; else empty_calibraciones">
                         <thead>
                             <tr class="header">
-                                <th scope="col">
+                                <th scope="col" class="align-middle">
                                     Fecha
                                 </th>
-                                <th scope="col">
+                                <th scope="col" class="align-middle">
                                     Prove-Calibración
                                 </th>
-                                <th scope="col">
+                                <th scope="col" class="align-middle">
                                     Verificó
                                 </th>
-                                <th scope="col">
+                                <th scope="col" class="align-middle">
                                     Verif. de etiqueta
+                                </th>
+                                <th scope="col" class="align-middle">
+                                    RYR
+                                </th>
+                                <th scope="col" class="align-middle">
+                                    Certificado
                                 </th>
                             </tr>
                         </thead>
@@ -150,24 +157,28 @@
                                     {{ c.fecha| date:'shortTime' }}
                                 </td>
                                 <td>
-                                    <a *ngIf="c.ryr != null; else just_ryr" title="Ver pruebas RYR"
-                                        [href]="downloadFile(c.ryr)" target="_blank" class="black-link">
-                                        <i class="fas fa-paperclip"></i>
-                                        {{ c.calibrador }}
-                                    </a>
-                                    <ng-template #just_ryr>
-                                        {{ c.calibrador }}
-                                    </ng-template>
+                                    {{ c.calibrador }}
                                 </td>
                                 <td> {{ c.verifico }} </td>
                                 <td>
+                                    Ok
+                                </td>
+                                <td>
+                                    <a *ngIf="c.ryr != null; else just_ryr" title="Ver pruebas RYR"
+                                        [href]="downloadFile(c.ryr)" target="_blank" class="black-link attach">
+                                        <i class="fas fa-file-download"></i>
+                                    </a>
+                                    <ng-template #just_ryr>
+                                        N/A
+                                    </ng-template>
+                                </td>
+                                <td>
                                     <a *ngIf="c.certificado != null; else just_ok" title="Ver certificado"
-                                        [href]="downloadFile(c.certificado)" target="_blank" class="black-link">
-                                        <i class="fas fa-paperclip"></i>
-                                        Ok
+                                        [href]="downloadFile(c.certificado)" target="_blank" class="black-link attach">
+                                        <i class="fas fa-file-download"></i>
                                     </a>
                                     <ng-template #just_ok>
-                                        Ok
+                                        N/A
                                     </ng-template>
                                 </td>
                             </tr>
@@ -183,8 +194,9 @@
                     <h6 class="text-left subtitle-att">Proveedores de calibración</h6>
                     <ul class="dot-list" *ngIf="device.proveedores.length > 0;else empty_proveedores">
                         <li *ngFor="let p of device.proveedores">
-                            <div  *ngIf="p.certificado;else just_name_p" title="Ver certificado ISO17025">
-                                <a *ngIf="p.id; else not_uploaded" [href]="seeCertificate(p.certificado, p.id)" target="_blank" class="black-link">
+                            <div *ngIf="p.certificado;else just_name_p" title="Ver certificado ISO17025">
+                                <a *ngIf="p.id; else not_uploaded" [href]="seeCertificate(p.certificado, p.id)"
+                                    target="_blank" class="black-link">
                                     {{ p.nombre }}
                                     <i class="fas fa-external-link-alt"></i>
                                 </a>

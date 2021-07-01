@@ -8,7 +8,8 @@
                 </td>
                 <td>
                     <div class="text-right">
-                        <filter (apply)="appyFilters($event)" (reset)="resetFilters()" [blocked]="['estado','activo']">
+                        <filter (apply)="appyFilters($event)" (reset)="resetFilters()" 
+                        [blocked]="['estado', 'activo' , 'fromUltima', 'fromSiguiente']">
                         </filter>
                     </div>
                 </td>
@@ -17,6 +18,7 @@
     </div>
 
     <span class="text-left float-left mt-0 mb-1">
+        Se muestran los equipos con calibraciones próximas hasta dentro de 30 días.<br>
         Haga click en la fila para empezar proceso de calibración o marcar como pendiente
     </span>
 

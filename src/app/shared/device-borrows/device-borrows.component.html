@@ -57,6 +57,26 @@
                     </ng-template>
                 </div>
 
+                <div class="mb-2">
+                    <h5 class="text-left subtitle-att"> Estado de calibración </h5>
+                    <div class="row">
+                        <div class="col-sm-2 pbar">
+                            <p>{{ device.ultima | date:'shortDate'}}</p>
+                            <i class="far fa-calendar-check"></i>
+                        </div>
+                        <div class="col-sm-8">
+                            <ngb-progressbar [type]="getDateType()" [value]="getDateValue()"
+                                [ngClass]="{'bar' : getDateType() == 'warning' }" height="25px">
+                                {{ status }}
+                            </ngb-progressbar>
+                        </div>
+                        <div class="col-sm-2 pbar">
+                            <p>{{ device.siguiente | date:'shortDate' }}</p>
+                            <i class="far fa-calendar-times"></i>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <div class="col-md-7 table-responsive container text-center">
@@ -67,6 +87,9 @@
                         *ngIf="device.prestamos.length > 0; else empty_prestamos">
                         <thead>
                             <tr class="header">
+                                <th scope="col" class="align-middle">
+                                    Folio
+                                </th>
                                 <th scope="col" class="align-middle">
                                     Estado
                                 </th>
@@ -92,6 +115,9 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let p of device.prestamos; let i = index">
+                                <td>
+                                    {{ p.id }}
+                                </td>
                                 <td style="white-space: nowrap">
                                     <span>
                                         {{ p.estado }}
@@ -121,7 +147,7 @@
                                 <td colspan="3" *ngIf="p.estado == 'Entregado'">
                                     <span *ngIf="i == 0; else no_info">
                                         Aún no devuelto
-                                    </span> 
+                                    </span>
                                     <ng-template #no_info>
                                         Sin información
                                     </ng-template>

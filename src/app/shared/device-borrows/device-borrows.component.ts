@@ -20,6 +20,7 @@ export class DeviceBorrowsComponent implements OnInit {
   public exists : boolean | null = null;
   public error : string | null = '';
   public show = true;
+  public status = '';
 
   @Output() public receive = new EventEmitter<any>();
 
@@ -70,6 +71,43 @@ export class DeviceBorrowsComponent implements OnInit {
   public getIcon(estado){
     console.log(IconsAlert.prestamo(estado));
     return IconsAlert.prestamo(estado);
+  }
+
+  public getDateType() : string{
+    const today = new Date();
+    const deadLine = new Date(this.device.ultima);
+    let daysDiff = Number(today) - Number(deadLine);
+    daysDiff = Math.ceil(daysDiff / (1000 * 60 * 60 * 24));
+    
+    const periodo = this.device.periodo*365;
+
+    const daysLeft = periodo - daysDiff;
+
+    if(daysLeft <= 0){
+      this.status = 'Idealmente calibrado';
+      return 'danger';
+    }
+
+    if(daysLeft <= 10){
+      this.status = 'Idealmente en proceso'
+      return 'warning';
+    }
+
+    if(daysLeft <= 20){
+      this.status = 'Idealmente planeando calibración'
+      return 'warning';
+    }
+
+    this.status = this.getDateValue() > 50 ?  'Calibración vigente' : '';
+    return 'success';
+  }
+
+  public getDateValue() : number{
+    const today = new Date();
+    const deadLine = new Date(this.device.ultima);
+    let daysDiff = Number(today) - Number(deadLine);
+    daysDiff = Math.ceil(daysDiff / (1000 * 60 * 60 * 24)); 
+    return daysDiff / (Number(this.device.periodo)*365) * 100;
   }
 
 }
