@@ -2,6 +2,8 @@ import { Routes } from "@angular/router";
 import { Error403Component } from "./errors/error403/error403.component";
 import { Error404Component } from "./errors/error404/error404.component";
 import { Error500Component } from "./errors/error500/error500.component";
+import { AdminGuard } from "./guards/admin.guard";
+import { LenderGuard } from "./guards/lender.guard";
 import { LoggedGuard } from "./guards/logged.guard";
 import { LoginGuard } from "./guards/login.guard";
 import { BlankComponent } from "./layouts/blank/blank.component";
@@ -22,6 +24,7 @@ export const AppRoutes: Routes = [
             },
             {
                 path: 'calibraciones',
+                // canActivate: [ AdminGuard ],
                 loadChildren: () =>
                 import('./calibrations/calibrations.module').then(
                     (m) => m.CalibrationsModule
@@ -29,6 +32,7 @@ export const AppRoutes: Routes = [
             },
             {
                 path: 'prestamos',
+                canActivate: [ LenderGuard ],
                 loadChildren: () =>
                 import('./borrowings/borrowings.module').then(
                     (m) => m.BorrowingsModule
@@ -43,6 +47,7 @@ export const AppRoutes: Routes = [
             },
             {
                 path: 'nuevo',
+                canActivate: [ AdminGuard ],
                 loadChildren: () =>
                 import('./new-device/new-device.module').then(
                     (m) => m.NewDeviceModule
@@ -50,6 +55,7 @@ export const AppRoutes: Routes = [
             },
             {
                 path: 'editar/:id',
+                canActivate: [ AdminGuard ],
                 loadChildren: ()=>
                 import('./edit/edit.module').then(
                     (m) => m.EditModule

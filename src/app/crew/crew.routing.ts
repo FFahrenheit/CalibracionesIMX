@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { AdminGuard } from "../guards/admin.guard";
 import { RecoverPasswordGuard } from "../guards/recover-password.guard";
 import { BackupUsersComponent } from "./backup-users/backup-users.component";
 import { ChangePasswordComponent } from "./change-password/change-password.component";
@@ -10,6 +11,7 @@ export const CrewRoutes : Routes =  [
             {
                 path: 'encargados',
                 component: BackupUsersComponent,
+                canActivate: [ AdminGuard ],
                 data: {
                     title: 'Administrar encargados'
                 }

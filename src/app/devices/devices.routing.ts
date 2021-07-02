@@ -1,4 +1,6 @@
 import { Routes } from "@angular/router";
+import { AdminGuard } from "../guards/admin.guard";
+import { LenderGuard } from "../guards/lender.guard";
 import { AdminDevicesComponent } from "./admin-devices/admin-devices.component";
 import { BorrowDevicesComponent } from "./borrow-devices/borrow-devices.component";
 import { BorrowedDevicesComponent } from "./borrowed-devices/borrowed-devices.component";
@@ -23,6 +25,7 @@ export const DevicesRoutes : Routes =  [
             {
                 path: 'proximos',
                 component: NextDevicesComponent,
+                // canActivate: [ AdminGuard ],
                 data: {
                     title: 'Equipos próximos a calibrar'
                 }
@@ -30,6 +33,7 @@ export const DevicesRoutes : Routes =  [
             {
                 path: 'proceso',
                 component: ProcessDevicesComponent,
+                // canActivate: [ AdminGuard ],
                 data: {
                     title: 'Equipos en proceso de calibración'
                 }
@@ -37,6 +41,7 @@ export const DevicesRoutes : Routes =  [
             {
                 path: 'pendientes',
                 component: PendingDevicesComponent,
+                // canActivate: [ AdminGuard ],
                 data: {
                     title: 'Equipos con Calibración Vencida'
                 }
@@ -50,6 +55,7 @@ export const DevicesRoutes : Routes =  [
             },
             {
                 path: 'actualizar',
+                // canActivate: [ AdminGuard ],
                 component: UpdateDevicesComponent,
                 data: {
                     title: 'Actualizar estado de equipos'
@@ -57,6 +63,7 @@ export const DevicesRoutes : Routes =  [
             },
             {
                 path: 'prestar',
+                canActivate: [ LenderGuard ],
                 component: BorrowDevicesComponent,
                 data: {
                     title: 'Préstamo de equipos'
@@ -65,6 +72,7 @@ export const DevicesRoutes : Routes =  [
             {
                 path: 'prestados',
                 component: BorrowedDevicesComponent,
+                canActivate: [ LenderGuard ],
                 data: {
                     title: 'Equipos prestados'
                 }
@@ -72,6 +80,7 @@ export const DevicesRoutes : Routes =  [
             {
                 path: 'administrar',
                 component: AdminDevicesComponent,
+                canActivate: [ AdminGuard ],
                 data: {
                     title: 'Agregar o modificar equipos'
                 }
