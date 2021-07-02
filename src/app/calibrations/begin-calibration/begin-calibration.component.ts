@@ -12,7 +12,7 @@ export class BeginCalibrationComponent implements OnInit {
 
   public id : string | null = '';
   public show = false;
-  public options = ['Calibración Vencida','En Proceso de Calibración'];
+  public options = ['Calibración Vencida','En Proceso de Calibración', 'Calibración Vigente'];
 
   constructor(private route   : ActivatedRoute,
               private status  : UpdateDeviceService,
@@ -30,12 +30,20 @@ export class BeginCalibrationComponent implements OnInit {
   }
 
   public getHtmlContent(){
-    return `Seleccione el estado que más describe la situación con la calibración.
+    return `Seleccione el estado que más describe la situación con la calibración.<br>
     Si desea dar de baja el dispositivo o marcarlo como calibrado diríjase a 
     <a style="color:rgb(0, 2, 141);" href="/calibraciones/actualizar/${ this.id }"> Actualizar equipos </a>`;
   }
 
   public changeStatus($event : string){
+    if($event == 'Calibración Vigente'){
+      window.scroll(0,0);
+      this.alert.warn('Llene el formulario de Calibración Vigente primero');
+      setTimeout(() => {
+        this.router.navigate(['calibraciones','confirmar',this.id]);
+      }, 2350);
+      return;
+    }
     this.status.updateStatus(this.id,$event).subscribe(
       resp=>{
         if(resp){

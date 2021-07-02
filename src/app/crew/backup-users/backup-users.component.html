@@ -10,12 +10,20 @@
         {{ changesDone }} cambios hechos
     </span>
     <div class="row py-2">
-        <form [formGroup]="form" class="ml-3 col-md-8">
+        <form [formGroup]="form" class="ml-3 col-md-10">
             <div class="form-group row">
                 <label for="" class="col-md-3 col-form-label has-error has-feedback">Nuevo encargado</label>
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <user-input #usuario (update)="setValues($event)" [users]="users">
                     </user-input>
+                </div>
+                <div class="col-md-3">
+                    <select [class]="getClass('posicion')" formControlName="posicion"
+                    class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                    <option [value]='null' disabled selected>Rol del usuario</option>
+                    <option value='encargado'>Encargado</option>
+                    <option value='prestador'>Prestador</option>
+                </select>
                 </div>
                 <div class="col-md-3">
                     <button class="btn" (click)="addUser()"
@@ -30,10 +38,13 @@
                 <thead>
                     <tr class="header">
                         <th scope="col">
-                            Encargado
+                            Usuario
                         </th>
                         <th scope="col">
                             Nombre de usuario
+                        </th>
+                        <th scope="col">
+                            Rol
                         </th>
                         <th scope="col">
                             Correo asociado
@@ -53,6 +64,9 @@
                         </td>
                         <td>
                             {{ e.email }}
+                        </td>
+                        <td>
+                            {{ e.posicion | titlecase }}
                         </td>
                         <td>
                             <button *ngIf="e.username != myUser; else no_user" title="Remover encargado"

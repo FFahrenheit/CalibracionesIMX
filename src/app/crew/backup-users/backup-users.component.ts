@@ -36,7 +36,8 @@ export class BackupUsersComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', Validators.required],
       username: [''],
-      email: ['']
+      email: [''],
+      posicion: [null,Validators.required]
     });
 
     this.userService.getUsers()
@@ -81,14 +82,13 @@ export class BackupUsersComponent implements OnInit {
     }
   }
 
-
   markAsTouched(){
     this.form.markAllAsTouched();
     this.usuario.markAsTouched();
   }
 
   getValidity(){
-    if (this.usuario != null){
+    if (this.usuario != null && this.form.valid){
       return this.usuario.getValidity();
     }
     return false;
@@ -107,20 +107,25 @@ export class BackupUsersComponent implements OnInit {
       });
 
       if(!repeated){
-        this.alert.info(newElement.name + ' añadido');
+        // this.alert.info(newElement.name + ' añadido');
         this.encargados.push(newElement);
         this.changesDone += 1;
       }else{
-        this.alert.warn(newElement.name + 'ya es encargado');
+        this.alert.warn(newElement.name + 'ya es tiene un rol');
       }
+      this.form.reset();
       this.usuario.reset();
     }else{
-      this.usuario.markAsTouched();
+      this.markAsTouched();
     }
   }
 
   public confirm(){
-    let list = this.encargados.map(e => e.username);
+    console.log(this.encargados);
+    let list = this.encargados.map(e => ( {
+      username: e.username,
+      posicion: e.posicion
+    }));
     this.crewService.updateEncargados(list)
         .subscribe(resp=>{
           if(resp){
@@ -137,9 +142,16 @@ export class BackupUsersComponent implements OnInit {
   }
 
   remove(index : number){
-    this.alert.info(this.encargados[index].name + ' removido')
+    this.alert.error(this.encargados[index].name + ' removido')
     this.encargados.splice(index,1);
     this.changesDone += 1;
+  }
+
+  public getClass(ctrl : string) : string{
+    if(!this.form.controls[ctrl].touched){
+      return '';
+    }
+    return this.form.controls[ctrl].valid ? 'is-valid' : 'is-invalid';
   }
 
 }
