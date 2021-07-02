@@ -128,4 +128,20 @@ export class LoginService {
     this.user = Object.create(null);
   }
 
+  public recoverPassowrd(username : string){
+    return this.http.post(`${ base_url }/auth/recover`, { username })
+               .pipe(
+                 map(resp=>{
+                   if(resp['ok']){
+                     return true;
+                   }
+                   this.errorMessage = resp['error'] || 'No se pudo procesar la solicitud';
+                   return false;
+                 }),catchError(err=>{
+                   this.errorMessage = 'Error de servidor';
+                   return of(false);
+                 })
+               );
+  }
+
 }
