@@ -7,7 +7,7 @@ export const profileOptions = [
     {
         title: 'Cambiar contraseña',
         icon: 'fas fa-key pr-1',
-        listener: ''
+        listener: 'change'
     },
     {
         title: 'Cerrar sesión',

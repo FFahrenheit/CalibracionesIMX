@@ -63,6 +63,10 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['usuarios','encargados']);
   }
 
+  public changePassword(){
+    this.router.navigate(['usuarios','seguridad','cambiar'])
+  }
+
   public handleClick(event : string){
     switch(event){
       case 'logout':
@@ -70,6 +74,9 @@ export class DashboardComponent implements OnInit {
         break;
       case 'admins':
         this.goToAdmins();
+        break;
+      case 'change':
+        this.changePassword();
         break;
       default:
         console.log('Not yet implemented');
