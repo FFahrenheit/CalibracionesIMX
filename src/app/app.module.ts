@@ -19,6 +19,7 @@ import localeMX from '@angular/common/locales/es-MX';
 import localeMXExtra from '@angular/common/locales/extra/es-MX';
 import { Error404Component } from './errors/error404/error404.component';
 import { PipesModule } from './pipes/pipes.module';
+import { Error403Component } from './errors/error403/error403.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { PipesModule } from './pipes/pipes.module';
     DashboardComponent,
     Error500Component,
     Error404Component,
+    Error403Component,
   ],
   imports: [
     BrowserModule,
