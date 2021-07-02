@@ -16,6 +16,7 @@ import { ConfirmCalibrationModalComponent } from './confirm-calibration-modal/co
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { DeviceBorrowsComponent } from './device-borrows/device-borrows.component';
 import { UserInputComponent } from './user-input/user-input.component';
+import { ProfileViewComponent } from './profile-view/profile-view.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { UserInputComponent } from './user-input/user-input.component';
     FileUploadComponent,
     DeviceBorrowsComponent,
     UserInputComponent,
+    ProfileViewComponent,
   ],
   imports: [
     CommonModule,
@@ -52,7 +54,8 @@ import { UserInputComponent } from './user-input/user-input.component';
     ConfirmCalibrationModalComponent,
     FileUploadComponent,
     DeviceBorrowsComponent,
-    UserInputComponent
+    UserInputComponent,
+    ProfileViewComponent
   ]
 })
 export class SharedModule { }
