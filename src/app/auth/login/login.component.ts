@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ChangePasswordService } from 'src/app/services/change-password.service';
 import { LoginService } from 'src/app/services/login.service';
 import { AlertService } from 'src/app/shared/alert';
 
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
               private router  : Router,
               private route   : ActivatedRoute,
               private login   : LoginService,
-              private alert   : AlertService) { }
+              private alert   : AlertService,
+              private change  : ChangePasswordService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -50,8 +52,11 @@ export class LoginComponent implements OnInit {
               }
             }
           } 
-
-          if(resp){
+          if(resp == null){
+            this.change.activateGuard();
+            this.router.navigate(['usuarios','seguridad','cambiar'])
+          }
+          else if(resp){
             this.router.navigateByUrl(this.returnUrl);
           }else{
             this.alert.error(this.login.getError(), { autoClose: false });

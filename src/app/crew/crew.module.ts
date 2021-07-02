@@ -5,10 +5,12 @@ import { RouterModule } from '@angular/router';
 import { CrewRoutes } from './crew.routing';
 import { BackupUsersComponent } from './backup-users/backup-users.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
-    BackupUsersComponent
+    BackupUsersComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,
