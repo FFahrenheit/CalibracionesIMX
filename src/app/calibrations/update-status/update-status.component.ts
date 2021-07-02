@@ -29,7 +29,7 @@ export class UpdateStatusComponent implements OnInit {
   }
 
   changeStatus($event  : string){
-    if($event == 'Calibración Aceptada'){
+    if($event == 'Calibración Vigente'){
       this.router.navigate(['calibraciones','confirmar',this.id]);
       return;
     }

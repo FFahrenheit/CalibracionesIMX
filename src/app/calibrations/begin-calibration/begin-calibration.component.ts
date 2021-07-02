@@ -12,7 +12,7 @@ export class BeginCalibrationComponent implements OnInit {
 
   public id : string | null = '';
   public show = false;
-  public options = ['Calibración Pendiente','En Proceso de Calibración'];
+  public options = ['Calibración Vencida','En Proceso de Calibración'];
 
   constructor(private route   : ActivatedRoute,
               private status  : UpdateDeviceService,

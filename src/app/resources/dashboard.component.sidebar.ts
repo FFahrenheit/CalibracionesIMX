@@ -18,7 +18,7 @@ export const publicSidebar = [
     {
         name: 'Calibraciones vencidas',
         route: ['equipos','pendientes'],
-        detail: 'Equipos con calibración pendiente'
+        detail: 'Equipos con Calibración Vencida'
     },
     {
         name: 'Actualizar calibración',

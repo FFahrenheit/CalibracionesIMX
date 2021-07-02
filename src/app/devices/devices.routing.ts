@@ -38,7 +38,7 @@ export const DevicesRoutes : Routes =  [
                 path: 'pendientes',
                 component: PendingDevicesComponent,
                 data: {
-                    title: 'Equipos con calibración pendiente'
+                    title: 'Equipos con Calibración Vencida'
                 }
             },
             {

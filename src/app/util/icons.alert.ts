@@ -45,13 +45,13 @@ export class IconsAlert {
         };
 
         switch (status) {
-            case 'Calibración Aceptada':
+            case 'Calibración Vigente':
             case 'Referencia':
                 return 'ok';
             case 'En Proceso de Calibración':
             case 'Reparacion':
                 return 'waiting';
-            case 'Calibración Pendiente':
+            case 'Calibración Vencida':
                 return 'warning';
             case 'Desactivado':
             case 'Baja':

@@ -1,7 +1,7 @@
 export const estados = [
     'Baja',
-    'Calibración Aceptada',
-    'Calibración Pendiente',
+    'Calibración Vigente',
+    'Calibración Vencida',
     'En Proceso de Calibración',
     'Extraviado',
     'Referencia',
