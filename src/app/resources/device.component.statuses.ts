@@ -12,7 +12,7 @@ export const activos = [
     'Activo',
     'Baja',
     'Extraviado',
-    'Inactivo',
+    'Inhabilitado',
     'Referencia',
     'Reparacion',
 ];

@@ -89,7 +89,7 @@
                 <div>
                     <h5 class="text-left subtitle-att">Calendario de calibración</h5>
 
-                    <div *ngIf="device.activo=='Activo' || device.activo == 'Inactivo'; else empty_calendario">
+                    <div *ngIf="device.activo=='Activo' || device.activo == 'Inhabilitado'; else empty_calendario">
                         <attr name="Última calibración" [value]="datePipe.transform(device.ultima,'longDate')">
                         </attr>
                         <attr name="Siguiente calibración" [value]="datePipe.transform(device.siguiente,'longDate')">
