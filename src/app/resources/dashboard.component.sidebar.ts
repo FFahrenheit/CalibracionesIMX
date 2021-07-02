@@ -5,6 +5,9 @@ export const publicSidebar = [
         route: ['equipos','ver'],
         detail: 'Ver equipos'
     },
+];
+
+export const adminSidebar = [
     {
         name: 'Calibraciones próximas',
         route: ['equipos','proximos'],
@@ -26,6 +29,14 @@ export const publicSidebar = [
         detail: 'Estado de equipo'
     },
     {
+        name: 'Administrar equipos',
+        route: ['equipos','administrar'],
+        detail: 'Modificar y agregar equipos'
+    }
+];
+
+export const mediumSidebar = [
+    {
         name: 'Prestar equipos',
         route: ['equipos','prestar'],
         detail: 'Prestar equipos'
@@ -35,9 +46,4 @@ export const publicSidebar = [
         route: ['equipos','prestados'],
         detail: 'Equipos prestados'
     },
-    {
-        name: 'Administrar equipos',
-        route: ['equipos','administrar'],
-        detail: 'Modificar y agregar equipos'
-    }
 ];

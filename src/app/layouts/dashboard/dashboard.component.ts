@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import * as $ from 'jquery';
 import { User } from 'src/app/models/user.model';
 import { LoginService } from 'src/app/services/login.service';
-import { publicSidebar } from 'src/app/resources/dashboard.component.sidebar';
+import { publicSidebar, adminSidebar, mediumSidebar } from 'src/app/resources/dashboard.component.sidebar';
 import { profileOptions, adminOptions } from 'src/app/resources/dashboard.component.options';
 
 @Component({
@@ -36,14 +36,14 @@ export class DashboardComponent implements OnInit {
 
     this.isAdmin = this.login.isAdmin();
 
+    this.sidebar = publicSidebar;
+    this.publicDropdown = profileOptions;
+
     if(this.isAdmin){
-      this.sidebar = publicSidebar;
+      this.sidebar = this.sidebar.concat(adminSidebar, mediumSidebar)
       this.adminDropdown = adminOptions;
-      this.publicDropdown = profileOptions;
-    }else{
-      this.sidebar = publicSidebar;
-      this.adminDropdown = adminOptions;
-      this.publicDropdown = profileOptions;
+    }else if(this.login.isLender()){
+      this.sidebar = this.sidebar.concat(mediumSidebar);
     }
 
   }

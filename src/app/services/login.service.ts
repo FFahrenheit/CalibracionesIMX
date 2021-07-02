@@ -65,7 +65,11 @@ export class LoginService {
   }
 
   public isAdmin() : boolean{
-    return this.user.posicion != 'usuario';
+    return this.user.posicion == 'encargado';
+  }
+
+  public isLender() : boolean{
+    return this.user.posicion == 'prestador';
   }
 
   public isLogged() : boolean{
@@ -125,6 +129,7 @@ export class LoginService {
     localStorage.removeItem('token');
     localStorage.removeItem('position');
     localStorage.removeItem('email');
+    sessionStorage.setItem('index','0')
     this.user = Object.create(null);
   }
 
