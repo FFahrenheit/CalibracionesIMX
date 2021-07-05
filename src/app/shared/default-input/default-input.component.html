@@ -16,7 +16,8 @@
         (focus)="focus$.next($any($event).target.value)"
         (click)="click$.next($any($event).target.value)"
         #instance="ngbTypeahead"
-        (input) = "update()" [class]="getStyle()"
-        formControlName="param">
+        [class]="getStyle()"
+        formControlName="param"
+        [placeholder]="placeholder">
     </form>
 </div>

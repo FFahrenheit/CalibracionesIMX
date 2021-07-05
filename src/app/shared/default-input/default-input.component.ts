@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { merge, Observable, OperatorFunction, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
-import { FixedInputsService } from 'src/app/services/fixed-inputs.service';
 
 @Component({
   selector: 'default-input',
@@ -14,35 +13,23 @@ export class DefaultInputComponent implements OnInit {
 
   @Input() public param = 'ubicacion';
   @Input() public placeholder = 'Ubicación del equipo';
+  @Input() public values = [];
+  @Input() public model : any = 'XD';
+  @Input() public marked = false;
 
   @Output() public onType = new EventEmitter<string>();
 
-  public values = [];
   public form : FormGroup = Object.create(null);
 
   @ViewChild('instance', {static: true}) instance: NgbTypeahead;
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
-  public model : any;
 
-  constructor(private getterService : FixedInputsService,
-              private fb            : FormBuilder) { }
+  constructor(private fb  : FormBuilder) { }
 
   ngOnInit(): void {
-    this.getterService.loadLocations()
-        .subscribe(resp=>{
-          if(resp){
-            this.values = this.getterService.getLocations();
-            
-            console.log([this.values,'XD']);
-          }else{
-            console.log(this.getterService.getError());
-          }
-        },error=>{
-          console.log(this.getterService.getError());
-        });
     this.form = this.fb.group({
-      param: ['']
+      param: [this.model]
     });
   }
 
@@ -61,11 +48,15 @@ export class DefaultInputComponent implements OnInit {
     );
   }
 
-  update(){
+  getStyle(){
     this.onType.emit(this.get().value || '');
+    if(this.marked  && this.get().value != '' && this.get().value != null ){
+      return 'is-valid';
+    }
+    return this.get().touched && this.get().value != '' && this.get().value != null ? 'is-valid' : '';
   }
 
-  getStyle(){
-    return this.get().touched && this.get().value != '' ? 'is-valid' : '';
+  public setValue(value : string){
+    this.get().setValue(value);
   }
 }

@@ -1,9 +1,11 @@
 import { TitleCasePipe } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DevicesService } from 'src/app/services/devices.service';
 import { estados, activos } from 'src/app/resources/device.component.statuses'
+import { DefaultInputComponent } from '../default-input/default-input.component';
+import { FixedInputsService } from 'src/app/services/fixed-inputs.service';
 
 @Component({
   selector: 'filter',
@@ -28,10 +30,15 @@ export class FilterModalComponent implements OnInit {
   public estados = estados;
   public activos = activos;
 
+  public ubicaciones;
+  @ViewChild('ubicacion') ubicacion : DefaultInputComponent;
+  public defaultLocation;
+
   constructor(private modalService    : NgbModal,
               private fb              : FormBuilder,
               private titleCase       : TitleCasePipe,
-              private devicesService  : DevicesService) { }
+              private devicesService  : DevicesService,
+              private getterService   : FixedInputsService) { }
 
   ngOnInit(): void {
     let saved = this.devicesService.getSavedFilters();
@@ -56,9 +63,30 @@ export class FilterModalComponent implements OnInit {
     });
 
     this.apply.emit(this.getValues());
+
+    this.getterService.loadLocations()
+    .subscribe(resp=>{
+      if(resp){
+        this.ubicaciones = this.getterService.getLocations();
+        
+        console.log([this.ubicaciones,'XD']);
+      }else{
+        console.log(this.getterService.getError());
+      }
+    },error=>{
+      console.log(this.getterService.getError());
+    });
+  }
+
+  ngAfterViewInit(){
+    console.log('View!');
+    console.log(this.ubicacion);
   }
 
   public open(content) {
+    this.defaultLocation = this.filterForm.controls['ubicacion'].value || '';
+    console.log(['Default' , this.defaultLocation]);
+
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(result => {
       switch (result) {
         case 'YES':
@@ -146,5 +174,9 @@ export class FilterModalComponent implements OnInit {
     });
 
     return filterObject;
+  }
+
+  public updateUbicacion(value : string){
+    this.filterForm.controls['ubicacion'].setValue(value);
   }
 }

@@ -104,8 +104,8 @@
                 <div class="form-group row pt-0">
                     <label for="" class="col-md-4 col-form-label has-error has-feedback">Ubicación</label>
                     <div class="col-md-8">
-                        <input formControlName="ubicacion" type="text" class="form-control"
-                            [class]="getClass('ubicacion')" placeholder="Ubicación del equipo">
+                        <default-input #ubicacion placeholder="Ubicación del equipo" [values]="ubicaciones" 
+                        (onType)="updateUbicacion($event)" [model]="defaultLocation" [marked]="true"></default-input>
                     </div>
                 </div>
 
