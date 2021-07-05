@@ -74,6 +74,28 @@ export class UpdateDeviceService {
     );
   }
 
+  public updateActive(id : string, activo : string){
+    const data = {
+      activo,
+    };
+
+    return this.http.put(`${base_url}/device/active/${ id }`,data)
+    .pipe(
+      map((resp:any)=>{
+        console.log(resp);
+        if(resp['ok']){
+          return true;
+        }
+        this.errorMessage = 'No se pudo completar la operación';
+        return false;
+      }),catchError(error=>{
+        console.log(error);
+        this.errorMessage = 'Error con el servidor';
+        return of(false);
+      })
+    );
+  }
+
   public updateStatus(id : string, estado : string){
     const data = {
       estado,

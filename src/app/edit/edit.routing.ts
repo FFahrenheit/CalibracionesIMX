@@ -1,5 +1,6 @@
 import { Routes } from "@angular/router";
 import { EditGuard } from "../guards/edit.guard";
+import { ActiveUpdateComponent } from "./active-update/active-update.component";
 import { BeginComponent } from "./begin/begin.component";
 import { CalibratorsResponsablesComponent } from "./calibrators-responsables/calibrators-responsables.component";
 import { ConfirmComponent } from "./confirm/confirm.component";
@@ -44,6 +45,13 @@ export const EditRoutes : Routes = [
                 component: ConfirmComponent,
                 data: {
                     title: 'Confirmar cambios'
+                }
+            },
+            {
+                path: 'estado',
+                component: ActiveUpdateComponent,
+                data: {
+                    title: 'Cambiar estado del equipo'
                 }
             },
             {

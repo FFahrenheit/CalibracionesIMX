@@ -1,0 +1,14 @@
+<alert></alert>
+<device [id]="id"
+(receive)= "exists($event)">
+</device>
+
+<status-option
+    *ngIf="show"
+    title="Cambiar estado de equipo"
+    content="Seleccione el estado que más describe la nueva situación del equipo"
+    trigger="Actualizar estado"
+    [options]="activos"
+    (send)="changeStatus($event)">
+
+</status-option>

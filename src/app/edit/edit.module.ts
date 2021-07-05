@@ -9,6 +9,7 @@ import { DetailsComponent } from './details/details.component';
 import { CalibratorsResponsablesComponent } from './calibrators-responsables/calibrators-responsables.component';
 import { ProvidersComponent } from './providers/providers.component';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { ActiveUpdateComponent } from './active-update/active-update.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ConfirmComponent } from './confirm/confirm.component';
     DetailsComponent,
     CalibratorsResponsablesComponent,
     ProvidersComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    ActiveUpdateComponent
   ],
   imports: [
     CommonModule,
