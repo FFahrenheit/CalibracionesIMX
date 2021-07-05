@@ -8,6 +8,7 @@ import { DevicesListComponent } from "./devices-list/devices-list.component";
 import { NextDevicesComponent } from "./next-devices/next-devices.component";
 import { PendingDevicesComponent } from "./pending-devices/pending-devices.component";
 import { ProcessDevicesComponent } from "./process-devices/process-devices.component";
+import { UpdateActiveComponent } from "./update-active/update-active.component";
 import { UpdateDevicesComponent } from "./update-devices/update-devices.component";
 import { ViewDeviceComponent } from "./view-device/view-device.component";
 
@@ -47,6 +48,13 @@ export const DevicesRoutes : Routes =  [
                 }
             },
             {
+                path: 'modificar',
+                component: UpdateActiveComponent,
+                data: {
+                    title: 'Actualizar estado de los equipos'
+                }
+            },
+            {
                 path: 'detalles/:id',
                 component: ViewDeviceComponent,
                 data: {
@@ -58,7 +66,7 @@ export const DevicesRoutes : Routes =  [
                 // canActivate: [ AdminGuard ],
                 component: UpdateDevicesComponent,
                 data: {
-                    title: 'Actualizar estado de equipos'
+                    title: 'Actualizar estado de calibración'
                 }
             },
             {

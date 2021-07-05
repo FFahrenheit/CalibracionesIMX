@@ -26,6 +26,11 @@ export const adminSidebar = [
     {
         name: 'Actualizar calibración',
         route: ['equipos','actualizar'],
+        detail: 'Estado de calibración'
+    },
+    {
+        name: 'Actualizar estados',
+        route: ['equipos','modificar'],
         detail: 'Estado de equipo'
     },
     {
