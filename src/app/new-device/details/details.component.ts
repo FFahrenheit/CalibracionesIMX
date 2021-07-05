@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Calibracion, Device } from 'src/app/interfaces/new-device.interface';
 import { activos, estados } from 'src/app/resources/device.component.statuses';
+import { FixedInputsService } from 'src/app/services/fixed-inputs.service';
 import { LoginService } from 'src/app/services/login.service';
 import { NewDeviceService } from 'src/app/services/new-device.service';
 import { AlertService } from 'src/app/shared/alert';
@@ -18,12 +19,15 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   public estados = estados;
   public activos = activos;
+  public ubicaciones = [];
+  public defaultLocation = '';
 
-  constructor(private fb      : FormBuilder,
-              private alert   : AlertService,
-              private router  : Router,
-              private create  : NewDeviceService,
-              private login   : LoginService) { }
+  constructor(private fb            : FormBuilder,
+              private alert         : AlertService,
+              private router        : Router,
+              private create        : NewDeviceService,
+              private login         : LoginService,
+              private getterService : FixedInputsService) { }
 
   ngOnInit(): void {
     let saved = this.create.getDevice();
@@ -42,6 +46,20 @@ export class DetailsComponent implements OnInit, OnDestroy {
       activo : [saved?.activo || '', Validators.required],    //MUST BE ''
       estado : [saved?.estado || '', Validators.required]
     });
+
+    this.defaultLocation = saved?.ubicacion || '';
+
+    this.getterService.loadLocations()
+    .subscribe(resp=>{
+      if(resp){
+        this.ubicaciones = this.getterService.getLocations();
+              }else{
+        console.log(this.getterService.getError());
+      }
+    },error=>{
+      console.log(this.getterService.getError());
+    });
+
   }
 
   ngOnDestroy(){
@@ -104,5 +122,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
     }else{
       this.alert.warn('Complete los campos necesarios');
     }
+  }
+
+  public updateUbicacion(value : string){
+    this.form.controls['ubicacion'].setValue(value);
   }
 }

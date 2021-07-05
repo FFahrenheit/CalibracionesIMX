@@ -68,8 +68,6 @@ export class FilterModalComponent implements OnInit {
     .subscribe(resp=>{
       if(resp){
         this.ubicaciones = this.getterService.getLocations();
-        
-        console.log([this.ubicaciones,'XD']);
       }else{
         console.log(this.getterService.getError());
       }

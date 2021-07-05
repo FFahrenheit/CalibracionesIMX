@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { activos, estados } from 'src/app/resources/device.component.statuses';
 import { EditService } from 'src/app/services/edit.service';
+import { FixedInputsService } from 'src/app/services/fixed-inputs.service';
 import { AlertService } from 'src/app/shared/alert';
 
 @Component({
@@ -18,10 +19,14 @@ export class DetailsComponent implements OnInit {
   public estados = estados;
   public id;
 
-  constructor(private router  : Router,
-              private edit    : EditService,
-              private fb      : FormBuilder,
-              private alert   : AlertService) { }
+  public ubicaciones = [];
+  public defaultLocation = '';
+
+  constructor(private router        : Router,
+              private edit          : EditService,
+              private fb            : FormBuilder,
+              private alert         : AlertService,
+              private getterService : FixedInputsService) { }
 
   ngOnInit(): void {
     let saved; 
@@ -41,6 +46,20 @@ export class DetailsComponent implements OnInit {
       activo : [saved?.activo || '', Validators.required],
       estado : [saved?.estado || '', Validators.required]
     });
+
+    this.defaultLocation = saved?.ubicacion || '';
+
+    this.getterService.loadLocations()
+    .subscribe(resp=>{
+      if(resp){
+        this.ubicaciones = this.getterService.getLocations();        
+      }else{
+        console.log(this.getterService.getError());
+      }
+    },error=>{
+      console.log(this.getterService.getError());
+    });
+
   }
 
   ngOnDestroy(){
@@ -89,6 +108,10 @@ export class DetailsComponent implements OnInit {
     }else{
       this.alert.warn('Complete los campos necesarios');
     }
+  }
+
+  public updateUbicacion(value : string){
+    this.form.controls['ubicacion'].setValue(value);
   }
 
 }

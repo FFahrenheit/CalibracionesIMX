@@ -25,8 +25,8 @@
                 <div class="form-group row pt-2 has-error has-feedback">
                     <label for="" class="col-md-4 col-form-label">Ubicación</label>
                     <div class="col-md-8">
-                        <input formControlName="ubicacion" type="text" class="form-control" placeholder="Ubicacion donde estará" [class]="getClass('ubicacion')">
-                    </div>
+                        <default-input #ubicacion placeholder="Ubicacion donde estará" [values]="ubicaciones" 
+                        (onType)="updateUbicacion($event)" [model]="defaultLocation"></default-input>                    </div>
                 </div>
 
                 <div class="form-group row pt-2 has-error has-feedback">
