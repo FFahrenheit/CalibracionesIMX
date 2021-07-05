@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,6 +18,9 @@ export class LendDeviceComponent implements OnInit {
   public show = false;
   public device = null;
   public validInput = false;
+  public daysBorrowed : number;
+  public daysBefore : number;
+  public today : string | Date = new Date();
 
   @ViewChild('prestatario') prestatario : UserInputComponent;
 
@@ -28,16 +32,20 @@ export class LendDeviceComponent implements OnInit {
               private fb          : FormBuilder,
               private userService : UsersService,
               private borrow      : BorrowsService,
-              private router      : Router) { }
+              private router      : Router,
+              public date         : DatePipe) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params=> {
       this.id = params.get('id');
     });
 
+    this.today = this.date.transform(this.today, 'yyyy-MM-dd');
+
     this.form = this.fb.group({
       prestatario : ['', Validators.compose([Validators.required])],
-      username : ['']
+      username : [''],
+      fechaCompromiso : ['', Validators.required]
     });
 
     this.userService.getUsers()
@@ -85,13 +93,14 @@ export class LendDeviceComponent implements OnInit {
       return false;
     }
     if (this.prestatario != null){
-      return this.prestatario.getValidity();
+      return this.prestatario.getValidity() && this.form.valid;
     }
     return false;
   }
 
   public confirm(){
-    this.borrow.borrowDevice(this.id, this.form.controls['username'].value)
+    this.borrow.borrowDevice(this.id, this.form.controls['username'].value, 
+    this.form.controls['fechaCompromiso'].value)
         .subscribe(resp=>{
           if(resp){
             this.alert.success('Equipo correctamente prestado');
@@ -106,4 +115,45 @@ export class LendDeviceComponent implements OnInit {
           this.alert.error(this.borrow.getError());
         });    
   }
+
+  private updateDate(){
+    console.log(this.today);
+    let today = new Date(this.today);
+    let compromiso = new Date(this.form.controls['fechaCompromiso'].value);
+    let calibracion = new Date(this.device.siguiente);
+
+    console.log([today, compromiso, calibracion]);
+    
+    let daysDiff = Number(compromiso) - Number(today);
+    this.daysBorrowed = Math.ceil(daysDiff / (1000 * 60 * 60 * 24)) + 1;
+
+    daysDiff = Number(calibracion) - Number(compromiso);
+    this.daysBefore = Math.ceil(daysDiff / (1000 * 60 * 60 * 24)) - 1;
+    
+  }
+
+  public getClass(ctrl : string) : string{
+    if(ctrl == 'fechaCompromiso'){
+      this.updateDate();
+    }
+    if(!this.form.controls[ctrl].touched){
+      return '';
+    }
+    return this.form.controls[ctrl].valid ? 'is-valid' : 'is-invalid';
+  }
+
+  public getReasons() : any {
+    let reasons = [];
+    if(this.device.prestatario != null){
+      return 'El equipo no está disponible para préstamo';
+    }
+    if(this.prestatario != null && !this.prestatario.getValidity()){
+      reasons.push('Falta ingresar el prestatario');
+    }
+    if(!this.form.controls['fechaCompromiso'].valid){
+      reasons.push('Ingrese una fecha de compromiso de retorno');
+    }
+    return reasons;
+  }
+
 }

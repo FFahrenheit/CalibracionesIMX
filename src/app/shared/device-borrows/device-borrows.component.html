@@ -94,7 +94,10 @@
                                     Estado
                                 </th>
                                 <th scope="col" class="align-middle">
-                                    Fecha préstamo
+                                    Fecha de préstamo
+                                </th>
+                                <th scope="col" class="align-middle">
+                                    Fecha de compromiso
                                 </th>
                                 <th scope="col" class="align-middle">
                                     Prestatario
@@ -103,7 +106,7 @@
                                     Entregó
                                 </th>
                                 <th scope="col" class="align-middle">
-                                    Fecha retorno
+                                    Fecha de retorno
                                 </th>
                                 <th scope="col" class="align-middle">
                                     Notas
@@ -115,18 +118,21 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let p of device.prestamos; let i = index">
-                                <td>
+                                <td style="white-space: nowrap">
                                     {{ p.id }}
+                                    <i [class]="getIcon(p.estado)"></i>
                                 </td>
                                 <td style="white-space: nowrap">
                                     <span>
                                         {{ p.estado }}
-                                        <i [class]="getIcon(p.estado)"></i>
                                     </span>
                                 </td>
                                 <td>
                                     {{ p.fechaEntrega | date:'mediumDate' }}
                                     {{ p.fechaEntrega | date:'shortTime' }}
+                                </td>
+                                <td>
+                                    {{ p.fechaCompromiso | date:'mediumDate' }}
                                 </td>
                                 <td>
                                     {{ p.nombrePrestatario }}

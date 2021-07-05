@@ -5,11 +5,49 @@
 <div *ngIf="show">
     <h5>Préstamo del equipo</h5>
     <div class="row py-2">
-        <form [formGroup]="form" class="ml-3 col-md-6">
+        <form [formGroup]="form" class="ml-3 col-md-8">
             <div class="form-group row">
                 <label for="" class="col-md-4 col-form-label has-error has-feedback">Prestatario</label>
-                <user-input #prestatario (update)="setValues($event)" [users]="users">
+                <user-input #prestatario (update)="setValues($event)" 
+                [users]="users" placeholder="Usuario prestatario">
                 </user-input>
+            </div>
+            
+            <div class="form-group row">
+                <label for="" class="col-md-4 col-form-label has-error has-feedback">
+                    Fecha de compromiso de retorno 
+                </label>
+                <input [min]="today" [max]="date.transform(device.siguiente,'yyyy-MM-dd')" type="date" class="form-control col-md-4" 
+                formControlName="fechaCompromiso" [class]="getClass('fechaCompromiso')">
+            </div>
+            <div class="form-group row">
+                <span *ngIf="daysBorrowed" class="note">
+                    El equipo será prestado por 
+                    <span class="bold">
+                        {{ daysBorrowed }}
+                    </span> 
+                    {{ daysBorrowed == 1 ? 'día' : 'días' }} <br>
+                    <span *ngIf="daysBefore >= 10; else closeCal">
+                        <i class="fas fa-check-circle ok-icon-st">
+                            El dispositivo será regresado 
+                            <span class="bold">
+                                {{ daysBefore }}
+                            </span> 
+                            {{ daysBefore == 1 ? 'día ' : 'días ' }}
+                            antes de su siguiente calibración
+                        </i>
+                    </span>
+                    <ng-template #closeCal>
+                        <i class="fas fa-exclamation-circle not-ok-icon-st">
+                            Advertencia: El dispositivo será regresado
+                            <span class="bold">
+                                {{ daysBefore }}
+                            </span> 
+                            {{ daysBefore == 1 ? 'día ' : 'días ' }}
+                            antes de su siguiente calibración
+                        </i>
+                    </ng-template>
+                </span>
             </div>
         </form>
     </div>
@@ -23,10 +61,10 @@
             <confirm-modal myClass="px-5 m-3 float-left"
                 [isDisabled]="!getValidity()" (accept)="confirm()"
                 [content]="'¿Confirma el préstamo del equipo ' + id + 
-                ' a ' + form.controls['prestatario'].value + '?'"
+                ' a ' + form.controls['prestatario'].value + ' para regresar el '
+                + form.controls['fechaCompromiso'].value + '?'"
                 title="Confirmar préstamo" trigger="Prestar equipo" 
-                [reason]="device.prestatario == null ? 
-                'No ha seleccionado el prestatario' : 'El equipo no está disponible para préstamo'" 
+                [reason]="getReasons()"
                  (triggered)="markAsTouched()">
             </confirm-modal>
         </div>

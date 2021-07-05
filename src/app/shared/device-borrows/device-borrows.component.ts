@@ -69,7 +69,6 @@ export class DeviceBorrowsComponent implements OnInit {
   }
 
   public getIcon(estado){
-    console.log(IconsAlert.prestamo(estado));
     return IconsAlert.prestamo(estado);
   }
 
