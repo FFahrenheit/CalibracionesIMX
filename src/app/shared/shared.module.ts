@@ -17,6 +17,7 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 import { DeviceBorrowsComponent } from './device-borrows/device-borrows.component';
 import { UserInputComponent } from './user-input/user-input.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
+import { DefaultInputComponent } from './default-input/default-input.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ProfileViewComponent } from './profile-view/profile-view.component';
     DeviceBorrowsComponent,
     UserInputComponent,
     ProfileViewComponent,
+    DefaultInputComponent,
   ],
   imports: [
     CommonModule,
@@ -55,7 +57,8 @@ import { ProfileViewComponent } from './profile-view/profile-view.component';
     FileUploadComponent,
     DeviceBorrowsComponent,
     UserInputComponent,
-    ProfileViewComponent
+    ProfileViewComponent,
+    DefaultInputComponent
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,22 @@
+<div [formGroup]="form">
+    <ng-template #rt let-r="result" let-t="term">
+        <ngb-highlight [result]="r" [term]="t"></ngb-highlight>
+        <span>
+            (
+            <ngb-highlight class="ngb-username" [result]="r"></ngb-highlight>
+            )
+        </span>
+    </ng-template>
+    <form [formGroup]="form">
+        <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="model"
+        [ngbTypeahead]="search"
+        (focus)="focus$.next($any($event).target.value)"
+        (click)="click$.next($any($event).target.value)"
+        #instance="ngbTypeahead"
+        (input) = "update()" [class]="getStyle()"
+        formControlName="param">
+    </form>
+</div>
