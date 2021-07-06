@@ -1,0 +1,30 @@
+input[type="checkbox"] {
+    /* Double-sized Checkboxes */
+    -ms-transform: scale(1.5); /* IE */
+    -moz-transform: scale(1.5); /* FF */
+    -webkit-transform: scale(1.5); /* Safari and Chrome */
+    -o-transform: scale(1.5); /* Opera */
+    transform: scale(1.5);
+    padding: 10px;
+    margin-top: 8px;
+}
+
+.label-attach {
+    font-size: 120%;
+}
+
+.file-input {
+    padding-bottom: 37px;
+}
+
+.no-ok {
+    background-color: rgb(134, 134, 134);
+    cursor: default;
+    border-color: rgb(133, 133, 133);
+}
+
+.no-attach{
+    font-style: italic;
+    color:rgb(54, 54, 54);
+    font-size: 80%;
+}
