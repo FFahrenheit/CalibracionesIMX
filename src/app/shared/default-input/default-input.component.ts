@@ -20,6 +20,7 @@ export class DefaultInputComponent implements OnInit {
   @Output() public onType = new EventEmitter<string>();
 
   public form : FormGroup = Object.create(null);
+  public runFunction = false;
 
   @ViewChild('instance', {static: true}) instance: NgbTypeahead;
   focus$ = new Subject<string>();
@@ -59,4 +60,20 @@ export class DefaultInputComponent implements OnInit {
   public setValue(value : string){
     this.get().setValue(value);
   }
+
+  public reset(){
+    if(typeof this.form.controls != 'undefined'){
+      this.get().setValue('');
+    }
+  }
+
+  @Input()      //Special for trigger input
+  get triggerFunction(): boolean {
+    return this.runFunction;
+  }
+
+  set triggerFunction(value: boolean) {
+    this.runFunction = value;
+    this.reset();
+  }  
 }

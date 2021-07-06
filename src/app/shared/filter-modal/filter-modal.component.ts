@@ -17,6 +17,7 @@ export class FilterModalComponent implements OnInit {
   public filterForm: FormGroup = Object.create(null);
   public filters: string[];
   public touched = false;
+  public resetTrigger = false;
 
   @Input() public trigger = 'Aplicar filtros';
   @Input() public title = 'Filtrar equipos';
@@ -30,8 +31,8 @@ export class FilterModalComponent implements OnInit {
   public estados = estados;
   public activos = activos;
 
+  @ViewChild(DefaultInputComponent) ubicacion : DefaultInputComponent;
   public ubicaciones;
-  @ViewChild('ubicacion') ubicacion : DefaultInputComponent;
   public defaultLocation;
 
   constructor(private modalService    : NgbModal,
@@ -77,13 +78,10 @@ export class FilterModalComponent implements OnInit {
   }
 
   ngAfterViewInit(){
-    console.log('View!');
-    console.log(this.ubicacion);
   }
 
   public open(content) {
     this.defaultLocation = this.filterForm.controls['ubicacion'].value || '';
-    console.log(['Default' , this.defaultLocation]);
 
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(result => {
       switch (result) {
@@ -105,6 +103,8 @@ export class FilterModalComponent implements OnInit {
 
   public resetForm(): void {
     this.filterForm.reset();
+    this.resetTrigger = !this.resetTrigger;
+
   }
 
   public getClass(ctrl: string): string {
