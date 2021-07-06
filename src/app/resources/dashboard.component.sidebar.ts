@@ -37,6 +37,11 @@ export const adminSidebar = [
         name: 'Administrar equipos',
         route: ['equipos','administrar'],
         detail: 'Modificar y agregar equipos'
+    },
+    {
+        name: 'Administrar proveedores',
+        route: ['usuarios','proveedores'],
+        detail: 'Agregar y ver proveedores certificados'
     }
 ];
 

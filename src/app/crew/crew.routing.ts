@@ -3,6 +3,7 @@ import { AdminGuard } from "../guards/admin.guard";
 import { RecoverPasswordGuard } from "../guards/recover-password.guard";
 import { BackupUsersComponent } from "./backup-users/backup-users.component";
 import { ChangePasswordComponent } from "./change-password/change-password.component";
+import { ProviderListComponent } from "./provider-list/provider-list.component";
 
 export const CrewRoutes : Routes =  [
     {
@@ -14,6 +15,13 @@ export const CrewRoutes : Routes =  [
                 canActivate: [ AdminGuard ],
                 data: {
                     title: 'Administrar encargados'
+                }
+            },
+            {
+                path: 'proveedores',
+                component: ProviderListComponent,
+                data: {
+                    title: 'Administrar proveedores certificados'
                 }
             },
             {
