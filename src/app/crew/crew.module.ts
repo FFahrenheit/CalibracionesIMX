@@ -7,12 +7,14 @@ import { BackupUsersComponent } from './backup-users/backup-users.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ProviderListComponent } from './provider-list/provider-list.component';
+import { SeeProvidersComponent } from './see-providers/see-providers.component';
 
 @NgModule({
   declarations: [
     BackupUsersComponent,
     ChangePasswordComponent,
-    ProviderListComponent
+    ProviderListComponent,
+    SeeProvidersComponent
   ],
   imports: [
     CommonModule,

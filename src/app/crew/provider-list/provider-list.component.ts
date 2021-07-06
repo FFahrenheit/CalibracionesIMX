@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { GetDeviceService } from 'src/app/services/get-device.service';
 import { ProvidersService } from 'src/app/services/providers.service';
 import { AlertService } from 'src/app/shared/alert';
@@ -20,7 +21,8 @@ export class ProviderListComponent implements OnInit {
   constructor(private alert     : AlertService,
               private fb        : FormBuilder,
               private providers : ProvidersService,
-              private getDevice : GetDeviceService) { }
+              private getDevice : GetDeviceService,
+              private router    : Router) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -55,7 +57,7 @@ export class ProviderListComponent implements OnInit {
           if(resp){
             this.alert.success('Proveedores actualizados');
             setTimeout(() => {
-              window.location.reload();
+              this.router.navigate(['usuarios','proveedores','ver']);
             }, 2500);
           }else{
               this.alert.error(this.providers.getError());

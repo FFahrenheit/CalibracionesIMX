@@ -40,7 +40,7 @@ export const adminSidebar = [
     },
     {
         name: 'Administrar proveedores',
-        route: ['usuarios','proveedores'],
+        route: ['usuarios','proveedores','ver'],
         detail: 'Agregar y ver proveedores certificados'
     }
 ];

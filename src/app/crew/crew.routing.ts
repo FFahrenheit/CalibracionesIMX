@@ -4,6 +4,7 @@ import { RecoverPasswordGuard } from "../guards/recover-password.guard";
 import { BackupUsersComponent } from "./backup-users/backup-users.component";
 import { ChangePasswordComponent } from "./change-password/change-password.component";
 import { ProviderListComponent } from "./provider-list/provider-list.component";
+import { SeeProvidersComponent } from "./see-providers/see-providers.component";
 
 export const CrewRoutes : Routes =  [
     {
@@ -18,10 +19,17 @@ export const CrewRoutes : Routes =  [
                 }
             },
             {
-                path: 'proveedores',
+                path: 'proveedores/administrar',
                 component: ProviderListComponent,
                 data: {
                     title: 'Administrar proveedores certificados'
+                }
+            },
+            {
+                path: 'proveedores/ver',
+                component: SeeProvidersComponent,
+                data: {
+                    title: 'Ver proveedores certificados'
                 }
             },
             {

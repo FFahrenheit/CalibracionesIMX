@@ -1,0 +1,89 @@
+<div class="containter text-center pt-2 mb-5 mx-3">
+    <alert></alert>
+    <table class="table table-borderless">
+        <tr>
+            <td>
+                <h4 class="text-left my-1">Proveedores Certificados</h4>
+            </td>
+            <td>
+                <div class="text-right">
+                    <button class="btn btn-success mt-3" (click)="goToAdmin()">
+                        <i class="fas fa-users-cog"></i>
+                        Administrar proveedores
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </table>
+        <div class="row d-flex justify-content-center">
+
+            <div class="col-md-12">
+                <span class="text-left float-left ml-3">
+                    Aquí puede consultar la lista de los proveedores certificados para las calibraciones.
+                    También puede consultar su certificado 
+                    <span style="font-weight: bold">ISO17025</span>.<br>
+                    Existen {{ proveedores.length }} proveedores certificados registrados dados de alta.
+                </span></div>
+
+            <div class="col-md-12">
+
+                <div class="row my-3">
+
+                    <div class="col-md-12">
+                        <div class="table-responsive px-3 text-center py-3">
+                            <table class="table table-hover table-bordered table-sm"
+                                *ngIf="proveedores.length > 0;else empty_calibradores">
+                                <thead>
+                                    <tr class="header">
+                                        <th scope="col">
+                                            ID
+                                        </th>
+                                        <th scope="col">
+                                            Nombre del proveedor
+                                        </th>
+                                        <th scope="col">
+                                            Certificado ISO17025
+                                        </th>
+                                        <th scope="col">
+                                            Agregado
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let p of proveedores; let i = index">
+                                        <td>
+                                            {{ p.id || '-' }}
+                                        </td>
+                                        <td>
+                                            {{ p.nombre }}
+                                        </td>
+                                        <td *ngIf="p.certificado && isFile(p.certificado)">
+                                            {{ p.certificado.name }}
+                                        </td>
+                                        <td *ngIf="p.certificado && !isFile(p.certificado)">
+                                            <a class="black-link" target="_blank" [href]="seeCertificate(p)">
+                                                <i class="fas fa-file-download"></i>
+                                                Ver certificado
+                                            </a>
+                                        </td>
+                                        <td *ngIf="!p.certificado" class="no-attach">
+                                            No se adjuntó
+                                        </td>
+                                        <td>
+                                            {{ p.agregado | date:'medium' }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ng-template #empty_calibradores>
+                            <p class="my-3">No hay proveedores registrados</p>
+                        </ng-template>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+</div>
