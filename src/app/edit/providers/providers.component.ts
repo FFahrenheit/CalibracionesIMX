@@ -29,6 +29,7 @@ export class ProvidersComponent implements OnInit {
     });
 
     this.loadProveedores();
+    this.ngOnDestroy();
   }
 
   ngOnDestroy(){

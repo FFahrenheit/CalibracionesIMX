@@ -27,7 +27,7 @@ export class UpdateActiveComponent implements OnInit {
   }
 
   private loadDevices(req = null): void {
-    this.devicesService.loadDevices(req,'complete')
+    this.devicesService.loadDevices(req,'inactive')
       .subscribe(resp => {
         if (resp) {
           this.devices = this.devicesService.getDevices();

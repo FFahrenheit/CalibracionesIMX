@@ -29,6 +29,7 @@ export class CalibratorsComponent implements OnInit, OnDestroy {
     });
 
     this.loadProveedores();
+    this.ngOnDestroy();
   }
 
   ngOnDestroy(){
