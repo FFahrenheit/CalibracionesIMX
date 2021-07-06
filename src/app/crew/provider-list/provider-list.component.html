@@ -48,8 +48,10 @@
                                             {{ p.certificado.name }}
                                         </td>
                                         <td *ngIf="p.certificado && !isFile(p.certificado)">
-                                            Adjuntado: 
-                                            {{ p.certificado }}
+                                            <a class="black-link" target="_blank" [href]="seeCertificate(p)">
+                                                <i class="fas fa-file-download"></i>
+                                                Ver certificado
+                                            </a>
                                         </td>
                                         <td *ngIf="!p.certificado" class="no-attach">
                                             No se adjuntó

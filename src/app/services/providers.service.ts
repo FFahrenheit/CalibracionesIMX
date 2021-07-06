@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { UploadCertificateService } from './upload-certificate.service';
 
 const base_url = environment.base_url;
 
@@ -14,7 +15,8 @@ export class ProvidersService {
   private loadedProviders;
   private errorMessage = 'Error de servicio';
 
-  constructor(private http  : HttpClient) { }
+  constructor(private http    : HttpClient,
+              private upload  : UploadCertificateService) { }
 
   public loadProviders(){
     return this.http.get(`${base_url}/providers`)
@@ -44,7 +46,12 @@ export class ProvidersService {
                .pipe(
                  map(resp=>{
                   if(resp['ok']){
-                    return true;
+                    return this.upload.uploadCertificate(providers)
+                    .subscribe(resp=>{
+                      return resp;
+                    },error=>{
+                      return false;
+                    });
                    }
                    this.errorMessage = 'No se pudieron obtener los proveedores';
                    return false;

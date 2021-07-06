@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { GetDeviceService } from 'src/app/services/get-device.service';
 import { ProvidersService } from 'src/app/services/providers.service';
 import { AlertService } from 'src/app/shared/alert';
 
@@ -18,7 +19,8 @@ export class ProviderListComponent implements OnInit {
 
   constructor(private alert     : AlertService,
               private fb        : FormBuilder,
-              private providers : ProvidersService) { }
+              private providers : ProvidersService,
+              private getDevice : GetDeviceService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -51,9 +53,9 @@ export class ProviderListComponent implements OnInit {
     this.providers.updateProviders(proveedores,this.deleted)
         .subscribe(resp=>{
           if(resp){
-            console.log('Cool!')
+            this.alert.success('Proveedores actualizados');
             setTimeout(() => {
-              //window.location.reload();
+              window.location.reload();
             }, 2500);
           }else{
               this.alert.error(this.providers.getError());
@@ -153,12 +155,16 @@ export class ProviderListComponent implements OnInit {
         if(!prov.certificado){
           prov.certificado = null;
         }
-        delete prov.new;
+        // delete prov.new;
         providers.push(prov);
       }
     });
     console.log({providers});
     return providers;
+  }
+
+  public seeCertificate(provider){
+    return this.getDevice.downloadFile(provider.certificado);
   }
 
 }
