@@ -158,6 +158,7 @@ export class ProviderListComponent implements OnInit {
           prov.certificado = null;
         }
         // delete prov.new;
+        prov.agregado = new Date();
         providers.push(prov);
       }
     });

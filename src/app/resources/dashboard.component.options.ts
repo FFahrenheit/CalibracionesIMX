@@ -1,9 +1,9 @@
 export const profileOptions = [
-    {
-        title: 'Mi perfil',
-        icon: 'fas fa-user-circle pr-1',
-        listener: ''
-    },
+    // {
+    //     title: 'Mi perfil',
+    //     icon: 'fas fa-user-circle pr-1',
+    //     listener: ''
+    // },
     {
         title: 'Cambiar contraseña',
         icon: 'fas fa-key pr-1',
