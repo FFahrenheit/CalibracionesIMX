@@ -96,9 +96,11 @@
 
     </table>
     <ng-template #empty_body>
-        <error-message [loading]="devices == null ? null : true" title="No hay resultados"
-            description="No se encontraron resultados para los filtros aplicados" action="Aplicar otros filtros"
-            [customAction]="true" action="Cargar lista de equipos" (back)="resetFilters()">
+        <error-message [loading]="devices == null ? null : true" 
+        [title]="filterCount == 0 ? 'No hay resultados' : 'Sin coincidencias'"
+        [description]="filterCount != 0 ? 'No se encontraron resultados para los filtros aplicados' : 'No hay dispositivos prestados'" 
+        [action]="filterCount == 0? 'Volver a consultar' : 'Cargar todos los equipos'"
+        [customAction]="true" (back)="resetFilters()">
         </error-message>
     </ng-template>
 </div>

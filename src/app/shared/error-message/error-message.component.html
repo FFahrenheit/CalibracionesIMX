@@ -1,6 +1,9 @@
 <div class="text-center" *ngIf="loading != null; else load_process" [ngClass]="{'body' : !type.includes('sub'),'easter' : type == 'easter'}"
     [class]="styles">
-    <img (click)="goBack()" class="my-1 logo" [src]="url">
+    <br>
+    <div class="logo-container">
+        <img (click)="goBack()" class="my-1 logo" [src]="getImage()">
+    </div>
     <h1 class="big-404 mb-3">{{ title }}</h1>
     <h2 class="error-content">{{ description }}</h2>
     <span *ngIf="!type.includes('sub')" (click)="goBack()" class="go-back">{{ action }}</span>

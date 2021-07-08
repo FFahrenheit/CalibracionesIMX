@@ -13,6 +13,7 @@ export class BorrowedDevicesComponent implements OnInit {
 
   public devices = null;
   public icons = IconsAlert;
+  public filterCount = 0;
 
   constructor(private devicesService  : DevicesService,
               private router          : Router,
@@ -41,9 +42,11 @@ export class BorrowedDevicesComponent implements OnInit {
 
   public appyFilters($event){
     this.loadDevices($event);
+    this.filterCount = Object.keys($event).length;
   }
 
   public resetFilters(){
+    this.filterCount = 0;
     this.loadDevices();
   }
 

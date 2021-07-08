@@ -16,17 +16,18 @@ export class ErrorMessageComponent implements OnInit {
   @Input() public action = 'Regresar';
   @Input() public customAction = false;
 
-  @Output() public back = new EventEmitter<any>(); 
+  @Output() public back = new EventEmitter<any>();
 
-  constructor(public location : Location) { }
-  
-  public url; 
+  constructor(public location: Location) { }
+
+  public url: string;
   public error_url = './../../../assets/img/error.jpg';
   public empty_url = './../../../assets/img/empty.png';
   public empty_sub_url = './../../../assets/img/lazy.png';
+  public ok_url = './../../../assets/img/happy.jpg';
 
   ngOnInit(): void {
-    switch(this.type){
+    switch (this.type) {
       case 'error':
         this.url = this.error_url;
         break;
@@ -36,19 +37,43 @@ export class ErrorMessageComponent implements OnInit {
       case 'empty-sub':
         this.url = this.empty_sub_url;
         break;
+      case 'ok':
+        this.url = this.ok_url;
+        break;
       case 'easter':
-        this.url =  './../../../assets/img/easter.png';
+        this.url = './../../../assets/img/easter.png';
         break;
     }
   }
 
-  public goBack(){
-    if(this.customAction){
+  public goBack() {
+    if (this.customAction) {
       this.back.emit();
     }
-    else{
+    else {
       this.location.back();
     }
+  }
+
+  public getImage() : string{
+    switch (this.type) {
+      case 'error':
+        this.url = this.error_url;
+        break;
+      case 'empty':
+        this.url = this.empty_url;
+        break;
+      case 'empty-sub':
+        this.url = this.empty_sub_url;
+        break;
+      case 'ok':
+        this.url = this.ok_url;
+        break;
+      case 'easter':
+        this.url = './../../../assets/img/easter.png';
+        break;
+    }
+    return this.url;
   }
 
 }

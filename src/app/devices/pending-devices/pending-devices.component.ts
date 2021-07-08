@@ -13,6 +13,7 @@ export class PendingDevicesComponent implements OnInit {
 
   public devices = null;
   public icons = IconsAlert;
+  public filterCount = 0;
 
   constructor(private devicesService  : DevicesService,
               private router          : Router,
@@ -41,10 +42,12 @@ export class PendingDevicesComponent implements OnInit {
 
   public appyFilters($event){
     this.loadDevices($event);
+    this.filterCount = Object.keys($event).length;
   }
 
   public resetFilters(){
     this.loadDevices();
+    this.filterCount = 0;
   }
 
 
