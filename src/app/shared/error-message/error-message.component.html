@@ -1,4 +1,4 @@
-<div class="text-center" *ngIf="loading != null; else load_process" [ngClass]="{'body' : !type.includes('sub')}"
+<div class="text-center" *ngIf="loading != null; else load_process" [ngClass]="{'body' : !type.includes('sub'),'easter' : type == 'easter'}"
     [class]="styles">
     <img (click)="goBack()" class="my-1 logo" [src]="url">
     <h1 class="big-404 mb-3">{{ title }}</h1>

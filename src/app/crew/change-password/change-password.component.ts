@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ChangePasswordService } from 'src/app/services/change-password.service';
 import { AlertService } from 'src/app/shared/alert';
 
@@ -14,7 +15,8 @@ export class ChangePasswordComponent implements OnInit {
 
   constructor(private fb : FormBuilder,
               private alert : AlertService,
-              private changePassword : ChangePasswordService) { }
+              private changePassword : ChangePasswordService,
+              private router : Router) { }
 
   ngOnInit(): void {
 
@@ -84,8 +86,9 @@ export class ChangePasswordComponent implements OnInit {
                 this.alert.success(message, { autoClose : false });
                 this.changePassword.deactivateGuard();
                 setTimeout(() => {
-                  this.form.reset();
-                  this.form.updateValueAndValidity();
+                  // this.form.reset();
+                  // this.form.updateValueAndValidity();
+                  this.router.navigate(['']);
                 }, 3000);
               }else{
                 this.alert.error(this.changePassword.getError());

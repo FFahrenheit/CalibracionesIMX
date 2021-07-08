@@ -1,4 +1,4 @@
-const url = 'http://localhost:3300';
+const url = 'http://10.52.2.34:3300';
 
 export const environment = {
   production: true,

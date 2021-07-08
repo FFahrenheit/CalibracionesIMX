@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  private count = 0;
+
+  constructor(private router : Router) { }
 
   ngOnInit(): void {
+  }
+
+  public easterEgg(){
+    this.count += 1;
+    if(this.count == 3){
+      this.router.navigate(['path','to','easter','egg']);
+      this.count = 0;
+    }
   }
 
 }

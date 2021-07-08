@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { EasterEggComponent } from "./errors/easter-egg/easter-egg.component";
 import { Error403Component } from "./errors/error403/error403.component";
 import { Error404Component } from "./errors/error404/error404.component";
 import { Error500Component } from "./errors/error500/error500.component";
@@ -94,6 +95,10 @@ export const AppRoutes: Routes = [
     {
         path: '403',
         component: Error403Component
+    },
+    {
+        path: 'path/to/easter/egg',
+        component: EasterEggComponent
     },
     {
         path: '**',

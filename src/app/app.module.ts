@@ -20,6 +20,7 @@ import localeMXExtra from '@angular/common/locales/extra/es-MX';
 import { Error404Component } from './errors/error404/error404.component';
 import { PipesModule } from './pipes/pipes.module';
 import { Error403Component } from './errors/error403/error403.component';
+import { EasterEggComponent } from './errors/easter-egg/easter-egg.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { Error403Component } from './errors/error403/error403.component';
     Error500Component,
     Error404Component,
     Error403Component,
+    EasterEggComponent,
   ],
   imports: [
     BrowserModule,

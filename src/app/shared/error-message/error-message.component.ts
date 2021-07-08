@@ -36,6 +36,9 @@ export class ErrorMessageComponent implements OnInit {
       case 'empty-sub':
         this.url = this.empty_sub_url;
         break;
+      case 'easter':
+        this.url =  './../../../assets/img/easter.png';
+        break;
     }
   }
 
