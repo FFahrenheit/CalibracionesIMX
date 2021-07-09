@@ -16,6 +16,24 @@ export class CrewService {
 
   constructor(private http  : HttpClient) { }
 
+  public addUser(user){
+    return this.http.post(`${base_url}/users`,{ user })
+    .pipe(
+      map(resp=>{
+        console.log(resp);
+        if(resp['ok']){
+          return true;
+        }
+        this.errorMessage = 'No se pudo agregar, verifique que el usuario no exista';
+        return false;
+      }),
+      catchError(error=>{
+        this.errorMessage = 'Error. No se pudo agregar el usuario, verifique sus campos';
+        return of(false);
+      })
+    );
+  }
+
   public updateEncargados(managerList){
     return this.http.put(`${base_url}/mandated`,{ users : managerList})
     .pipe(
