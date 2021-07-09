@@ -25,6 +25,7 @@ export class DevicesService {
     return this.http.get(`${ base_url }/devices/${route}${ query }`)
                 .pipe(
                   map((resp:any)=>{
+                    console.log(this.router.url);
                     console.log(resp);
                     if(resp.ok){
                       this.devicesList = resp['equipos'];
@@ -76,5 +77,9 @@ export class DevicesService {
    */
   public getSavedFilters(){
     return this.filters[this.router.url] || {};
+  }
+
+  public resetFilters(){
+    this.filters[this.router.url] = null;
   }
 }

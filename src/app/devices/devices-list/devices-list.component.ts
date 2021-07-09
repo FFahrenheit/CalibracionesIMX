@@ -26,7 +26,7 @@ export class DevicesListComponent implements OnInit {
     this.router.navigate(['equipos','detalles',id]);
   }
 
-  private loadDevices(req = null) : void{
+  private loadDevices(req = this.devicesService.getSavedFilters()) : void{
     this.devicesService.loadDevices(req)
         .subscribe(resp=>{
           if(resp){
@@ -44,6 +44,7 @@ export class DevicesListComponent implements OnInit {
   }
 
   public resetFilters(){
+    this.devicesService.resetFilters();
     this.loadDevices();
   }
 

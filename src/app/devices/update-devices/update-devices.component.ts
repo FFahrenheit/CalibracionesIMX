@@ -25,7 +25,7 @@ export class UpdateDevicesComponent implements OnInit {
     this.router.navigate(['calibraciones','actualizar',id]);
   }
 
-  private loadDevices(req = null): void {
+  private loadDevices(req = this.devicesService.getSavedFilters()): void {
     this.devicesService.loadDevices(req,'complete')
       .subscribe(resp => {
         if (resp) {

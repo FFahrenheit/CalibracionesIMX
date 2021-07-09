@@ -26,7 +26,7 @@ export class ProcessDevicesComponent implements OnInit {
     this.router.navigate(['calibraciones','confirmar',id]);
   }
 
-  private loadDevices(req = null) : void{
+  private loadDevices(req = this.devicesService.getSavedFilters()) : void{
     this.devicesService.loadDevices(req,'process')
         .subscribe(resp=>{
           if(resp){

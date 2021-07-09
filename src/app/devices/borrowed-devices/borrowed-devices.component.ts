@@ -27,7 +27,7 @@ export class BorrowedDevicesComponent implements OnInit {
     this.router.navigate(['prestamos','regresar',id]);
   }
 
-  private loadDevices(req = null) : void{
+  private loadDevices(req = this.devicesService.getSavedFilters()) : void{
     this.devicesService.loadDevices(req,'borrowed')
         .subscribe(resp=>{
           if(resp){

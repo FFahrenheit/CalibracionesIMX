@@ -26,7 +26,7 @@ export class UpdateActiveComponent implements OnInit {
     this.router.navigate(['editar',id,'estado']);
   }
 
-  private loadDevices(req = null): void {
+  private loadDevices(req = this.devicesService.getSavedFilters()): void {
     this.devicesService.loadDevices(req,'inactive')
       .subscribe(resp => {
         if (resp) {

@@ -22,7 +22,7 @@ export class AdminDevicesComponent implements OnInit {
     this.loadDevices();
   }
 
-  private loadDevices(req = null) : void{
+  private loadDevices(req = this.devicesService.getSavedFilters()) : void{
     this.devicesService.loadDevices(req)
         .subscribe(resp=>{
           if(resp){

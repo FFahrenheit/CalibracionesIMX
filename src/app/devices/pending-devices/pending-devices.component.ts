@@ -27,7 +27,7 @@ export class PendingDevicesComponent implements OnInit {
     this.router.navigate(['calibraciones','empezar',id]);
   }
 
-  private loadDevices(req = null) : void{
+  private loadDevices(req = this.devicesService.getSavedFilters()) : void{
     this.devicesService.loadDevices(req,'pending')
         .subscribe(resp=>{
           if(resp){
