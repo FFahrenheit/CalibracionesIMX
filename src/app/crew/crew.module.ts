@@ -8,13 +8,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ProviderListComponent } from './provider-list/provider-list.component';
 import { SeeProvidersComponent } from './see-providers/see-providers.component';
+import { AddUserComponent } from './add-user/add-user.component';
 
 @NgModule({
   declarations: [
     BackupUsersComponent,
     ChangePasswordComponent,
     ProviderListComponent,
-    SeeProvidersComponent
+    SeeProvidersComponent,
+    AddUserComponent
   ],
   imports: [
     CommonModule,

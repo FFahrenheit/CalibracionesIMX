@@ -78,9 +78,16 @@ export class DashboardComponent implements OnInit {
       case 'change':
         this.changePassword();
         break;
+      case 'add':
+        this.addUser();
+        break;
       default:
         console.log('Not yet implemented');
     }
+  }
+
+  private addUser(){
+    this.router.navigate(['usuarios','nuevo']);
   }
 
 }

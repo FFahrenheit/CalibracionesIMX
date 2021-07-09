@@ -21,5 +21,10 @@ export const adminOptions = [
         title: 'Administrar encargados',
         icon: 'fas fa-users-cog pr-1',
         listener: 'admins'
+    },
+    {
+        title: 'Agregar usuarios',
+        icon: 'fas fa-user-plus pr-1',
+        listener: 'add'
     }
 ];
