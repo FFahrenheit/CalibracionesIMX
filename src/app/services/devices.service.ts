@@ -76,7 +76,7 @@ export class DevicesService {
    * the location of the caller
    */
   public getSavedFilters(){
-    return this.filters[this.router.url] || {};
+    return /*this.filters[this.router.url] ||*/ Object.create(null);
   }
 
   public resetFilters(){

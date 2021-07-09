@@ -87,7 +87,7 @@
     <ng-template #empty_body>
         <error-message [loading]="devices == null ? null : true"
         [title]="filterCount == 0 ? 'Todo en orden' : 'Sin coincidencias'"
-        [description]="filterCount != 0 ? 'No se encontraron resultados para los filtros aplicados' : 'No tienes calibraciones pendientes dentro de los siguientes 30 días'" 
+        [description]="filterCount != 0 ? 'No se encontraron resultados para los filtros aplicados' : 'No hay equipos con calibraciones vencidas'" 
         [action]="filterCount == 0? 'Volver a consultar' : 'Cargar todos los equipos'"
         [type]="filterCount == 0 ? 'ok' : 'error'"
         [customAction]="true" action="Cargar lista de equipos" (back)="resetFilters()">
