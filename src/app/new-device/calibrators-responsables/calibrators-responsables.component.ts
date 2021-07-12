@@ -70,7 +70,10 @@ export class CalibratorsResponsablesComponent implements OnInit, OnDestroy {
     this.create.setVerificadores(this.getCalibradores());
     this.create.setResponsables(this.getResponsables());
     console.log(this.create.getDevice());
-    this.router.navigate(['nuevo','proveedores']);
+    this.create.setProveedores([]);
+    console.log(this.create.getDevice());
+    this.router.navigate(['nuevo','confirmar']);
+    // this.router.navigate(['nuevo','proveedores']);
   }
 
   private getCalibradores() : Verificacion[]{

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { activos, estados } from 'src/app/resources/device.component.statuses';
+import { activos, estados, ubicaciones } from 'src/app/resources/device.component.statuses';
 import { EditService } from 'src/app/services/edit.service';
 import { FixedInputsService } from 'src/app/services/fixed-inputs.service';
 import { AlertService } from 'src/app/shared/alert';
@@ -17,6 +17,7 @@ export class DetailsComponent implements OnInit {
 
   public activos = activos;
   public estados = estados;
+  public _ubicaciones = ubicaciones;
   public id;
 
   public ubicaciones = [];

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Calibracion, Device } from 'src/app/interfaces/new-device.interface';
-import { activos, estados } from 'src/app/resources/device.component.statuses';
+import { activos, estados, ubicaciones } from 'src/app/resources/device.component.statuses';
 import { FixedInputsService } from 'src/app/services/fixed-inputs.service';
 import { LoginService } from 'src/app/services/login.service';
 import { NewDeviceService } from 'src/app/services/new-device.service';
@@ -19,6 +19,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   public estados = estados;
   public activos = activos;
+  public _ubicaciones = ubicaciones;
+
   public ubicaciones = [];
   public defaultLocation = '';
 
