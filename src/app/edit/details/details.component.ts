@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { activos, estados, ubicaciones } from 'src/app/resources/device.component.statuses';
 import { EditService } from 'src/app/services/edit.service';
 import { FixedInputsService } from 'src/app/services/fixed-inputs.service';
+import { NavigationService } from 'src/app/services/navigation.service';
 import { AlertService } from 'src/app/shared/alert';
 
 @Component({
@@ -27,9 +28,11 @@ export class DetailsComponent implements OnInit {
               private edit          : EditService,
               private fb            : FormBuilder,
               private alert         : AlertService,
-              private getterService : FixedInputsService) { }
+              private getterService : FixedInputsService,
+              private navigation    : NavigationService) { }
 
   ngOnInit(): void {
+    this.navigation.reactivate();
     let saved; 
     if((saved = this.edit.get()) == null || saved.id != this.edit.getId()){
       saved = this.edit.getDevice();

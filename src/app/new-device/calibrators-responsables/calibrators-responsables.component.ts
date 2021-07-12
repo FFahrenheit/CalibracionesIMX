@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Responsable, Verificacion } from 'src/app/interfaces/new-device.interface';
+import { NavigationService } from 'src/app/services/navigation.service';
 import { NewDeviceService } from 'src/app/services/new-device.service';
 import { UsersService } from 'src/app/services/users.service';
 import { AlertService } from 'src/app/shared/alert';
@@ -26,9 +27,11 @@ export class CalibratorsResponsablesComponent implements OnInit, OnDestroy {
               private fb          : FormBuilder,
               private alert       : AlertService,
               private router      : Router,
-              private create      : NewDeviceService) { }
+              private create      : NewDeviceService,
+              private nav         : NavigationService) { }
 
   ngOnInit(): void {
+    this.nav.reactivate();
     this.userService.getUsers()
     .subscribe((resp:any)=>{
       console.log(resp);

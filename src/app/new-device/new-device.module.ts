@@ -28,17 +28,17 @@ export class NewDeviceModule {
   constructor(private router      : Router,
               private navigation  : NavigationService){
 
-    this.navigation.reactivate();
+    this.router.events.subscribe((val) =>{
 
-    this.router.events.subscribe(val =>{
-      // console.log(val);
       if(val instanceof  NavigationCancel && !this.navigation.canNavigate()){
-        if(val.url.includes('nuevo') ||confirm('¿Desea salir sin guardar los cambios?')){
+        console.log({ val, url: this.router.url});
+        if(val.url.includes('/nuevo/')){
           this.navigation.deactivate();
-          this.router.navigateByUrl(val.url);
-          setTimeout(() => {
-            this.navigation.reactivate();            
-          }, 1000);
+          this.router.navigateByUrl(val.url); 
+        }
+        else if(this.router.url.includes('/nuevo/') && confirm('¿Desea salir sin guardar los cambios?')){
+          this.navigation.deactivate();
+          this.router.navigateByUrl(val.url); 
         }
       }
     });

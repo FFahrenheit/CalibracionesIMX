@@ -20,6 +20,7 @@ export class ConfirmComponent implements OnInit {
               private nav     : NavigationService) { }
 
   ngOnInit(): void {
+    this.nav.reactivate();
     this.device = this.create.loadDevice();
   }
   
@@ -32,9 +33,6 @@ export class ConfirmComponent implements OnInit {
             setTimeout(() => {
               this.create.reset();
               this.router.navigate(['equipos','detalles',this.create.getId()]);
-              setTimeout(() => {
-                this.nav.reactivate();
-              }, 1000);
             }, 2500);
           }else{
             this.alert.error(this.create.getError());

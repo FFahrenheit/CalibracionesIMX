@@ -1,5 +1,6 @@
 import { Routes } from "@angular/router";
 import { EditGuard } from "../guards/edit.guard";
+import { NavigationGuard } from "../guards/navigation.guard";
 import { ActiveUpdateComponent } from "./active-update/active-update.component";
 import { BeginComponent } from "./begin/begin.component";
 import { CalibratorsResponsablesComponent } from "./calibrators-responsables/calibrators-responsables.component";
@@ -22,12 +23,14 @@ export const EditRoutes : Routes = [
             {
                 path: 'detalles',
                 component: DetailsComponent,
+                canDeactivate: [NavigationGuard],
                 data: {
                     title: 'Editar detalles del equipo'
                 }
             },
             {
                 path: 'responsables',
+                canDeactivate: [NavigationGuard],
                 component: CalibratorsResponsablesComponent,
                 data: {
                     title: 'Editar responsables y verificadores'
@@ -43,6 +46,7 @@ export const EditRoutes : Routes = [
             {
                 path: 'confirmar',
                 component: ConfirmComponent,
+                canDeactivate: [NavigationGuard],
                 data: {
                     title: 'Confirmar cambios'
                 }

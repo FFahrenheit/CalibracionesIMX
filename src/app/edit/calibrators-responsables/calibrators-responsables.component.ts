@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Verificacion } from 'src/app/interfaces/new-device.interface';
 import { EditService } from 'src/app/services/edit.service';
+import { NavigationService } from 'src/app/services/navigation.service';
 import { UsersService } from 'src/app/services/users.service';
 import { AlertService } from 'src/app/shared/alert';
 import { UserInputComponent } from 'src/app/shared/user-input/user-input.component';
@@ -28,9 +29,11 @@ export class CalibratorsResponsablesComponent implements OnInit {
               private fb          : FormBuilder,
               private alert       : AlertService,
               private router      : Router,
-              private edit        : EditService) { }
+              private edit        : EditService,
+              private nav         : NavigationService) { }
 
   ngOnInit(): void {
+    this.nav.reactivate();
     this.userService.getUsers()
     .subscribe((resp:any)=>{
       console.log(resp);

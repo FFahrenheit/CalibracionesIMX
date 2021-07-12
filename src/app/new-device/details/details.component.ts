@@ -5,6 +5,7 @@ import { Calibracion, Device } from 'src/app/interfaces/new-device.interface';
 import { activos, estados, ubicaciones } from 'src/app/resources/device.component.statuses';
 import { FixedInputsService } from 'src/app/services/fixed-inputs.service';
 import { LoginService } from 'src/app/services/login.service';
+import { NavigationService } from 'src/app/services/navigation.service';
 import { NewDeviceService } from 'src/app/services/new-device.service';
 import { AlertService } from 'src/app/shared/alert';
 
@@ -29,9 +30,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
               private router        : Router,
               private create        : NewDeviceService,
               private login         : LoginService,
-              private getterService : FixedInputsService) { }
+              private getterService : FixedInputsService,
+              private navigation    : NavigationService) { } 
 
   ngOnInit(): void {
+    this.navigation.reactivate();
     let saved = this.create.getDevice();
 
     this.form = this.fb.group({
