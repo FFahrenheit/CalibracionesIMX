@@ -1,3 +1,12 @@
+/***
+ * Declara los estados posibles de los 
+ * equipos en los componentes de agregar
+ * ,editar equipo, actualizar calibración y 
+ * los filtros.
+ * Modifique este arreglo para modificar estos componentes
+ * Modificar esta variable NO modificará los detalles
+ * de los equipos ya existentes.
+ */
 export const estados = [
     'Baja',
     'Calibración Vigente',
@@ -8,6 +17,15 @@ export const estados = [
     'Reparacion',
 ];
 
+/***
+ * Declara los estados posibles de las calibraciones  
+ * de los equipos en los componentes de agregar
+ * ,editar equipo, actualizar estado y 
+ * los filtros.
+ * Modifique este arreglo para modificar estos componentes
+ * Modificar esta variable NO modificará los detalles
+ * de los equipos ya existentes.
+ */
 export const activos = [
     'Activo',
     'Baja',
@@ -17,6 +35,14 @@ export const activos = [
     'Reparacion',
 ];
 
+/***
+ * Declara las ubicaciones posibles donde pueden 
+ * estar los equipos en los componentes de agregar
+ * o editar equipo.
+ * Modifique este arreglo para modificar estos componentes
+ * Modificar esta variable NO modificará los detalles
+ * de los equipos ya existentes.
+ */
 export const ubicaciones = [
     'Almacen',
     'Almacen de Embarques',
