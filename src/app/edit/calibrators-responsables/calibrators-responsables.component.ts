@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Verificacion } from 'src/app/interfaces/new-device.interface';
 import { EditService } from 'src/app/services/edit.service';
 import { NavigationService } from 'src/app/services/navigation.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -165,5 +164,9 @@ export class CalibratorsResponsablesComponent implements OnInit {
 
   public removeCalibrador(index : number){
     this.verificadores.splice(index,1);
+  }
+
+  public back(){
+    this.nav.navigateWithPermission(['editar',this.id ,'detalles']);
   }
 }

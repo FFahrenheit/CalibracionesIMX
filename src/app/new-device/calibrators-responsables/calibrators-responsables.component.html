@@ -121,7 +121,9 @@
                     <p class="my-3">Agregue al menos un equipo calibrador</p>
                 </ng-template>
 
-
+                <button class="btn btn-primary" type="button" (click)="back()">
+                    Anterior
+                </button>
                 <button [ngClass]="{'no-ok btn-secondary' : calibradores.length == 0 || responsables.length == 0 , 
                                     'btn-success' : calibradores.length > 0 && responsables.length > 0 }" type="button"
                     (click)="next()" class="btn px-5 float-right">Siguiente</button>

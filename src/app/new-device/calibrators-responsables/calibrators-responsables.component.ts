@@ -189,4 +189,8 @@ export class CalibratorsResponsablesComponent implements OnInit, OnDestroy {
   public removeCalibrador(index : number){
     this.calibradores.splice(index,1);
   }
+
+  public back(){
+    this.nav.navigateWithPermission(['nuevo','detalles']);
+  }
 }
