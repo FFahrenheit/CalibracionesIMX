@@ -157,7 +157,7 @@ export class FilterModalComponent implements OnInit {
             filter = 'Siguiente hasta : ' + control;
             break;
           case 'periodo':
-            filter = 'Calibración cada ' + control + ' años';
+            filter = 'Calibración cada ' + control + ' meses';
             break;
           case 'id':
             filter = 'ID : ' + control;

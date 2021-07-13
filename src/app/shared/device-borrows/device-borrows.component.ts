@@ -72,6 +72,9 @@ export class DeviceBorrowsComponent implements OnInit {
     return IconsAlert.prestamo(estado);
   }
 
+  /***
+   * FIX FIX FIX
+   */
   public getDateType() : string{
     const today = new Date();
     const deadLine = new Date(this.device.ultima);
@@ -101,6 +104,9 @@ export class DeviceBorrowsComponent implements OnInit {
     return 'success';
   }
 
+  /**
+   * FIX FIX FIX
+   */
   public getDateValue() : number{
     const today = new Date();
     const deadLine = new Date(this.device.ultima);
