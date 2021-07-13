@@ -70,14 +70,17 @@
 
             <div class="col-md-5">
 
-                <h5 class="text-left">Calibradores</h5>
-                <span class="text-left"> Agregue calibradores del equipo</span>
+                <h5 class="text-left">Equipos calibradores</h5>
+                <span class="text-left">
+                    Agregue los equipos que se utilizan para la calibración
+                    del equipo  
+                </span>
 
 
                 <div class="mx-5 mt-3 row">
                     <div class="col-md-8">
                         <input formControlName="calibrador" [class]="getClass('calibrador')" class="form-control"
-                            type="text" placeholder="Nombre del calibrador">
+                            type="text" placeholder="Equipo calibrador">
                     </div>
                     <div class="col-md-4">
                         <button class="btn" (click)="addCalibrador()"
@@ -93,7 +96,7 @@
                         <thead>
                             <tr class="header">
                                 <th scope="col">
-                                    Calibrador
+                                    Equipo
                                 </th>
                                 <th scope="col">
                                     Acciones
@@ -106,7 +109,7 @@
                                     {{ c }}
                                 </td>
                                 <td>
-                                    <button title="Remover calibrador" class="btn btn-danger fas fa-trash-alt"
+                                    <button title="Remover equipo calibrador" class="btn btn-danger fas fa-trash-alt"
                                         (click)="removeCalibrador(i)">
                                     </button>
                                 </td>
@@ -115,7 +118,7 @@
                     </table>
                 </div>
                 <ng-template #empty_calibradores>
-                    <p class="my-3">Agregue al menos un calibrador</p>
+                    <p class="my-3">Agregue al menos un equipo calibrador</p>
                 </ng-template>
 
 
