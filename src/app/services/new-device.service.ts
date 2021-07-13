@@ -33,13 +33,13 @@ export class NewDeviceService {
           console.log(resp);
           if (resp['ok']) {
             this.id = resp['id'];
-            return this.upload.uploadCertificates(this.device.proveedores,this.id)
-                .subscribe(resp=>{
-                  return resp;
-                },error=>{
-                  return false;
-                });
-          }else{
+            return this.upload.uploadCertificates(this.device.proveedores, this.id)
+              .subscribe(resp => {
+                return resp;
+              }, error => {
+                return false;
+              });
+          } else {
             this.error = 'Error al crear';
             return false;
           }
@@ -91,20 +91,23 @@ export class NewDeviceService {
     return this.device.responsables?.length > 0;
   }
 
-  public getError(){
+  public getError() {
     return this.error;
   }
 
-  public getId(){
+  public getId() {
     return this.id;
   }
 
+  /***
+   * FIXED YEAR ADDITION
+   */
   public loadDevice() {
     let ultima = new Date(this.device.ultima);
     let periodo: number = parseInt(this.device.periodo);
 
-    let siguiente = ultima;
-    siguiente.setFullYear(ultima.getFullYear() + periodo);
+    let siguiente = this.addMonths(ultima, periodo);
+    // siguiente.setFullYear(ultima.getFullYear() + periodo);
     this.device.siguiente = siguiente;
 
     let aviso = siguiente;
@@ -150,24 +153,33 @@ export class NewDeviceService {
 
     const body = {
       type: device.tipo,
-      device : device,
-      proveedores : device._proveedores,
-      responsables : device._responsables,
-      verificadores : device.verificadores,
-      calibraciones : device._calibraciones,
+      device: device,
+      proveedores: device._proveedores,
+      responsables: device._responsables,
+      verificadores: device.verificadores,
+      calibraciones: device._calibraciones,
     }
 
     delete body.device.id;
     delete body.device.tipo;
     delete body.device._proveedores;
     delete body.device._responsables;
-    delete  body.device._calibraciones
+    delete body.device._calibraciones
     delete body.device.verificadores;
 
     return body;
   }
 
-  public reset(){
+  public reset() {
     this.device = null;
+  }
+
+  private addMonths(date, months) {
+    var d = date.getDate();
+    date.setMonth(date.getMonth() + +months);
+    if (date.getDate() != d) {
+      date.setDate(0);
+    }
+    return date;
   }
 }

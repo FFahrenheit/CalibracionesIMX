@@ -75,13 +75,16 @@ export class DeviceComponent implements OnInit {
     return IconsAlert.getStatus(this.device.estado);
   }
 
+  /***
+   * FIX FIX FIX
+   */
   public getDateType() : string{
     const today = new Date();
     const deadLine = new Date(this.device.ultima);
     let daysDiff = Number(today) - Number(deadLine);
     daysDiff = Math.ceil(daysDiff / (1000 * 60 * 60 * 24));
     
-    const periodo = this.device.periodo*365;
+    const periodo = Math.round(this.device.periodo*365/12);
 
     const daysLeft = periodo - daysDiff;
 
@@ -104,12 +107,15 @@ export class DeviceComponent implements OnInit {
     return 'success';
   }
 
+  /***
+   * FIX FIX FIX
+   */
   public getDateValue() : number{
     const today = new Date();
     const deadLine = new Date(this.device.ultima);
     let daysDiff = Number(today) - Number(deadLine);
     daysDiff = Math.ceil(daysDiff / (1000 * 60 * 60 * 24)); 
-    return daysDiff / (Number(this.device.periodo)*365) * 100;
+    return daysDiff / (Number(this.device.periodo)*365/12) * 100;
   }
 
   public getDays() : string {

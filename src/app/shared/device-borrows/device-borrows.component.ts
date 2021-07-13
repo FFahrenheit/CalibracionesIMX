@@ -81,7 +81,7 @@ export class DeviceBorrowsComponent implements OnInit {
     let daysDiff = Number(today) - Number(deadLine);
     daysDiff = Math.ceil(daysDiff / (1000 * 60 * 60 * 24));
     
-    const periodo = this.device.periodo*365;
+    const periodo = Math.round(this.device.periodo*365/12);
 
     const daysLeft = periodo - daysDiff;
 
@@ -112,7 +112,7 @@ export class DeviceBorrowsComponent implements OnInit {
     const deadLine = new Date(this.device.ultima);
     let daysDiff = Number(today) - Number(deadLine);
     daysDiff = Math.ceil(daysDiff / (1000 * 60 * 60 * 24)); 
-    return daysDiff / (Number(this.device.periodo)*365) * 100;
+    return daysDiff / (Number(this.device.periodo)*365/12) * 100;
   }
 
 }
