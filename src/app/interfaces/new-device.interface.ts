@@ -1,4 +1,5 @@
 export interface Device {
+    tipo? : string,
     id? : string 
     serie? : string,
     descripcion? : string,

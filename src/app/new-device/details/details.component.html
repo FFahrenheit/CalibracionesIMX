@@ -9,6 +9,20 @@
                 <h5 class="text-left">Detalles del equipo</h5>
 
                 <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">Tipo de dispositivo</label>
+                    <div class="col-md-8">
+                        <select formControlName="tipo" [class]="getClass('tipo')" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                            <option [value]='""' disabled selected>Seleccione el tipo de dispositivo</option>
+                            <option value="INT">Equipo (INT)</option>
+                            <option value="FIX">Fixture (FIX)</option>
+                            <option value="DUM">Dummy (DUM)</option>
+                        </select>
+                        <!-- <default-input #ubicacion placeholder="Ubicacion donde estará" [values]="ubicaciones" 
+                        (onType)="updateUbicacion($event)" [model]="defaultLocation"></default-input> -->
+                    </div>
+                </div>
+
+                <div class="form-group row pt-2 has-error has-feedback">
                     <label for="" class="col-md-4 col-form-label">Descripción</label>
                     <div class="col-md-8">
                         <input formControlName="descripcion" type="text" class="form-control" placeholder="Descripción del equipo" [class]="getClass('descripcion')">

@@ -149,6 +149,7 @@ export class NewDeviceService {
     console.log(device);
 
     const body = {
+      type: device.tipo,
       device : device,
       proveedores : device._proveedores,
       responsables : device._responsables,
@@ -157,6 +158,7 @@ export class NewDeviceService {
     }
 
     delete body.device.id;
+    delete body.device.tipo;
     delete body.device._proveedores;
     delete body.device._responsables;
     delete  body.device._calibraciones

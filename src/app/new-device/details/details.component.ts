@@ -38,6 +38,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     let saved = this.create.getDevice();
 
     this.form = this.fb.group({
+      tipo: [saved?.tipo || '', Validators.required],
       descripcion : [saved?.descripcion || '', Validators.required],
       serie : [saved?.serie || '', Validators.required],
       ubicacion : [saved?.ubicacion || '', Validators.required],
@@ -88,6 +89,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   private getForm() : Device{
     let device : Device = {
+      tipo: this.get('tipo').value,
       id : 'Nuevo',
       serie : this.get('serie').value,
       descripcion: this.get('descripcion').value,
