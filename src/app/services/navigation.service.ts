@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ export class NavigationService {
 
   private isLocked : boolean = true;
 
-  constructor() {
+  constructor(private router  : Router) {
     this.isLocked = true;
    }
 
@@ -23,5 +24,14 @@ export class NavigationService {
    public deactivate() : void{
      console.log('Not locked');
      this.isLocked = false;
+   }
+
+   public navigateWithPermission(route : string[]){
+     let lastState = this.isLocked;
+     this.isLocked = false;
+     this.router.navigate(route);
+     setTimeout(() => {
+       this.isLocked = lastState;
+     }, 1000);
    }
 }
