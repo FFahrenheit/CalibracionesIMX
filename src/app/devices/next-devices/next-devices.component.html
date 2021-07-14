@@ -81,10 +81,10 @@
                     {{ d.activo }}
                 </td>
                 <td> {{ d.ubicacion}} </td>
-                <td> {{ d.ultima | date:'shortDate' }} </td>
+                <td> {{ d.ultima | date:'shortDate':'UTC' }} </td>
                 <td>
                     <i [class]="icons.calibrado(d.siguiente)"></i>
-                    {{ d.siguiente | date:'shortDate' }}
+                    {{ d.siguiente | date:'shortDate':'UTC' }}
                 </td>
                 <td> {{ d.dias || 0 }} días</td>
             </tr>

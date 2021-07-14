@@ -82,7 +82,7 @@
                 <td> {{ d.ubicacion}} </td>
                 <td>
                     <i [class]="icons.calibrado(d.siguiente)"></i>
-                    {{ d.siguiente | date:'shortDate' }}
+                    {{ d.siguiente | date:'shortDate':'UTC' }}
                 </td>
                 <td>
                     {{ d.nombrePrestatario }}
