@@ -61,7 +61,7 @@
                     <h5 class="text-left subtitle-att"> Estado de calibración </h5>
                     <div class="row">
                         <div class="col-sm-2 pbar">
-                            <p>{{ device.ultima | date:'shortDate'}}</p>
+                            <p>{{ device.ultima | date:'shortDate':'UTC' }}</p>
                             <i class="far fa-calendar-check"></i>
                         </div>
                         <div class="col-sm-8">
@@ -71,7 +71,7 @@
                             </ngb-progressbar>
                         </div>
                         <div class="col-sm-2 pbar">
-                            <p>{{ device.siguiente | date:'shortDate' }}</p>
+                            <p>{{ device.siguiente | date:'shortDate':'UTC' }}</p>
                             <i class="far fa-calendar-times"></i>
                         </div>
                     </div>

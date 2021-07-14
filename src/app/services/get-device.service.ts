@@ -26,9 +26,9 @@ export class GetDeviceService {
                   console.log(resp);
                   if(resp['ok']){
                     this.device = resp['equipo'];
-                    this.device.siguiente = this.device.siguiente.split('T')[0];
-                    this.device.aviso = this.device.aviso.split('T')[0];
-                    this.device.ultima = this.device.ultima.split('T')[0];
+                    // this.device.siguiente = this.device.siguiente.split('T')[0];
+                    // this.device.aviso = this.device.aviso.split('T')[0];
+                    // this.device.ultima = this.device.ultima.split('T')[0];
                     
                     return true;
                   }
