@@ -146,6 +146,12 @@
                     <label for="certificate">Suba el Certificado de Calibración en formato PDF</label>
                     <input type="file" class="form-control file-input" [required]="form.controls['hasCertificate'].value"
                     (change) = "certificateEvent($event)"id="certificate" formControlName="certificate">
+                    <span *ngIf="certificate">
+                        <span class="adj">
+                            Archivo adjunto:
+                        </span> 
+                        {{ certificate.name }}
+                    </span>
                 </div>
     
                 <div class="form-check my-2" (click)="goDown()">
@@ -160,6 +166,12 @@
                     <label for="ryr">Suba el PDF o Excel de las Pruebas RYR</label>
                     <input type="file" class="form-control file-input" id="ryr"
                     (change)="ryrEvent($event)" formControlName="ryr" [required]="form.controls['hasRyr'].value">
+                    <span *ngIf="ryr">
+                        <span class="adj">
+                            Archivo adjunto:
+                        </span>
+                        {{ ryr.name }}
+                    </span>
                 </div>
 
                 <button [ngClass]="{'no-ok btn-secondary': !form.valid || needsEvidence() , 'btn-success' : form.valid && !needsEvidence()}" type="button" (click)="next()" class="btn px-5 float-right">Siguiente</button>

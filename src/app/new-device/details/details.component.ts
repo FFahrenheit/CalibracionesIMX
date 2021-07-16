@@ -25,8 +25,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
   public ubicaciones = [];
   public defaultLocation = '';
 
-  private ryr;
-  private certificate;
+  public ryr;
+  public certificate;
 
   constructor(private fb            : FormBuilder,
               private alert         : AlertService,
@@ -56,9 +56,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
       estado : [saved?.estado || '', Validators.required],
       hasRyr: [saved?.ryr == null ? false : true || false],
       hasCertificate: [saved?.certificate == null ? false : true || false],
-      ryr: [saved?.ryr == null ? '' : saved?.ryr.name || ''],
-      certificate: [saved?.certificate == null ? '' : saved?.certificate.name || ''],
+      ryr: [ saved?.ryr == null ? '' : saved?.ryr.name || ''],
+      certificate: [ saved?.certificate == null ? '' : saved?.certificate.name ||  ''],
     });
+    
 
     this.certificate = saved?.certificate || null;
     this.ryr = saved?.ryr || null;
@@ -203,4 +204,5 @@ export class DetailsComponent implements OnInit, OnDestroy {
       window.scrollTo(0, document.body.scrollHeight);
     }, 1);
   }
+
 }
