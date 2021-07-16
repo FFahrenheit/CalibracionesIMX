@@ -33,7 +33,9 @@ export class AlertService {
 
     // main alert method    
     alert(alert: Alert) {
-        window.scroll(0,0);
+        setTimeout(() => {
+            window.scroll(0,0);            
+        }, 2);
         alert.id = alert.id || this.defaultId;
         this.subject.next(alert);
     }

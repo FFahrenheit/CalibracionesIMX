@@ -20,7 +20,9 @@ export interface Device {
     activo ? : string,
     _responsables ? : Responsable[],
     _proveedores ? : _Proveedor[],
-    _calibraciones ? :Calibracion[]
+    _calibraciones ? :Calibracion[],
+    certificate ? : File,
+    ryr ? : File
 }
 
 export interface _Responsable{

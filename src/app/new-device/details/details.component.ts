@@ -25,6 +25,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
   public ubicaciones = [];
   public defaultLocation = '';
 
+  private ryr;
+  private certificate;
+
   constructor(private fb            : FormBuilder,
               private alert         : AlertService,
               private router        : Router,
@@ -50,7 +53,34 @@ export class DetailsComponent implements OnInit, OnDestroy {
       fechaCalibracion : [saved?.calibraciones[0]?.fecha || '',Validators.required],
       calibradorCalibracion : [saved?.calibraciones[0]?.calibrador || '', Validators.required],
       activo : [saved?.activo || '', Validators.required],    //MUST BE ''
-      estado : [saved?.estado || '', Validators.required]
+      estado : [saved?.estado || '', Validators.required],
+      hasRyr: [saved?.ryr == null ? false : true || false],
+      hasCertificate: [saved?.certificate == null ? false : true || false],
+      ryr: [saved?.ryr == null ? '' : saved?.ryr.name || ''],
+      certificate: [saved?.certificate == null ? '' : saved?.certificate.name || ''],
+    });
+
+    this.certificate = saved?.certificate || null;
+    this.ryr = saved?.ryr || null;
+
+    this.get('hasRyr').valueChanges.subscribe(value=>{
+      if(!value){
+        this.get('ryr').clearValidators();
+        this.get('ryr').setValue('');
+        this.ryr = null;
+      }else{
+        this.get('ryr').setValidators([Validators.required]);
+      }
+    });
+
+    this.get('hasCertificate').valueChanges.subscribe(value=>{
+      if(!value){
+        this.get('certificate').clearValidators();
+        this.get('certificate').setValue('');
+        this.certificate = null;
+      }else{
+        this.get('certificate').setValidators([Validators.required]);
+      }
     });
 
     this.defaultLocation = saved?.ubicacion || '';
@@ -88,6 +118,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   private getForm() : Device{
+    let ryr = this.get('hasRyr').value ? this.ryr : null;
+    let certificate = this.get('hasCertificate').value ? this.certificate : null;
+
     let device : Device = {
       tipo: this.get('tipo').value,
       id : 'Nuevo',
@@ -101,7 +134,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
       resSup: this.getValue('resSup'),
       ultima: this.get('fechaCalibracion').value,
       activo: this.get('activo').value,
-      estado: this.get('estado').value
+      estado: this.get('estado').value,
+      ryr: ryr,
+      certificate : certificate,
     };
 
     return device;
@@ -124,14 +159,48 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   public next(){
     this.form.markAllAsTouched();
-    if(this.form.valid){
+    if(this.form.valid && !this.needsEvidence()){
       this.ngOnDestroy();
     }else{
+      console.log(this.form);
       this.alert.warn('Complete los campos necesarios');
     }
   }
 
   public updateUbicacion(value : string){
     this.form.controls['ubicacion'].setValue(value);
+  }
+
+  ryrEvent($event){
+    if($event.target.files.length > 0) {
+      this.ryr = $event.target.files[0];
+    }
+  }
+
+  certificateEvent($event){
+    if($event.target.files.length > 0) {
+      this.certificate = $event.target.files[0]
+    }
+  }
+
+  needsEvidence() {
+    let status = false;
+    if (!this.form.controls['hasRyr'].value && !this.form.controls['hasCertificate'].value) {
+      return false;
+    }
+    if (this.form.controls['hasCertificate'].value && this.form.controls['certificate'].value == '') {
+      status = true;
+    }
+    // console.log([this.form.controls['hasCertificate'].value, this.form.controls['certificate'].value == ''])
+    if (this.form.controls['hasRyr'].value && this.form.controls['ryr'].value == '') {
+      status = true;
+    }
+    return status;
+  }
+
+  goDown() {
+    setTimeout(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+    }, 1);
   }
 }
