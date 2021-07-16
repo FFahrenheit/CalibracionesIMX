@@ -69,7 +69,9 @@ export class CalibratorsResponsablesComponent implements OnInit {
       this.responsables.push(resp);
     });
 
-    this.verificadores = device?.verificadores.map( v => v.nombre);
+    if(device?.verificadores?.length > 0){
+      this.verificadores = device?.verificadores?.map( d => d.nombre);
+    }  
   }
 
   ngOnDestroy(){

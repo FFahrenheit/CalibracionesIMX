@@ -66,7 +66,10 @@ export class CalibratorsResponsablesComponent implements OnInit, OnDestroy {
       this.responsables.push(resp);
     });
 
-    this.calibradores = device?.verificadores.map( d => d.nombre);
+    if(device?.verificadores?.length > 0){
+      this.calibradores = device?.verificadores?.map( d => d.nombre);
+    }
+    
   }
 
   ngOnDestroy(){
