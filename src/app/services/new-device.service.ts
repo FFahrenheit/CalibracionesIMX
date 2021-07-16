@@ -33,7 +33,12 @@ export class NewDeviceService {
           console.log(resp);
           if (resp['ok']) {
             this.id = resp['id'];
-            return this.upload.uploadCertificates(this.device.proveedores, this.id)
+            let calibrationId = resp['calibrationId'];
+            console.log( { id: this.id, calibrationId });
+
+            return this.upload.uploadFiles(
+              this.id, calibrationId
+              ,this.device.certificate, this.device.ryr)
               .subscribe(resp => {
                 return resp;
               }, error => {
@@ -166,6 +171,8 @@ export class NewDeviceService {
     delete body.device._responsables;
     delete body.device._calibraciones
     delete body.device.verificadores;
+    delete body.device.ryr;
+    delete body.device.certificate;
 
     return body;
   }
