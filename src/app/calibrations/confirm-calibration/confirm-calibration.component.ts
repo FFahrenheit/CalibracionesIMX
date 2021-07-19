@@ -160,4 +160,14 @@ export class ConfirmCalibrationComponent implements OnInit {
     }
     return this.form.controls[ctrl].valid ? 'is-valid' : 'is-invalid';
   }
+
+  getReasons(){
+    if(this.form.controls['fecha'].valid){
+      return this.reasons;
+    }else{
+      let reasons = this.reasons;
+      reasons.push('Agregue la fecha de calibrado');
+      return reasons;
+    }
+  }
 }
