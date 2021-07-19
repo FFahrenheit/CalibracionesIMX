@@ -11,21 +11,24 @@
                 <div class="form-group row pt-2 has-error has-feedback">
                     <label for="" class="col-md-4 col-form-label">Descripción</label>
                     <div class="col-md-8">
-                        <input formControlName="descripcion" type="text" class="form-control" placeholder="Descripción del equipo" [class]="getClass('descripcion')">
+                        <input formControlName="descripcion" type="text" class="form-control"
+                            placeholder="Descripción del equipo" [class]="getClass('descripcion')">
                     </div>
                 </div>
 
                 <div class="form-group row pt-2 has-error has-feedback">
                     <label for="" class="col-md-4 col-form-label">No. de serie</label>
                     <div class="col-md-8">
-                        <input formControlName="serie" type="text" class="form-control" placeholder="Numero de serie" [class]="getClass('serie')">
+                        <input formControlName="serie" type="text" class="form-control" placeholder="Numero de serie"
+                            [class]="getClass('serie')">
                     </div>
                 </div>
 
                 <div class="form-group row pt-2 has-error has-feedback">
                     <label for="" class="col-md-4 col-form-label">Ubicación</label>
                     <div class="col-md-8">
-                        <select formControlName="ubicacion" [class]="getClass('ubicacion')" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                        <select formControlName="ubicacion" [class]="getClass('ubicacion')"
+                            class="custom-select mb-2 mr-sm-2 mb-sm-0">
                             <option [value]='""' disabled selected>Ubicación donde estará</option>
                             <option *ngFor="let u of _ubicaciones" [value]="u"> {{ u }} </option>
                         </select>
@@ -37,7 +40,8 @@
                 <div class="form-group row pt-2 has-error has-feedback">
                     <label for="" class="col-md-4 col-form-label">Estado del dispositivo</label>
                     <div class="col-md-8">
-                        <select formControlName="activo" [class]="getClass('activo')" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                        <select formControlName="activo" [class]="getClass('activo')"
+                            class="custom-select mb-2 mr-sm-2 mb-sm-0">
                             <option [value]='""' disabled selected>Estado actual</option>
                             <option *ngFor="let a of activos" [value]="a"> {{ a }}</option>
                         </select>
@@ -48,17 +52,20 @@
                     <label for="" class="col-md-4 col-form-label">Margen de error</label>
                     <span class="col-md-1 more-less"> ± </span>
                     <div class="col-md-7">
-                        <input formControlName="error" type="text" class="form-control" placeholder="Error (deje vacío si no aplica)" [class]="getClass('error')">
+                        <input formControlName="error" type="text" class="form-control"
+                            placeholder="Error (deje vacío si no aplica)" [class]="getClass('error')">
                     </div>
                 </div>
 
                 <div class="form-group row pt-2 has-error has-feedback">
                     <label for="" class="col-md-4 col-form-label">Resolucion</label>
                     <div class="col-md-4">
-                        <input formControlName="resInf" type="text" class="form-control" placeholder="Limite inferior" [class]="getClass('resInf')">
+                        <input formControlName="resInf" type="text" class="form-control" placeholder="Limite inferior"
+                            [class]="getClass('resInf')">
                     </div>
                     <div class="col-md-4">
-                        <input formControlName="resSup" type="text" class="form-control" placeholder="Limite superior" [class]="getClass('resSup')">
+                        <input formControlName="resSup" type="text" class="form-control" placeholder="Limite superior"
+                            [class]="getClass('resSup')">
                     </div>
                 </div>
 
@@ -72,15 +79,15 @@
                     <legend class="col-form-label col-md-4 pt-0">Tipo de calibración</legend>
                     <div class="col-md-8">
                         <div class="form-check">
-                            <input formControlName="calibracion" class="form-check-input" type="radio" name="calibracion" id="c1"
-                                value="INTERNO">
+                            <input formControlName="calibracion" class="form-check-input" type="radio"
+                                name="calibracion" id="c1" value="INTERNO">
                             <label class="form-check-label" for="c1">
                                 Interna
                             </label>
                         </div>
                         <div class="form-check">
-                            <input formControlName="calibracion" class="form-check-input" type="radio" name="calibracion" id="c2"
-                                value="EXTERNO">
+                            <input formControlName="calibracion" class="form-check-input" type="radio"
+                                name="calibracion" id="c2" value="EXTERNO">
                             <label class="form-check-label" for="c2">
                                 Externa
                             </label>
@@ -89,23 +96,30 @@
                 </div>
 
                 <div class="form-group row pt-2 has-error has-feedback">
-                    <label for="" class="col-md-6 col-form-label">Periodo de calibración (meses)</label>
+                    <label for="" class="col-md-6 col-form-label">Periodo de calibración
+                        <span class="adj">
+                            en meses
+                        </span>
+                    </label>
                     <div class="col-md-6">
-                        <input formControlName="periodo" type="number" class="form-control" placeholder="Cada cuánto tiempo se calibra" [class]="getClass('periodo')">
+                        <input formControlName="periodo" type="number" class="form-control"
+                            placeholder="Cada cuánto tiempo se calibra" [class]="getClass('periodo')">
                     </div>
                 </div>
 
                 <div class="form-group row pt-2 has-error has-feedback">
                     <label for="" class="col-md-4 col-form-label">Estado de calibracion</label>
                     <div class="col-md-8">
-                        <select formControlName="estado" [class]="getClass('estado')" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                        <select formControlName="estado" [class]="getClass('estado')"
+                            class="custom-select mb-2 mr-sm-2 mb-sm-0">
                             <option [value]='""' disabled selected>Estado actual</option>
                             <option *ngFor="let e of estados" [value]="e"> {{ e }}</option>
                         </select>
                     </div>
                 </div>
 
-                <button [ngClass]="{'no-ok btn-secondary' : !form.valid , 'btn-success' : form.valid }" type="button" (click)="next()" class="btn px-5 float-right">Siguiente</button>
+                <button [ngClass]="{'no-ok btn-secondary' : !form.valid , 'btn-success' : form.valid }" type="button"
+                    (click)="next()" class="btn px-5 float-right">Siguiente</button>
 
             </div>
 
