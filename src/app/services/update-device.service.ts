@@ -17,6 +17,8 @@ export class UpdateDeviceService {
   constructor(private http: HttpClient) { }
 
   public acceptCalibration(equipo : string, calibrador = 'N/I', fecha = new Date()){
+    let offset = fecha.getTimezoneOffset() * 60000;
+    fecha = new Date(fecha.getTime() + offset);
     const data = {
       equipo,
       fecha,

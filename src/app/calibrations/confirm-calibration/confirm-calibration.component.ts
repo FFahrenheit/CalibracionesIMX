@@ -1,5 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UpdateDeviceService } from 'src/app/services/update-device.service';
 import { AlertService } from 'src/app/shared/alert';
@@ -23,7 +24,8 @@ export class ConfirmCalibrationComponent implements OnInit {
     private status: UpdateDeviceService,
     private alert: AlertService,
     private router: Router,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -31,6 +33,7 @@ export class ConfirmCalibrationComponent implements OnInit {
     });
 
     this.form = this.fb.group({
+      fecha: [this.datePipe.transform(new Date(),'yyyy-MM-dd'), Validators.required],
       calibrador: [''],
       hasRyr: [false],
       hasCertificate: [false],
@@ -70,7 +73,7 @@ export class ConfirmCalibrationComponent implements OnInit {
     let fileCount = this.form.controls['hasRyr'].value + this.form.controls['hasCertificate'].value;
     console.log('File count : ' + fileCount);
     let myCount = 0;
-    this.status.acceptCalibration(this.id, calibrador).subscribe(
+    this.status.acceptCalibration(this.id, calibrador, new Date(this.form.controls['fecha'].value)).subscribe(
       resp => {
         if (resp) {
           if (this.form.controls['hasRyr'].value) {
@@ -149,5 +152,12 @@ export class ConfirmCalibrationComponent implements OnInit {
     setTimeout(() => {
       window.scrollTo(0, document.body.scrollHeight);
     }, 1);
+  }
+
+  public getClass(ctrl : string) : string{
+    if(!this.form.controls[ctrl].touched){
+      return '';
+    }
+    return this.form.controls[ctrl].valid ? 'is-valid' : 'is-invalid';
   }
 }
