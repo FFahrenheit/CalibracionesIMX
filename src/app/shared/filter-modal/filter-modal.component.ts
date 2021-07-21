@@ -46,6 +46,7 @@ export class FilterModalComponent implements OnInit {
 
     this.filterForm = this.fb.group({
       id: [saved?.id || ''],
+      tipo: [saved?.tipo || ''],
       serie: [saved?.serie || ''],
       descripcion: [saved?.descripcion || ''],
       estado: [saved?.estado || null],
@@ -115,6 +116,11 @@ export class FilterModalComponent implements OnInit {
   private  getValues(){
     let filterObject : any = {};
     this.filters = [];
+    const tipos = {
+      'INT' : 'Equipo',
+      'FIX' : 'Fixture',
+      'DUM-' : 'Dummy'
+    };
 
     Object.keys(this.filterForm.controls).forEach(key=>{
       let control = this.filterForm.controls[key].value;
@@ -126,6 +132,9 @@ export class FilterModalComponent implements OnInit {
         let filter;
 
         switch(key){
+          case 'tipo':
+            filter = 'Tipo : ' + tipos[control];
+            break;
           case 'prestado':
             filter = control == 'IS NULL' ? 'Disponible para préstamo' : 'Prestado';
             break;

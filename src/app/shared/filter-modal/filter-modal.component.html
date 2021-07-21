@@ -40,6 +40,20 @@
                     </div>
                 </div>
 
+                <div class="form-group row pt-0 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">Tipo</label>
+                    <div class="col-md-8">
+                        <select formControlName="tipo" [class]="getClass('tipo')"
+                            class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                            <option [value]='""' disabled selected>Tipo de dispositivo</option>
+                            <option value="INT">Equipo (INT)</option>
+                            <option value="DUM-">Dummy (DUM)</option>
+                            <option value="FIX">Fixture (FIX)</option>
+                            <option [value]='""'></option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="form-group row pt-0" *ngIf="blocked.includes('disponible')">
                     <label for="" class="col-md-4 col-form-label has-error has-feedback">Prestatario</label>
                     <div class="col-md-8">
