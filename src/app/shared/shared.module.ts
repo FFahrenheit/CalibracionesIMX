@@ -18,6 +18,7 @@ import { DeviceBorrowsComponent } from './device-borrows/device-borrows.componen
 import { UserInputComponent } from './user-input/user-input.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { DefaultInputComponent } from './default-input/default-input.component';
+import { DeviceOptionsComponent } from './device-options/device-options.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { DefaultInputComponent } from './default-input/default-input.component';
     UserInputComponent,
     ProfileViewComponent,
     DefaultInputComponent,
+    DeviceOptionsComponent,
   ],
   imports: [
     CommonModule,

@@ -1,17 +1,16 @@
 <div *ngIf="exists; else not_found" class="card my-3 pb-3">
     <div class="container text-center pt-1">
         <div class="row ml-1">
-            <h4 class="text-left my-3">
-                <i *ngIf="canHide" title="Mostrar / ocultar" [ngClass]="{'fa-chevron-down':!show,'fa-chevron-up':show}"
-                    class="fas hide-button" (click)="show = !show"></i>
-                {{ title }} {{ device['descripcion'] || '' }} - {{ id }}
-            </h4>
-            <!-- <div class="col-md-8">
-                <h4 class="text-left my-3"> {{ title }} {{ id }}</h4>
+            <div class="col-md-8">
+                <h4 class="text-left my-3">
+                    <i *ngIf="canHide" title="Mostrar / ocultar" [ngClass]="{'fa-chevron-down':!show,'fa-chevron-up':show}"
+                        class="fas hide-button" (click)="show = !show"></i>
+                    {{ title }} {{ device['descripcion'] || '' }} - {{ id }}
+                </h4>
             </div>
-            <div class="col-md-4 text-right">
-                <waiver-actions [wr]="wr"></waiver-actions>
-            </div> -->
+            <div class="col-md-4 text-right pt-3 px-0">
+                <device-options [device]="device"></device-options>
+            </div>
         </div>
 
         <div class="row justify-content-center" *ngIf="show">
@@ -68,7 +67,7 @@
                     <h6 class="text-left subtitle-att">Equipos que se utilizan para calibración</h6>
                     <ul class="dot-list" *ngIf="device.verificadores.length > 0;else empty_calibradores">
                         <li *ngFor="let c of device.verificadores">
-                            <a *ngIf="c.nombre.startsWith('INT'); else just_name" title="Consultar equipo"
+                            <a *ngIf="c.nombre.startsWith('INT') || c.nombre.startsWith('DUM-')|| c.nombre.startsWith('FIX'); else just_name" title="Consultar equipo"
                                 [href]="'/equipos/detalles/' + c.nombre" target="_blank" class="black-link">
                                 {{ c.nombre }}
                                 <i class="fas fa-external-link-alt"></i>

@@ -1,0 +1,15 @@
+<div ngbDropdown class="" *ngIf="loaded">
+    <button class="btn btn-light options" id="dropdownBasic1" ngbDropdownToggle>
+        <span class="signed-user">
+            <i class="fas fa-tasks mr-3"></i> Acciones disponibles
+        </span>
+    </button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button *ngFor="let action of actions" 
+        ngbDropdownItem (click)="goTo(action.link)"
+        [ngClass]="{ 'clicked' : currentRoute.toString() == action.link.toString()}">
+            <i [class]="action.icon" class="pr-1"></i> 
+            {{ action.action }}
+        </button>
+    </div>
+</div>
