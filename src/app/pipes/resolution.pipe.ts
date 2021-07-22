@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ResolutionPipe implements PipeTransform {
 
   transform(value: string, ...args: string[]): string {
-    if(value != 'N/A'){
+    if(value.toUpperCase() != 'N/A' && value.toUpperCase() != 'NA'){
       return value + ' - ' + args[0]
     }
     return value;
