@@ -145,10 +145,10 @@
                                 <th scope="col" class="align-middle">
                                     Verif. de etiqueta
                                 </th>
-                                <th scope="col" class="align-middle">
+                                <th scope="col" class="align-middle" *ngIf="!isDummy()">
                                     RYR
                                 </th>
-                                <th scope="col" class="align-middle">
+                                <th scope="col" class="align-middle" *ngIf="!isDummy()">
                                     Certificado
                                 </th>
                             </tr>
@@ -166,7 +166,7 @@
                                 <td>
                                     Ok
                                 </td>
-                                <td>
+                                <td *ngIf="!isDummy()">
                                     <a *ngIf="c.ryr != null; else just_ryr" title="Ver pruebas RYR"
                                         [href]="downloadFile(c.ryr)" target="_blank" class="black-link attach">
                                         <i class="fas fa-file-download"></i>
@@ -180,7 +180,7 @@
                                         </ng-template>
                                     </ng-template>
                                 </td>
-                                <td>
+                                <td *ngIf="!isDummy()">
                                     <a *ngIf="c.certificado != null; else just_ok" title="Ver certificado"
                                         [href]="downloadFile(c.certificado)" target="_blank" class="black-link attach">
                                         <i class="fas fa-file-download"></i>

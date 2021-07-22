@@ -18,38 +18,42 @@
             <div class="form-group row">
                 <label for="" class="col-md-5 col-form-label has-error has-feedback">Fecha de calibración</label>
                 <div class="col-md-7">
-                    <input [class]="getClass('fecha')" formControlName="fecha" 
-                    class="form-control date-short" type="date">
+                    <input [class]="getClass('fecha')" formControlName="fecha" class="form-control date-short"
+                        type="date">
                 </div>
             </div>
 
-            <div class="form-check my-2" (click)="goDown()">
-                <input formControlName="hasCertificate" class="form-check-input" type="checkbox" id="hasCertificate">
-                <label class="form-check-label label-attach" for="hasCertificate">
-                    Adjuntar Certificado de Calibración
-                </label>
+            <div *ngIf="!isDummy()">
+                <div class="form-check my-2" (click)="goDown()">
+                    <input formControlName="hasCertificate" class="form-check-input" type="checkbox"
+                        id="hasCertificate">
+                    <label class="form-check-label label-attach" for="hasCertificate">
+                        Adjuntar Certificado de Calibración
+                    </label>
+                </div>
+
+                <div class="form-group" *ngIf="form.controls['hasCertificate'].value"
+                    [ngClass]="{'was-validated': form.controls['certificate'].touched}">
+                    <label for="certificate">Suba el Certificado de Calibración en formato PDF</label>
+                    <input type="file" required class="form-control file-input" (change)="certificateEvent($event)"
+                        id="certificate" formControlName="certificate">
+                </div>
+
+                <div class="form-check my-2" (click)="goDown()">
+                    <input formControlName="hasRyr" class="form-check-input" type="checkbox" id="hasRyr">
+                    <label class="form-check-label label-attach" for="hasRyr">
+                        Adjuntar Pruebas RYR
+                    </label>
+                </div>
+
+                <div class="form-group" *ngIf="form.controls['hasRyr'].value"
+                    [ngClass]="{'was-validated': form.controls['ryr'].touched}">
+                    <label for="ryr">Suba el PDF o Excel de las Pruebas RYR</label>
+                    <input type="file" class="form-control file-input" id="ryr" (change)="ryrEvent($event)"
+                        formControlName="ryr" required>
+                </div>
             </div>
 
-            <div class="form-group" *ngIf="form.controls['hasCertificate'].value"
-            [ngClass]="{'was-validated': form.controls['certificate'].touched}">
-                <label for="certificate">Suba el Certificado de Calibración en formato PDF</label>
-                <input type="file" required class="form-control file-input" 
-                (change) = "certificateEvent($event)"id="certificate" formControlName="certificate">
-            </div>
-
-            <div class="form-check my-2" (click)="goDown()">
-                <input formControlName="hasRyr" class="form-check-input" type="checkbox" id="hasRyr">
-                <label class="form-check-label label-attach" for="hasRyr">
-                    Adjuntar Pruebas RYR
-                </label>
-            </div>
-
-            <div class="form-group" *ngIf="form.controls['hasRyr'].value"
-            [ngClass]="{'was-validated': form.controls['ryr'].touched}">
-                <label for="ryr">Suba el PDF o Excel de las Pruebas RYR</label>
-                <input type="file" class="form-control file-input" id="ryr" 
-                (change)="ryrEvent($event)" formControlName="ryr" required>
-            </div>
         </form>
     </div>
 
@@ -60,8 +64,9 @@
 
         <div class="col-md-6">
             <confirm-calibration-modal (accept)="confirmCalibration()" myClass="px-5 m-3 float-left"
-                title="Confirmar calibración" trigger="Marcar Calibración Vigente" 
-                [isDisabled]="needsEvidence() || !form.valid" [reason]="getReasons()" (triggered)="form.markAllAsTouched()">
+                title="Confirmar calibración" trigger="Marcar Calibración Vigente"
+                [isDisabled]="needsEvidence() || !form.valid" [reason]="getReasons()"
+                (triggered)="form.markAllAsTouched()">
             </confirm-calibration-modal>
         </div>
     </div>

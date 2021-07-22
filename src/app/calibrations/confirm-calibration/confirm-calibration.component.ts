@@ -170,4 +170,8 @@ export class ConfirmCalibrationComponent implements OnInit {
       return reasons;
     }
   }
+
+  public isDummy() : boolean{
+    return this.device?.id.startsWith('DUM-');
+  }
 }

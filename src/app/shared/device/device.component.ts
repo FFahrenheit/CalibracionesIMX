@@ -160,4 +160,8 @@ export class DeviceComponent implements OnInit {
     }
   }
 
+  public isDummy() : boolean{
+    return this.device?.id.startsWith('DUM-');
+  }
+  
 }
