@@ -19,6 +19,9 @@
 
     <span class="text-left float-left mt-0 mb-1">
         Se muestran los equipos con calibraciones próximas hasta dentro de 30 días.<br>
+    </span>
+
+    <span class="text-left float-left mt-0 mb-1" *ngIf="devices?.length!=0">
         Haga click en la fila para empezar proceso de calibración o marcar como pendiente
     </span>
 
