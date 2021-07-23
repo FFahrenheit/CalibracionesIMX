@@ -3,8 +3,9 @@
         <div class="row ml-1">
             <div class="col-md-8">
                 <h4 class="text-left my-3">
-                    <i *ngIf="canHide" title="Mostrar / ocultar" [ngClass]="{'fa-chevron-down':!show,'fa-chevron-up':show}"
-                        class="fas hide-button" (click)="show = !show"></i>
+                    <i *ngIf="canHide" title="Mostrar / ocultar"
+                        [ngClass]="{'fa-chevron-down':!show,'fa-chevron-up':show}" class="fas hide-button"
+                        (click)="show = !show"></i>
                     {{ title }} {{ device['descripcion'] || '' }} - {{ id }}
                 </h4>
             </div>
@@ -67,8 +68,9 @@
                     <h6 class="text-left subtitle-att">Equipos que se utilizan para calibración</h6>
                     <ul class="dot-list" *ngIf="device.verificadores.length > 0;else empty_calibradores">
                         <li *ngFor="let c of device.verificadores">
-                            <a *ngIf="c.nombre.startsWith('INT') || c.nombre.startsWith('DUM-')|| c.nombre.startsWith('FIX'); else just_name" title="Consultar equipo"
-                                [href]="'/equipos/detalles/' + c.nombre" target="_blank" class="black-link">
+                            <a *ngIf="c.nombre.startsWith('INT') || c.nombre.startsWith('DUM-')|| c.nombre.startsWith('FIX'); else just_name"
+                                title="Consultar equipo" [href]="'/equipos/detalles/' + c.nombre" target="_blank"
+                                class="black-link">
                                 {{ c.nombre }}
                                 <i class="fas fa-external-link-alt"></i>
                             </a>
@@ -146,15 +148,20 @@
                                     Verif. de etiqueta
                                 </th>
                                 <th scope="col" class="align-middle" *ngIf="!isDummy()">
-                                    RYR
+                                    R&R
                                 </th>
                                 <th scope="col" class="align-middle" *ngIf="!isDummy()">
-                                    Certificado
+                                    <span *ngIf="device.calibracion == 'INTERNO';else certificado">
+                                        Validación interna
+                                    </span>
+                                    <ng-template #certificado>
+                                        Certficado
+                                    </ng-template>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let c of device.calibraciones">
+                            <tr *ngFor="let c of device.calibraciones; let i = index">
                                 <td>
                                     {{ c.fecha| date:'mediumDate':'UTC' }}
                                     <!-- {{ c.fecha| date:'shortTime' }} -->
@@ -167,9 +174,9 @@
                                     Ok
                                 </td>
                                 <td *ngIf="!isDummy()">
-                                    <a *ngIf="c.ryr != null; else just_ryr" title="Ver pruebas RYR"
+                                    <a *ngIf="c.ryr != null; else just_ryr" title="Ver pruebas R&R"
                                         [href]="downloadFile(c.ryr)" target="_blank" class="black-link attach">
-                                        <i class="fas fa-file-download"></i>
+                                        <i class="fas fa-file-excel"></i>
                                     </a>
                                     <ng-template #just_ryr>
                                         <div *ngIf="!device.ryr; else to_upload_ryr">
@@ -181,9 +188,13 @@
                                     </ng-template>
                                 </td>
                                 <td *ngIf="!isDummy()">
-                                    <a *ngIf="c.certificado != null; else just_ok" title="Ver certificado"
+                                    <a *ngIf="c.certificado != null; else just_ok" 
+                                    [title]=" isCertificate(i) || device.calibracion != 'INTERNO' ? 'Ver certificado' : 'Ver validación interna'"
                                         [href]="downloadFile(c.certificado)" target="_blank" class="black-link attach">
-                                        <i class="fas fa-file-download"></i>
+                                        <i class="fas fa-file-contract" *ngIf="isCertificate(i); else normal_file"></i>
+                                        <ng-template #normal_file>
+                                            <i class="fas fa-file-download"></i>
+                                        </ng-template>
                                     </a>
                                     <ng-template #just_ok>
                                         <div *ngIf="!device.certificate; else to_upload_certificate">
@@ -204,32 +215,6 @@
                     </ng-template>
                 </div>
 
-                <!-- <div class="mb-3">
-                    <h6 class="text-left subtitle-att">Proveedores de calibración</h6>
-                    <ul class="dot-list" *ngIf="device.proveedores.length > 0;else empty_proveedores">
-                        <li *ngFor="let p of device.proveedores">
-                            <div *ngIf="p.certificado;else just_name_p" title="Ver certificado ISO17025">
-                                <a *ngIf="p.id; else not_uploaded" [href]="seeCertificate(p.certificado, p.id)"
-                                    target="_blank" class="black-link">
-                                    {{ p.nombre }}
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                                <ng-template #not_uploaded>
-                                    <span class="black-link no-cursor">
-                                        {{ p.nombre }}
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </span>
-                                </ng-template>
-                            </div>
-                            <ng-template #just_name_p>
-                                {{ p.nombre }}
-                            </ng-template>
-                        </li>
-                    </ul>
-                    <ng-template #empty_proveedores>
-                        <span class="empty text"> No hay información de los proveedores de calibración</span>
-                    </ng-template>
-                </div> -->
             </div>
         </div>
     </div>

@@ -163,5 +163,9 @@ export class DeviceComponent implements OnInit {
   public isDummy() : boolean{
     return this.device?.id.startsWith('DUM-');
   }
+
+  isCertificate(i : number) : boolean{
+    return this.device?.calibracion == 'INTERNO' && this.device?.calibraciones.length == (i + 1);
+  }
   
 }
