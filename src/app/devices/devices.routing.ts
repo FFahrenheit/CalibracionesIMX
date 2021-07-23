@@ -2,6 +2,7 @@ import { Routes } from "@angular/router";
 import { AdminGuard } from "../guards/admin.guard";
 import { LenderGuard } from "../guards/lender.guard";
 import { AdminDevicesComponent } from "./admin-devices/admin-devices.component";
+import { AttachmentDevicesComponent } from "./attachment-devices/attachment-devices.component";
 import { BorrowDevicesComponent } from "./borrow-devices/borrow-devices.component";
 import { BorrowedDevicesComponent } from "./borrowed-devices/borrowed-devices.component";
 import { DevicesListComponent } from "./devices-list/devices-list.component";
@@ -29,6 +30,13 @@ export const DevicesRoutes : Routes =  [
                 // canActivate: [ AdminGuard ],
                 data: {
                     title: 'Equipos próximos a calibrar'
+                }
+            },
+            {
+                path: 'adjuntar',
+                component: AttachmentDevicesComponent,
+                data: {
+                    title: 'Adjuntar certificados'
                 }
             },
             {

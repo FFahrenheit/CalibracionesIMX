@@ -13,6 +13,7 @@ import { BorrowDevicesComponent } from './borrow-devices/borrow-devices.componen
 import { BorrowedDevicesComponent } from './borrowed-devices/borrowed-devices.component';
 import { AdminDevicesComponent } from './admin-devices/admin-devices.component';
 import { UpdateActiveComponent } from './update-active/update-active.component';
+import { AttachmentDevicesComponent } from './attachment-devices/attachment-devices.component';
 
 
 
@@ -28,6 +29,7 @@ import { UpdateActiveComponent } from './update-active/update-active.component';
     BorrowedDevicesComponent,
     AdminDevicesComponent,
     UpdateActiveComponent,
+    AttachmentDevicesComponent,
   ],
   imports: [
     CommonModule,

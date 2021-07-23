@@ -7,12 +7,14 @@ import { BeginCalibrationComponent } from './begin-calibration/begin-calibration
 import { UpdateStatusComponent } from './update-status/update-status.component';
 import { ConfirmCalibrationComponent } from './confirm-calibration/confirm-calibration.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AttachFilesComponent } from './attach-files/attach-files.component';
 
 @NgModule({
   declarations: [
     BeginCalibrationComponent,
     UpdateStatusComponent,
     ConfirmCalibrationComponent,
+    AttachFilesComponent,
   ],
   imports: [
     CommonModule,

@@ -29,6 +29,11 @@ export const adminSidebar = [
         detail: 'Estado de calibración'
     },
     {
+        name: 'Adjuntar archivos',
+        route: ['equipos','adjuntar'],
+        detail: 'Adjuntar certificados de calibración'
+    },
+    {
         name: 'Actualizar estado',
         route: ['equipos','modificar'],
         detail: 'Estado de equipo'
