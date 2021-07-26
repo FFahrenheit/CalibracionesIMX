@@ -124,7 +124,7 @@ export class ConfirmCalibrationComponent implements OnInit {
   }
 
   private navigate() {
-    this.alert.success('Calibración Vigente');
+    this.alert.success('Calibración confirmada');
     setTimeout(() => {
       this.router.navigate(['equipos', 'detalles', this.id]);
     }, 2500);

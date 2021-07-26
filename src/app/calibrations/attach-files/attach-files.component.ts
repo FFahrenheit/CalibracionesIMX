@@ -17,8 +17,11 @@ export class AttachFilesComponent implements OnInit {
   public device = null;
   public form: FormGroup = Object.create(null);
   public reasons: string[];
-  public ryr : File;
-  public certificate : File;
+  public ryr : File | string;
+  public certificate : File | string;
+  public model = null;
+  public ryrName : string;
+  public certificateName : string;
 
   constructor(private route: ActivatedRoute,
     private status: UpdateDeviceService,
@@ -34,8 +37,18 @@ export class AttachFilesComponent implements OnInit {
 
     this.form = this.fb.group({
       calibracion: ['', Validators.required],
-      fecha: [this.datePipe.transform(new Date(),'yyyy-MM-dd'), Validators.required],
-      calibrador: [''],
+      verifico: [{
+        value: '',
+        disabled: true
+      }],
+      fecha: [{
+        value: '',
+        disabled: true
+      }],
+      calibrador: [{
+        value: '',
+        disabled: true
+      }],
       hasRyr: [false],
       hasCertificate: [false],
       ryr: [''],
@@ -79,7 +92,7 @@ export class AttachFilesComponent implements OnInit {
         if (resp) {
           if (this.form.controls['hasRyr'].value) {
             //UPLOAD RYR 
-            this.status.uploadRyr(this.id,this.ryr)
+            this.status.uploadRyr(this.id,this.ryr as File)
                   .subscribe(resp=>{
                     if(resp['ok']){
                       myCount += 1;
@@ -96,7 +109,7 @@ export class AttachFilesComponent implements OnInit {
           if (this.form.controls['hasCertificate'].value) {
 
             //UPLOAD CERTIFICATE
-            this.status.uploadCertificate(this.id,this.certificate)
+            this.status.uploadCertificate(this.id,this.certificate as File)
                   .subscribe(resp=>{
                     if(resp['ok']){
                       myCount += 1;
@@ -125,28 +138,10 @@ export class AttachFilesComponent implements OnInit {
   }
 
   private navigate() {
-    this.alert.success('Calibración Vigente');
+    this.alert.success('Se han adjuntado los archivos');
     setTimeout(() => {
       this.router.navigate(['equipos', 'detalles', this.id]);
     }, 2500);
-  }
-
-  needsEvidence() {
-    this.reasons = [];
-    let status = false;
-    if (!this.form.controls['hasRyr'].value && !this.form.controls['hasCertificate'].value) {
-      return false;
-    }
-    if (this.form.controls['hasCertificate'].value && this.form.controls['certificate'].value == '') {
-      this.reasons.push('No se ha adjuntado el certificado de calibración');
-      status = true;
-    }
-    // console.log([this.form.controls['hasCertificate'].value, this.form.controls['certificate'].value == ''])
-    if (this.form.controls['hasRyr'].value && this.form.controls['ryr'].value == '') {
-      this.reasons.push('No se ha adjuntado el archivo RYR');
-      status = true;
-    }
-    return status;
   }
 
   goDown() {
@@ -156,23 +151,85 @@ export class AttachFilesComponent implements OnInit {
   }
 
   public getClass(ctrl : string) : string{
-    if(!this.form.controls[ctrl].touched){
+    if(!this.form.controls[ctrl].touched || this.form.controls[ctrl].status == 'DISABLED'){
       return '';
     }
     return this.form.controls[ctrl].valid ? 'is-valid' : 'is-invalid';
   }
 
-  getReasons(){
-    if(this.form.controls['fecha'].valid){
-      return this.reasons;
+  public isDummy() : boolean{
+    return this.device?.id.startsWith('DUM-');
+  }
+
+  setModel(){
+    let id  = this.form.controls['calibracion'].value;
+    let calibracion = this.device.calibraciones.filter(d => d.id == id)[0];
+    this.model = calibracion;
+    this.model.fecha = this.datePipe.transform(this.model.fecha,'yyyy-MM-dd');
+    console.log({ id, calibracion });
+    this.updateFiles();
+  }
+
+  getModel(ctrl: string){
+    let input = this.form.controls[ctrl];
+    if(this.model != null){
+      input.setValue(this.model[ctrl]);
     }else{
-      let reasons = this.reasons;
-      reasons.push('Agregue la fecha de calibrado');
-      return reasons;
+      input.setValue('');
     }
   }
 
-  public isDummy() : boolean{
-    return this.device?.id.startsWith('DUM-');
+  private updateFiles(){
+    if(this.model.certificado != null){
+      this.form.controls['hasCertificate'].setValue(true);
+      this.certificate = this.model.certificado as string;
+      this.certificateName = this.certificate.substring(this.certificate.lastIndexOf("\\") + 1);
+      this.form.controls['certificate'].disable();
+      this.form.controls['hasCertificate'].disable();
+    }else{
+      this.form.controls['hasCertificate'].setValue(false);
+      this.certificate = null;
+      this.certificateName = null;
+      this.form.controls['certificate'].enable();
+      this.form.controls['hasCertificate'].enable();
+    }
+    if(this.model.ryr != null){
+      this.form.controls['hasRyr'].setValue(true);
+      this.ryr = this.model.ryr as string;
+      this.ryrName = this.ryr.substring(this.ryr.lastIndexOf("\\") + 1);
+      this.form.controls['ryr'].disable();
+      this.form.controls['hasRyr'].disable();
+    }else{
+      this.form.controls['hasRyr'].setValue(false);
+      this.ryr = null;
+      this.ryrName = null;
+      this.form.controls['ryr'].enable();
+      this.form.controls['hasRyr'].enable();
+    }
+    this.form.updateValueAndValidity();
+  }
+
+  isValid(){
+    this.reasons = [];
+    if(!this.form.valid){
+      console.log(this.form);
+      this.reasons.push('Seleccione una calibración');
+      return false;
+    }
+    return true;
+    // let status = false;
+    // if (!this.form.controls['hasRyr'].value && !this.form.controls['hasCertificate'].value) {
+    //   return false;
+    // }
+    // if (this.form.controls['hasCertificate'].value && this.form.controls['certificate'].value == '') {
+    //   this.reasons.push('No se ha adjuntado el certificado de calibración');
+    //   status = true;
+    // }
+    // // console.log([this.form.controls['hasCertificate'].value, this.form.controls['certificate'].value == ''])
+    // if (this.form.controls['hasRyr'].value && this.form.controls['ryr'].value == '') {
+    //   this.reasons.push('No se ha adjuntado el archivo RYR');
+    //   status = true;
+    // }
+    // return status;
   }
 }

@@ -3,7 +3,13 @@
 </device>
 
 <div *ngIf="show">
-    <h5>Confirmación de calibración</h5>
+    <h5>Adjuntar archivos a calibraciones</h5>
+    <p>
+        * Seleccione la calibración a la cual desea agregar archivos
+    </p>
+    <p>
+        * Adjunte el archivo correspondiente
+    </p>
     <div class="row py-2">
         <form [formGroup]="form" class="ml-3 col-md-6">
 
@@ -11,22 +17,31 @@
                 <label for="" class="col-md-5 col-form-label has-error has-feedback">Calibración</label>
                 <div class="col-md-7">
                     <select formControlName="calibracion" [class]="getClass('calibracion')"
-                    class="custom-select mb-2 mr-sm-2 mb-sm-0">
-                    <option [value]="''" selected disabled>Seleccione el evento de calibración</option>
-                    <option *ngFor="let c of device.calibraciones" [value]="c.id"> 
-                        ID : {{ c.id }} - 
-                        {{ c.fecha| date:'mediumDate':'UTC' }}
-                        por {{ c.calibrador }}
-                    </option>
-                </select>
+                        class="custom-select mb-2 mr-sm-2 mb-sm-0" (change)="setModel()">
+                        <option [value]="''" selected disabled>Seleccione el evento de calibración</option>
+                        <option *ngFor="let c of device.calibraciones" [value]="c.id">
+                            ID : {{ c.id }} -
+                            {{ c.fecha| date:'mediumDate':'UTC' }}
+                            por {{ c.calibrador }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="" class="col-md-5 col-form-label has-error has-feedback">Verificó</label>
+                <div class="col-md-7">
+                    <input type="text" class="form-control" formControlName="verifico" [value]="getModel('verifico')"
+                        placeholder="Nombre del verificador" [class]="getClass('verifico')">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="" class="col-md-5 col-form-label has-error has-feedback">Prove-Calibración</label>
                 <div class="col-md-7">
-                    <input formControlName="calibrador" type="text" class="form-control"
-                        placeholder="Nombre del calibrador">
+                    <input type="text" class="form-control" formControlName="calibrador"
+                        [value]="getModel('calibrador')" placeholder="Nombre del calibrador"
+                        [class]="getClass('calibrador')">
                 </div>
             </div>
 
@@ -34,7 +49,7 @@
                 <label for="" class="col-md-5 col-form-label has-error has-feedback">Fecha de calibración</label>
                 <div class="col-md-7">
                     <input [class]="getClass('fecha')" formControlName="fecha" class="form-control date-short"
-                        type="date">
+                        type="date" [value]="getModel('fecha')">
                 </div>
             </div>
 
@@ -50,8 +65,15 @@
                 <div class="form-group" *ngIf="form.controls['hasCertificate'].value"
                     [ngClass]="{'was-validated': form.controls['certificate'].touched}">
                     <label for="certificate">Suba el Certificado de Calibración en formato PDF</label>
-                    <input type="file" required class="form-control file-input" (change)="certificateEvent($event)"
+                    <input type="file" class="form-control file-input" (change)="certificateEvent($event)"
                         id="certificate" formControlName="certificate">
+                    <span *ngIf="certificate">
+                        <i class="fas fa-check-circle ok-icon-st"></i>
+                        <span class="adj">
+                            Archivo adjunto:
+                        </span>
+                        {{ certificateName }}
+                    </span>
                 </div>
 
                 <div class="form-check my-2" (click)="goDown()">
@@ -63,9 +85,16 @@
 
                 <div class="form-group" *ngIf="form.controls['hasRyr'].value"
                     [ngClass]="{'was-validated': form.controls['ryr'].touched}">
-                    <label for="ryr">Suba el PDF o Excel de las Pruebas RYR</label>
+                    <label for="ryr">Suba el PDF o Excel de las Pruebas R&R</label>
                     <input type="file" class="form-control file-input" id="ryr" (change)="ryrEvent($event)"
-                        formControlName="ryr" required>
+                        formControlName="ryr">
+                    <span *ngIf="ryr">
+                        <i class="fas fa-check-circle ok-icon-st"></i>
+                        <span class="adj">
+                            Archivo adjunto:
+                        </span>
+                        {{ ryrName }}
+                    </span>
                 </div>
             </div>
 
@@ -78,7 +107,11 @@
         </div>
 
         <div class="col-md-6">
-            <confirm-modal>
+            <confirm-modal 
+            [isDisabled]="! isValid()" 
+            (triggered)="form.markAllAsTouched()"
+            [reason]="reasons"
+            trigger="Adjuntar archivos">
             </confirm-modal>
         </div>
     </div>
