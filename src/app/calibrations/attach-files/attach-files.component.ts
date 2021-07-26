@@ -179,6 +179,7 @@ export class AttachFilesComponent implements OnInit {
     let id  = this.form.controls['calibracion'].value;
     let calibracion = this.device.calibraciones.filter(d => d.id == id)[0];
     this.model = calibracion;
+    this.status.setCalibrationId(this.model.id);
     this.model.fecha = this.datePipe.transform(this.model.fecha,'yyyy-MM-dd');
     console.log({ id, calibracion });
     this.updateFiles();
@@ -273,6 +274,39 @@ export class AttachFilesComponent implements OnInit {
   }
 
   public submit(){
-    console.log('working!');
+    let fileCount = 0;
+    let myCount = 0;
+    if(this.get('hasRyr').enabled && this.get('hasRyr').value){
+      fileCount += 1;
+      this.status.uploadRyr(this.id,this.ryr as File)
+      .subscribe(resp=>{
+        if(resp['ok']){
+          myCount += 1;
+          if(myCount == fileCount){
+            this.navigate();
+          }
+        }else{
+          this.alert.error('No se pudo subir el RYR');
+        }
+      },error=>{
+        this.alert.error('Error al subir RYR');
+      });
+    }
+    if(this.get('hasCertificate').enabled && this.get('hasCertificate').value){
+      fileCount += 1;
+      this.status.uploadCertificate(this.id,this.certificate as File)
+      .subscribe(resp=>{
+        if(resp['ok']){
+          myCount += 1;
+          if(myCount == fileCount){
+            this.navigate();
+          }
+        }else{
+          this.alert.error('No se pudo subir el certificado');
+        }
+      },error=>{
+        this.alert.error('Error al subir certificado');
+      });
+    }
   }
 }

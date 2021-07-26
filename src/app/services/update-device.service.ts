@@ -125,4 +125,8 @@ export class UpdateDeviceService {
   public geError() : string{
     return this.errorMessage;
   }
+
+  setCalibrationId(id : string){
+    this.calibrationId = id;
+  }
 }
