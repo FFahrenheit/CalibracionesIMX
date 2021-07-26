@@ -23,7 +23,7 @@ export class AttachmentDevicesComponent implements OnInit {
   }
 
   public deviceDetails(id : string){
-    this.router.navigate(['equipos','detalles',id]);
+    this.router.navigate(['calibraciones','adjuntar',id]);
   }
 
   private loadDevices(req = this.devicesService.getSavedFilters()) : void{

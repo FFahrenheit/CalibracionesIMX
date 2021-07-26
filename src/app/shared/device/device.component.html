@@ -162,7 +162,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let c of device.calibraciones; let i = index">
-                                <td>
+                                <td [title]="'ID: ' + c.id" class="black-link">
                                     {{ c.fecha| date:'mediumDate':'UTC' }}
                                     <!-- {{ c.fecha| date:'shortTime' }} -->
                                 </td>
