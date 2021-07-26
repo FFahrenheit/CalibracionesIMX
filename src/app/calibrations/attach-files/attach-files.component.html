@@ -63,10 +63,11 @@
                 </div>
 
                 <div class="form-group" *ngIf="form.controls['hasCertificate'].value"
-                    [ngClass]="{'was-validated': form.controls['certificate'].touched}">
+                    [ngClass]="{'was-validated': form.controls['certificate'].touched && false }">
                     <label for="certificate">Suba el Certificado de Calibración en formato PDF</label>
                     <input type="file" class="form-control file-input" (change)="certificateEvent($event)"
-                        id="certificate" formControlName="certificate">
+                        id="certificate" formControlName="certificate"
+                        [class]="getFileClass('certificate')" required>
                     <span *ngIf="certificate">
                         <i class="fas fa-check-circle ok-icon-st"></i>
                         <span class="adj">
@@ -84,10 +85,10 @@
                 </div>
 
                 <div class="form-group" *ngIf="form.controls['hasRyr'].value"
-                    [ngClass]="{'was-validated': form.controls['ryr'].touched}">
+                    [ngClass]="{'was-validated': form.controls['ryr'].touched && false }">
                     <label for="ryr">Suba el PDF o Excel de las Pruebas R&R</label>
                     <input type="file" class="form-control file-input" id="ryr" (change)="ryrEvent($event)"
-                        formControlName="ryr">
+                        formControlName="ryr" [class]="getFileClass('ryr')" required>
                     <span *ngIf="ryr">
                         <i class="fas fa-check-circle ok-icon-st"></i>
                         <span class="adj">
@@ -108,10 +109,13 @@
 
         <div class="col-md-6">
             <confirm-modal 
+            title="Adjuntar archivo"
+            content="¿Confirma la subida de los archivos a esta calibración?"
             [isDisabled]="! isValid()" 
             (triggered)="form.markAllAsTouched()"
             [reason]="reasons"
-            trigger="Adjuntar archivos">
+            trigger="Adjuntar archivos"
+            (accept)="submit()">
             </confirm-modal>
         </div>
     </div>

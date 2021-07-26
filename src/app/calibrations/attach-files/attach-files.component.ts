@@ -49,8 +49,14 @@ export class AttachFilesComponent implements OnInit {
         value: '',
         disabled: true
       }],
-      hasRyr: [false],
-      hasCertificate: [false],
+      hasRyr: [{
+        value: false,
+        disabled: true
+      }],
+      hasCertificate: [{
+        value: false,
+        disabled: true
+      }],
       ryr: [''],
       certificate: [''],
     });
@@ -58,13 +64,21 @@ export class AttachFilesComponent implements OnInit {
 
   ryrEvent($event){
     if($event.target.files.length > 0) {
-      this.ryr = $event.target.files[0];
+      this.ryr = $event.target.files[0] as File;
+      this.ryrName = this.ryr.name;
+    }else{
+      this.ryrName = null;
+      this.ryr = null;
     }
   }
 
   certificateEvent($event){
     if($event.target.files.length > 0) {
-      this.certificate = $event.target.files[0]
+      this.certificate = $event.target.files[0] as File;
+      this.certificateName = this.certificate.name;
+    }else{
+      this.certificateName = null;
+      this.certificate = null;
     }
   }
 
@@ -151,7 +165,7 @@ export class AttachFilesComponent implements OnInit {
   }
 
   public getClass(ctrl : string) : string{
-    if(!this.form.controls[ctrl].touched || this.form.controls[ctrl].status == 'DISABLED'){
+    if(!this.form.controls[ctrl].touched || this.form.controls[ctrl].disabled){
       return '';
     }
     return this.form.controls[ctrl].valid ? 'is-valid' : 'is-invalid';
@@ -209,27 +223,56 @@ export class AttachFilesComponent implements OnInit {
     this.form.updateValueAndValidity();
   }
 
+  public get(ctrl : string){
+    return this.form.controls[ctrl];
+  }
+
+  public getFileClass(ctrl : string) : string{
+    if(this.get(ctrl).disabled){
+      return '';
+    }
+    return this[ctrl + 'Name'] != null ? 'is-valid' : 'is-invalid';
+  }
+
   isValid(){
     this.reasons = [];
-    if(!this.form.valid){
-      console.log(this.form);
+    if(!this.get('calibracion').valid){
       this.reasons.push('Seleccione una calibración');
       return false;
     }
-    return true;
-    // let status = false;
-    // if (!this.form.controls['hasRyr'].value && !this.form.controls['hasCertificate'].value) {
-    //   return false;
-    // }
-    // if (this.form.controls['hasCertificate'].value && this.form.controls['certificate'].value == '') {
-    //   this.reasons.push('No se ha adjuntado el certificado de calibración');
-    //   status = true;
-    // }
-    // // console.log([this.form.controls['hasCertificate'].value, this.form.controls['certificate'].value == ''])
-    // if (this.form.controls['hasRyr'].value && this.form.controls['ryr'].value == '') {
-    //   this.reasons.push('No se ha adjuntado el archivo RYR');
-    //   status = true;
-    // }
-    // return status;
+    let status = true;
+    if(this.get('hasRyr').disabled && this.get('hasCertificate').disabled){
+      this.reasons.push('No puede adjuntar más archivos a esta calibración');
+      status = false;
+    }
+    if (!this.get('hasRyr').value && !this.get('hasCertificate').value) {
+      this.reasons.push('No ha adjuntado ningún archivo');
+      return false;
+    }
+    if (this.get('hasCertificate').value && !this.certificateName) {
+      this.reasons.push('No se ha adjuntado el certificado de calibración');
+      status = false;
+    }
+    if (this.get('hasRyr').value && !this.ryrName) {
+      this.reasons.push('No se ha adjuntado el archivo RYR');
+      status = false;
+    }
+    if(this.get('hasRyr').disabled && !this.certificateName){
+      if(status){
+        this.reasons.push('Adjunte un archivo al menos');
+      }
+      status = false;
+    }
+    if(this.get('hasCertificate').disabled && !this.ryrName){
+      if(status){
+        this.reasons.push('Adjunte un archivo al menos');
+      }
+      status = false;
+    }
+    return status;
+  }
+
+  public submit(){
+    console.log('working!');
   }
 }
