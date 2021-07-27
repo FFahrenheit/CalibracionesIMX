@@ -237,6 +237,10 @@ export class AttachFilesComponent implements OnInit {
 
   isValid(){
     this.reasons = [];
+    if(this.id.startsWith('DUM')){
+      this.reasons.push('Los dummies no requieren archivos como evidencia');
+      return false;
+    }
     if(!this.get('calibracion').valid){
       this.reasons.push('Seleccione una calibración');
       return false;

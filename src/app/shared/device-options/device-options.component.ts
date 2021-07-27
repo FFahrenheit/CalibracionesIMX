@@ -38,9 +38,9 @@ export class DeviceOptionsComponent implements OnInit {
       });
 
       this.actions.push({
-        action: 'Ver préstamos',
+        action: 'Historial de préstamos',
         link: ['prestamos','detalles',this.id],
-        icon: 'fas fa-ticket-alt'
+        icon: 'fas fa-history'
       });
     }
 
@@ -50,6 +50,12 @@ export class DeviceOptionsComponent implements OnInit {
 
   public loadActions() : void{
     if(this.auth.isAdmin()){
+
+      this.actions.push({
+        action: 'Empezar proceso de calibración',
+        link: ['calibraciones','empezar',this.id],
+        icon: 'fas fa-flag'
+      });
 
       this.actions.push({
         action: 'Actualizar estado calibración',
@@ -63,6 +69,13 @@ export class DeviceOptionsComponent implements OnInit {
         icon: 'fas fa-check'
       });
 
+      
+      this.actions.push({
+        action: 'Adjuntar archivos',
+        link: ['calibraciones','adjuntar',this.id],
+        icon: 'fas fa-file-upload'
+      });
+
       this.actions.push({
         action: 'Editar equipo',
         link: ['editar',this.id, 'empezar'],
@@ -74,6 +87,7 @@ export class DeviceOptionsComponent implements OnInit {
         link: ['editar',this.id, 'estado'],
         icon: 'fas fa-wrench'
       });
+
     }
     if(this.auth.isLender() || this.auth.isAdmin()){
       if(this.device.prestatario == null){

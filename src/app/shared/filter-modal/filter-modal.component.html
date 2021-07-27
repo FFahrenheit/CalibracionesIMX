@@ -49,7 +49,7 @@
                             <option value="INT">Equipo (INT)</option>
                             <option value="DUM-">Dummy (DUM)</option>
                             <option value="FIX">Fixture (FIX)</option>
-                            <option [value]='""'></option>
+                            <option [value]='""'>Todos</option>
                         </select>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                             class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
                             <option [value]='null' disabled selected>Estado de calibración</option>
                             <option *ngFor="let e of estados" [value]="e"> {{ e }}</option>
-                            <option value=''></option>
+                            <option value=''>Cualquiera</option>
                         </select>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
                             class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
                             <option [value]='null' disabled selected>Estado del equipo</option>
                             <option *ngFor="let a of activos" [value]="a"> {{ a }}</option>
-                            <option value=''></option>
+                            <option value=''>Cualquiera</option>
                         </select>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
                             <option [value]='null' disabled selected>Interna o externa</option>
                             <option value='INTERNO'>Interna</option>
                             <option value='EXTERNO'>Externa</option>
-                            <option value=''></option>
+                            <option value=''>Cualquiera/option>
                         </select>
                     </div>
                 </div>
@@ -131,7 +131,7 @@
                             <option [value]='null' disabled selected>Estado de préstamo</option>
                             <option value='IS NOT NULL'>Prestado</option>
                             <option value='IS NULL'>Disponible</option>
-                            <option value=''></option>
+                            <option value=''>Cualquiera</option>
                         </select>
                     </div>
                 </div>

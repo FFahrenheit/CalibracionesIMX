@@ -188,12 +188,12 @@
                                     </ng-template>
                                 </td>
                                 <td *ngIf="!isDummy()">
-                                    <a *ngIf="c.certificado != null; else just_ok" 
-                                    [title]=" isCertificate(i) || device.calibracion != 'INTERNO' ? 'Ver certificado' : 'Ver validación interna'"
+                                    <a *ngIf="c.certificado != null; else just_ok"
+                                        [title]=" isCertificate(i) || device.calibracion != 'INTERNO' ? 'Ver certificado' : 'Ver validación interna'"
                                         [href]="downloadFile(c.certificado)" target="_blank" class="black-link attach">
                                         <i class="fas fa-file-contract" *ngIf="isCertificate(i); else normal_file"></i>
                                         <ng-template #normal_file>
-                                            <i class="fas fa-file-download"></i>
+                                            <i class="fas fa-file-pdf"></i>
                                         </ng-template>
                                     </a>
                                     <ng-template #just_ok>
