@@ -1,0 +1,51 @@
+<div class="containter text-center pt-2 mb-5 mx-3">
+    <alert></alert>
+    <h4 class="text-left my-3">Eliminar registros</h4>
+    <form [formGroup]="form" autocomplete="off">
+        <div class="row d-flex justify-content-center">
+
+            <div class="col-md-12">
+
+                <h5 class="text-left">Detalles del registro a borrar </h5>
+
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">
+                        <i class="fas fa-database pr-3"></i>
+                        Tipo
+                    </label>
+                    <div class="col-md-8 px-5">
+                        <select formControlName="tipo" [class]="getClass('tipo')"
+                            class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                            <option [value]='""' disabled selected>Tipo de registro a eliminar</option>
+                            <option value="calibraciones">Calibración</option>
+                            <option value="">Préstamo</option>
+                            <!-- <option value="prestador">Prestador</option> -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row pt-2 has-error has-feedback">
+                    <label for="" class="col-md-4 col-form-label">
+                        <i class="fas fa-key pr-3"></i>
+                        Folio o ID
+                    </label>
+                    <div class="col-md-8 px-5">
+                        <input formControlName="id" type="number" class="form-control"
+                            placeholder="Folio o ID del registro a eliminar" [class]="getClass('id')">
+                    </div>
+                </div>
+
+                <confirm-modal [isDisabled]="!form.valid"
+                (triggered)="form.markAllAsTouched()"
+                (accept)="next()"
+                trigger="Eliminar registro"
+                reason="Rellene el formulario de forma correcta"
+                title="Confirmar eliminación de registro"
+                myClass="px-5 m-3 btn-danger"
+                content="¿Está completamente seguro de eliminar este registro?">
+                </confirm-modal>
+            </div>
+
+        </div>
+    </form>
+</div>

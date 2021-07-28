@@ -30,6 +30,6 @@ export const adminOptions = [
     {
         title: 'Borrar registros',
         icon: 'fas fa-tools pr-1',
-        listener: ''
+        listener: 'delete'
     }
 ];

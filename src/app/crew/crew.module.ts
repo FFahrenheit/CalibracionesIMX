@@ -9,6 +9,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { ProviderListComponent } from './provider-list/provider-list.component';
 import { SeeProvidersComponent } from './see-providers/see-providers.component';
 import { AddUserComponent } from './add-user/add-user.component';
+import { DeleteRecordsComponent } from './delete-records/delete-records.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AddUserComponent } from './add-user/add-user.component';
     ChangePasswordComponent,
     ProviderListComponent,
     SeeProvidersComponent,
-    AddUserComponent
+    AddUserComponent,
+    DeleteRecordsComponent
   ],
   imports: [
     CommonModule,

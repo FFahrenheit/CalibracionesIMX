@@ -4,6 +4,7 @@ import { RecoverPasswordGuard } from "../guards/recover-password.guard";
 import { AddUserComponent } from "./add-user/add-user.component";
 import { BackupUsersComponent } from "./backup-users/backup-users.component";
 import { ChangePasswordComponent } from "./change-password/change-password.component";
+import { DeleteRecordsComponent } from "./delete-records/delete-records.component";
 import { ProviderListComponent } from "./provider-list/provider-list.component";
 import { SeeProvidersComponent } from "./see-providers/see-providers.component";
 
@@ -25,6 +26,14 @@ export const CrewRoutes : Routes =  [
                 canActivate: [ AdminGuard ],
                 data: {
                     title: 'Agregar nuevo usuario'
+                }
+            },
+            {
+                path: 'admin/eliminar',
+                canActivate: [ AdminGuard ],
+                component: DeleteRecordsComponent,
+                data: {
+                    title: 'Eliminar registros'
                 }
             },
             {

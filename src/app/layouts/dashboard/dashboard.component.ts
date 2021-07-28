@@ -81,9 +81,16 @@ export class DashboardComponent implements OnInit {
       case 'add':
         this.addUser();
         break;
+      case 'delete':
+        this.deleteRecords();
+        break;
       default:
         console.log('Not yet implemented');
     }
+  }
+
+  private deleteRecords(){
+    this.router.navigate(['usuarios','admin','eliminar']);
   }
 
   private addUser(){
