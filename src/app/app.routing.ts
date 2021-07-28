@@ -3,6 +3,7 @@ import { EasterEggComponent } from "./errors/easter-egg/easter-egg.component";
 import { Error403Component } from "./errors/error403/error403.component";
 import { Error404Component } from "./errors/error404/error404.component";
 import { Error500Component } from "./errors/error500/error500.component";
+import { Error503Component } from "./errors/error503/error503.component";
 import { AdminGuard } from "./guards/admin.guard";
 import { LenderGuard } from "./guards/lender.guard";
 import { LoggedGuard } from "./guards/logged.guard";
@@ -90,18 +91,37 @@ export const AppRoutes: Routes = [
     },
     {
         path: '500',
-        component: Error500Component
+        component: Error500Component,
+        data: {
+            title: 'Error de servidor'
+        }
     },
     {
         path: '403',
-        component: Error403Component
+        component: Error403Component,
+        data: {
+            title: 'Acceso denegado'
+        }
+    },
+    {
+        path: '503',
+        component: Error503Component,
+        data: {
+            title: 'Servidor en mantenimiento'
+        }
     },
     {
         path: 'path/to/easter/egg',
-        component: EasterEggComponent
+        component: EasterEggComponent,
+        data: {
+            title: '--- You found this ---'
+        }
     },
     {
         path: '**',
-        component: Error404Component 
+        component: Error404Component,
+        data: {
+            title: 'Ruta no encontrada'
+        }
     }
 ];

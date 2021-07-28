@@ -11,7 +11,8 @@ console.log('Current Backend Server : ' + url);
 
 export const environment = {
   production: false,
-  base_url: url
+  base_url: url,
+  maintenance: false
 };
 
 /*
