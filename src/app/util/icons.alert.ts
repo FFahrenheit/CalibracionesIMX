@@ -47,6 +47,7 @@ export class IconsAlert {
         switch (status) {
             case 'Calibración Vigente':
             case 'Referencia':
+            case 'Reemplazo':
                 return 'ok';
             case 'En Proceso de Calibración':
             case 'Reparacion':
@@ -70,6 +71,7 @@ export class IconsAlert {
             case 'Activo':
                 return 'ok';
             case 'Reparacion':
+            case 'Reemplazo':
             case 'Inhabilitado':
                 return 'waiting';
             case 'Baja':

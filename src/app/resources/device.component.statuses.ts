@@ -13,6 +13,7 @@ export const estados = [
     'Calibración Vencida',
     'En Proceso de Calibración',
     'Extraviado',
+    'Reemplazo',
     'Referencia',
     'Reparacion',
 ];
@@ -31,6 +32,7 @@ export const activos = [
     'Baja',
     'Extraviado',
     'Inhabilitado',
+    'Reemplazo',
     'Referencia',
     'Reparacion',
 ];

@@ -26,7 +26,7 @@
     </div>
 
     <div class="modal-body m-content mx-3">
-        <form [formGroup]="filterForm">
+        <form [formGroup]="filterForm" (keyup.enter)="modal.close('YES')">
             <h6>
                 {{ message }}
             </h6>
@@ -45,7 +45,7 @@
                     <div class="col-md-8">
                         <select formControlName="tipo" [class]="getClass('tipo')"
                             class="custom-select mb-2 mr-sm-2 mb-sm-0">
-                            <option [value]='""' disabled selected>Tipo de dispositivo</option>
+                            <option [value]='null' disabled selected>Tipo de dispositivo</option>
                             <option value="INT">Equipo (INT)</option>
                             <option value="DUM-">Dummy (DUM)</option>
                             <option value="FIX">Fixture (FIX)</option>
