@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UpdateDeviceService } from 'src/app/services/update-device.service';
 import { AlertService } from 'src/app/shared/alert';
@@ -17,8 +17,8 @@ export class ConfirmCalibrationComponent implements OnInit {
   public device = null;
   public form: FormGroup = Object.create(null);
   public reasons: string[];
-  public ryr : File;
-  public certificate : File;
+  public ryr: File;
+  public certificate: File;
 
   constructor(private route: ActivatedRoute,
     private status: UpdateDeviceService,
@@ -33,7 +33,7 @@ export class ConfirmCalibrationComponent implements OnInit {
     });
 
     this.form = this.fb.group({
-      fecha: [this.datePipe.transform(new Date(),'yyyy-MM-dd'), Validators.required],
+      fecha: [this.datePipe.transform(new Date(), 'yyyy-MM-dd'), Validators.required],
       calibrador: [''],
       hasRyr: [false],
       hasCertificate: [false],
@@ -42,14 +42,14 @@ export class ConfirmCalibrationComponent implements OnInit {
     });
   }
 
-  ryrEvent($event){
-    if($event.target.files.length > 0) {
+  ryrEvent($event) {
+    if ($event.target.files.length > 0) {
       this.ryr = $event.target.files[0];
     }
   }
 
-  certificateEvent($event){
-    if($event.target.files.length > 0) {
+  certificateEvent($event) {
+    if ($event.target.files.length > 0) {
       this.certificate = $event.target.files[0]
     }
   }
@@ -78,36 +78,36 @@ export class ConfirmCalibrationComponent implements OnInit {
         if (resp) {
           if (this.form.controls['hasRyr'].value) {
             //UPLOAD RYR 
-            this.status.uploadRyr(this.id,this.ryr)
-                  .subscribe(resp=>{
-                    if(resp['ok']){
-                      myCount += 1;
-                      if(myCount == fileCount){
-                        this.navigate();
-                      }
-                    }else{
-                      this.alert.error('No se pudo subir el RYR');
-                    }
-                  },error=>{
-                    this.alert.error('Error al subir RYR');
-                  });
+            this.status.uploadRyr(this.id, this.ryr)
+              .subscribe(resp => {
+                if (resp['ok']) {
+                  myCount += 1;
+                  if (myCount == fileCount) {
+                    this.navigate();
+                  }
+                } else {
+                  this.alert.error('No se pudo subir el RYR');
+                }
+              }, error => {
+                this.alert.error('Error al subir RYR');
+              });
           }
           if (this.form.controls['hasCertificate'].value) {
 
             //UPLOAD CERTIFICATE
-            this.status.uploadCertificate(this.id,this.certificate)
-                  .subscribe(resp=>{
-                    if(resp['ok']){
-                      myCount += 1;
-                      if(myCount == fileCount){
-                        this.navigate();
-                      }
-                    }else{
-                      this.alert.error('No se pudo subir el certificado');
-                    }
-                  },error=>{
-                    this.alert.error('Error al subir certificado');
-                  });
+            this.status.uploadCertificate(this.id, this.certificate)
+              .subscribe(resp => {
+                if (resp['ok']) {
+                  myCount += 1;
+                  if (myCount == fileCount) {
+                    this.navigate();
+                  }
+                } else {
+                  this.alert.error('No se pudo subir el certificado');
+                }
+              }, error => {
+                this.alert.error('Error al subir certificado');
+              });
 
           }
           if (fileCount == 0) {
@@ -130,48 +130,47 @@ export class ConfirmCalibrationComponent implements OnInit {
     }, 2500);
   }
 
-  needsEvidence() {
-    this.reasons = [];
-    let status = false;
-    if (!this.form.controls['hasRyr'].value && !this.form.controls['hasCertificate'].value) {
-      return false;
-    }
-    if (this.form.controls['hasCertificate'].value && this.form.controls['certificate'].value == '') {
-      this.reasons.push('No se ha adjuntado el certificado de calibración');
-      status = true;
-    }
-    // console.log([this.form.controls['hasCertificate'].value, this.form.controls['certificate'].value == ''])
-    if (this.form.controls['hasRyr'].value && this.form.controls['ryr'].value == '') {
-      this.reasons.push('No se ha adjuntado el archivo RYR');
-      status = true;
-    }
-    return status;
-  }
-
   goDown() {
     setTimeout(() => {
       window.scrollTo(0, document.body.scrollHeight);
     }, 1);
   }
 
-  public getClass(ctrl : string) : string{
-    if(!this.form.controls[ctrl].touched){
+  public getClass(ctrl: string): string {
+    if (!this.form.controls[ctrl].touched) {
       return '';
     }
     return this.form.controls[ctrl].valid ? 'is-valid' : 'is-invalid';
   }
 
-  getReasons(){
-    if(this.form.controls['fecha'].valid){
-      return this.reasons;
-    }else{
-      let reasons = this.reasons;
-      reasons.push('Agregue la fecha de calibrado');
-      return reasons;
+  public isValid() : boolean {
+    this.reasons = [];
+    let status = true;
+    if (this.get('fecha').invalid) {
+      status = false;
+      this.reasons.push('Agregue la fecha de calibrado');
     }
+    if (this.get('hasRyr').value && this.get('ryr').value == '') {
+      status = false;
+      this.reasons.push('No se ha adjuntado el archivo RYR');
+    }
+    if (this.get('hasCertificate').value && this.get('certificate').value == '') {
+      this.reasons.push('No se ha adjuntado el certificado de calibración o validación interna');
+      status = false;
+    }
+    return status;
   }
 
-  public isDummy() : boolean{
+  public get(ctrl: string): AbstractControl {
+    return this.form.controls[ctrl];
+  }
+
+  public isDummy(): boolean {
     return this.device?.id.startsWith('DUM-');
   }
+
+  public checkValidity() {
+    this.form.markAllAsTouched();
+  }
+
 }

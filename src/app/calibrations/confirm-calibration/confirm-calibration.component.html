@@ -65,8 +65,8 @@
         <div class="col-md-6">
             <confirm-calibration-modal (accept)="confirmCalibration()" myClass="px-5 m-3 float-left"
                 title="Confirmar calibración" trigger="Marcar Calibración Vigente"
-                [isDisabled]="needsEvidence() || !form.valid" [reason]="getReasons()"
-                (triggered)="form.markAllAsTouched()">
+                [isDisabled]=" ! isValid()" [reason]="reasons"
+                (triggered)="checkValidity()">
             </confirm-calibration-modal>
         </div>
     </div>
