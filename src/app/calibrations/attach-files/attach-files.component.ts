@@ -17,11 +17,11 @@ export class AttachFilesComponent implements OnInit {
   public device = null;
   public form: FormGroup = Object.create(null);
   public reasons: string[];
-  public ryr : File | string;
-  public certificate : File | string;
+  public ryr: File | string;
+  public certificate: File | string;
   public model = null;
-  public ryrName : string;
-  public certificateName : string;
+  public ryrName: string;
+  public certificateName: string;
 
   constructor(private route: ActivatedRoute,
     private status: UpdateDeviceService,
@@ -62,21 +62,21 @@ export class AttachFilesComponent implements OnInit {
     });
   }
 
-  ryrEvent($event){
-    if($event.target.files.length > 0) {
+  ryrEvent($event) {
+    if ($event.target.files.length > 0) {
       this.ryr = $event.target.files[0] as File;
       this.ryrName = this.ryr.name;
-    }else{
+    } else {
       this.ryrName = null;
       this.ryr = null;
     }
   }
 
-  certificateEvent($event){
-    if($event.target.files.length > 0) {
+  certificateEvent($event) {
+    if ($event.target.files.length > 0) {
       this.certificate = $event.target.files[0] as File;
       this.certificateName = this.certificate.name;
-    }else{
+    } else {
       this.certificateName = null;
       this.certificate = null;
     }
@@ -106,36 +106,36 @@ export class AttachFilesComponent implements OnInit {
         if (resp) {
           if (this.form.controls['hasRyr'].value) {
             //UPLOAD RYR 
-            this.status.uploadRyr(this.id,this.ryr as File)
-                  .subscribe(resp=>{
-                    if(resp['ok']){
-                      myCount += 1;
-                      if(myCount == fileCount){
-                        this.navigate();
-                      }
-                    }else{
-                      this.alert.error('No se pudo subir el RYR');
-                    }
-                  },error=>{
-                    this.alert.error('Error al subir RYR');
-                  });
+            this.status.uploadRyr(this.id, this.ryr as File)
+              .subscribe(resp => {
+                if (resp['ok']) {
+                  myCount += 1;
+                  if (myCount == fileCount) {
+                    this.navigate();
+                  }
+                } else {
+                  this.alert.error('No se pudo subir el RYR');
+                }
+              }, error => {
+                this.alert.error('Error al subir RYR');
+              });
           }
           if (this.form.controls['hasCertificate'].value) {
 
             //UPLOAD CERTIFICATE
-            this.status.uploadCertificate(this.id,this.certificate as File)
-                  .subscribe(resp=>{
-                    if(resp['ok']){
-                      myCount += 1;
-                      if(myCount == fileCount){
-                        this.navigate();
-                      }
-                    }else{
-                      this.alert.error('No se pudo subir el certificado');
-                    }
-                  },error=>{
-                    this.alert.error('Error al subir certificado');
-                  });
+            this.status.uploadCertificate(this.id, this.certificate as File)
+              .subscribe(resp => {
+                if (resp['ok']) {
+                  myCount += 1;
+                  if (myCount == fileCount) {
+                    this.navigate();
+                  }
+                } else {
+                  this.alert.error('No se pudo subir el certificado');
+                }
+              }, error => {
+                this.alert.error('Error al subir certificado');
+              });
 
           }
           if (fileCount == 0) {
@@ -164,57 +164,57 @@ export class AttachFilesComponent implements OnInit {
     }, 1);
   }
 
-  public getClass(ctrl : string) : string{
-    if(!this.form.controls[ctrl].touched || this.form.controls[ctrl].disabled){
+  public getClass(ctrl: string): string {
+    if (!this.form.controls[ctrl].touched || this.form.controls[ctrl].disabled) {
       return '';
     }
     return this.form.controls[ctrl].valid ? 'is-valid' : 'is-invalid';
   }
 
-  public isDummy() : boolean{
+  public isDummy(): boolean {
     return this.device?.id.startsWith('DUM-');
   }
 
-  setModel(){
-    let id  = this.form.controls['calibracion'].value;
+  setModel() {
+    let id = this.form.controls['calibracion'].value;
     let calibracion = this.device.calibraciones.filter(d => d.id == id)[0];
     this.model = calibracion;
     this.status.setCalibrationId(this.model.id);
-    this.model.fecha = this.datePipe.transform(this.model.fecha,'yyyy-MM-dd');
+    this.model.fecha = this.datePipe.transform(this.model.fecha, 'yyyy-MM-dd');
     console.log({ id, calibracion });
     this.updateFiles();
   }
 
-  getModel(ctrl: string){
+  getModel(ctrl: string) {
     let input = this.form.controls[ctrl];
-    if(this.model != null){
+    if (this.model != null) {
       input.setValue(this.model[ctrl]);
-    }else{
+    } else {
       input.setValue('');
     }
   }
 
-  private updateFiles(){
-    if(this.model.certificado != null){
+  private updateFiles() {
+    if (this.model.certificado != null) {
       this.form.controls['hasCertificate'].setValue(true);
       this.certificate = this.model.certificado as string;
       this.certificateName = this.certificate.substring(this.certificate.lastIndexOf("\\") + 1);
-      this.form.controls['certificate'].disable();
+      this.form.controls['certificate'].enable();
       this.form.controls['hasCertificate'].disable();
-    }else{
+    } else {
       this.form.controls['hasCertificate'].setValue(false);
       this.certificate = null;
       this.certificateName = null;
       this.form.controls['certificate'].enable();
       this.form.controls['hasCertificate'].enable();
     }
-    if(this.model.ryr != null){
+    if (this.model.ryr != null) {
       this.form.controls['hasRyr'].setValue(true);
       this.ryr = this.model.ryr as string;
       this.ryrName = this.ryr.substring(this.ryr.lastIndexOf("\\") + 1);
-      this.form.controls['ryr'].disable();
+      this.form.controls['ryr'].enable();
       this.form.controls['hasRyr'].disable();
-    }else{
+    } else {
       this.form.controls['hasRyr'].setValue(false);
       this.ryr = null;
       this.ryrName = null;
@@ -224,32 +224,30 @@ export class AttachFilesComponent implements OnInit {
     this.form.updateValueAndValidity();
   }
 
-  public get(ctrl : string){
+  public get(ctrl: string) {
     return this.form.controls[ctrl];
   }
 
-  public getFileClass(ctrl : string) : string{
-    if(this.get(ctrl).disabled){
+  public getFileClass(ctrl: string): string {
+    if (this.get(ctrl).disabled) {
       return '';
     }
     return this[ctrl + 'Name'] != null ? 'is-valid' : 'is-invalid';
   }
 
-  isValid(){
+  isValid() {
     this.reasons = [];
-    if(this.id.startsWith('DUM')){
+    if (this.id.startsWith('DUM')) {
       this.reasons.push('Los dummies no requieren archivos como evidencia');
       return false;
     }
-    if(!this.get('calibracion').valid){
+    if (!this.get('calibracion').valid) {
       this.reasons.push('Seleccione una calibración');
       return false;
     }
+
     let status = true;
-    if(this.get('hasRyr').disabled && this.get('hasCertificate').disabled){
-      this.reasons.push('No puede adjuntar más archivos a esta calibración');
-      status = false;
-    }
+
     if (!this.get('hasRyr').value && !this.get('hasCertificate').value) {
       this.reasons.push('No ha adjuntado ningún archivo');
       return false;
@@ -262,55 +260,81 @@ export class AttachFilesComponent implements OnInit {
       this.reasons.push('No se ha adjuntado el archivo RYR');
       status = false;
     }
-    if(this.get('hasRyr').disabled && !this.certificateName){
-      if(status){
-        this.reasons.push('Adjunte un archivo al menos');
-      }
+    // if(this.get('hasRyr').disabled && !this.certificateName){
+    //   if(status){
+    //     this.reasons.push('Adjunte un archivo al menos');
+    //   }
+    //   status = false;
+    // }
+    // if(this.get('hasCertificate').disabled && !this.ryrName){
+    //   if(status){
+    //     this.reasons.push('Adjunte un archivo al menos');
+    //   }
+    //   status = false;
+    // }
+    // if (this.get('hasCertificate').disabled && typeof this.certificate == 'string') {
+    //   if (status) {
+    //     this.reasons.push('No hay cambios en los archivos');
+    //     status = false;
+    //   }
+    // }
+    // if (this.get('hasRyr').disabled && typeof this.ryr == 'string') {
+    //   if (status) {
+    //     this.reasons.push('No hay cambios en los archivos');
+    //     status = false;
+    //   }
+    // }
+
+    if (!this.isFileChanged(this.certificate) && !this.isFileChanged(this.ryr)) {
+      this.reasons.push('No hay cambios en los archivos');
       status = false;
     }
-    if(this.get('hasCertificate').disabled && !this.ryrName){
-      if(status){
-        this.reasons.push('Adjunte un archivo al menos');
-      }
-      status = false;
-    }
+
+    console.log({
+      ryr: this.ryr,
+      certificado: this.certificate
+    });
     return status;
   }
 
-  public submit(){
+  private isFileChanged(file): boolean {
+    return file != null && typeof file != 'string';
+  }
+
+  public submit() {
     let fileCount = 0;
     let myCount = 0;
-    if(this.get('hasRyr').enabled && this.get('hasRyr').value){
+    if (typeof this.ryr != 'string' && this.get('hasRyr').value) {
       fileCount += 1;
-      this.status.uploadRyr(this.id,this.ryr as File)
-      .subscribe(resp=>{
-        if(resp['ok']){
-          myCount += 1;
-          if(myCount == fileCount){
-            this.navigate();
+      this.status.uploadRyr(this.id, this.ryr as File)
+        .subscribe(resp => {
+          if (resp['ok']) {
+            myCount += 1;
+            if (myCount == fileCount) {
+              this.navigate();
+            }
+          } else {
+            this.alert.error('No se pudo subir el RYR');
           }
-        }else{
-          this.alert.error('No se pudo subir el RYR');
-        }
-      },error=>{
-        this.alert.error('Error al subir RYR');
-      });
+        }, error => {
+          this.alert.error('Error al subir RYR');
+        });
     }
-    if(this.get('hasCertificate').enabled && this.get('hasCertificate').value){
+    if (typeof this.certificate != 'string' && this.get('hasCertificate').value) {
       fileCount += 1;
-      this.status.uploadCertificate(this.id,this.certificate as File)
-      .subscribe(resp=>{
-        if(resp['ok']){
-          myCount += 1;
-          if(myCount == fileCount){
-            this.navigate();
+      this.status.uploadCertificate(this.id, this.certificate as File)
+        .subscribe(resp => {
+          if (resp['ok']) {
+            myCount += 1;
+            if (myCount == fileCount) {
+              this.navigate();
+            }
+          } else {
+            this.alert.error('No se pudo subir el certificado');
           }
-        }else{
-          this.alert.error('No se pudo subir el certificado');
-        }
-      },error=>{
-        this.alert.error('Error al subir certificado');
-      });
+        }, error => {
+          this.alert.error('Error al subir certificado');
+        });
     }
   }
 }

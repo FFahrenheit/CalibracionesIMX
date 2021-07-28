@@ -6,7 +6,7 @@
                 <h4 class="text-left my-3">
                     <i *ngIf="canHide" title="Mostrar / ocultar" [ngClass]="{'fa-chevron-down':!show,'fa-chevron-up':show}"
                         class="fas hide-button" (click)="show = !show"></i>
-                    {{ device['descripcion'] || '' }} - {{ id }}
+                    {{ device['descripcion'] || '' }} - {{ id.replace('--','/') }}
                 </h4>
             </div>
             <div class="col-md-4 text-right pt-3 px-0">
@@ -25,7 +25,7 @@
                         </h5>
                     </a>
 
-                    <attr name="ID" [value]="id"></attr>
+                    <attr name="ID" [value]="id.replace('--','/')"></attr>
                     <attr name="Descripcion" [value]="device.descripcion"></attr>
                     <attr name="Numero de serie" [value]="device.serie"></attr>
                     <attr name="Ubicacion" [value]="device.ubicacion"></attr>

@@ -26,5 +26,10 @@ export const adminOptions = [
         title: 'Agregar usuarios',
         icon: 'fas fa-user-plus pr-1',
         listener: 'add'
+    },
+    {
+        title: 'Borrar registros',
+        icon: 'fas fa-tools pr-1',
+        listener: ''
     }
 ];
