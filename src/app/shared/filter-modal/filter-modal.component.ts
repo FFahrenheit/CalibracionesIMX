@@ -46,7 +46,7 @@ export class FilterModalComponent implements OnInit {
 
     this.filterForm = this.fb.group({
       id: [saved?.id || ''],
-      tipo: [saved?.tipo || ''],
+      tipo: [saved?.tipo || null],
       serie: [saved?.serie || ''],
       descripcion: [saved?.descripcion || ''],
       estado: [saved?.estado || null],

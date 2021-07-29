@@ -141,7 +141,12 @@
                                     {{ p.fechaCompromiso | date:'mediumDate' }}
                                 </td>
                                 <td>
-                                    {{ p.nombrePrestatario }}
+                                    <span *ngIf="p.nombrePrestatario != 'operador';else operador">
+                                        {{ p.nombrePrestatario }}
+                                    </span>
+                                    <ng-template #operador>
+                                        {{ p.operador }}
+                                    </ng-template>
                                 </td>
                                 <td>
                                     {{ p.nombreEntrega }}

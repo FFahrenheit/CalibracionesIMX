@@ -85,8 +85,12 @@
                     {{ d.siguiente | date:'shortDate':'UTC' }}
                 </td>
                 <td>
-                    {{ d.nombrePrestatario }}
-                </td>
+                    <span *ngIf="d.nombrePrestatario != 'operador';else operador">
+                        {{ d.nombrePrestatario }}
+                    </span>
+                    <ng-template #operador>
+                        {{ d.operador }}
+                    </ng-template>                </td>
                 <td>
                     29/03/21
                 </td>

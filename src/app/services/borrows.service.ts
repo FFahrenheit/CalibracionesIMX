@@ -39,11 +39,12 @@ export class BorrowsService {
     ); 
   }
 
-  public borrowDevice(id : string, prestatario : string, compromiso, fecha = new Date()){
+  public borrowDevice(id : string, prestatario : string, compromiso, operador = '', fecha = new Date()){
     const body = {
       id,
       prestatario,
       compromiso,
+      operador,
       fecha //Saltarse el prestador porque se sabe por el token
     };
 

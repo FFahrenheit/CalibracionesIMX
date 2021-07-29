@@ -6,33 +6,50 @@
     <h5>Préstamo del equipo</h5>
     <div class="row py-2">
         <form [formGroup]="form" class="ml-3 col-md-8">
+
             <div class="form-group row">
-                <label for="" class="col-md-4 col-form-label has-error has-feedback">Prestatario</label>
-                <user-input #prestatario (update)="setValues($event)" 
-                [users]="users" placeholder="Usuario prestatario">
+                <label for="" class="col-md-4 col-form-label has-error has-feedback text-center">
+                    Usuario a quien se le presta
+                    <small> <br> Seleccionar 
+                        <span class="bold">
+                            operador
+                        </span>
+                        si no encuentra el usuario 
+                    </small>
+                </label>
+                <user-input #prestatario (update)="setValues($event)" [users]="users" placeholder="Prestatario">
                 </user-input>
             </div>
-            
-            <div class="form-group row">
-                <label for="" class="col-md-4 col-form-label has-error has-feedback">
-                    Fecha de compromiso de retorno 
+
+            <div class="form-group row" *ngIf="isOperador">
+                <label for="" class="col-md-4 col-form-label has-error has-feedback text-center">
+                    Nombre del prestatario
                 </label>
-                <input [min]="today" [max]="date.transform(device.siguiente,'yyyy-MM-dd')" type="date" class="form-control col-md-4" 
-                formControlName="fechaCompromiso" [class]="getClass('fechaCompromiso')">
+                <input type="text" class="form-control col-md-4" placeholder="Nombre del empleado"
+                [class]="getClass('operador')" formControlName="operador">
+            </div>
+
+            <div class="form-group row">
+                <label for="" class="col-md-4 col-form-label has-error has-feedback text-center">
+                    Fecha de compromiso de retorno
+                </label>
+                <input [min]="today" [max]="date.transform(device.siguiente,'yyyy-MM-dd')" type="date"
+                    class="form-control col-md-4" formControlName="fechaCompromiso"
+                    [class]="getClass('fechaCompromiso')">
             </div>
             <div class="form-group row">
                 <span *ngIf="daysBorrowed" class="note">
-                    El equipo será prestado por 
+                    El equipo será prestado por
                     <span class="bold">
                         {{ daysBorrowed }}
-                    </span> 
+                    </span>
                     {{ daysBorrowed == 1 ? 'día' : 'días' }} <br>
                     <span *ngIf="daysBefore >= 10; else closeCal">
                         <i class="fas fa-check-circle ok-icon-st">
-                            El dispositivo será regresado 
+                            El dispositivo será regresado
                             <span class="bold">
                                 {{ daysBefore }}
-                            </span> 
+                            </span>
                             {{ daysBefore == 1 ? 'día ' : 'días ' }}
                             antes de su siguiente calibración
                         </i>
@@ -42,7 +59,7 @@
                             Advertencia: El dispositivo será regresado
                             <span class="bold">
                                 {{ daysBefore }}
-                            </span> 
+                            </span>
                             {{ daysBefore == 1 ? 'día ' : 'días ' }}
                             antes de su siguiente calibración
                         </i>
@@ -58,14 +75,10 @@
         </div>
 
         <div class="col-md-6">
-            <confirm-modal myClass="px-5 m-3 float-left"
-                [isDisabled]="!getValidity()" (accept)="confirm()"
-                [content]="'¿Confirma el préstamo del equipo ' + id + 
+            <confirm-modal myClass="px-5 m-3 float-left" [isDisabled]="!getValidity()" (accept)="confirm()" [content]="'¿Confirma el préstamo del equipo ' + id + 
                 ' a ' + form.controls['prestatario'].value + ' para regresar el '
-                + form.controls['fechaCompromiso'].value + '?'"
-                title="Confirmar préstamo" trigger="Prestar equipo" 
-                [reason]="getReasons()"
-                 (triggered)="markAsTouched()">
+                + form.controls['fechaCompromiso'].value + '?'" title="Confirmar préstamo" trigger="Prestar equipo"
+                [reason]="getReasons()" (triggered)="markAsTouched()">
             </confirm-modal>
         </div>
     </div>
