@@ -156,6 +156,10 @@ export class NewDeviceService {
 
     console.log(device);
 
+    if(device.tipo.startsWith('FIX')){
+      device.tipo = device.tipo+'-';
+    }
+
     const body = {
       type: device.tipo,
       device: device,

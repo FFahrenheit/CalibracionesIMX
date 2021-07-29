@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Calibracion, Device } from 'src/app/interfaces/new-device.interface';
 import { activos, estados, ubicaciones } from 'src/app/resources/device.component.statuses';
@@ -28,6 +28,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
   public ryr;
   public certificate;
 
+  public isFixture = false;
+
   constructor(private fb            : FormBuilder,
               private alert         : AlertService,
               private router        : Router,
@@ -41,7 +43,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     let saved = this.create.getDevice();
 
     this.form = this.fb.group({
-      tipo: [saved?.tipo || '', Validators.required],
+      tipo: [this.getTipo(saved) || '', Validators.required],
       descripcion : [saved?.descripcion || '', Validators.required],
       serie : [saved?.serie || '', Validators.required],
       ubicacion : [saved?.ubicacion || '', Validators.required],
@@ -58,8 +60,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
       hasCertificate: [saved?.certificate == null ? false : true || false],
       ryr: [ saved?.ryr == null ? '' : saved?.ryr.name || ''],
       certificate: [ saved?.certificate == null ? '' : saved?.certificate.name ||  ''],
+      piezas : [this.getPiezas(saved) || '']
     });
     
+    this.isFixture = saved?.tipo.startsWith('FIX');
 
     this.certificate = saved?.certificate || null;
     this.ryr = saved?.ryr || null;
@@ -123,7 +127,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     let certificate = this.get('hasCertificate').value ? this.certificate : null;
 
     let device : Device = {
-      tipo: this.get('tipo').value,
+      tipo: this.getID(),
       id : 'Nuevo',
       serie : this.get('serie').value,
       descripcion: this.get('descripcion').value,
@@ -147,7 +151,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     return this.get(ctrl).value != null && this.get(ctrl).value != '' ? this.get(ctrl).value : 'N/A';
   }
 
-  get(ctrl : string){
+  private get(ctrl : string) : AbstractControl{
     return this.form.controls[ctrl];
   }
 
@@ -204,5 +208,45 @@ export class DetailsComponent implements OnInit, OnDestroy {
       window.scrollTo(0, document.body.scrollHeight);
     }, 1);
   }
+
+  public onChange(){
+    this.isFixture = this.get('tipo').value == 'FIX-';
+    if(this.isFixture){
+      this.get('piezas').setValidators(Validators.required);
+    }else{
+      this.get('piezas').clearValidators();
+    }
+  }
+
+  private getID(){
+    let tipo : string = this.get('tipo').value;
+    if(tipo == 'FIX-'){
+      return tipo + this.get('piezas').value;
+    }
+    return tipo;
+  }
+
+  private getTipo(saved) : string{
+    if(saved?.tipo){
+      if(saved?.tipo.startsWith('FIX')){
+        return saved?.tipo.split('-')[0]+'-';
+      }
+      return saved.tipo;
+    }
+    return '';
+  }
+
+  private getPiezas(saved) : string{
+    if(saved?.tipo){
+      if(saved?.tipo.startsWith('FIX')){
+        let tipo : string = saved?.tipo;
+        console.log( { tipo });
+        return tipo.substring(tipo.indexOf('-') + 1) || '';
+      }
+      return saved.tipo;
+    }
+    return '';
+  }
+
 
 }
