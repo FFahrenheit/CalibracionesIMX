@@ -30,7 +30,7 @@
                 placement="bottom-right" display="dynamic">
                     <button class="btn btn-light " id="dropdownBasic1" ngbDropdownToggle>
                         <span class="signed-user px-2">
-                            <i class="fas fa-user px-2"></i> {{ user?.nombre || "Usuario"}}
+                            <i class="fas fa-user px-2"></i> {{ (user?.nombre | titlecase) || "Usuario"}}
                         </span>
                     </button>
                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">

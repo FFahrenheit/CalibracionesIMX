@@ -42,7 +42,7 @@
                         <h6 class="text-left subtitle-att">Responsables del equipo</h6>
                         <ul class="dot-list" *ngIf="device.responsables.length > 0; else empty_responsables">
                             <li *ngFor="let r of device.responsables">
-                                {{ r.nombre }}
+                                {{ r.nombre | titlecase }}
                             </li>
                         </ul>
                         <ng-template #empty_responsables>
@@ -58,8 +58,14 @@
                     </div>
                     <ng-template #not_available>
                         <attr name="Estado del equipo" value="Prestado" status="not-ok"></attr>
-                        <attr name="Prestatario" [value]="device.nombrePrestatario + ' (' + device.prestatario + ')'">
+                        <attr *ngIf="device.prestatario != 'operador'; else operador" name="Prestatario"
+                            [value]="titleCase.transform(device.nombrePrestatario) + ' (' + device.prestatario + ')'">
                         </attr>
+                        <ng-template #operador>
+                            <attr name="Prestatario"
+                            [value]="device.operador + ' (operador)'">
+                        </attr>
+                        </ng-template>
                     </ng-template>
                 </div>
 
@@ -142,14 +148,14 @@
                                 </td>
                                 <td>
                                     <span *ngIf="p.nombrePrestatario != 'operador';else operador">
-                                        {{ p.nombrePrestatario }}
+                                        {{ p.nombrePrestatario | titlecase }}
                                     </span>
                                     <ng-template #operador>
                                         {{ p.operador }}
                                     </ng-template>
                                 </td>
                                 <td>
-                                    {{ p.nombreEntrega }}
+                                    {{ p.nombreEntrega | titlecase }}
                                 </td>
                                 <td *ngIf="p.estado != 'Entregado'">
                                     {{ p.fechaRetorno | date:'mediumDate' }}
@@ -159,7 +165,7 @@
                                     {{ p.notas == '' ? '-' : p.notas }}
                                 </td>
                                 <td *ngIf="p.estado != 'Entregado'">
-                                    {{ p.nombreRecibe }}
+                                    {{ p.nombreRecibe | titlecase }}
                                 </td>
                                 <td colspan="3" *ngIf="p.estado == 'Entregado'">
                                     <span *ngIf="i == 0; else no_info">

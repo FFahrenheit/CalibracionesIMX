@@ -88,4 +88,11 @@ export class ReturnDeviceComponent implements OnInit {
     return control.value == '' ? 'is-invalid' : 'is-valid';
   }
 
+  getPrestatario() : string{
+    if(this.device.nombrePrestatario == 'operador'){
+      return 'Operador: ' + this.device.prestamos[0].operador;
+    }
+    return this.device.nombrePrestatario;
+  }
+
 }

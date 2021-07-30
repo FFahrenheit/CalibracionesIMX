@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, TitleCasePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ErrorPipe } from 'src/app/pipes/error.pipe';
@@ -28,7 +28,8 @@ export class DeviceBorrowsComponent implements OnInit {
               public errorPipe      : ErrorPipe,
               public resolution     : ResolutionPipe,
               public datePipe       : DatePipe,
-              private router        : Router) { 
+              private router        : Router,
+              public titleCase     : TitleCasePipe) { 
   }
 
   ngOnInit(): void {

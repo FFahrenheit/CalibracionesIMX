@@ -45,9 +45,14 @@
                         </div>
                         <ng-template #not_available>
                             <attr name="Estado del equipo" value="Prestado" status="not-ok"></attr>
-                            <attr name="Prestatario"
+                            <attr *ngIf="device.prestatario != 'operador'; else operador" name="Prestatario"
                                 [value]="device.nombrePrestatario + ' (' + device.prestatario + ')'">
                             </attr>
+                            <ng-template #operador>
+                                <attr name="Prestatario"
+                                [value]="device.operador + ' (operador)'">
+                            </attr>
+                            </ng-template>
                         </ng-template>
                     </div>
 
@@ -55,7 +60,7 @@
                         <h6 class="text-left subtitle-att">Responsables del equipo</h6>
                         <ul class="dot-list" *ngIf="device.responsables.length > 0; else empty_responsables">
                             <li *ngFor="let r of device.responsables">
-                                {{ r.nombre }}
+                                {{ r.nombre | titlecase }}
                             </li>
                         </ul>
                         <ng-template #empty_responsables>
@@ -164,12 +169,11 @@
                             <tr *ngFor="let c of device.calibraciones; let i = index">
                                 <td [title]="'ID: ' + c.id" class="black-link">
                                     {{ c.fecha| date:'mediumDate':'UTC' }}
-                                    <!-- {{ c.fecha| date:'shortTime' }} -->
                                 </td>
                                 <td>
                                     {{ c.calibrador }}
                                 </td>
-                                <td> {{ c.verifico }} </td>
+                                <td> {{ c.verifico | titlecase }} </td>
                                 <td>
                                     Ok
                                 </td>
