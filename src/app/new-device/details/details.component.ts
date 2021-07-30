@@ -151,7 +151,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     return this.get(ctrl).value != null && this.get(ctrl).value != '' ? this.get(ctrl).value : 'N/A';
   }
 
-  private get(ctrl : string) : AbstractControl{
+  public get(ctrl : string) : AbstractControl{
     return this.form.controls[ctrl];
   }
 
@@ -212,7 +212,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   public onChange(){
     this.isFixture = this.get('tipo').value == 'FIX-';
     if(this.isFixture){
-      this.get('piezas').setValidators(Validators.required);
+      this.get('piezas').setValidators([ Validators.required, Validators.pattern('^[^\/]+$')]);
     }else{
       this.get('piezas').clearValidators();
     }

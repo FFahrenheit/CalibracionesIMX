@@ -23,12 +23,15 @@
                     </div>
                 </div>
 
-                
+
                 <div class="form-group row pt-2 has-error has-feedback" *ngIf="isFixture">
                     <label for="" class="col-md-4 col-form-label">Números de pieza del fixture</label>
                     <div class="col-md-8">
                         <input formControlName="piezas" type="text" class="form-control"
                             placeholder="Piezas en las que se usa, separadas por -" [class]="getClass('piezas')">
+                        <div class="invalid-feedback" *ngIf="get('piezas').value.includes('/')">
+                            No puedes usar el símbolo / para enlistar las piezas
+                        </div>
                     </div>
                 </div>
 

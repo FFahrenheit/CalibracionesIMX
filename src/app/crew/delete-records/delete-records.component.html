@@ -4,7 +4,41 @@
     <form [formGroup]="form" autocomplete="off">
         <div class="row d-flex justify-content-center">
 
-            <div class="col-md-12">
+            
+            <div class="col-md-4">
+                <h5 class="bold"> Instrucciones </h5>
+                <div [ngSwitch]="get('tipo').value">
+                    
+                    <span *ngSwitchCase="null">
+                        1.- Seleccione el tipo de registro a eliminar <br>
+                        2.- Asegúrese de identificar el folio o ID del registro a borrar <br>
+                        3.- Siga las instrucciones dependiendo del tipo de registro
+                    </span>
+
+                    <span *ngSwitchCase="'calibraciones'">
+                        1.- Identifique el ID de calibración sobreponiendo el puntero sobre la fecha de calibración del registro <br>
+                        2.- Asegúrese de haber dado de alta el registro de la calibración correcta 
+                        <span class="bold">después</span> de haber dado de 
+                        alta el registro que está a punto de eliminar<br>
+                        3.- Corrobore que realizó de forma correcta la eliminación
+                    </span>
+
+                    <span *ngSwitchCase="'prestamos'">
+                        1.- Identifique el folio del préstamos a eliminar consultándolo en la columna de "Folio"
+                        del historial de préstamos del equipo<br>
+                        2.- Si este préstamo es el <span class="bold">último</span> registrado para el equipo
+                        en cuestión, asegúrese que el estado
+                        del préstamo sea <span class="bold">Devuelto</span> (o dañado)
+                    </span>
+
+                    <span *ngSwitchDefault>
+                        1.- Seleccione una opción válida
+                    </span>
+
+                </div>
+            </div>
+
+            <div class="col-md-8">
 
                 <h5 class="text-left">Detalles del registro a borrar </h5>
 
@@ -16,10 +50,9 @@
                     <div class="col-md-8 px-5">
                         <select formControlName="tipo" [class]="getClass('tipo')"
                             class="custom-select mb-2 mr-sm-2 mb-sm-0">
-                            <option [value]='""' disabled selected>Tipo de registro a eliminar</option>
+                            <option [value]='null' disabled selected>Tipo de registro a eliminar</option>
                             <option value="calibraciones">Calibración</option>
-                            <option value="">Préstamo</option>
-                            <!-- <option value="prestador">Prestador</option> -->
+                            <option value="prestamos">Préstamo</option>
                         </select>
                     </div>
                 </div>
@@ -34,16 +67,18 @@
                             placeholder="Folio o ID del registro a eliminar" [class]="getClass('id')">
                     </div>
                 </div>
-
-                <confirm-modal [isDisabled]="!form.valid"
-                (triggered)="form.markAllAsTouched()"
-                (accept)="next()"
-                trigger="Eliminar registro"
-                reason="Rellene el formulario de forma correcta"
-                title="Confirmar eliminación de registro"
-                myClass="px-5 m-3 btn-danger"
-                content="¿Está completamente seguro de eliminar este registro?">
-                </confirm-modal>
+                <div class="float-right">
+                    <confirm-modal [isDisabled]="!form.valid"
+                    (triggered)="form.markAllAsTouched()"
+                    (accept)="next()"
+                    trigger="Eliminar registro"
+                    reason="Rellene el formulario de forma correcta"
+                    title="Confirmar eliminación de registro"
+                    myClass="px-5 m-3 btn-danger"
+                    content="¿Está completamente seguro de eliminar este registro?">
+                    </confirm-modal>            
+                </div>
+    
             </div>
 
         </div>
