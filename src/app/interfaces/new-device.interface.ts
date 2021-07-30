@@ -22,7 +22,8 @@ export interface Device {
     _proveedores ? : _Proveedor[],
     _calibraciones ? :Calibracion[],
     certificate ? : File,
-    ryr ? : File
+    ryr ? : File,
+    resource ? : File
 }
 
 export interface _Responsable{

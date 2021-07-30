@@ -27,6 +27,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   public ryr;
   public certificate;
+  public resource;
 
   public isFixture = false;
 
@@ -58,8 +59,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
       estado : [saved?.estado || '', Validators.required],
       hasRyr: [saved?.ryr == null ? false : true || false],
       hasCertificate: [saved?.certificate == null ? false : true || false],
+      hasResource: [ saved?.resource == null ? false : true || false ],
       ryr: [ saved?.ryr == null ? '' : saved?.ryr.name || ''],
       certificate: [ saved?.certificate == null ? '' : saved?.certificate.name ||  ''],
+      resource: [ saved?.resource == null ? '' : saved?.resource.name || ''],
       piezas : [this.getPiezas(saved) || '']
     });
     
@@ -67,6 +70,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
     this.certificate = saved?.certificate || null;
     this.ryr = saved?.ryr || null;
+    this.resource = saved?.resource || null;
 
     this.get('hasRyr').valueChanges.subscribe(value=>{
       if(!value){
@@ -85,6 +89,16 @@ export class DetailsComponent implements OnInit, OnDestroy {
         this.certificate = null;
       }else{
         this.get('certificate').setValidators([Validators.required]);
+      }
+    });
+
+    this.get('resource').valueChanges.subscribe(value=>{
+      if(!value){
+        this.get('resource').clearValidators();
+        this.get('resource').setValue('');
+        this.resource = null;
+      }else{
+        this.get('resource').setValidators([Validators.required]);
       }
     });
 
@@ -125,6 +139,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   private getForm() : Device{
     let ryr = this.get('hasRyr').value ? this.ryr : null;
     let certificate = this.get('hasCertificate').value ? this.certificate : null;
+    let resource = this.get('resource').value ? this.resource : null;
 
     let device : Device = {
       tipo: this.getID(),
@@ -142,6 +157,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       estado: this.get('estado').value,
       ryr: ryr,
       certificate : certificate,
+      resource: resource
     };
 
     return device;
@@ -188,9 +204,15 @@ export class DetailsComponent implements OnInit, OnDestroy {
     }
   }
 
+  resourceEvent($event){
+    if($event.target.files.length > 0){
+      this.resource = $event.target.files[0];
+    }
+  }
+
   needsEvidence() {
     let status = false;
-    if (!this.form.controls['hasRyr'].value && !this.form.controls['hasCertificate'].value) {
+    if (!this.get('hasRyr').value && !this.get('hasCertificate').value && !this.get('hasResource').value) {
       return false;
     }
     if (this.form.controls['hasCertificate'].value && this.form.controls['certificate'].value == '') {
@@ -198,6 +220,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
     }
     // console.log([this.form.controls['hasCertificate'].value, this.form.controls['certificate'].value == ''])
     if (this.form.controls['hasRyr'].value && this.form.controls['ryr'].value == '') {
+      status = true;
+    }
+
+    if (this.form.controls['hasResource'].value && this.form.controls['resource'].value == '') {
       status = true;
     }
     return status;
@@ -213,8 +239,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.isFixture = this.get('tipo').value == 'FIX-';
     if(this.isFixture){
       this.get('piezas').setValidators([ Validators.required, Validators.pattern('^[^\/]+$')]);
+      this.get('resource').setValidators(Validators.required);
     }else{
+      this.get('hasResource').setValue(false);
       this.get('piezas').clearValidators();
+      this.get('resource').clearValidators();
     }
   }
 

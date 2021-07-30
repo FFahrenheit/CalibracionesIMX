@@ -38,7 +38,7 @@ export class NewDeviceService {
 
             return this.upload.uploadFiles(
               this.id, calibrationId
-              ,this.device.certificate, this.device.ryr)
+              ,this.device.certificate, this.device.ryr, this.device.resource)
               .subscribe(resp => {
                 return resp;
               }, error => {
@@ -177,6 +177,7 @@ export class NewDeviceService {
     delete body.device.verificadores;
     delete body.device.ryr;
     delete body.device.certificate;
+    delete body.device.resource;
 
     return body;
   }

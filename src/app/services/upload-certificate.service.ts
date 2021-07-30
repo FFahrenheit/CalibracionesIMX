@@ -13,7 +13,7 @@ export class UploadCertificateService {
 
   constructor(private http: HttpClient) { }
 
-  public uploadFiles(equipo : string, id : string, certificate : File, ryr : File){
+  public uploadFiles(equipo : string, id : string, certificate : File, ryr : File, resource : File){
     let calls = [];
 
     if(certificate){
@@ -39,6 +39,21 @@ export class UploadCertificateService {
   
       calls.push(this.http.post(
         `${base_url}/upload/ryr/${equipo}/${id}`,
+        formData,
+        {
+          headers: headers
+        }
+      ));
+    }
+
+    if(resource){
+      let headers = new HttpHeaders();
+      headers.set('Content-Type','multipart/form-data');
+      let formData = new FormData();
+      formData.append('resource',resource);
+  
+      calls.push(this.http.post(
+        `${base_url}/upload/resource/${equipo}/foo`,
         formData,
         {
           headers: headers
