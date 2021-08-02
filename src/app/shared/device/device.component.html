@@ -49,9 +49,8 @@
                                 [value]="device.nombrePrestatario + ' (' + device.prestatario + ')'">
                             </attr>
                             <ng-template #operador>
-                                <attr name="Prestatario"
-                                [value]="device.operador + ' (operador)'">
-                            </attr>
+                                <attr name="Prestatario" [value]="device.operador + ' (operador)'">
+                                </attr>
                             </ng-template>
                         </ng-template>
                     </div>
@@ -69,7 +68,7 @@
                     </div>
                 </div>
 
-                <div class="mb-3">
+                <div>
                     <h6 class="text-left subtitle-att">Equipos que se utilizan para calibración</h6>
                     <ul class="dot-list" *ngIf="device.verificadores.length > 0;else empty_calibradores">
                         <li *ngFor="let c of device.verificadores">
@@ -90,6 +89,57 @@
                             este equipo
                         </span>
                     </ng-template>
+                </div>
+
+                <div class="mb-3">
+                    <h5 class="text-left subtitle-att">Archivos de referencia</h5>
+
+                    <table class="table table-hover table-bordered table-sm"
+                        *ngIf="device.recursos?.length > 0; else empty_resources">
+                        <tr class="header">
+                            <th scope="col" class="align-middle">
+                                Tipo
+                            </th>
+                            <th scope="col" class="align-middle">
+                                Rev.
+                            </th>
+                            <th scope="col" class="align-middle">
+                                Fecha de subida
+                            </th>
+                            <th scope="col" class="align-middle">
+                                Descarga
+                            </th>
+                        </tr>
+                        <tbody>
+                            <tr *ngFor="let r of device.recursos">
+                                <td>
+                                    {{ r.tipo | titlecase }}
+                                </td>
+                                <td>
+                                    {{ r.version }}
+                                </td>
+                                <td>
+                                    {{ r.fecha | date:'medium' }}
+                                </td>
+                                <td>
+                                    <a *ngIf="r.archivo != null; else just_resource" [title]="'Descargar ' + r.tipo"
+                                        [href]="downloadResource(r.archivo)" target="_blank" class="black-link attach">
+                                        <i class="fas fa-file-download"></i>
+                                    </a>
+                                    <ng-template #just_resource>
+                                        <i class="fas fa-file"></i>
+                                    </ng-template>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <ng-template #empty_resources>
+                        <span class="">
+                            No hay archivos de referencia
+                        </span>
+                    </ng-template>
+
                 </div>
 
             </div>
@@ -228,3 +278,6 @@
         description="No se encontró el dispositivo con el ID especificado">
     </error-message>
 </ng-template>
+<div class="mb-1">
+    &nbsp;
+</div>

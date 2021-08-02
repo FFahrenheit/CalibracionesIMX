@@ -52,6 +52,11 @@ export class GetDeviceService {
     return this.errorMessage;
   }
 
+  public downloadResource(file : string){
+    file = file.replace(/\\/g,'*');
+    return encodeURI(`${ base_url }/resource/${ file }`);    
+  }
+
   public downloadFiles(file : string){
     file = file.replace(/\\/g,'*');
     return encodeURI(`${ base_url }/files/${ file }`);

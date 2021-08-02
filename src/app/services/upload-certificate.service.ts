@@ -53,7 +53,7 @@ export class UploadCertificateService {
       formData.append('resource',resource);
   
       calls.push(this.http.post(
-        `${base_url}/upload/resource/${equipo}/foo`,
+        `${base_url}/upload/resource/${equipo}/Dibujo`,
         formData,
         {
           headers: headers

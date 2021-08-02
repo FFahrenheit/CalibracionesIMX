@@ -148,6 +148,10 @@ export class DeviceComponent implements OnInit {
     return this.deviceService.downloadFiles(filename);
   }
 
+  public downloadResource(filename : string){
+    return this.deviceService.downloadResource(filename);
+  }
+
   public getBorrow(){
     this.router.navigate(['prestamos','detalles',this.id]);
   }
