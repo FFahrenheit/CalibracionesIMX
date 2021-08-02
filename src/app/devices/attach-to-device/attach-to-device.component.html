@@ -59,7 +59,7 @@
 
         <div class="col-md-6">
             <confirm-modal title="Adjuntar archivo" content="¿Confirma la subida de este archivo de referencia a este equipo?"
-                [isDisabled]="! isValid()" (triggered)="form.markAllAsTouched()" [reason]="reasons"
+                [isDisabled]="! isValid()" (triggered)="form.markAllAsTouched()" reason="Complete el formulario de forma completa"
                 trigger="Adjuntar archivos" (accept)="submit()">
             </confirm-modal>
         </div>

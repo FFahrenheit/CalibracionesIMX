@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -71,7 +71,7 @@ export class DeviceOptionsComponent implements OnInit {
 
       
       this.actions.push({
-        action: 'Adjuntar archivos',
+        action: 'Adjuntar archivos a calibración',
         link: ['calibraciones','adjuntar',this.id],
         icon: 'fas fa-file-upload'
       });
@@ -80,6 +80,12 @@ export class DeviceOptionsComponent implements OnInit {
         action: 'Editar equipo',
         link: ['editar',this.id, 'empezar'],
         icon: 'fas fa-pencil-alt'
+      });
+
+      this.actions.push({
+        action: 'Adjuntar archivos de referencia',
+        link: ['equipos','adjuntar',this.id],
+        icon: 'fas fa-file-import'
       });
       
       this.actions.push({

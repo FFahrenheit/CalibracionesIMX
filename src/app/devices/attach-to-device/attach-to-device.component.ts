@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { tiposReferencia } from 'src/app/resources/resources.types';
+import { UploadCertificateService } from 'src/app/services/upload-certificate.service';
 import { AlertService } from 'src/app/shared/alert';
 
 @Component({
@@ -15,16 +16,15 @@ export class AttachToDeviceComponent implements OnInit {
   public show = false;
   public device = null;
   public form: FormGroup = Object.create(null);
-  public reasons: string[] = [];
   public archivo : File;
-  public model = null;
   public filename : string;
   public tipos = tiposReferencia;
 
   constructor(private route: ActivatedRoute,
     private alert: AlertService,
     private router: Router,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private upload: UploadCertificateService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -59,7 +59,7 @@ export class AttachToDeviceComponent implements OnInit {
   }
 
   private navigate() {
-    this.alert.success('Se han adjuntado los archivos');
+    this.alert.success('Se ha adjuntado la referencia');
     setTimeout(() => {
       this.router.navigate(['equipos', 'detalles', this.id]);
     }, 2500);
@@ -92,6 +92,20 @@ export class AttachToDeviceComponent implements OnInit {
 
 
   public submit() {
-    console.log('Ok!');
+    if(this.form.valid){
+      this.upload.uploadReference(
+        this.id,
+        this.get('tipo').value == 'custom' ? this.get('tipoCustom').value : this.get('tipo').value,
+        this.archivo
+      ).subscribe(resp=>{
+        if(resp){
+          this.navigate();
+        }else{
+          this.alert.error(this.upload.getError());
+        }
+      },error=>{
+        this.alert.error(this.upload.getError());
+      })
+    }
   }
 }

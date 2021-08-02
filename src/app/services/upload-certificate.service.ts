@@ -11,7 +11,37 @@ const base_url = environment.base_url;
 })
 export class UploadCertificateService {
 
+  private error = 'Error de servicio';
+
   constructor(private http: HttpClient) { }
+
+  public uploadReference(equipo : string, tipo : string, resource : File ){
+
+    let headers = new HttpHeaders();
+    headers.set('Content-Type','multipart/form-data');
+    let formData = new FormData();
+    formData.append('resource',resource);
+
+    return this.http.post(
+      `${base_url}/upload/resource/${equipo}/${tipo}`,
+      formData,
+      {
+        headers: headers
+      }
+    ).pipe(
+      map(resp => {
+        if(resp['ok']){
+          return true;
+        }
+        this.error = 'No se pudo adjuntar la referencia';
+        return false;
+      }),catchError(err=>{
+        console.log(err);
+        this.error = 'No se pudo subir el recurso';
+        return of(false);
+      })
+    );
+  }
 
   public uploadFiles(equipo : string, id : string, certificate : File, ryr : File, resource : File){
     let calls = [];
@@ -162,6 +192,10 @@ export class UploadCertificateService {
         return of(false);
       }))
     );
+  }
+
+  public getError() : string{
+    return this.error;
   }
 
 }
