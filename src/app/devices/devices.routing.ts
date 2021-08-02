@@ -2,6 +2,7 @@ import { Routes } from "@angular/router";
 import { AdminGuard } from "../guards/admin.guard";
 import { LenderGuard } from "../guards/lender.guard";
 import { AdminDevicesComponent } from "./admin-devices/admin-devices.component";
+import { AttachResourcesComponent } from "./attach-resources/attach-resources.component";
 import { AttachmentDevicesComponent } from "./attachment-devices/attachment-devices.component";
 import { BorrowDevicesComponent } from "./borrow-devices/borrow-devices.component";
 import { BorrowedDevicesComponent } from "./borrowed-devices/borrowed-devices.component";
@@ -37,6 +38,13 @@ export const DevicesRoutes : Routes =  [
                 component: AttachmentDevicesComponent,
                 data: {
                     title: 'Adjuntar certificados'
+                }
+            },
+            {
+                path: 'referencias',
+                component: AttachResourcesComponent,
+                data: {
+                    title: 'Adjuntar archivos de referencia'
                 }
             },
             {

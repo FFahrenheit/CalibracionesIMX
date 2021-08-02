@@ -44,6 +44,11 @@ export const adminSidebar = [
         detail: 'Modificar y agregar equipos'
     },
     {
+        name: 'Adjuntar referencias',
+        route: ['equipos', 'referencias'],
+        detail: 'Agregar archivos de referencia' 
+    },
+    {
         name: 'Administrar proveedores',
         route: ['usuarios','proveedores','ver'],
         detail: 'Agregar y ver proveedores certificados'

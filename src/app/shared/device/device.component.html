@@ -112,14 +112,14 @@
                         </tr>
                         <tbody>
                             <tr *ngFor="let r of device.recursos">
-                                <td>
+                                <td [title]="'ID: ' + r.id" class="black-link">
                                     {{ r.tipo | titlecase }}
                                 </td>
                                 <td>
                                     {{ r.version }}
                                 </td>
                                 <td>
-                                    {{ r.fecha | date:'medium' }}
+                                    {{ r.fecha | date:'medium':'UTC' }}
                                 </td>
                                 <td>
                                     <a *ngIf="r.archivo != null; else just_resource" [title]="'Descargar ' + r.tipo"
