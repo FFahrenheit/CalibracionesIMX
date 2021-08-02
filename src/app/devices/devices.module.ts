@@ -15,8 +15,8 @@ import { AdminDevicesComponent } from './admin-devices/admin-devices.component';
 import { UpdateActiveComponent } from './update-active/update-active.component';
 import { AttachmentDevicesComponent } from './attachment-devices/attachment-devices.component';
 import { AttachResourcesComponent } from './attach-resources/attach-resources.component';
-
-
+import { AttachToDeviceComponent } from './attach-to-device/attach-to-device.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,11 +32,14 @@ import { AttachResourcesComponent } from './attach-resources/attach-resources.co
     UpdateActiveComponent,
     AttachmentDevicesComponent,
     AttachResourcesComponent,
+    AttachToDeviceComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(DevicesRoutes),
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class DevicesModule { }

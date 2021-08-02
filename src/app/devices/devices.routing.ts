@@ -3,6 +3,7 @@ import { AdminGuard } from "../guards/admin.guard";
 import { LenderGuard } from "../guards/lender.guard";
 import { AdminDevicesComponent } from "./admin-devices/admin-devices.component";
 import { AttachResourcesComponent } from "./attach-resources/attach-resources.component";
+import { AttachToDeviceComponent } from "./attach-to-device/attach-to-device.component";
 import { AttachmentDevicesComponent } from "./attachment-devices/attachment-devices.component";
 import { BorrowDevicesComponent } from "./borrow-devices/borrow-devices.component";
 import { BorrowedDevicesComponent } from "./borrowed-devices/borrowed-devices.component";
@@ -75,6 +76,13 @@ export const DevicesRoutes : Routes =  [
                 component: ViewDeviceComponent,
                 data: {
                     title: 'Detalles de equipo'
+                }
+            },
+            {
+                path: 'adjuntar/:id',
+                component: AttachToDeviceComponent,
+                data:{
+                    title: 'Adjuntar archivos de referencia'
                 }
             },
             {

@@ -23,7 +23,7 @@ export class AttachResourcesComponent implements OnInit {
   }
 
   public deviceDetails(id : string){
-    this.router.navigate(['equipos','detalles',id]);
+    this.router.navigate(['equipos','adjuntar',id]);
   }
 
   private loadDevices(req = this.devicesService.getSavedFilters()) : void{

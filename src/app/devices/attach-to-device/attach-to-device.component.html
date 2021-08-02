@@ -1,0 +1,67 @@
+<alert></alert>
+<device [id]="id" (receive)="exists($event)" [canHide]="true">
+</device>
+
+<div *ngIf="show">
+    <h5>Adjuntar archivos de referencia</h5>
+    <p>
+        * Seleccione el tipo de archivo de referencia que desea subir
+    </p>
+    <p>
+        * Adjunte el archivo correspondiente
+    </p>
+    <div class="row py-2">
+        <form [formGroup]="form" class="ml-3 col-md-6">
+
+            <div class="form-group row">
+                <label for="" class="col-md-5 col-form-label has-error has-feedback">Tipo de recurso</label>
+                <div class="col-md-7">
+                    <select formControlName="tipo" [class]="getClass('tipo')"
+                        class="custom-select mb-2 mr-sm-2 mb-sm-0" (change)="setModel()">
+                        <option [value]="null" selected disabled>Seleccione el tipo de archivo referencia</option>
+                        <option *ngFor="let t of tipos" [value]="t">
+                            {{ t | titlecase }}
+                        </option>
+                        <option value="custom">Otro (personalizado)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row" *ngIf="get('tipo').value == 'custom'">
+                <label for="" class="col-md-5 col-form-label has-error has-feedback">Tipo referencia</label>
+                <div class="col-md-7">
+                    <input type="text" class="form-control" formControlName="tipoCustom"
+                        placeholder="Nombre del verificador" [class]="getClass('tipoCustom')">
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="ryr">Suba el archivo de referencia</label>
+                <input type="file" class="form-control file-input" (change)="fileEvent($event)"
+                    formControlName="archivo" [class]="getClass('archivo')" required>
+                <span *ngIf="archivo">
+                    <i class="fas fa-check-circle ok-icon-st"></i>
+                    <span class="adj">
+                        Archivo adjunto:
+                    </span>
+                    {{ filename }}
+                </span>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="row py-2">
+        <div class="col-md-6">
+
+        </div>
+
+        <div class="col-md-6">
+            <confirm-modal title="Adjuntar archivo" content="¿Confirma la subida de este archivo de referencia a este equipo?"
+                [isDisabled]="! isValid()" (triggered)="form.markAllAsTouched()" [reason]="reasons"
+                trigger="Adjuntar archivos" (accept)="submit()">
+            </confirm-modal>
+        </div>
+    </div>
+</div>
