@@ -31,6 +31,13 @@
                         del préstamo sea <span class="bold">Devuelto</span> (o dañado)
                     </span>
 
+                    <span *ngSwitchCase="'recursos'">
+                        1.- Identifique el ID del recurso calibración sobreponiendo el puntero sobre el tipo de 
+                        archivo de referencia <br>
+                        2.- Si la revisión a eliminar <span class="bold">no es la última</span>, este número de revisión será
+                        <span class="bold">eliminado</span> del historial
+                    </span>
+
                     <span *ngSwitchDefault>
                         1.- Seleccione una opción válida
                     </span>
@@ -53,6 +60,7 @@
                             <option [value]='null' disabled selected>Tipo de registro a eliminar</option>
                             <option value="calibraciones">Calibración</option>
                             <option value="prestamos">Préstamo</option>
+                            <option value="recursos">Archivo de referencia</option>
                         </select>
                     </div>
                 </div>

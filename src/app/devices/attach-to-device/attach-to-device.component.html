@@ -31,7 +31,7 @@
                 <label for="" class="col-md-5 col-form-label has-error has-feedback">Tipo referencia</label>
                 <div class="col-md-7">
                     <input type="text" class="form-control" formControlName="tipoCustom"
-                        placeholder="Nombre del verificador" [class]="getClass('tipoCustom')">
+                        placeholder="Referencia a adjuntar" [class]="getClass('tipoCustom')">
                 </div>
             </div>
 
@@ -58,9 +58,11 @@
         </div>
 
         <div class="col-md-6">
-            <confirm-modal title="Adjuntar archivo" content="¿Confirma la subida de este archivo de referencia a este equipo?"
-                [isDisabled]="! isValid()" (triggered)="form.markAllAsTouched()" reason="Complete el formulario de forma completa"
-                trigger="Adjuntar archivos" (accept)="submit()">
+            <confirm-modal title="Adjuntar archivo" 
+            content="¿Confirma la subida de este archivo de referencia a este equipo?"
+            [isDisabled]="! isValid()" (triggered)="form.markAllAsTouched()" 
+            reason="Complete el formulario de forma completa"
+            trigger="Adjuntar archivos" (accept)="submit()">
             </confirm-modal>
         </div>
     </div>
