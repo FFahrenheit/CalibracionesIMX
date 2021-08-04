@@ -77,7 +77,7 @@ export class ConfirmCalibrationComponent implements OnInit {
       resp => {
         if (resp) {
           if (this.form.controls['hasRyr'].value) {
-            //UPLOAD RYR 
+            //UPLOAD R&R 
             this.status.uploadRyr(this.id, this.ryr)
               .subscribe(resp => {
                 if (resp['ok']) {
@@ -86,10 +86,10 @@ export class ConfirmCalibrationComponent implements OnInit {
                     this.navigate();
                   }
                 } else {
-                  this.alert.error('No se pudo subir el RYR');
+                  this.alert.error('No se pudo subir el R&R');
                 }
               }, error => {
-                this.alert.error('Error al subir RYR');
+                this.alert.error('Error al subir R&R');
               });
           }
           if (this.form.controls['hasCertificate'].value) {
@@ -152,7 +152,7 @@ export class ConfirmCalibrationComponent implements OnInit {
     }
     if (this.get('hasRyr').value && this.get('ryr').value == '') {
       status = false;
-      this.reasons.push('No se ha adjuntado el archivo RYR');
+      this.reasons.push('No se ha adjuntado el archivo R&R');
     }
     if (this.get('hasCertificate').value && this.get('certificate').value == '') {
       this.reasons.push('No se ha adjuntado el certificado de calibración o validación interna');

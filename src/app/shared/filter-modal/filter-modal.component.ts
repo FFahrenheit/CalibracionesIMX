@@ -61,7 +61,7 @@ export class FilterModalComponent implements OnInit {
       fromRemaining: [saved?.fromRemaining || ''],
       toRemaining: [saved?.toRemaining || ''],
       prestatario: [saved?.prestatario],
-      prestado: [saved.prestado || null],
+      prestado: [saved?.prestado || null]
     });
 
     this.apply.emit(this.getValues());

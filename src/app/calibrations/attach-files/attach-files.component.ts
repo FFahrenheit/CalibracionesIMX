@@ -105,7 +105,7 @@ export class AttachFilesComponent implements OnInit {
       resp => {
         if (resp) {
           if (this.form.controls['hasRyr'].value) {
-            //UPLOAD RYR 
+            //UPLOAD R&R 
             this.status.uploadRyr(this.id, this.ryr as File)
               .subscribe(resp => {
                 if (resp['ok']) {
@@ -114,10 +114,10 @@ export class AttachFilesComponent implements OnInit {
                     this.navigate();
                   }
                 } else {
-                  this.alert.error('No se pudo subir el RYR');
+                  this.alert.error('No se pudo subir el R&R');
                 }
               }, error => {
-                this.alert.error('Error al subir RYR');
+                this.alert.error('Error al subir R&R');
               });
           }
           if (this.form.controls['hasCertificate'].value) {
@@ -257,7 +257,7 @@ export class AttachFilesComponent implements OnInit {
       status = false;
     }
     if (this.get('hasRyr').value && !this.ryrName) {
-      this.reasons.push('No se ha adjuntado el archivo RYR');
+      this.reasons.push('No se ha adjuntado el archivo R&R');
       status = false;
     }
     // if(this.get('hasRyr').disabled && !this.certificateName){
@@ -314,10 +314,10 @@ export class AttachFilesComponent implements OnInit {
               this.navigate();
             }
           } else {
-            this.alert.error('No se pudo subir el RYR');
+            this.alert.error('No se pudo subir el R&R');
           }
         }, error => {
-          this.alert.error('Error al subir RYR');
+          this.alert.error('Error al subir R&R');
         });
     }
     if (typeof this.certificate != 'string' && this.get('hasCertificate').value) {
