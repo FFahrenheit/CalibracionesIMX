@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { AdminDeviceGuard } from "../guards/admin-device.guard";
 import { AdminGuard } from "../guards/admin.guard";
 import { LenderGuard } from "../guards/lender.guard";
 import { AdminDevicesComponent } from "./admin-devices/admin-devices.component";
@@ -84,7 +85,7 @@ export const DevicesRoutes : Routes =  [
             {
                 path: 'adjuntar/:id',
                 component: AttachToDeviceComponent,
-                canActivate: [ AdminGuard ],
+                canActivate: [ AdminDeviceGuard ],
                 data:{
                     title: 'Adjuntar archivos de referencia'
                 }

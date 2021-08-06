@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { AdminDeviceGuard } from "../guards/admin-device.guard";
 import { EditGuard } from "../guards/edit.guard";
 import { NavigationGuard } from "../guards/navigation.guard";
 import { ActiveUpdateComponent } from "./active-update/active-update.component";
@@ -16,6 +17,7 @@ export const EditRoutes : Routes = [
             {
                 path: 'empezar',
                 component: BeginComponent,
+                // canActivate: [ AdminDeviceGuard ],
                 data: {
                     title: 'Vista previa editar equipo'
                 }
@@ -23,14 +25,16 @@ export const EditRoutes : Routes = [
             {
                 path: 'detalles',
                 component: DetailsComponent,
-                canDeactivate: [NavigationGuard],
+                // canActivate: [ AdminDeviceGuard ],
+                canDeactivate: [ NavigationGuard ],
                 data: {
                     title: 'Editar detalles del equipo'
                 }
             },
             {
                 path: 'responsables',
-                canDeactivate: [NavigationGuard],
+                // canActivate: [ AdminDeviceGuard ],
+                canDeactivate: [ NavigationGuard ],
                 component: CalibratorsResponsablesComponent,
                 data: {
                     title: 'Editar responsables y verificadores'
@@ -39,6 +43,7 @@ export const EditRoutes : Routes = [
             {
                 path: 'proveedores',
                 component: ProvidersComponent,
+                // canActivate: [ AdminDeviceGuard ],
                 data: {
                     title: 'Editar proveedores certificados'
                 }
@@ -46,13 +51,15 @@ export const EditRoutes : Routes = [
             {
                 path: 'confirmar',
                 component: ConfirmComponent,
-                canDeactivate: [NavigationGuard],
+                // canActivate: [ AdminDeviceGuard ],
+                canDeactivate: [ NavigationGuard ],
                 data: {
                     title: 'Confirmar cambios'
                 }
             },
             {
                 path: 'estado',
+                // canActivate: [ AdminDeviceGuard ],
                 component: ActiveUpdateComponent,
                 data: {
                     title: 'Cambiar estado del equipo'

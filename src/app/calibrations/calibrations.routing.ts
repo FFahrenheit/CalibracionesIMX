@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { AdminDeviceGuard } from "../guards/admin-device.guard";
 import { AttachFilesComponent } from "./attach-files/attach-files.component";
 import { BeginCalibrationComponent } from "./begin-calibration/begin-calibration.component";
 import { ConfirmCalibrationComponent } from "./confirm-calibration/confirm-calibration.component";
@@ -11,6 +12,7 @@ export const CalibrationsRoutes : Routes =  [
             {
                 path: 'empezar/:id',
                 component: BeginCalibrationComponent,
+                canActivate: [ AdminDeviceGuard ],
                 data: {
                     title: 'Empezar proceso de calibración'
                 }
@@ -18,6 +20,7 @@ export const CalibrationsRoutes : Routes =  [
             {
                 path: 'actualizar/:id',
                 component: UpdateStatusComponent,
+                canActivate: [ AdminDeviceGuard ],
                 data: {
                     title: 'Actualizar estado de calibración'
                 }
@@ -25,6 +28,7 @@ export const CalibrationsRoutes : Routes =  [
             {
                 path: 'adjuntar/:id',
                 component: AttachFilesComponent,
+                canActivate: [ AdminDeviceGuard ],
                 data: {
                     title: 'Adjuntar archivos a calibración'
                 }
@@ -32,6 +36,7 @@ export const CalibrationsRoutes : Routes =  [
             {
                 path: 'confirmar/:id',
                 component: ConfirmCalibrationComponent,
+                canActivate: [ AdminDeviceGuard ],
                 data: {
                     title: 'Confirmar calibración'
                 }

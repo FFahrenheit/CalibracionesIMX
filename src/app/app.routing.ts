@@ -4,8 +4,8 @@ import { Error403Component } from "./errors/error403/error403.component";
 import { Error404Component } from "./errors/error404/error404.component";
 import { Error500Component } from "./errors/error500/error500.component";
 import { Error503Component } from "./errors/error503/error503.component";
+import { AdminDeviceGuard } from "./guards/admin-device.guard";
 import { AdminGuard } from "./guards/admin.guard";
-import { LenderGuard } from "./guards/lender.guard";
 import { LoggedGuard } from "./guards/logged.guard";
 import { LoginGuard } from "./guards/login.guard";
 import { BlankComponent } from "./layouts/blank/blank.component";
@@ -26,7 +26,7 @@ export const AppRoutes: Routes = [
             },
             {
                 path: 'calibraciones',
-                // canActivate: [ AdminGuard ],
+                // canActivate: [ AdminDeviceGuard ],
                 loadChildren: () =>
                 import('./calibrations/calibrations.module').then(
                     (m) => m.CalibrationsModule
@@ -34,7 +34,7 @@ export const AppRoutes: Routes = [
             },
             {
                 path: 'prestamos',
-                canActivate: [ LenderGuard ],
+                // canActivate: [ LenderGuard ],
                 loadChildren: () =>
                 import('./borrowings/borrowings.module').then(
                     (m) => m.BorrowingsModule
@@ -57,7 +57,7 @@ export const AppRoutes: Routes = [
             },
             {
                 path: 'editar/:id',
-                canActivate: [ AdminGuard ],
+                canActivate: [ AdminDeviceGuard ],
                 loadChildren: ()=>
                 import('./edit/edit.module').then(
                     (m) => m.EditModule

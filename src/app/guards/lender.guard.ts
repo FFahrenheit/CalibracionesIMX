@@ -16,6 +16,7 @@ export class LenderGuard implements CanActivate {
     state: RouterStateSnapshot): boolean {
     if (!this.login.isLender() && !this.login.isAdmin()) {
       this.router.navigate(['']);
+      return false;
     }
     return true;
   }
