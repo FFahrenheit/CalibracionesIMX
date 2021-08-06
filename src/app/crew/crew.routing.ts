@@ -39,6 +39,7 @@ export const CrewRoutes : Routes =  [
             {
                 path: 'proveedores/administrar',
                 component: ProviderListComponent,
+                canActivate: [ AdminGuard ],
                 data: {
                     title: 'Administrar proveedores certificados'
                 }

@@ -15,7 +15,7 @@ export class AdminGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot) : boolean {
     if(!this.login.isAdmin()){
-      this.router.navigate(['403']);
+      this.router.navigate(['']);
     }
     return true;
   }

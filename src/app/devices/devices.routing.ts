@@ -29,7 +29,7 @@ export const DevicesRoutes : Routes =  [
             {
                 path: 'proximos',
                 component: NextDevicesComponent,
-                // canActivate: [ AdminGuard ],
+                canActivate: [ AdminGuard ],
                 data: {
                     title: 'Equipos próximos a calibrar'
                 }
@@ -37,6 +37,7 @@ export const DevicesRoutes : Routes =  [
             {
                 path: 'adjuntar',
                 component: AttachmentDevicesComponent,
+                canActivate: [ AdminGuard] ,
                 data: {
                     title: 'Adjuntar certificados'
                 }
@@ -44,6 +45,7 @@ export const DevicesRoutes : Routes =  [
             {
                 path: 'referencias',
                 component: AttachResourcesComponent,
+                canActivate: [ AdminGuard ],
                 data: {
                     title: 'Adjuntar archivos de referencia'
                 }
@@ -51,7 +53,7 @@ export const DevicesRoutes : Routes =  [
             {
                 path: 'proceso',
                 component: ProcessDevicesComponent,
-                // canActivate: [ AdminGuard ],
+                canActivate: [ AdminGuard ],
                 data: {
                     title: 'Equipos en proceso de calibración'
                 }
@@ -59,7 +61,7 @@ export const DevicesRoutes : Routes =  [
             {
                 path: 'pendientes',
                 component: PendingDevicesComponent,
-                // canActivate: [ AdminGuard ],
+                canActivate: [ AdminGuard ],
                 data: {
                     title: 'Equipos con Calibración Vencida'
                 }
@@ -67,6 +69,7 @@ export const DevicesRoutes : Routes =  [
             {
                 path: 'modificar',
                 component: UpdateActiveComponent,
+                canActivate: [ AdminGuard ],
                 data: {
                     title: 'Actualizar estado de los equipos'
                 }
@@ -81,13 +84,14 @@ export const DevicesRoutes : Routes =  [
             {
                 path: 'adjuntar/:id',
                 component: AttachToDeviceComponent,
+                canActivate: [ AdminGuard ],
                 data:{
                     title: 'Adjuntar archivos de referencia'
                 }
             },
             {
                 path: 'actualizar',
-                // canActivate: [ AdminGuard ],
+                canActivate: [ AdminGuard ],
                 component: UpdateDevicesComponent,
                 data: {
                     title: 'Actualizar estado de calibración'

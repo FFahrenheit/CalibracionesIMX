@@ -6,7 +6,7 @@
                 <h4 class="text-left my-1">Proveedores Certificados</h4>
             </td>
             <td>
-                <div class="text-right">
+                <div class="text-right" *ngIf="isAdmin">
                     <button class="btn btn-success mt-3" (click)="goToAdmin()">
                         <i class="fas fa-users-cog"></i>
                         Administrar proveedores
