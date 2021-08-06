@@ -14,7 +14,7 @@ export class LenderDeviceGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot) {
-    if (!this.login.isAdmin() && !this.login.isAdmin()) {
+    if (!this.login.isAdmin() && !this.login.isLender()) {
       this.router.navigate(['equipos', 'detalles', route.params.id]);
       return false;
     }

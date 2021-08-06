@@ -67,7 +67,9 @@
                 <h5 class="text-left">Equipos calibradores</h5>
                 <span class="text-left">
                     Agregue los equipos que se utilizan para la calibración
-                    del equipo
+                    del equipo<br>
+                    Este puede ser un equipo dado de alta o solo una descripción
+                    del equipo 
                 </span>
 
 
@@ -119,8 +121,8 @@
                     Anterior
                 </button>
                 <button [ngClass]="{'no-ok btn-secondary' : verificadores.length == 0 || responsables.length == 0 , 
-                                    'btn-success' : verificadores.length > 0 && responsables.length > 0 }" type="button"
-                    (click)="next()" class="btn px-5 float-right">Siguiente</button>
+                                    'btn-success' : verificadores.length > 0 && responsables.length > 0 }"
+                    type="button" (click)="next()" class="btn px-5 float-right">Siguiente</button>
 
             </div>
 
