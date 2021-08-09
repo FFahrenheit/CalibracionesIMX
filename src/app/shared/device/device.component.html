@@ -135,8 +135,11 @@
                     </table>
 
                     <ng-template #empty_resources>
-                        <span class="">
+                        <span class="" *ngIf="!device.resource">
                             No hay archivos de referencia
+                        </span>
+                        <span class="" *ngIf="device.resource">
+                            Un archivo pendiente de subir
                         </span>
                     </ng-template>
 

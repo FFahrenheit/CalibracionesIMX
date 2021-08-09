@@ -16,6 +16,13 @@
                     </div>
                 </div>
 
+                <span *ngIf="isFixture()">
+                    Si desea cambiar el dibujo adjunto diríjase a 
+                    <a (click)="attachReferences()" class="href">
+                        Adjuntar referencias
+                    </a>
+                </span>
+
                 <div class="form-group row pt-2 has-error has-feedback">
                     <label for="" class="col-md-4 col-form-label">No. de serie</label>
                     <div class="col-md-8">
