@@ -61,7 +61,7 @@
     
                     <div class="form-group" *ngIf="form.controls['hasResource'].value"
                         [ngClass]="{'was-validated': form.controls['resource'].touched}">
-                        <label for="ryr">Suba el archivo del dimensional</label>
+                        <label for="ryr">Suba el archivo del dibujo</label>
                         <input type="file" class="form-control file-input" id="ryr" (change)="resourceEvent($event)"
                             formControlName="resource" [required]="form.controls['hasResource'].value">
                         <span *ngIf="resource">
