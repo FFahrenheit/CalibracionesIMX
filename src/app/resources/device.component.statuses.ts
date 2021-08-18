@@ -161,6 +161,7 @@ export const ubicaciones = [
     'Linea Brose-X69F-000',
     'Linea COT-3266-000 Chende',
     'Linea COT-8585-000',
+    'Linea COT-9997-000',
     'Linea Dana-10024-000',
     'Linea de Brose 9112',
     'Linea de Brose-10024 (Dana).',

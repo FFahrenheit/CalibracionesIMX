@@ -124,7 +124,7 @@ export class DeviceComponent implements OnInit {
     let daysDiff = Number(deadLine) - Number(today);
     daysDiff = Math.ceil(daysDiff / (1000 * 60 * 60 * 24))
     
-    return daysDiff + ' días';
+    return daysDiff + (daysDiff == 1 ? ' día' : ' días');
   }
 
   public daysIcon() : string{

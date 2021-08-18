@@ -89,7 +89,7 @@
                     <i [class]="icons.calibrado(d.siguiente)"></i>
                     {{ d.siguiente | date:'shortDate':'UTC' }}
                 </td>
-                <td> {{ d.dias || 0 }} días</td>
+                <td> {{ d.dias || 0 }} {{ d?.dias == 1 ? 'día' : 'días' }}</td>
             </tr>
         </tbody>
 
