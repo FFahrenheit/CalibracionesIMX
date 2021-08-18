@@ -153,7 +153,9 @@ export class DeviceComponent implements OnInit {
   }
 
   public getBorrow(){
-    this.router.navigate(['prestamos','detalles',this.id]);
+    if(!this.id.includes('Por')){
+      this.router.navigate(['prestamos','detalles',this.id]);
+    }
   }
 
   seeCertificate(filename : string, id = null){

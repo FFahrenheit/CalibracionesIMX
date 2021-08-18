@@ -13,3 +13,13 @@
 .adj {
     font-weight: bold;
 }
+
+.href:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    color: rgb(0, 0, 87);
+}
+
+.href{
+    color: rgb(0, 0, 141);
+}

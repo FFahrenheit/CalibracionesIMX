@@ -19,7 +19,7 @@ export class DetailsComponent implements OnInit {
   public activos = activos;
   public estados = estados;
   public _ubicaciones = ubicaciones;
-  public id;
+  public id : string;
 
   public ubicaciones = [];
   public defaultLocation = '';
@@ -116,6 +116,14 @@ export class DetailsComponent implements OnInit {
 
   public updateUbicacion(value : string){
     this.form.controls['ubicacion'].setValue(value);
+  }
+
+  public isFixture() : boolean{
+    return this.id.startsWith('FIX');
+  }
+
+  public attachReferences() : void{
+    this.router.navigate(['equipos', 'adjuntar', this.id]);
   }
 
 }
