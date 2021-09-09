@@ -144,7 +144,7 @@
                                     {{ p.fechaEntrega | date:'shortTime' }}
                                 </td>
                                 <td>
-                                    {{ p.fechaCompromiso | date:'mediumDate' }}
+                                    {{ p.fechaCompromiso | date:'mediumDate':'UTC' }}
                                 </td>
                                 <td>
                                     <span *ngIf="p.nombrePrestatario != 'operador';else operador">
