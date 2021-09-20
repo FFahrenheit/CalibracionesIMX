@@ -14,7 +14,20 @@ export const profileOptions = [
         icon: 'fas fa-sign-out-alt pr-1',
         listener: 'logout'
     }
-]
+];
+
+export const mediumOptions = [
+    {
+        title: 'Préstamos de Gauges',
+        icon: 'fas fa-tachometer-alt',
+        listener: 'gauges'
+    },
+    {
+        title: 'Sistema Completo',
+        icon: 'fas fa-cogs',
+        listener: 'full'
+    }
+];
 
 export const adminOptions = [
     {

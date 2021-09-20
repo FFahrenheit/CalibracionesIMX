@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
-import { adminOptions, profileOptions } from 'src/app/resources/dashboard.component.options';
+import { adminOptions, mediumOptions, profileOptions } from 'src/app/resources/dashboard.component.options';
 import { adminSidebar, mediumSidebar, publicSidebar } from 'src/app/resources/dashboard.component.sidebar';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -21,7 +21,7 @@ export class SimpleComponent implements OnInit {
 
   public sidebar : any;
 
-  constructor(private router : Router,
+  constructor(private router  : Router,
               private login  : LoginService) { }
 
   ngOnInit(): void {
@@ -38,6 +38,11 @@ export class SimpleComponent implements OnInit {
     this.sidebar = publicSidebar;
     this.publicDropdown = profileOptions;
 
+
+    if(this.isAdmin || this.login.isLender()){
+      this.publicDropdown = this.publicDropdown.concat(mediumOptions[1]);
+      console.log(this.publicDropdown);
+    }
     if(this.isAdmin){
       this.sidebar = this.sidebar.concat(adminSidebar, mediumSidebar)
       this.adminDropdown = adminOptions;
@@ -83,9 +88,23 @@ export class SimpleComponent implements OnInit {
       case 'delete':
         this.deleteRecords();
         break;
+      case 'gauges':
+        this.goToGauges();
+        break;
+      case 'full':
+        this.goToFull();
+        break;
       default:
         console.log('Not yet implemented');
     }
+  }
+
+  private goToFull(){
+    this.router.navigate(['']);
+  }
+
+  private goToGauges(){
+    this.router.navigate(['gauges']);
   }
 
   private deleteRecords(){

@@ -4,7 +4,7 @@ import * as $ from 'jquery';
 import { User } from 'src/app/models/user.model';
 import { LoginService } from 'src/app/services/login.service';
 import { publicSidebar, adminSidebar, mediumSidebar } from 'src/app/resources/dashboard.component.sidebar';
-import { profileOptions, adminOptions } from 'src/app/resources/dashboard.component.options';
+import { profileOptions, adminOptions, mediumOptions } from 'src/app/resources/dashboard.component.options';
 
 @Component({
   selector: 'app-dashboard',
@@ -39,6 +39,11 @@ export class DashboardComponent implements OnInit {
     this.sidebar = publicSidebar;
     this.publicDropdown = profileOptions;
 
+
+    if(this.isAdmin || this.login.isLender()){
+      this.publicDropdown = this.publicDropdown.concat(mediumOptions[0]);
+      console.log(this.publicDropdown);
+    }
     if(this.isAdmin){
       this.sidebar = this.sidebar.concat(adminSidebar, mediumSidebar)
       this.adminDropdown = adminOptions;
@@ -84,9 +89,23 @@ export class DashboardComponent implements OnInit {
       case 'delete':
         this.deleteRecords();
         break;
+      case 'gauges':
+        this.goToGauges();
+        break;
+      case 'full':
+        this.goToFull();
+        break;
       default:
         console.log('Not yet implemented');
     }
+  }
+
+  private goToFull(){
+    this.router.navigate(['']);
+  }
+
+  private goToGauges(){
+    this.router.navigate(['gauges']);
   }
 
   private deleteRecords(){
