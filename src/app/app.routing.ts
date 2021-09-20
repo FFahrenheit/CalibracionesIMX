@@ -6,10 +6,12 @@ import { Error500Component } from "./errors/error500/error500.component";
 import { Error503Component } from "./errors/error503/error503.component";
 import { AdminDeviceGuard } from "./guards/admin-device.guard";
 import { AdminGuard } from "./guards/admin.guard";
+import { LenderGuard } from "./guards/lender.guard";
 import { LoggedGuard } from "./guards/logged.guard";
 import { LoginGuard } from "./guards/login.guard";
 import { BlankComponent } from "./layouts/blank/blank.component";
 import { DashboardComponent } from "./layouts/dashboard/dashboard.component";
+import { SimpleComponent } from "./layouts/simple/simple.component";
 
 export const AppRoutes: Routes = [
     {
@@ -69,6 +71,20 @@ export const AppRoutes: Routes = [
                 redirectTo: 'equipos'
             }
         ]
+    },
+    {
+        path: '',
+        component: SimpleComponent,
+        children: [
+            {
+                path: 'gauges',
+                canActivate: [ LoginGuard, LenderGuard ],
+                loadChildren: ()=>
+                import('./gauges/gauges.module').then(
+                    (m) => m.GaugesModule
+                )
+            }
+        ]        
     },
     {
         path: '',

@@ -1,0 +1,62 @@
+<div id="wrapper" class="d-flex">
+    <div class="bg-light bg-gradient order-right border" id="sidebar-wrapper">
+        <div (click)="goTo([''],0)" class="sidebar-heading menu-title title-link"> 
+            <i class="fas fa-cogs"></i>
+            Calibraciones
+         </div>
+        <div class="list-group list-group-flush bg-gradient">
+            <a *ngFor="let link of sidebar;let i = index"
+                class="list-group-item list-group-item-action bg-light clickable" (click)="goTo(link.route,i)"
+                [class.active-link]="selectedIndex === i">
+                {{ link.name }}
+            </a>
+        </div>
+    </div>
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light bg-gradient border">
+            <a (click)="shown = !shown" class="navbar-brand clickable" id="menu-toggle" data-toggle="tooltip"
+                data-placement="bottom" title="Click to toggle sidebar">
+                <i class="fas fa-bars mr-3 icon"></i>
+                <!-- <i class="fas fa-ellipsis-v mr-3 icon"></i> -->
+                <img src="../../../assets/icon.png" class="d-inline-block align-top nav-logo"
+                    alt="Haga click para ocultar o mostrar la barra lateral">
+                <span class="nav-logo title-logo"> 
+                    {{ sidebar[selectedIndex].detail }} 
+                </span>
+            </a>
+            <span class="navbar-text float-right ml-auto">
+
+                <div ngbDropdown class=""
+                placement="bottom-right" display="dynamic">
+                    <button class="btn btn-light " id="dropdownBasic1" ngbDropdownToggle>
+                        <span class="signed-user px-2">
+                            <i class="fas fa-user px-2"></i> {{ (user?.nombre | titlecase) || "Usuario"}}
+                        </span>
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem *ngFor="let o of publicDropdown" (click)="handleClick(o.listener)">
+                            <i [class]="o.icon"></i>
+                            {{ o.title }}
+                        </button>
+
+                        <div *ngIf="isAdmin">
+                            <div class="dropdown-divider"></div>
+                            <button ngbDropdownItem *ngFor="let o of adminDropdown" (click)="handleClick(o.listener)">
+                                <i [class]="o.icon"></i>
+                                {{ o.title }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </span>
+        </nav>
+        <div class="container-fluid">
+            <router-outlet>
+
+            </router-outlet>
+        </div>
+    </div>
+    <app-footer>
+    </app-footer>
+</div>
