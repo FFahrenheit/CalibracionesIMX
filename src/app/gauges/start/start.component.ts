@@ -68,7 +68,7 @@ export class StartComponent implements OnInit {
           if(resp){
             this.appendGauge(this.gaugesService.getGuage());
           }else{
-            this.alert.error(this.gaugesService.getError()); 
+            this.alert.error(this.gaugesService.getError());
           }
         },error=>{
           this.get('gauge').setValue('');
@@ -77,19 +77,43 @@ export class StartComponent implements OnInit {
   }
 
   appendGauge(gauge : any){
-    let id = gauge.id;
-
-    let isRepeteaded = this.gauges.filter( p=> p.id == id );
-
-    if(isRepeteaded.length > 0){
-      return this.alert.warn('Este equipo ya está prestado');
+    let name = `Gauge ${gauge.id} (${gauge.descripcion})`;
+    console.log(gauge);
+    
+    if(gauge.activo != 'Activo'){
+      return this.alert.warn('El ' + name +' no está activo y no se puede prestar');
     }
+    
+    if(gauge.estado != 'Calibración Vigente'){
+      return this.alert.warn('El ' + name + ' no se encuentra calibrado correctamente');
+    }
+    
+    if(gauge.prestatario != null){
+      return this.alert.warn('El ' + name + ' ya se encuentra prestado');
+    }
+
+    let isRepeteaded = this.gauges.filter( p=> p.id == gauge.id );
+    if(isRepeteaded.length > 0){
+      return this.alert.warn('El ' + name + ' ya se encuentra en su lista de préstamos');
+    }
+    
+    let toAdd = (( {id, descripcion, ubicacion, siguiente} ) => ( {id, descripcion, ubicacion, siguiente }))(gauge);    
+    // this.alert.clear();
+    this.alert.success(`${name} agregado a la lista`);
+    this.gauges.push(toAdd);
+
   }
 
   public clearOperator() {
     this.get('operator').setValue('');
-    this.get('operator').markAsUntouched();
+    this.get('operator').markAsUntouched();123
+    123
+
     this.operator.nativeElement.focus();
+  }
+
+  public removeGauge(index : number){
+    this.gauges.splice(index, 1);
   }
 
   test() {

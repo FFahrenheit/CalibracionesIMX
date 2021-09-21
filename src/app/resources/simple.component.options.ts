@@ -7,6 +7,11 @@ export const simpleOptions = [
     {
         name: 'Regresar',
         route: ['gauges','regresar'],
-        detail: 'Regresar'
+        detail: 'Regresar equipos'
+    },
+    {
+        name: 'Consultar',
+        route: ['gauges'],
+        detail: 'Consultar equipos'
     }
 ];
