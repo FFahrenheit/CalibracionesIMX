@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { adminOptions, mediumOptions, profileOptions } from 'src/app/resources/dashboard.component.options';
 import { adminSidebar, mediumSidebar, publicSidebar } from 'src/app/resources/dashboard.component.sidebar';
+import { simpleOptions } from 'src/app/resources/simple.component.options';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -12,12 +13,11 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class SimpleComponent implements OnInit {
 
-  public selectedIndex : number = 0;
-  public shown : boolean = true;
   public user : User | undefined = Object.create(null);
   public isAdmin = false;
   public publicDropdown;
   public adminDropdown;
+  public simpleOptions = simpleOptions;
 
   public sidebar : any;
 
@@ -25,11 +25,6 @@ export class SimpleComponent implements OnInit {
               private login  : LoginService) { }
 
   ngOnInit(): void {
-    this.selectedIndex = Number(sessionStorage.getItem('index')) || 0;
-    $("#menu-toggle").click((e:any)=> {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });
 
     this.user = this.login.getLoggedUser();
 
@@ -37,11 +32,9 @@ export class SimpleComponent implements OnInit {
 
     this.sidebar = publicSidebar;
     this.publicDropdown = profileOptions;
-
-
+    
     if(this.isAdmin || this.login.isLender()){
       this.publicDropdown = this.publicDropdown.concat(mediumOptions[1]);
-      console.log(this.publicDropdown);
     }
     if(this.isAdmin){
       this.sidebar = this.sidebar.concat(adminSidebar, mediumSidebar)
@@ -52,9 +45,7 @@ export class SimpleComponent implements OnInit {
 
   }
 
-  public goTo(route : string[],index : number) : void{
-    this.selectedIndex = index;
-    sessionStorage.setItem('index',String(index));
+  public goTo(route : string[]) : void{
     this.router.navigate(route);
   }
 
@@ -113,6 +104,10 @@ export class SimpleComponent implements OnInit {
 
   private addUser(){
     this.router.navigate(['usuarios','nuevo']);
+  }
+
+  public isActive(url : string[]) : boolean{
+    return ('/' + url.join('/') == this.router.url);
   }
 
 }

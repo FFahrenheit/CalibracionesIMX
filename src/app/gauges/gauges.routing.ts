@@ -8,7 +8,7 @@ export const GaugesRoutes : Routes = [
         canActivate: [ LenderGuard ],
         children: [
             {
-                path: 'inicio',
+                path: 'prestar',
                 component: StartComponent,
                 data: {
                     title: 'Préstamo de Guages'
@@ -17,7 +17,7 @@ export const GaugesRoutes : Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'inicio'   
+                redirectTo: 'prestar'   
             }
         ]
     }
