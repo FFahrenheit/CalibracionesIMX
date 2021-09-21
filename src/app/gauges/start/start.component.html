@@ -19,8 +19,7 @@
                             class="form-control label" [class]="getClass('operator')" (keyup.enter)="setEmployee()"
                             (keydown.Tab)="setEmployee($event)">
                         <div class="input-group-prepend click">
-                            <div class="input-group-text" title="Borrar código"
-                                (click)="clearOperator()">
+                            <div class="input-group-text" title="Borrar código" (click)="clearOperator()">
                                 <i class="fas fa-backspace"></i>
                             </div>
                         </div>
@@ -34,10 +33,9 @@
                     </label>
                     <div class="input-group">
                         <input #gauge type="text" formControlName="gauge" placeholder="Escanee del Guage"
-                        (keyup.enter)="addGauge()" (keydown.Tab)="addGauge()" class="form-control label">
+                            (keyup.enter)="addGauge()" (keydown.Tab)="addGauge()" class="form-control label">
                         <div class="input-group-prepend click" *ngIf="!get('scanner').value">
-                            <div class="input-group-text" title="Agregar Gauge"
-                                (click)="clearOperator()">
+                            <div class="input-group-text" title="Agregar Gauge" (click)="add()">
                                 <i class="fas fa-plus-circle"></i>
                             </div>
                         </div>
@@ -46,8 +44,8 @@
 
                 <div class="custom-control custom-switch mt-3 click">
                     <input type="checkbox" formControlName="scanner" class="custom-control-input" id="isUsingScanner">
-                    <label class="custom-control-label" for="isUsingScanner">Estoy usando código de barras</label>
-                  </div>
+                    <label class="custom-control-label" for="isUsingScanner">Estoy usando scanner</label>
+                </div>
             </form>
 
         </div>

@@ -23,7 +23,7 @@ export const mediumOptions = [
         listener: 'gauges'
     },
     {
-        title: 'Sistema Completo',
+        title: 'Sistema Completo $10USD',
         icon: 'fas fa-cogs',
         listener: 'full'
     }
