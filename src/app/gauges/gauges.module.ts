@@ -5,12 +5,14 @@ import { GaugesRoutes } from './gauges.routing';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ReturnComponent } from './return/return.component';
 
 
 
 @NgModule({
   declarations: [
-    StartComponent
+    StartComponent,
+    ReturnComponent
   ],
   imports: [
     CommonModule,

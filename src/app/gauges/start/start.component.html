@@ -1,1 +1,64 @@
-<p>start works!</p>
+<div class="table-responsive container text-center pt-2">
+
+    <alert></alert>
+
+    <h4 class="text-left my-3">Préstamo de equipos</h4>
+
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-5">
+
+            <form [formGroup]="form">
+                <div class="form-group">
+                    <label for="" class="label">
+                        <i class="fas fa-barcode"></i>
+                        Código de empleado:
+                    </label>
+
+                    <div class="input-group">
+                        <input #operator type="text" formControlName="operator" placeholder="Escanee de la credencial"
+                            class="form-control label" [class]="getClass('operator')" (keyup.enter)="setEmployee()"
+                            (keydown.Tab)="setEmployee($event)">
+                        <div class="input-group-prepend click">
+                            <div class="input-group-text" title="Borrar código"
+                                (click)="clearOperator()">
+                                <i class="fas fa-backspace"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="" class="label">
+                        <i class="fas fa-barcode"></i>
+                        Código de Gauge:
+                    </label>
+                    <div class="input-group">
+                        <input #gauge type="text" formControlName="gauge" placeholder="Escanee del Guage"
+                        (keyup.enter)="addGauge()" (keydown.Tab)="addGauge()" class="form-control label">
+                        <div class="input-group-prepend click" *ngIf="!get('scanner').value">
+                            <div class="input-group-text" title="Agregar Gauge"
+                                (click)="clearOperator()">
+                                <i class="fas fa-plus-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="custom-control custom-switch mt-3 click">
+                    <input type="checkbox" formControlName="scanner" class="custom-control-input" id="isUsingScanner">
+                    <label class="custom-control-label" for="isUsingScanner">Estoy usando código de barras</label>
+                  </div>
+            </form>
+
+        </div>
+
+        <div class="col-md-7">
+
+        </div>
+
+    </div>
+    <button class="btn btn-success" (click)="test()">
+        Lorem Ipsum
+    </button>
+
+</div>
