@@ -22,15 +22,20 @@ export class StartComponent implements OnInit {
               private gaugesService : GaugesService) { }
 
   ngOnInit(): void {
+    let isUsingScanner = (localStorage.getItem('scanner') || 'true') == 'true';
     this.form = this.fb.group({
       operator: ['', Validators.required],
       gauge: [''],
-      scanner: [true]
+      scanner: [isUsingScanner]
     });
 
     setTimeout(() => {
       this.operator.nativeElement.focus();
     }, 100);
+
+    this.get('scanner').valueChanges.subscribe(v =>{
+      localStorage.setItem('scanner', String(v));
+    });
 
   }
 
@@ -39,7 +44,7 @@ export class StartComponent implements OnInit {
   }
 
   public getClass(ctrl: string): string {
-    if (this.get(ctrl).untouched) {
+    if (this.get(ctrl).untouched || this.get(ctrl).disabled) {
       return '';
     }
     return this.get(ctrl).valid ? 'is-valid' : 'is-invalid';
@@ -49,6 +54,9 @@ export class StartComponent implements OnInit {
     if ($event) {
       $event.preventDefault();
     }
+    setTimeout(() => {
+      this.get('operator').disable();
+    }, 100);
     this.gauge.nativeElement.focus();
   }
 
@@ -105,10 +113,9 @@ export class StartComponent implements OnInit {
   }
 
   public clearOperator() {
+    this.get('operator').enable();
     this.get('operator').setValue('');
-    this.get('operator').markAsUntouched();123
-    123
-
+    this.get('operator').markAsUntouched();
     this.operator.nativeElement.focus();
   }
 
@@ -147,5 +154,9 @@ export class StartComponent implements OnInit {
     }
 
     return reasons;
+  }
+
+  public enable() : void{
+    this.get('operator').enable();
   }
 }
