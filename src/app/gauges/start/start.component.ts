@@ -54,6 +54,10 @@ export class StartComponent implements OnInit {
     if ($event) {
       $event.preventDefault();
     }
+    if(this.get('operator').value.trim() == ''){
+      this.get('operator').setValue('');
+      return this.alert.warn('Ingrese un código de empleado válido');
+    }
     setTimeout(() => {
       this.get('operator').disable();
     }, 100);
@@ -69,7 +73,11 @@ export class StartComponent implements OnInit {
   }
 
   public add(){
-    let id = this.get('gauge').value;
+    let id = this.get('gauge').value.trim();
+    if(id == ''){
+      this.get('gauge').setValue('');
+      return this.alert.warn('Ingrese un código válido');
+    }
     this.gaugesService.loadGauge(id)
         .subscribe(resp=>{
           this.get('gauge').setValue('');
