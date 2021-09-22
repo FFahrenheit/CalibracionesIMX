@@ -36,6 +36,28 @@ export class GaugesService {
                )
   }
 
+  public lendGauges(operator : string, devices : string[]){
+    const body = {
+      operator,
+      devices
+    };
+
+    return this.http.post(`${base_url}/gauges`, body)
+               .pipe(
+                 map(resp=>{
+                   if(resp['ok']){
+                     return true;
+                   }
+                   this.errorMessage = 'No se pudieron prestar los equipos';
+                   return false;
+                 },catchError(err=>{
+                   console.log(err);
+                   this.errorMessage = 'Error de servidor';
+                   return of(false);
+                 }))
+               );
+  }
+
   public getError() : string{
     return this.errorMessage;
   }

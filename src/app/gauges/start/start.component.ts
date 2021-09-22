@@ -116,8 +116,36 @@ export class StartComponent implements OnInit {
     this.gauges.splice(index, 1);
   }
 
-  test() {
-    this.operator.nativeElement.focus();
-    console.log('Test!');
+  public confirm() : void{
+    let devices : string[] = this.gauges.map(g => g.id);
+    console.log(devices);
+    let operator = this.get('operator').value as string;
+
+    this.gaugesService.lendGauges(operator, devices)  
+        .subscribe(resp=>{
+          if(resp){
+            this.alert.success(devices.length + ' guages prestados a ' + operator + ' con éxito');
+            setTimeout(() => {
+              window.location.reload();
+            }, 3000);
+          }else{
+            this.alert.error(this.gaugesService.getError());
+          }
+        },error=>{
+          this.alert.clear();
+          this.alert.error(this.gaugesService.getError());
+        });
+  }
+
+  public getReasons() : string[]{
+    let reasons = [];
+    if(this.gauges.length == 0){
+      reasons.push('Agregue al menos un Gauge a prestar');
+    }
+    if(this.get('operator').invalid){
+      reasons.push('Ingrese el código de empleado prestatario');
+    }
+
+    return reasons;
   }
 }

@@ -76,10 +76,13 @@
                 Escaneé la credencial del empleado y los respectivos códigos de gauges
             </ng-template>
         </div>
-
+        <confirm-modal 
+            myClass="px-3 m-3 py-2 float-left big-letter" title="Confirmar préstamos"
+            [content]="'¿Confirma el préstamo de ' + gauges.length + ' gauges a ' + get('operator').value + '?'"
+            trigger="Prestar gauges" (accept)="confirm()" 
+            [isDisabled]="gauges.length == 0 || get('operator').invalid"
+            [reason]="getReasons()">
+        </confirm-modal>
     </div>
-    <button class="btn btn-success" (click)="test()">
-        Lorem Ipsum
-    </button>
 
 </div>
