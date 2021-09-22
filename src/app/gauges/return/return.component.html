@@ -64,7 +64,10 @@
                 <div class="form-group">
                     <label for="" class="label">
                         <i class="far fa-edit gray"></i>
-                        Notas de retorno:
+                        Notas de retorno
+                        <span class="required" *ngIf="get('status').value != 'Devuelto' ">
+                            *
+                        </span>: 
                     </label>
                     <div class="input-group">
                         <textarea [class]="getClass('notes')" class="form-control area" formControlName="notes"
@@ -80,7 +83,7 @@
         <div class="col-md-7 text-center">
             <div *ngIf="gauges.length > 0; else add_gauge">
 
-                <h5 class="bold"> Préstamos a {{ get('operator').value }} </h5>
+                <h5 class="bold"> Retornos de {{ get('operator').value }} </h5>
 
                 <p class="text-right"> Total de Guages: {{ gauges.length }}</p>
 
@@ -152,7 +155,7 @@
         </div>
         <confirm-modal myClass="px-3 m-3 py-2 float-left big-letter" title="Retorno de préstamos"
             [content]="'¿Confirma el préstamo de ' + gauges.length + ' gauges a ' + get('operator').value + '?'"
-            trigger="Regresar gauges" (accept)="confirm()" [isDisabled]="gauges.length == 0 || get('operator').invalid"
+            trigger="Regresar gauges" (accept)="confirm()" [isDisabled]="gauges.length == 0 || form.invalid"
             [reason]="getReasons()">
         </confirm-modal>
     </div>

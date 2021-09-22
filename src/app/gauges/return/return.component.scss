@@ -1,13 +1,19 @@
-.label{
+.label {
     color: rgb(49, 49, 49);
     font-weight: 300;
     font-size: 20px;
 }
 
-.bold{
+.bold {
     font-weight: 600;
 }
 
-.gray{
-    color:rgb(92, 92, 92);
+.gray {
+    color: rgb(92, 92, 92);
+}
+
+.required {
+    color: red;
+    font-size: 24px;
+    font-weight: 900;
 }

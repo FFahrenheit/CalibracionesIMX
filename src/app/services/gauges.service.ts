@@ -14,7 +14,6 @@ export class GaugesService {
   private errorMessage = 'Error de servicio';
   private gauge : any;
 
-
   constructor(private http  : HttpClient) { }
 
   public loadGauge(number : string){
@@ -49,6 +48,30 @@ export class GaugesService {
                      return true;
                    }
                    this.errorMessage = 'No se pudieron prestar los equipos';
+                   return false;
+                 },catchError(err=>{
+                   console.log(err);
+                   this.errorMessage = 'Error de servidor';
+                   return of(false);
+                 }))
+               );
+  }
+
+  public returnGauges(operator : string, devices : string[], status : string, notes : string = ''){
+    const body = {
+      operator,
+      devices,
+      status,
+      notes
+    };
+
+    return this.http.put(`${base_url}/gauges`, body)
+               .pipe(
+                 map(resp=>{
+                   if(resp['ok']){
+                     return true;
+                   }
+                   this.errorMessage = 'No se pudieron regresar los equipos';
                    return false;
                  },catchError(err=>{
                    console.log(err);

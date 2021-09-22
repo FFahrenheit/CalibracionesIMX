@@ -107,21 +107,21 @@ export class ReturnComponent implements OnInit {
     let name = `Gauge ${gauge.id} (${gauge.descripcion})`;
     console.log(gauge);
     
-    if(gauge.activo != 'Activo'){
-      return this.alert.warn('El ' + name +' no está activo y no se puede prestar');
-    }
+    // if(gauge.activo != 'Activo'){
+    //   return this.alert.warn('El ' + name +' no está activo y no se puede regresar');
+    // }
     
-    if(gauge.estado != 'Calibración Vigente'){
-      return this.alert.warn('El ' + name + ' no se encuentra calibrado correctamente');
-    }
+    // if(gauge.estado != 'Calibración Vigente'){
+    //   return this.alert.warn('El ' + name + ' no se encuentra calibrado correctamente');
+    // }
     
-    if(gauge.prestatario != null){
-      return this.alert.warn('El ' + name + ' ya se encuentra prestado');
+    if(gauge.prestatario == null){
+      return this.alert.warn('El ' + name + ' no se encuentra prestado');
     }
 
     let isRepeteaded = this.gauges.filter( p=> p.id == gauge.id );
     if(isRepeteaded.length > 0){
-      return this.alert.warn('El ' + name + ' ya se encuentra en su lista de préstamos');
+      return this.alert.warn('El ' + name + ' ya se encuentra en su lista de retornos');
     }
     
     let toAdd = (( {id, descripcion, ubicacion, siguiente} ) => ( {id, descripcion, ubicacion, siguiente }))(gauge);    
@@ -146,11 +146,13 @@ export class ReturnComponent implements OnInit {
     let devices : string[] = this.gauges.map(g => g.id);
     console.log(devices);
     let operator = this.get('operator').value as string;
+    let status = this.get('status').value as string;
+    let notes = this.get('notes').value as string;
 
-    this.gaugesService.lendGauges(operator, devices)  
+    this.gaugesService.returnGauges(operator, devices, status, notes)  
         .subscribe(resp=>{
           if(resp){
-            this.alert.success(devices.length + ' guages prestados a ' + operator + ' con éxito');
+            this.alert.success(devices.length + ' guages retornados por ' + operator + ' con éxito');
             setTimeout(() => {
               window.location.reload();
             }, 3000);
@@ -166,10 +168,16 @@ export class ReturnComponent implements OnInit {
   public getReasons() : string[]{
     let reasons = [];
     if(this.gauges.length == 0){
-      reasons.push('Agregue al menos un Gauge a prestar');
+      reasons.push('Agregue al menos un Gauge a regresar');
     }
     if(this.get('operator').invalid){
-      reasons.push('Ingrese el código de empleado prestatario');
+      reasons.push('Ingrese el código de empleado que retorna');
+    }
+    if(this.get('status').invalid){
+      reasons.push('Seleccione el estado de retorno');
+    }
+    if(this.get('notes').invalid){
+      reasons.push('Agregue notas de retorno');
     }
 
     return reasons;
