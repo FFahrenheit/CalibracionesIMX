@@ -154,7 +154,7 @@
             </ng-template>
         </div>
         <confirm-modal myClass="px-3 m-3 py-2 float-left big-letter" title="Retorno de préstamos"
-            [content]="'¿Confirma el préstamo de ' + gauges.length + ' gauges a ' + get('operator').value + '?'"
+            [content]="'¿Confirma el retorno de ' + gauges.length + ' gauges por ' + get('operator').value + '?'"
             trigger="Regresar gauges" (accept)="confirm()" [isDisabled]="gauges.length == 0 || form.invalid"
             [reason]="getReasons()">
         </confirm-modal>

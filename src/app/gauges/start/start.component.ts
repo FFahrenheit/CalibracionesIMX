@@ -58,6 +58,15 @@ export class StartComponent implements OnInit {
       this.get('operator').setValue('');
       return this.alert.warn('Ingrese un código de empleado válido');
     }
+    let employee = this.get('operator').value.toUpperCase().trim();
+    let regex = /^IMXG'1[0-9]{1,}$/;
+
+    if(!regex.test(employee)){
+      this.get('operator').setValue('');
+      return this.alert.warn('Este código de empleado no es válido');
+    }
+    this.get('operator').setValue(employee);
+
     setTimeout(() => {
       this.get('operator').disable();
     }, 100);
@@ -97,20 +106,20 @@ export class StartComponent implements OnInit {
     console.log(gauge);
     
     if(gauge.activo != 'Activo'){
-      return this.alert.warn('El ' + name +' no está activo y no se puede prestar');
+      return this.alert.error('El ' + name +' no está activo y no se puede prestar');
     }
     
     if(gauge.estado != 'Calibración Vigente'){
-      return this.alert.warn('El ' + name + ' no se encuentra calibrado correctamente');
+      return this.alert.error('El ' + name + ' no se encuentra calibrado correctamente');
     }
     
     if(gauge.prestatario != null){
-      return this.alert.warn('El ' + name + ' ya se encuentra prestado');
+      return this.alert.error('El ' + name + ' ya se encuentra prestado');
     }
 
     let isRepeteaded = this.gauges.filter( p=> p.id == gauge.id );
     if(isRepeteaded.length > 0){
-      return this.alert.warn('El ' + name + ' ya se encuentra en su lista de préstamos');
+      return this.alert.error('El ' + name + ' ya se encuentra en su lista de préstamos');
     }
     
     let toAdd = (( {id, descripcion, ubicacion, siguiente} ) => ( {id, descripcion, ubicacion, siguiente }))(gauge);    
