@@ -32,7 +32,7 @@ export class GaugesService {
                    this.errorMessage = 'Error de servidor';
                    return of(false);
                  }))
-               )
+               );
   }
 
   public lendGauges(operator : string, devices : string[]){
@@ -74,6 +74,25 @@ export class GaugesService {
                    this.errorMessage = 'No se pudieron regresar los equipos';
                    return false;
                  },catchError(err=>{
+                   console.log(err);
+                   this.errorMessage = 'Error de servidor';
+                   return of(false);
+                 }))
+               );
+  }
+
+  public loadGaugeDetails(number : string){
+
+    return this.http.get(`${base_url}/gauge/${number}`)
+               .pipe(
+                 map(resp=>{
+                   if(resp['ok']){
+                    this.gauge = resp['device'];
+                    return true;
+                   }
+                   this.errorMessage = 'No se pudo encontrar el Gauge con el ID especificado';
+                   return false;
+                 }, catchError(err=>{
                    console.log(err);
                    this.errorMessage = 'Error de servidor';
                    return of(false);

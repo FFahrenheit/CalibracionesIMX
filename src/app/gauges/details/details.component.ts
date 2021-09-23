@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/shared/alert';
 
 @Component({
@@ -19,7 +19,7 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      gauge: ['']
+      gauge: ['', Validators.required]
     });
     
     setTimeout(() => {
@@ -49,6 +49,17 @@ export class DetailsComponent implements OnInit {
     else{
       this.alert.warn('Ingrese un código válido');
     }
+    this.gauge.nativeElement.focus();
+  }
+
+  public loaded($event){
+    console.log($event);
+    this.get('gauge').setValue('');
+  }
+
+  public clearSearch() : void{
+    this.get('gauge').setValue('');
+    this.gauge.nativeElement.focus()
   }
 
 }

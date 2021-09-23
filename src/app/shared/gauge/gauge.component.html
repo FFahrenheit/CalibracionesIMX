@@ -1,4 +1,30 @@
-<p>
-    gauge works!
-    {{ id }}
-</p>
+<div [ngSwitch]="status">
+    <div *ngSwitchCase="Status.WAITING">
+        <h4 class="mt-5">
+            Escaneé un código o escríba el número y haga click
+            en el ícono de <i class="fas fa-search mx-1"></i> para
+            ver los detalles del Gauge
+        </h4>
+    </div>
+    <div *ngSwitchCase="Status.SHOW">
+        gauge works!
+        <br>
+        {{ getObject() }}
+    </div>
+    <div *ngSwitchCase="Status.NOT_FOUND">
+        <error-message [loading]="true" title="Gauge no encontrado"
+            description="No se encontró el Gauge con el ID especificado" action="">
+        </error-message>
+    </div>
+    <div *ngSwitchCase="Status.ERROR">
+        <error-message [loading]="true" title="ERROR"
+            [customAction] = "true"
+            action="Recargar página" (back)="reload()"
+            description="Se ha encontrado un error con el servidor. Vuelva a intentarlo" >
+        </error-message>
+    </div>
+    <div *ngSwitchCase="Status.LOADING">
+        <error-message [loading]="null" title="" description="" action="">
+        </error-message>
+    </div>
+</div>

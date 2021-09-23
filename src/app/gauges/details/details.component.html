@@ -10,23 +10,28 @@
                 <i class="fas fa-barcode"></i>
                 Código del Guage
             </label>
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <div class="input-group">
                     <input #gauge type="text" formControlName="gauge"
                         placeholder="Escanee del Guage o teclee el código y busque" (keyup.enter)="searchGauge()"
                         (keydown.Tab)="searchGauge($event)" class="form-control label">
                     <div class="input-group-prepend click">
-                        <div class="input-group-text" title="Buscar Gauge" (click)="search()">
-                            <i class="fas fa-search"></i>
+                        <div class="input-group-text" title="Borrar búsqueda" (click)="clearSearch()">
+                            <i class="fas fa-backspace"></i>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="col-md-1">
+                <button class="btn btn-success big"
+                    [ngClass]="{'btn-success' : form.valid, 'btn-secondary dis' : form.invalid}" (click)="search()">
+                    <i class="fas fa-search p-1"></i>
+                </button>
+            </div>
         </div>
     </form>
 
-    <gauge [id]="searchId">
-        
+    <gauge [id]="searchId" (loaded)="loaded($event)">
     </gauge>
 
 </div>
