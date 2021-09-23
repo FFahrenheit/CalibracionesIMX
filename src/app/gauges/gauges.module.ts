@@ -6,13 +6,13 @@ import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ReturnComponent } from './return/return.component';
-
-
+import { DetailsComponent } from './details/details.component';
 
 @NgModule({
   declarations: [
     StartComponent,
-    ReturnComponent
+    ReturnComponent,
+    DetailsComponent
   ],
   imports: [
     CommonModule,

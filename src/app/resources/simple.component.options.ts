@@ -11,7 +11,7 @@ export const simpleOptions = [
     },
     {
         name: 'Consultar',
-        route: ['gauges'],
+        route: ['gauges','detalles'],
         detail: 'Consultar equipos'
     }
 ];

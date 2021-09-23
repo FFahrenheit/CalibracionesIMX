@@ -1,5 +1,6 @@
 import { Routes } from "@angular/router";
 import { LenderGuard } from "../guards/lender.guard";
+import { DetailsComponent } from "./details/details.component";
 import { ReturnComponent } from "./return/return.component";
 import { StartComponent } from "./start/start.component";
 
@@ -20,6 +21,13 @@ export const GaugesRoutes : Routes = [
                 component: ReturnComponent,
                 data: {
                     title: 'Regresar Gauges prestados'
+                }
+            },
+            {
+                path: 'detalles',
+                component: DetailsComponent,
+                data: {
+                    title: 'Detalles de Guage'
                 }
             },
             {
