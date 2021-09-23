@@ -51,6 +51,7 @@ export class DashboardComponent implements OnInit {
       this.sidebar = this.sidebar.concat(mediumSidebar);
     }
 
+    this.getMode();
   }
 
   public goTo(route : string[],index : number) : void{
@@ -95,9 +96,46 @@ export class DashboardComponent implements OnInit {
       case 'full':
         this.goToFull();
         break;
+      case 'dark':
+        this.toggleDarkMode();
+        break;
       default:
         console.log('Not yet implemented');
     }
+  }
+
+  private getMode() : void{
+    let opt = this.publicDropdown.filter(p => p.listener == 'dark')[0];
+    console.log(opt);
+    if (!opt){
+      return;
+    }
+    if( this.isDarkMode() ){
+      opt.title = 'Modo día';
+      opt.icon = 'fas fa-sun';
+    }else{
+      opt.title = 'Modo noche';
+      opt.icon = 'fas fa-moon';
+    }
+  }
+
+  public isDarkMode() : boolean{
+    const darkMode = localStorage.getItem('dark') || 'false';
+    return darkMode == 'true';
+  }
+
+  private toggleDarkMode() : void{
+    const html = document.getElementsByTagName('html')[0];
+
+    if( this.isDarkMode() ){
+      localStorage.setItem('dark', 'false');
+      html.dataset.theme = '';
+    } else { 
+      localStorage.setItem('dark', 'true');
+      html.dataset.theme = 'dark-mode';
+    }
+
+    this.getMode();
   }
 
   private goToFull(){

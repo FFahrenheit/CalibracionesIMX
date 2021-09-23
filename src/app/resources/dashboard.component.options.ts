@@ -13,6 +13,11 @@ export const profileOptions = [
         title: 'Cerrar sesión',
         icon: 'fas fa-sign-out-alt pr-1',
         listener: 'logout'
+    },
+    {
+        title: 'Modo oscuro',
+        icon: 'fas fa-moon',
+        listener: 'dark'
     }
 ];
 
