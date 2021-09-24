@@ -17,3 +17,16 @@
     font-size: 24px;
     font-weight: 900;
 }
+
+.black-link{
+    color: rgb(46, 46, 46);
+}
+
+.black-link:hover{
+    cursor: pointer !important;
+    text-decoration: underline;
+}
+
+.black-link i{
+    font-size: 75%;
+}

@@ -13,7 +13,7 @@
             <div class="col-md-4">
 
                 <div>
-                    <a (click)="getDetails()" class="black-link" title="Ver detalles del equipo">
+                    <a [href]="'/equipos/detalles/' + device.id" target="_blank" class="black-link" title="Ver detalles del equipo">
                         <h5 class="text-left subtitle-att">
                             Detalles del equipo
                             <i class="fas fa-external-link-alt"></i>

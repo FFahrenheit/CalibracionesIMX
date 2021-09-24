@@ -67,7 +67,7 @@
                         Notas de retorno
                         <span class="required" *ngIf="get('status').value != 'Devuelto' ">
                             *
-                        </span>: 
+                        </span>:
                     </label>
                     <div class="input-group">
                         <textarea [class]="getClass('notes')" class="form-control area" formControlName="notes"
@@ -98,7 +98,13 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let g of gauges;let i = index">
-                            <td> {{ g.id }} </td>
+                            <td>
+                                <a [href]="'/equipos/detalles/' + g.id" target="_blank" class="black-link"
+                                    title="Ver detalles del equipo">
+                                    {{ g.id }}
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </td>
                             <td> {{ g.descripcion }} </td>
                             <td> {{ g.ubicacion }} </td>
                             <td> <button title="Quitar de la lista" class="btn btn-danger fas fa-trash-alt"

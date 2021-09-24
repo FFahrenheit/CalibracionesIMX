@@ -14,7 +14,7 @@
                         Código de empleado:
                     </label>
 
-                    <div class="input-group"  (click)="enable()">
+                    <div class="input-group" (click)="enable()">
                         <input #operator type="text" formControlName="operator" placeholder="Escanee de la credencial"
                             class="form-control label" [class]="getClass('operator')" (keyup.enter)="setEmployee()"
                             (keydown.Tab)="setEmployee($event)">
@@ -56,7 +56,7 @@
                 <h5 class="bold"> Préstamos a {{ get('operator').value }} </h5>
 
                 <p class="text-right"> Total de Guages: {{ gauges.length }}</p>
-                
+
                 <table class="table table-hover table-bordered table-sm">
                     <thead>
                         <tr class="header">
@@ -68,7 +68,13 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let g of gauges;let i = index">
-                            <td> {{ g.id }} </td>
+                            <td>
+                                <a [href]="'/equipos/detalles/' + g.id" target="_blank" class="black-link"
+                                    title="Ver detalles del equipo">
+                                    {{ g.id }}
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </td>
                             <td> {{ g.descripcion }} </td>
                             <td> {{ g.ubicacion }} </td>
                             <td> <button title="Quitar de la lista" class="btn btn-danger fas fa-trash-alt"
@@ -90,7 +96,7 @@
                         de finalizar el préstamo
                     </li>
                     <li>
-                        Una vez escaneado el código de empleado y los Gauges a prestar, presione el 
+                        Una vez escaneado el código de empleado y los Gauges a prestar, presione el
                         botón "Prestar gauges"
                     </li>
                 </ol>
@@ -99,14 +105,15 @@
                 <ul>
                     <li>
                         Puede cambiar el código de empleado en caso de equivocarse seleccionando el botón con el
-                        símbolo  <i class="fas fa-backspace mx-1"></i> al lado de la input
+                        símbolo <i class="fas fa-backspace mx-1"></i> al lado de la input
                     </li>
                     <li>
-                        Si no está utilizando un scanner, puede desmarcar el switch y hacer click en el símbolo 
-                        de <i class="fas fa-plus-circle mx-1"></i> al lado de la input de Gauges para agregar un nuevo Gauge a prestar
+                        Si no está utilizando un scanner, puede desmarcar el switch y hacer click en el símbolo
+                        de <i class="fas fa-plus-circle mx-1"></i> al lado de la input de Gauges para agregar un nuevo
+                        Gauge a prestar
                     </li>
                     <li>
-                        Puede quitar los Gauges que escaneó por error haciendo click en el botón rojo 
+                        Puede quitar los Gauges que escaneó por error haciendo click en el botón rojo
                         en la fila del Gauge en cuestión
                     </li>
                 </ul>

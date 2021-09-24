@@ -44,10 +44,6 @@ export class DeviceSimpleComponent implements OnInit {
     return IconsAlert.getStatus(this.device.estado);
   }
 
-  public getDetails(){
-    this.router.navigate(['equipos','detalles',this.device['id']]);
-  }
-
   public getIcon(estado){
     return IconsAlert.prestamo(estado);
   }
