@@ -94,7 +94,7 @@ export class ReturnComponent implements OnInit {
   }
 
   public add(){
-    let id = this.get('gauge').value.trim() as string;
+    let id = this.get('gauge').value.trim();
 
     if(id == ''){
       this.get('gauge').setValue('');
@@ -102,6 +102,9 @@ export class ReturnComponent implements OnInit {
     }
     if(id.startsWith('F') || id.startsWith('f')){
       id = id.substring(1);
+    }
+    if(isNaN(id)){
+      return this.alert.error('Código de barras inválido');
     }
     this.gaugesService.loadGauge(id)
         .subscribe(resp=>{
@@ -120,14 +123,6 @@ export class ReturnComponent implements OnInit {
   appendGauge(gauge : any){
     let name = `Gauge ${gauge.id} (${gauge.descripcion})`;
     console.log(gauge);
-    
-    // if(gauge.activo != 'Activo'){
-    //   return this.alert.error('El ' + name +' no está activo y no se puede regresar');
-    // }
-    
-    // if(gauge.estado != 'Calibración Vigente'){
-    //   return this.alert.error('El ' + name + ' no se encuentra calibrado correctamente');
-    // }
     
     if(gauge.prestatario == null){
       return this.alert.error('El ' + name + ' no se encuentra prestado');

@@ -82,13 +82,16 @@ export class StartComponent implements OnInit {
   }
 
   public add(){
-    let id = this.get('gauge').value.trim() as string;
+    let id = this.get('gauge').value.trim();
     if(id == ''){
       this.get('gauge').setValue('');
       return this.alert.warn('Ingrese un código válido');
     }
     if(id.startsWith('F') || id.startsWith('f')){
       id = id.substring(1);
+    }
+    if(isNaN(id)){
+      return this.alert.error('Código de barras inválido');
     }
     this.gaugesService.loadGauge(id)
         .subscribe(resp=>{
