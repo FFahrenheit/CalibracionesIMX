@@ -1,11 +1,12 @@
 <div *ngIf="exists; else not_found" class="card my-3 pb-3">
-    <div class="container text-center pt-1">
-        
+    <div class="container-fluid text-center pt-1">
+
         <div class="row ml-1">
             <div class="col-md-8">
                 <h4 class="text-left my-3">
-                    <i *ngIf="canHide" title="Mostrar / ocultar" [ngClass]="{'fa-chevron-down':!show,'fa-chevron-up':show}"
-                        class="fas hide-button" (click)="show = !show"></i>
+                    <i *ngIf="canHide" title="Mostrar / ocultar"
+                        [ngClass]="{'fa-chevron-down':!show,'fa-chevron-up':show}" class="fas hide-button"
+                        (click)="show = !show"></i>
                     {{ device['descripcion'] || '' }} - {{ id.replace('--','/') }}
                 </h4>
             </div>
@@ -62,9 +63,8 @@
                             [value]="titleCase.transform(device.nombrePrestatario) + ' (' + device.prestatario + ')'">
                         </attr>
                         <ng-template #operador>
-                            <attr name="Prestatario"
-                            [value]="device.operador + ' (operador)'">
-                        </attr>
+                            <attr name="Prestatario" [value]="device.operador + ' (operador)'">
+                            </attr>
                         </ng-template>
                     </ng-template>
                 </div>
@@ -121,6 +121,9 @@
                                     Fecha de retorno
                                 </th>
                                 <th scope="col" class="align-middle">
+                                    Retornó
+                                </th>
+                                <th scope="col" class="align-middle">
                                     Notas
                                 </th>
                                 <th scope="col" class="align-middle">
@@ -129,7 +132,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let p of device.prestamos; let i = index">
+                            <tr *ngFor="let p of device.prestamos; let i = index" class="smaller">
                                 <td style="white-space: nowrap">
                                     {{ p.id }}
                                     <i [class]="getIcon(p.estado)"></i>
@@ -146,7 +149,7 @@
                                 <td>
                                     {{ p.fechaCompromiso | date:'mediumDate':'UTC' }}
                                 </td>
-                                <td>
+                                <td style="white-space: nowrap">
                                     <span *ngIf="p.nombrePrestatario != 'operador';else operador">
                                         {{ p.nombrePrestatario | titlecase }}
                                     </span>
@@ -162,12 +165,20 @@
                                     {{ p.fechaRetorno | date:'shortTime' }}
                                 </td>
                                 <td *ngIf="p.estado != 'Entregado'">
+                                    <span *ngIf="p.nombrePrestatario != 'operador';else operador">
+                                        {{ p.nombreRetorna | titlecase }}
+                                    </span>
+                                    <ng-template #operador>
+                                        {{ p.operadorRegresa }}
+                                    </ng-template>
+                                </td>
+                                <td *ngIf="p.estado != 'Entregado'">
                                     {{ p.notas == '' ? '-' : p.notas }}
                                 </td>
                                 <td *ngIf="p.estado != 'Entregado'">
                                     {{ p.nombreRecibe | titlecase }}
                                 </td>
-                                <td colspan="3" *ngIf="p.estado == 'Entregado'">
+                                <td colspan="4" *ngIf="p.estado == 'Entregado'">
                                     <span *ngIf="i == 0; else no_info">
                                         Aún no devuelto
                                     </span>

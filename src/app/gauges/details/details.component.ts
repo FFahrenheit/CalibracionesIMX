@@ -24,6 +24,8 @@ export class DetailsComponent implements OnInit {
     
     setTimeout(() => {
       this.gauge.nativeElement.focus();
+      this.get('gauge').setValue('331');
+      this.searchGauge();
     }, 100);
   }
 

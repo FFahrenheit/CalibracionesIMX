@@ -1,23 +1,16 @@
 <div *ngIf="device != null" class="card my-3 pb-3">
-    Hello!
-    {{ getObject() }}
-    <!-- <div class="container text-center pt-1">
+    <div class="container-fluid text-center pt-1">
         
         <div class="row ml-1">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <h4 class="text-left my-3">
-                    <i *ngIf="canHide" title="Mostrar / ocultar" [ngClass]="{'fa-chevron-down':!show,'fa-chevron-up':show}"
-                        class="fas hide-button" (click)="show = !show"></i>
-                    {{ device['descripcion'] || '' }} - {{ id.replace('--','/') }}
+                    {{ device['descripcion'] || '' }} - {{ device.id.replace('--','/') }}
                 </h4>
-            </div>
-            <div class="col-md-4 text-right pt-3 px-0">
-                <device-options [device]="device"></device-options>
             </div>
         </div>
 
-        <div class="row justify-content-center" *ngIf="show">
-            <div class="col-md-5">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
 
                 <div>
                     <a (click)="getDetails()" class="black-link" title="Ver detalles del equipo">
@@ -27,7 +20,7 @@
                         </h5>
                     </a>
 
-                    <attr name="ID" [value]="id.replace('--','/')"></attr>
+                    <attr name="ID" [value]="device.id.replace('--','/')"></attr>
                     <attr name="Descripcion" [value]="device.descripcion"></attr>
                     <attr name="Numero de serie" [value]="device.serie"></attr>
                     <attr name="Ubicacion" [value]="device.ubicacion"></attr>
@@ -39,18 +32,6 @@
                     <attr name="Periodo de calibración"
                         [value]="device.periodo == 1 ? '1 mes' : device.periodo + ' meses'">
                     </attr>
-
-                    <div>
-                        <h6 class="text-left subtitle-att">Responsables del equipo</h6>
-                        <ul class="dot-list" *ngIf="device.responsables.length > 0; else empty_responsables">
-                            <li *ngFor="let r of device.responsables">
-                                {{ r.nombre | titlecase }}
-                            </li>
-                        </ul>
-                        <ng-template #empty_responsables>
-                            <span class="empty text"> No hay información de los responsables de este equipo</span>
-                        </ng-template>
-                    </div>
                 </div>
 
                 <div class="mb-2">
@@ -93,7 +74,7 @@
 
             </div>
 
-            <div class="col-md-7 table-responsive container text-center">
+            <div class="col-md-8 table-responsive container text-center">
 
                 <div>
                     <h5 class="text-left subtitle-att">Historial de préstamos</h5>
@@ -123,6 +104,9 @@
                                     Fecha de retorno
                                 </th>
                                 <th scope="col" class="align-middle">
+                                    Retornó
+                                </th>
+                                <th scope="col" class="align-middle">
                                     Notas
                                 </th>
                                 <th scope="col" class="align-middle">
@@ -131,7 +115,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let p of device.prestamos; let i = index">
+                            <tr *ngFor="let p of device.prestamos; let i = index" class="smaller">
                                 <td style="white-space: nowrap">
                                     {{ p.id }}
                                     <i [class]="getIcon(p.estado)"></i>
@@ -148,7 +132,7 @@
                                 <td>
                                     {{ p.fechaCompromiso | date:'mediumDate':'UTC' }}
                                 </td>
-                                <td>
+                                <td style="white-space: nowrap">
                                     <span *ngIf="p.nombrePrestatario != 'operador';else operador">
                                         {{ p.nombrePrestatario | titlecase }}
                                     </span>
@@ -164,12 +148,20 @@
                                     {{ p.fechaRetorno | date:'shortTime' }}
                                 </td>
                                 <td *ngIf="p.estado != 'Entregado'">
+                                    <span *ngIf="p.nombrePrestatario != 'operador';else operador">
+                                        {{ p.nombreRetorna | titlecase }}
+                                    </span>
+                                    <ng-template #operador>
+                                        {{ p.operadorRegresa }}
+                                    </ng-template>
+                                </td>
+                                <td *ngIf="p.estado != 'Entregado'">
                                     {{ p.notas == '' ? '-' : p.notas }}
                                 </td>
                                 <td *ngIf="p.estado != 'Entregado'">
                                     {{ p.nombreRecibe | titlecase }}
                                 </td>
-                                <td colspan="3" *ngIf="p.estado == 'Entregado'">
+                                <td colspan="4" *ngIf="p.estado == 'Entregado'">
                                     <span *ngIf="i == 0; else no_info">
                                         Aún no devuelto
                                     </span>
@@ -187,5 +179,5 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 </div>
