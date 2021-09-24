@@ -59,7 +59,7 @@ export class StartComponent implements OnInit {
       return this.alert.warn('Ingrese un código de empleado válido');
     }
     let employee = this.get('operator').value.toUpperCase().trim();
-    let regex = /^IMXG'1[0-9]{1,}$/;
+    let regex = /^IMXG'[0-9]{1,}$/;
 
     if(!regex.test(employee)){
       this.get('operator').setValue('');
@@ -82,10 +82,13 @@ export class StartComponent implements OnInit {
   }
 
   public add(){
-    let id = this.get('gauge').value.trim();
+    let id = this.get('gauge').value.trim() as string;
     if(id == ''){
       this.get('gauge').setValue('');
       return this.alert.warn('Ingrese un código válido');
+    }
+    if(id.startsWith('F') || id.startsWith('f')){
+      id = id.substring(1);
     }
     this.gaugesService.loadGauge(id)
         .subscribe(resp=>{
@@ -167,7 +170,7 @@ export class StartComponent implements OnInit {
       reasons.push('Agregue al menos un Gauge a prestar');
     }
     if(this.get('operator').invalid){
-      reasons.push('Ingrese el código de empleado prestatario');
+      reasons.push('Ingrese el código de empleado prestatario válido');
     }
 
     return reasons;
@@ -175,5 +178,19 @@ export class StartComponent implements OnInit {
 
   public enable() : void{
     this.get('operator').enable();
+  }
+
+  public disableInput() : void{
+    let op = this.get('operator');
+
+    op.setValue(op.value.toUpperCase().trim());
+    if(this.get('operator').valid){
+      op.disable();
+      this.gauge.nativeElement.focus();
+    }else{
+      this.alert.warn('Código de empleado no válido');
+      this.get('operator').setValue('');
+      this.operator.nativeElement.focus();
+    }
   }
 }

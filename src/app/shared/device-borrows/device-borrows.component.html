@@ -165,7 +165,7 @@
                                     {{ p.fechaRetorno | date:'shortTime' }}
                                 </td>
                                 <td *ngIf="p.estado != 'Entregado'">
-                                    <span *ngIf="p.nombrePrestatario != 'operador';else operador">
+                                    <span *ngIf="p.nombreRetorna != 'operador';else operador">
                                         {{ p.nombreRetorna | titlecase }}
                                     </span>
                                     <ng-template #operador>

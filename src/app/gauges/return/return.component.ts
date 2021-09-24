@@ -94,10 +94,14 @@ export class ReturnComponent implements OnInit {
   }
 
   public add(){
-    let id = this.get('gauge').value.trim();
+    let id = this.get('gauge').value.trim() as string;
+
     if(id == ''){
       this.get('gauge').setValue('');
       return this.alert.warn('Ingrese un código válido');
+    }
+    if(id.startsWith('F') || id.startsWith('f')){
+      id = id.substring(1);
     }
     this.gaugesService.loadGauge(id)
         .subscribe(resp=>{
@@ -181,7 +185,7 @@ export class ReturnComponent implements OnInit {
       reasons.push('Agregue al menos un Gauge a regresar');
     }
     if(this.get('operator').invalid){
-      reasons.push('Ingrese el código de empleado que retorna');
+      reasons.push('Ingrese el código válido del empleado que retorna');
     }
     if(this.get('status').invalid){
       reasons.push('Seleccione el estado de retorno');
@@ -195,5 +199,19 @@ export class ReturnComponent implements OnInit {
 
   public enable() : void{
     this.get('operator').enable();
+  }
+  
+  public disableInput() : void{
+    let op = this.get('operator');
+
+    op.setValue(op.value.toUpperCase().trim());
+    if(this.get('operator').valid){
+      op.disable();
+      this.gauge.nativeElement.focus();
+    }else{
+      this.alert.warn('Código de empleado no válido');
+      this.get('operator').setValue('');
+      this.operator.nativeElement.focus();
+    }
   }
 }

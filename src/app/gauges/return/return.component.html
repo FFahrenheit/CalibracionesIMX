@@ -15,9 +15,10 @@
                     </label>
 
                     <div class="input-group" (click)="enable()">
-                        <input #operator type="text" formControlName="operator" placeholder="Escanee de la credencial"
-                            class="form-control label" [class]="getClass('operator')" (keyup.enter)="setEmployee()"
-                            (keydown.Tab)="setEmployee($event)">
+                        <input #operator type="password" formControlName="operator"
+                            placeholder="Escanee de la credencial" class="form-control label"
+                            [class]="getClass('operator')" (keyup.enter)="setEmployee()"
+                            (keydown.Tab)="setEmployee($event)" pattern="^IMXG'[0-9]{1,}$" (focusout)="disableInput()">
                         <div class="input-group-prepend click">
                             <div class="input-group-text" title="Borrar código" (click)="clearOperator()">
                                 <i class="fas fa-backspace"></i>
@@ -33,7 +34,8 @@
                     </label>
                     <div class="input-group">
                         <input #gauge type="text" formControlName="gauge" placeholder="Escanee del Guage"
-                            (keyup.enter)="addGauge()" (keydown.Tab)="addGauge($event)" class="form-control label">
+                            (keyup.enter)="addGauge()" (keydown.Tab)="addGauge($event)"
+                            class="form-control label">
                         <div class="input-group-prepend click" *ngIf="!get('scanner').value">
                             <div class="input-group-text" title="Agregar Gauge" (click)="add()">
                                 <i class="fas fa-plus-circle"></i>
@@ -83,7 +85,7 @@
         <div class="col-md-7 text-center">
             <div *ngIf="gauges.length > 0; else add_gauge">
 
-                <h5 class="bold"> Retornos de {{ get('operator').value }} </h5>
+                <h5 class="bold"> Retornos de {{ get('operator').value.substring(5) }} </h5>
 
                 <p class="text-right"> Total de Guages: {{ gauges.length }}</p>
 
