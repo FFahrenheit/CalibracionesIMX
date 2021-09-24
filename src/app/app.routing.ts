@@ -10,6 +10,7 @@ import { LoggedGuard } from "./guards/logged.guard";
 import { LoginGuard } from "./guards/login.guard";
 import { BlankComponent } from "./layouts/blank/blank.component";
 import { DashboardComponent } from "./layouts/dashboard/dashboard.component";
+import { SimpleComponent } from "./layouts/simple/simple.component";
 
 export const AppRoutes: Routes = [
     {
@@ -69,6 +70,20 @@ export const AppRoutes: Routes = [
                 redirectTo: 'equipos'
             }
         ]
+    },
+    {
+        path: '',
+        component: SimpleComponent,
+        canActivate: [ LoggedGuard ],
+        children: [
+            {
+                path: 'gauges',
+                loadChildren: ()=>
+                import('./gauges/gauges.module').then(
+                    (m) => m.GaugesModule
+                )
+            }
+        ]        
     },
     {
         path: '',

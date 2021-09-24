@@ -1,0 +1,37 @@
+<div class="table-responsive container text-center pt-2">
+
+    <alert></alert>
+
+    <h4 class="text-left mt-2 mb-0">Detalles de Guage</h4>
+
+    <form [formGroup]="form">
+        <div class="form-group row pt-2 has-error has-feedback">
+            <label for="" class="col-md-4 col-form-label label">
+                <i class="fas fa-barcode"></i>
+                Código del Guage
+            </label>
+            <div class="col-md-7">
+                <div class="input-group">
+                    <input #gauge type="text" formControlName="gauge"
+                        placeholder="Escanee del Guage o teclee el código y busque" (keyup.enter)="searchGauge()"
+                        (keydown.Tab)="searchGauge($event)" class="form-control label">
+                    <div class="input-group-prepend click">
+                        <div class="input-group-text" title="Borrar búsqueda" (click)="clearSearch()">
+                            <i class="fas fa-backspace"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-success big"
+                    [ngClass]="{'btn-success' : form.valid, 'btn-secondary dis' : form.invalid}" (click)="search()">
+                    <i class="fas fa-search p-1"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <gauge [id]="searchId" (loaded)="loaded($event)">
+    </gauge>
+
+</div>

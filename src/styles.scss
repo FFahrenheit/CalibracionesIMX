@@ -21,3 +21,15 @@ html, body{
 .not-ok-icon-st{
     color: red;
 }
+
+html {
+    transition: filter 10ms;
+}
+
+html[data-theme='dark-mode'] {
+    filter: invert(1) hue-rotate(180deg);
+}
+
+// html img{
+//     filter: invert(1) hue-rotate(180deg);
+// }

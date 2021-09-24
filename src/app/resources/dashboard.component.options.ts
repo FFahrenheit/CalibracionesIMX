@@ -13,8 +13,26 @@ export const profileOptions = [
         title: 'Cerrar sesión',
         icon: 'fas fa-sign-out-alt pr-1',
         listener: 'logout'
+    },
+    {
+        title: 'Modo oscuro',
+        icon: 'fas fa-moon',
+        listener: 'dark'
     }
-]
+];
+
+export const mediumOptions = [
+    {
+        title: 'Préstamos de Gauges',
+        icon: 'fas fa-tachometer-alt',
+        listener: 'gauges'
+    },
+    {
+        title: 'Sistema Completo $10USD',
+        icon: 'fas fa-cogs',
+        listener: 'full'
+    }
+];
 
 export const adminOptions = [
     {

@@ -1,0 +1,163 @@
+<div class="table-responsive container text-center pt-2">
+
+    <alert></alert>
+
+    <h4 class="text-left my-3">Retorno de equipos</h4>
+
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-5">
+
+            <form [formGroup]="form">
+                <div class="form-group">
+                    <label for="" class="label">
+                        <i class="fas fa-barcode"></i>
+                        Código de empleado:
+                    </label>
+
+                    <div class="input-group" (click)="enable()">
+                        <input #operator type="text" formControlName="operator" placeholder="Escanee de la credencial"
+                            class="form-control label" [class]="getClass('operator')" (keyup.enter)="setEmployee()"
+                            (keydown.Tab)="setEmployee($event)">
+                        <div class="input-group-prepend click">
+                            <div class="input-group-text" title="Borrar código" (click)="clearOperator()">
+                                <i class="fas fa-backspace"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mb-0">
+                    <label for="" class="label">
+                        <i class="fas fa-barcode"></i>
+                        Código de Gauge:
+                    </label>
+                    <div class="input-group">
+                        <input #gauge type="text" formControlName="gauge" placeholder="Escanee del Guage"
+                            (keyup.enter)="addGauge()" (keydown.Tab)="addGauge($event)" class="form-control label">
+                        <div class="input-group-prepend click" *ngIf="!get('scanner').value">
+                            <div class="input-group-text" title="Agregar Gauge" (click)="add()">
+                                <i class="fas fa-plus-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="custom-control custom-switch mt-1 click mb-2">
+                    <input type="checkbox" formControlName="scanner" class="custom-control-input" id="isUsingScanner">
+                    <label class="custom-control-label" for="isUsingScanner">Estoy usando scanner</label>
+                </div>
+
+                <div class="form-group">
+                    <label for="" class="label">
+                        <i class="fas fa-check gray"></i>
+                        Estado de retorno:
+                    </label>
+                    <div class="input-group">
+                        <select [class]="getClass('status')" formControlName="status" class="custom-select"
+                            id="inlineFormCustomSelect">
+                            <option value='Devuelto'>Devuelto correctamente</option>
+                            <option value='Dañado'>Devuelto con falla</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="" class="label">
+                        <i class="far fa-edit gray"></i>
+                        Notas de retorno
+                        <span class="required" *ngIf="get('status').value != 'Devuelto' ">
+                            *
+                        </span>: 
+                    </label>
+                    <div class="input-group">
+                        <textarea [class]="getClass('notes')" class="form-control area" formControlName="notes"
+                            placeholder="Notas de retorno" rows="3">
+                        </textarea>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+
+        <div class="col-md-7 text-center">
+            <div *ngIf="gauges.length > 0; else add_gauge">
+
+                <h5 class="bold"> Retornos de {{ get('operator').value }} </h5>
+
+                <p class="text-right"> Total de Guages: {{ gauges.length }}</p>
+
+                <table class="table table-hover table-bordered table-sm">
+                    <thead>
+                        <tr class="header">
+                            <th scope="col">ID</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Ubicación</th>
+                            <th scope="col">Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let g of gauges;let i = index">
+                            <td> {{ g.id }} </td>
+                            <td> {{ g.descripcion }} </td>
+                            <td> {{ g.ubicacion }} </td>
+                            <td> <button title="Quitar de la lista" class="btn btn-danger fas fa-trash-alt"
+                                    (click)="removeGauge(i)">
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ng-template #add_gauge>
+                <h5 class="bold"> Instrucciones </h5>
+                <ol>
+                    <li>
+                        Escaneé de la credencial el código de barras para registrar el retornador
+                    </li>
+                    <li>
+                        Escaneé el código de barras del Gauge, puede escanear muchos códigos antes
+                        de finalizar el regreso de Gauges
+                    </li>
+                    <li>
+                        Seleccione la condición de retorno de préstamo
+                    </li>
+                    <li>
+                        Agregue notas respecto al estado de retorno si son necesarias
+                    </li>
+                    <li>
+                        Una vez llenos los campos necesarios presione el botón "Regresar gauges"
+                    </li>
+                </ol>
+
+                <h5 class="bold"> Notas </h5>
+                <ul>
+                    <li>
+                        Puede cambiar el código de empleado en caso de equivocarse seleccionando el botón con el
+                        símbolo <i class="fas fa-backspace mx-1"></i> al lado de la input
+                    </li>
+                    <li>
+                        Si no está utilizando un scanner, puede desmarcar el switch y hacer click en el símbolo
+                        de <i class="fas fa-plus-circle mx-1"></i> para agregar un nuevo Gauge a regresar
+                    </li>
+                    <li>
+                        Puede quitar los Gauges que escaneó por error haciendo click en el botón rojo
+                        en la fila del Gauge en cuestión
+                    </li>
+                    <li>
+                        Tome en cuenta que si un equipo es devuelto con falla deberá adjuntar una nota
+                    </li>
+                    <li>
+                        Note que la nota y el estado de retorno aplicarán para todos los gauges escaneados en la sesión
+                    </li>
+                </ul>
+            </ng-template>
+        </div>
+        <confirm-modal myClass="px-3 m-3 py-2 float-left big-letter" title="Retorno de préstamos"
+            [content]="'¿Confirma el retorno de ' + gauges.length + ' gauges por ' + get('operator').value + '?'"
+            trigger="Regresar gauges" (accept)="confirm()" [isDisabled]="gauges.length == 0 || form.invalid"
+            [reason]="getReasons()">
+        </confirm-modal>
+    </div>
+
+</div>

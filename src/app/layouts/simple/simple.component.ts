@@ -1,24 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import * as $ from 'jquery';
 import { User } from 'src/app/models/user.model';
+import { adminOptions, mediumOptions, profileOptions } from 'src/app/resources/dashboard.component.options';
+import { adminSidebar, mediumSidebar, publicSidebar } from 'src/app/resources/dashboard.component.sidebar';
+import { simpleOptions } from 'src/app/resources/simple.component.options';
 import { LoginService } from 'src/app/services/login.service';
-import { publicSidebar, adminSidebar, mediumSidebar } from 'src/app/resources/dashboard.component.sidebar';
-import { profileOptions, adminOptions, mediumOptions } from 'src/app/resources/dashboard.component.options';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: 'app-simple',
+  templateUrl: './simple.component.html',
+  styleUrls: ['./simple.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class SimpleComponent implements OnInit {
 
-  public selectedIndex : number = 0;
-  public shown : boolean = true;
   public user : User | undefined = Object.create(null);
   public isAdmin = false;
   public publicDropdown;
   public adminDropdown;
+  public simpleOptions = simpleOptions;
 
   public sidebar : any;
 
@@ -26,11 +25,6 @@ export class DashboardComponent implements OnInit {
               private login  : LoginService) { }
 
   ngOnInit(): void {
-    this.selectedIndex = Number(sessionStorage.getItem('index')) || 0;
-    $("#menu-toggle").click((e:any)=> {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });
 
     this.user = this.login.getLoggedUser();
 
@@ -38,11 +32,9 @@ export class DashboardComponent implements OnInit {
 
     this.sidebar = publicSidebar;
     this.publicDropdown = profileOptions;
-
-
+    
     if(this.isAdmin || this.login.isLender()){
-      this.publicDropdown = this.publicDropdown.concat(mediumOptions[0]);
-      console.log(this.publicDropdown);
+      this.publicDropdown = this.publicDropdown.concat(mediumOptions[1]);
     }
     if(this.isAdmin){
       this.sidebar = this.sidebar.concat(adminSidebar, mediumSidebar)
@@ -51,12 +43,9 @@ export class DashboardComponent implements OnInit {
       this.sidebar = this.sidebar.concat(mediumSidebar);
     }
 
-    this.getMode();
   }
-
-  public goTo(route : string[],index : number) : void{
-    this.selectedIndex = index;
-    sessionStorage.setItem('index',String(index));
+  
+  public goTo(route : string[]) : void{
     this.router.navigate(route);
   }
 
@@ -104,6 +93,8 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  
+  
   private getMode() : void{
     let opt = this.publicDropdown.filter(p => p.listener == 'dark')[0];
     console.log(opt);
@@ -152,6 +143,10 @@ export class DashboardComponent implements OnInit {
 
   private addUser(){
     this.router.navigate(['usuarios','nuevo']);
+  }
+
+  public isActive(url : string[]) : boolean{
+    return ('/' + url.join('/') == this.router.url);
   }
 
 }

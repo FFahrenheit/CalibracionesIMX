@@ -19,6 +19,7 @@ import { UserInputComponent } from './user-input/user-input.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { DefaultInputComponent } from './default-input/default-input.component';
 import { DeviceOptionsComponent } from './device-options/device-options.component';
+import { GaugeComponent } from './gauge/gauge.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { DeviceOptionsComponent } from './device-options/device-options.componen
     ProfileViewComponent,
     DefaultInputComponent,
     DeviceOptionsComponent,
+    GaugeComponent,
   ],
   imports: [
     CommonModule,
@@ -60,7 +62,8 @@ import { DeviceOptionsComponent } from './device-options/device-options.componen
     DeviceBorrowsComponent,
     UserInputComponent,
     ProfileViewComponent,
-    DefaultInputComponent
+    DefaultInputComponent,
+    GaugeComponent
   ]
 })
 export class SharedModule { }
