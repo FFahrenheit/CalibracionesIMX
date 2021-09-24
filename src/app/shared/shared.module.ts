@@ -20,6 +20,7 @@ import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { DefaultInputComponent } from './default-input/default-input.component';
 import { DeviceOptionsComponent } from './device-options/device-options.component';
 import { GaugeComponent } from './gauge/gauge.component';
+import { DeviceSimpleComponent } from './device-simple/device-simple.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { GaugeComponent } from './gauge/gauge.component';
     DefaultInputComponent,
     DeviceOptionsComponent,
     GaugeComponent,
+    DeviceSimpleComponent,
   ],
   imports: [
     CommonModule,

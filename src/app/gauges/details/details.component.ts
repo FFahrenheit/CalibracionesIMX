@@ -40,21 +40,17 @@ export class DetailsComponent implements OnInit {
   }
 
   public search() : void{
-    console.log('Search!');
     let id = this.get('gauge').value.trim();
 
     if(id != ''){
       this.searchId = id;
-    }
-    else{
-      this.alert.warn('Ingrese un código válido');
+      this.clearSearch();
     }
     this.gauge.nativeElement.focus();
   }
 
   public loaded($event){
-    console.log($event);
-    this.get('gauge').setValue('');
+    this.clearSearch();
   }
 
   public clearSearch() : void{

@@ -1,0 +1,191 @@
+<div *ngIf="device != null" class="card my-3 pb-3">
+    Hello!
+    {{ getObject() }}
+    <!-- <div class="container text-center pt-1">
+        
+        <div class="row ml-1">
+            <div class="col-md-8">
+                <h4 class="text-left my-3">
+                    <i *ngIf="canHide" title="Mostrar / ocultar" [ngClass]="{'fa-chevron-down':!show,'fa-chevron-up':show}"
+                        class="fas hide-button" (click)="show = !show"></i>
+                    {{ device['descripcion'] || '' }} - {{ id.replace('--','/') }}
+                </h4>
+            </div>
+            <div class="col-md-4 text-right pt-3 px-0">
+                <device-options [device]="device"></device-options>
+            </div>
+        </div>
+
+        <div class="row justify-content-center" *ngIf="show">
+            <div class="col-md-5">
+
+                <div>
+                    <a (click)="getDetails()" class="black-link" title="Ver detalles del equipo">
+                        <h5 class="text-left subtitle-att">
+                            Detalles del equipo
+                            <i class="fas fa-external-link-alt"></i>
+                        </h5>
+                    </a>
+
+                    <attr name="ID" [value]="id.replace('--','/')"></attr>
+                    <attr name="Descripcion" [value]="device.descripcion"></attr>
+                    <attr name="Numero de serie" [value]="device.serie"></attr>
+                    <attr name="Ubicacion" [value]="device.ubicacion"></attr>
+                    <attr name="Tipo de calibracion" [value]="device.calibracion"></attr>
+                    <attr name="Error" [value]="errorPipe.transform(device.error)"></attr>
+                    <attr name="Resolución" [value]="resolution.transform(device.resInf,device.resSup)"></attr>
+                    <attr name="Estado del dispositivo" [value]="device.activo" [status]="getActive()"></attr>
+                    <attr name="Estado de calibracion" [value]="device.estado" [status]="getStatus()"></attr>
+                    <attr name="Periodo de calibración"
+                        [value]="device.periodo == 1 ? '1 mes' : device.periodo + ' meses'">
+                    </attr>
+
+                    <div>
+                        <h6 class="text-left subtitle-att">Responsables del equipo</h6>
+                        <ul class="dot-list" *ngIf="device.responsables.length > 0; else empty_responsables">
+                            <li *ngFor="let r of device.responsables">
+                                {{ r.nombre | titlecase }}
+                            </li>
+                        </ul>
+                        <ng-template #empty_responsables>
+                            <span class="empty text"> No hay información de los responsables de este equipo</span>
+                        </ng-template>
+                    </div>
+                </div>
+
+                <div class="mb-2">
+                    <h5 class="text-left subtitle-att"> Estado de préstamo </h5>
+                    <div *ngIf="device.prestatario == null; else not_available">
+                        <attr name="Estado del equipo" value="Disponible" status="ok"></attr>
+                    </div>
+                    <ng-template #not_available>
+                        <attr name="Estado del equipo" value="Prestado" status="not-ok"></attr>
+                        <attr *ngIf="device.prestatario != 'operador'; else operador" name="Prestatario"
+                            [value]="titleCase.transform(device.nombrePrestatario) + ' (' + device.prestatario + ')'">
+                        </attr>
+                        <ng-template #operador>
+                            <attr name="Prestatario"
+                            [value]="device.operador + ' (operador)'">
+                        </attr>
+                        </ng-template>
+                    </ng-template>
+                </div>
+
+                <div class="mb-2">
+                    <h5 class="text-left subtitle-att"> Estado de calibración </h5>
+                    <div class="row">
+                        <div class="col-2 pbar">
+                            <p>{{ device.ultima | date:'shortDate':'UTC' }}</p>
+                            <i class="far fa-calendar-check"></i>
+                        </div>
+                        <div class="col-8">
+                            <ngb-progressbar [type]="getDateType()" [value]="getDateValue()"
+                                [ngClass]="{'bar' : getDateType() == 'warning' }" height="25px">
+                                {{ status }}
+                            </ngb-progressbar>
+                        </div>
+                        <div class="col-2 pbar">
+                            <p>{{ device.siguiente | date:'shortDate':'UTC' }}</p>
+                            <i class="far fa-calendar-times"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-7 table-responsive container text-center">
+
+                <div>
+                    <h5 class="text-left subtitle-att">Historial de préstamos</h5>
+                    <table class="table table-hover table-bordered table-sm"
+                        *ngIf="device.prestamos.length > 0; else empty_prestamos">
+                        <thead>
+                            <tr class="header">
+                                <th scope="col" class="align-middle">
+                                    Folio
+                                </th>
+                                <th scope="col" class="align-middle">
+                                    Estado
+                                </th>
+                                <th scope="col" class="align-middle">
+                                    Fecha de préstamo
+                                </th>
+                                <th scope="col" class="align-middle">
+                                    Fecha de compromiso
+                                </th>
+                                <th scope="col" class="align-middle">
+                                    Prestatario
+                                </th>
+                                <th scope="col" class="align-middle">
+                                    Entregó
+                                </th>
+                                <th scope="col" class="align-middle">
+                                    Fecha de retorno
+                                </th>
+                                <th scope="col" class="align-middle">
+                                    Notas
+                                </th>
+                                <th scope="col" class="align-middle">
+                                    Recibió
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let p of device.prestamos; let i = index">
+                                <td style="white-space: nowrap">
+                                    {{ p.id }}
+                                    <i [class]="getIcon(p.estado)"></i>
+                                </td>
+                                <td style="white-space: nowrap">
+                                    <span>
+                                        {{ p.estado }}
+                                    </span>
+                                </td>
+                                <td>
+                                    {{ p.fechaEntrega | date:'mediumDate' }}
+                                    {{ p.fechaEntrega | date:'shortTime' }}
+                                </td>
+                                <td>
+                                    {{ p.fechaCompromiso | date:'mediumDate':'UTC' }}
+                                </td>
+                                <td>
+                                    <span *ngIf="p.nombrePrestatario != 'operador';else operador">
+                                        {{ p.nombrePrestatario | titlecase }}
+                                    </span>
+                                    <ng-template #operador>
+                                        {{ p.operador }}
+                                    </ng-template>
+                                </td>
+                                <td>
+                                    {{ p.nombreEntrega | titlecase }}
+                                </td>
+                                <td *ngIf="p.estado != 'Entregado'">
+                                    {{ p.fechaRetorno | date:'mediumDate' }}
+                                    {{ p.fechaRetorno | date:'shortTime' }}
+                                </td>
+                                <td *ngIf="p.estado != 'Entregado'">
+                                    {{ p.notas == '' ? '-' : p.notas }}
+                                </td>
+                                <td *ngIf="p.estado != 'Entregado'">
+                                    {{ p.nombreRecibe | titlecase }}
+                                </td>
+                                <td colspan="3" *ngIf="p.estado == 'Entregado'">
+                                    <span *ngIf="i == 0; else no_info">
+                                        Aún no devuelto
+                                    </span>
+                                    <ng-template #no_info>
+                                        Sin información
+                                    </ng-template>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ng-template #empty_prestamos>
+                        <span class="empty text"> No hay información del historial de préstamos de este
+                            equipo</span>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>

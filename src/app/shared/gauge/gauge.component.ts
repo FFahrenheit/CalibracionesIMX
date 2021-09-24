@@ -54,8 +54,4 @@ export class GaugeComponent implements OnInit, OnChanges {
     window.location.reload();
   }
 
-  getObject(){
-    return JSON.stringify(this.gauge)
-  }
-
 }

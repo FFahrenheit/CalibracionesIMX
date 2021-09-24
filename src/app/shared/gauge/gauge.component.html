@@ -7,9 +7,8 @@
         </h4>
     </div>
     <div *ngSwitchCase="Status.SHOW">
-        gauge works!
-        <br>
-        {{ getObject() }}
+        <device-simple [device]="gauge">
+        </device-simple>
     </div>
     <div *ngSwitchCase="Status.NOT_FOUND">
         <error-message [loading]="true" title="Gauge no encontrado"

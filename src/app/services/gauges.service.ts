@@ -87,7 +87,7 @@ export class GaugesService {
                .pipe(
                  map(resp=>{
                    if(resp['ok']){
-                    this.gauge = resp['device'];
+                    this.gauge = resp['equipo'];
                     return true;
                    }
                    this.errorMessage = 'No se pudo encontrar el Gauge con el ID especificado';
