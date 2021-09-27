@@ -105,6 +105,8 @@ export class ReturnComponent implements OnInit {
       id = id.substring(1);
     }
     if(isNaN(id)){
+      this.get('gauge').setValue('');
+      this.gauge.nativeElement.focus();
       return this.alert.error('Código de barras inválido');
     }
     this.gaugesService.loadGauge(id)

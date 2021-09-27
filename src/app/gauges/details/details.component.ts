@@ -43,7 +43,17 @@ export class DetailsComponent implements OnInit {
     let id = this.get('gauge').value.trim();
 
     if(id != ''){
-      this.searchId = id;
+      if(id.startsWith('F') || id.startsWith('f')){
+        id = id.substring(1);
+      }
+
+      if(isNaN(id)){
+        this.get('gauge').setValue('');
+        this.gauge.nativeElement.focus();
+        return this.alert.error('Código de barras inválido');
+      }else{
+        this.searchId = id;
+      }
       this.clearSearch();
     }
     this.gauge.nativeElement.focus();
