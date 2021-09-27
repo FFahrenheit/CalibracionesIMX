@@ -22,6 +22,7 @@ export class ReturnComponent implements OnInit {
               private gaugesService : GaugesService) { }
 
   ngOnInit(): void {
+    // this.alert.clear();
     let isUsingScanner = (localStorage.getItem('scanner') || 'true') == 'true';
     this.form = this.fb.group({
       operator: ['', Validators.required],
@@ -203,7 +204,7 @@ export class ReturnComponent implements OnInit {
     if(this.get('operator').valid){
       op.disable();
       this.gauge.nativeElement.focus();
-    }else{
+    }else if(this.get('operator').value != ''){
       this.alert.warn('Código de empleado no válido');
       this.get('operator').setValue('');
       this.operator.nativeElement.focus();
