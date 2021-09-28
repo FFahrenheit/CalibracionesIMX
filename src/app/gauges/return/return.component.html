@@ -18,7 +18,7 @@
                         <input #operator type="password" formControlName="operator"
                             placeholder="Escanee de la credencial" class="form-control label"
                             [class]="getClass('operator')" (keyup.enter)="setEmployee()"
-                            (keydown.Tab)="setEmployee($event)" pattern="^(IMXG|imxg)'[0-9]{1,}$" (focusout)="disableInput()">
+                            (keydown.Tab)="setEmployee($event)" pattern="^(IMXG|imxg)('|-)[0-9]{1,}$" (focusout)="disableInput()">
                         <div class="input-group-prepend click">
                             <div class="input-group-text" title="Borrar código" (click)="clearOperator()">
                                 <i class="fas fa-backspace"></i>
@@ -85,7 +85,7 @@
         <div class="col-md-7 text-center">
             <div *ngIf="gauges.length > 0; else add_gauge">
 
-                <h5 class="bold"> Retornos de {{ get('operator').value.substring(5) }} </h5>
+                <h5 class="bold"> Retornos de Empleado No. {{ get('operator').value.substring(5) }} </h5>
 
                 <p class="text-right"> Total de Guages: {{ gauges.length }}</p>
 

@@ -71,8 +71,8 @@ export class ReturnComponent implements OnInit {
       return this.alert.warn('Ingrese un código de empleado válido');
     }
 
-    let employee = this.get('operator').value.toUpperCase().trim();
-    let regex = /^IMXG'[0-9]{1,}$/;
+    let employee = this.get('operator').value.toUpperCase().trim().replace("'",'-');
+    let regex = /^IMXG-[0-9]{1,}$/;
 
     if(!regex.test(employee)){
       this.get('operator').setValue('');
