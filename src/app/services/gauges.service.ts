@@ -35,10 +35,11 @@ export class GaugesService {
                );
   }
 
-  public lendGauges(operator : string, devices : string[]){
+  public lendGauges(operator : string, devices : string[], date = new Date()){
     const body = {
       operator,
-      devices
+      devices,
+      date
     };
 
     return this.http.post(`${base_url}/gauges`, body)
@@ -57,12 +58,13 @@ export class GaugesService {
                );
   }
 
-  public returnGauges(operator : string, devices : string[], status : string, notes : string = ''){
+  public returnGauges(operator : string, devices : string[], status : string, notes : string = '', date = new Date()){
     const body = {
       operator,
       devices,
       status,
-      notes
+      notes,
+      date
     };
 
     return this.http.put(`${base_url}/gauges`, body)
