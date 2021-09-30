@@ -21,7 +21,7 @@ export class Error503Component implements OnInit {
 
   goBack(){
     sessionStorage.removeItem('index');
-    this.router.navigate(['']);
+    this.router.navigate(['equipos','ver']);
   }
 
 }
