@@ -142,7 +142,7 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-  private goToGauges(){
+  public goToGauges(){
     this.router.navigate(['gauges']);
   }
 

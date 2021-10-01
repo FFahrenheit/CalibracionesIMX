@@ -2,9 +2,9 @@
     <div id="page-content-wrapper">
         <nav class="navbar navbar-expand-md navbar-light bg-light bg-gradient border">
             <a class="navbar-brand click" data-placement="bottom">
-                <img src="../../../assets/icon.png" (click)="goTo([''])" 
-                class="d-inline-block align-top nav-logo">
+                <img src="../../../assets/icon.png" (click)="goTo([''])" class="d-inline-block align-top nav-logo">
                 <span class="nav-logo title-logo" (click)="goTo(['gauges'])">
+                    <!-- <i class="fas fa-tachometer-alt"></i> -->
                     GAUGES
                 </span>
             </a>
@@ -18,31 +18,38 @@
                 </li>
             </ul>
 
-            <span class="navbar-text float-right ml-auto">
+            <div class="float-right ml-auto my-auto">
+                <span class=" mx-2 gauge my-auto align-middle">
+                    <i class="fas fa-cogs" (click)="goTo([''])" title="Ir a sistema completo">
+                    </i>
+                </span>
+                <span class="navbar-text">
 
-                <div ngbDropdown class="" placement="bottom-right" display="dynamic">
-                    <button class="btn btn-light " id="dropdownBasic1" ngbDropdownToggle>
-                        <span class="signed-user px-2">
-                            <i class="fas fa-user px-2"></i> {{ (user?.nombre | titlecase) || "Usuario"}}
-                        </span>
-                    </button>
-                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <button ngbDropdownItem *ngFor="let o of publicDropdown" (click)="handleClick(o.listener)">
-                            <i [class]="o.icon"></i>
-                            {{ o.title }}
+                    <div ngbDropdown class="" placement="bottom-right" display="dynamic">
+                        <button class="btn btn-light " id="dropdownBasic1" ngbDropdownToggle>
+                            <span class="signed-user px-2">
+                                <i class="fas fa-user px-2"></i> {{ (user?.nombre | titlecase) || "Usuario"}}
+                            </span>
                         </button>
-
-                        <div *ngIf="isAdmin">
-                            <div class="dropdown-divider"></div>
-                            <button ngbDropdownItem *ngFor="let o of adminDropdown" (click)="handleClick(o.listener)">
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                            <button ngbDropdownItem *ngFor="let o of publicDropdown" (click)="handleClick(o.listener)">
                                 <i [class]="o.icon"></i>
                                 {{ o.title }}
                             </button>
+
+                            <div *ngIf="isAdmin">
+                                <div class="dropdown-divider"></div>
+                                <button ngbDropdownItem *ngFor="let o of adminDropdown"
+                                    (click)="handleClick(o.listener)">
+                                    <i [class]="o.icon"></i>
+                                    {{ o.title }}
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            </span>
+                </span>
+            </div>
         </nav>
         <div class="container-fluid">
             <router-outlet>
