@@ -47,4 +47,7 @@ export class BorrowDevicesComponent implements OnInit {
     this.loadDevices();
   }
 
+  public goToGauges() : void{
+    this.router.navigate(['gauges', 'prestar']);
+  }
 }
