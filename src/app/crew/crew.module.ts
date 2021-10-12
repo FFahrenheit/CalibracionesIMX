@@ -10,6 +10,7 @@ import { ProviderListComponent } from './provider-list/provider-list.component';
 import { SeeProvidersComponent } from './see-providers/see-providers.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { DeleteRecordsComponent } from './delete-records/delete-records.component';
+import { ResendTasksComponent } from './resend-tasks/resend-tasks.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DeleteRecordsComponent } from './delete-records/delete-records.componen
     ProviderListComponent,
     SeeProvidersComponent,
     AddUserComponent,
-    DeleteRecordsComponent
+    DeleteRecordsComponent,
+    ResendTasksComponent
   ],
   imports: [
     CommonModule,

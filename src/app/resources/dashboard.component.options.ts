@@ -49,5 +49,10 @@ export const adminOptions = [
         title: 'Borrar registros',
         icon: 'fas fa-tools pr-1',
         listener: 'delete'
+    },
+    {
+        title: 'Reenviar eventos',
+        icon: 'fas fa-stopwatch',
+        listener: 'resend'
     }
 ];

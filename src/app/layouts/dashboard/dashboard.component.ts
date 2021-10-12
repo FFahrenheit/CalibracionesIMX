@@ -99,9 +99,16 @@ export class DashboardComponent implements OnInit {
       case 'dark':
         this.toggleDarkMode();
         break;
+      case 'resend':
+        this.goToResend();
+        break;
       default:
         console.log('Not yet implemented');
     }
+  }
+
+  private goToResend(){
+    this.router.navigate(['usuarios','eventos']);
   }
 
   private getMode() : void{

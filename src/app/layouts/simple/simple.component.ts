@@ -13,16 +13,16 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class SimpleComponent implements OnInit {
 
-  public user : User | undefined = Object.create(null);
+  public user: User | undefined = Object.create(null);
   public isAdmin = false;
   public publicDropdown;
   public adminDropdown;
   public simpleOptions = simpleOptions;
 
-  public sidebar : any;
+  public sidebar: any;
 
-  constructor(private router  : Router,
-              private login  : LoginService) { }
+  constructor(private router: Router,
+    private login: LoginService) { }
 
   ngOnInit(): void {
 
@@ -32,38 +32,38 @@ export class SimpleComponent implements OnInit {
 
     this.sidebar = publicSidebar;
     this.publicDropdown = profileOptions;
-    
-    if(this.isAdmin || this.login.isLender()){
+
+    if (this.isAdmin || this.login.isLender()) {
       this.publicDropdown = this.publicDropdown.concat(mediumOptions[1]);
     }
-    if(this.isAdmin){
+    if (this.isAdmin) {
       this.sidebar = this.sidebar.concat(adminSidebar, mediumSidebar)
       this.adminDropdown = adminOptions;
-    }else if(this.login.isLender()){
+    } else if (this.login.isLender()) {
       this.sidebar = this.sidebar.concat(mediumSidebar);
     }
 
   }
-  
-  public goTo(route : string[]) : void{
+
+  public goTo(route: string[]): void {
     this.router.navigate(route);
   }
 
-  public logout() : void {
+  public logout(): void {
     this.login.logout();
-    this.router.navigate(['inicio','login']);
+    this.router.navigate(['inicio', 'login']);
   }
 
-  public goToAdmins(){
-    this.router.navigate(['usuarios','encargados']);
+  public goToAdmins() {
+    this.router.navigate(['usuarios', 'encargados']);
   }
 
-  public changePassword(){
-    this.router.navigate(['usuarios','seguridad','cambiar'])
+  public changePassword() {
+    this.router.navigate(['usuarios', 'seguridad', 'cambiar'])
   }
 
-  public handleClick(event : string){
-    switch(event){
+  public handleClick(event: string) {
+    switch (event) {
       case 'logout':
         this.logout();
         break;
@@ -88,40 +88,45 @@ export class SimpleComponent implements OnInit {
       case 'dark':
         this.toggleDarkMode();
         break;
+      case 'resend':
+        this.goToResend();
+        break;
       default:
         console.log('Not yet implemented');
     }
   }
 
-  
-  
-  private getMode() : void{
+  private goToResend() {
+    this.router.navigate(['usuarios', 'eventos']);
+  }
+
+  private getMode(): void {
     let opt = this.publicDropdown.filter(p => p.listener == 'dark')[0];
     console.log(opt);
-    if (!opt){
+    if (!opt) {
       return;
     }
-    if( this.isDarkMode() ){
+    if (this.isDarkMode()) {
       opt.title = 'Modo día';
       opt.icon = 'fas fa-sun';
-    }else{
+    } else {
       opt.title = 'Modo noche';
       opt.icon = 'fas fa-moon';
     }
   }
 
-  public isDarkMode() : boolean{
+  public isDarkMode(): boolean {
     const darkMode = localStorage.getItem('dark') || 'false';
     return darkMode == 'true';
   }
 
-  private toggleDarkMode() : void{
+  private toggleDarkMode(): void {
     const html = document.getElementsByTagName('html')[0];
 
-    if( this.isDarkMode() ){
+    if (this.isDarkMode()) {
       localStorage.setItem('dark', 'false');
       html.dataset.theme = '';
-    } else { 
+    } else {
       localStorage.setItem('dark', 'true');
       html.dataset.theme = 'dark-mode';
     }
@@ -129,23 +134,23 @@ export class SimpleComponent implements OnInit {
     this.getMode();
   }
 
-  private goToFull(){
+  private goToFull() {
     this.router.navigate(['']);
   }
 
-  private goToGauges(){
+  private goToGauges() {
     this.router.navigate(['gauges']);
   }
 
-  private deleteRecords(){
-    this.router.navigate(['usuarios','admin','eliminar']);
+  private deleteRecords() {
+    this.router.navigate(['usuarios', 'admin', 'eliminar']);
   }
 
-  private addUser(){
-    this.router.navigate(['usuarios','nuevo']);
+  private addUser() {
+    this.router.navigate(['usuarios', 'nuevo']);
   }
 
-  public isActive(url : string[]) : boolean{
+  public isActive(url: string[]): boolean {
     return ('/' + url.join('/') == this.router.url);
   }
 

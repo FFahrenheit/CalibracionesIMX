@@ -6,6 +6,7 @@ import { BackupUsersComponent } from "./backup-users/backup-users.component";
 import { ChangePasswordComponent } from "./change-password/change-password.component";
 import { DeleteRecordsComponent } from "./delete-records/delete-records.component";
 import { ProviderListComponent } from "./provider-list/provider-list.component";
+import { ResendTasksComponent } from "./resend-tasks/resend-tasks.component";
 import { SeeProvidersComponent } from "./see-providers/see-providers.component";
 
 export const CrewRoutes : Routes =  [
@@ -57,6 +58,14 @@ export const CrewRoutes : Routes =  [
                 canDeactivate: [ RecoverPasswordGuard ],
                 data: {
                     title: 'Cambiar contraseña'
+                }
+            },
+            {
+                path: 'eventos',
+                component: ResendTasksComponent,
+                canActivate: [ AdminGuard ],
+                data: {
+                    title: 'Reenviar tareas o eventos programados'
                 }
             },
             {
