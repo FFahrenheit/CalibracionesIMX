@@ -161,4 +161,10 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['usuarios','nuevo']);
   }
 
+  public getTitle(){
+    if(this.router.url.includes('usuarios')){
+      return 'Configuración';
+    }
+    return this.sidebar[this.selectedIndex].detail;
+  }
 }

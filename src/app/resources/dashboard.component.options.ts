@@ -51,8 +51,8 @@ export const adminOptions = [
         listener: 'delete'
     },
     {
-        title: 'Reenviar eventos',
-        icon: 'fas fa-stopwatch',
+        title: 'Eventos programados',
+        icon: 'fas fa-stopwatch pr-1',
         listener: 'resend'
     }
 ];
