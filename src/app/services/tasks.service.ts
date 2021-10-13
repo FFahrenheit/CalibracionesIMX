@@ -36,7 +36,7 @@ export class TasksService {
     return this.resendTask('backup/weekly');
   }
 
-  private resendTask(task : string){
+  public resendTask(task : string){
     return this.http.get(`${base_url}/tasks/${task}`)
               .pipe(
                 map(resp=>{

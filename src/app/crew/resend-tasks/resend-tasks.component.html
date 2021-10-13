@@ -2,21 +2,43 @@
     <alert></alert>
     <h4 class="text-left my-3">Eventos programados</h4>
     <span class="text-left float-left mt-0 mb-1">
-        Consulte la lista de eventos programados y haga reenvio de correos o 
+        Consulte la lista de eventos programados y haga reenvio de correos o
         actualice los respaldos
     </span>
-    <table class="table table-bordered table-striped table-sm">
-        <thead>
-            <tr class="header">
-                <th scope="col">Evento</th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Frecuencia</th>
-                <th scope="col">Reenviar / Forzar</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
+    <div class="table-responsive ">
+        <table class="table table-bordered table-striped table-sm">
 
+            <thead>
+                <tr class="header">
+                    <th scope="col" class="align-middle">Evento</th>
+                    <th scope="col" class="align-middle">Descripción</th>
+                    <th scope="col" class="align-middle">Frecuencia</th>
+                    <th scope="col" class="align-middle">Reenviar / Respaldar</th>
+                </tr>
+            </thead>
 
-    </table>
+            <tbody>
+                <tr *ngFor="let t of events">
+                    <td>
+                        <i [class]="t.icon" class="pr-1"></i>
+                        {{ t.task }}
+                    </td>
+                    <td>
+                        {{ t.description }}
+                    </td>
+                    <td>
+                        {{ t.frequency }}
+                    </td>
+                    <td>
+                        <div class="row d-flex justify-content-center">
+                            <confirm-modal myClass="px-2 m-0 btn-primary col-md-12" [trigger]="t.trigger"
+                            >
+                            </confirm-modal>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
 </div>

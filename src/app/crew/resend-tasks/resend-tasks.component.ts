@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TasksService } from 'src/app/services/tasks.service';
+import { tasks } from './scheduled.tasks';
 
 @Component({
   selector: 'app-resend-tasks',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResendTasksComponent implements OnInit {
 
-  constructor() { }
+  public events = tasks;
+
+  constructor(private task : TasksService) { }
 
   ngOnInit(): void {
   }
