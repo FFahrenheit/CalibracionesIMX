@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit {
             this.router.navigateByUrl(this.returnUrl);
           }else{
             this.alert.error(this.login.getError(), { autoClose: false });
+            this.form.controls['password'].setValue('');
           }
         },
         error=>{
