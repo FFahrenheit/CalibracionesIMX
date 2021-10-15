@@ -1,15 +1,15 @@
 import { DatePipe } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { ChartsService } from 'src/app/services/charts.service';
 import { AlertService } from 'src/app/shared/alert';
 
 @Component({
-  selector: 'app-next-calibrations',
-  templateUrl: './next-calibrations.component.html',
-  styleUrls: ['./next-calibrations.component.scss']
+  selector: 'app-done-calibrations',
+  templateUrl: './done-calibrations.component.html',
+  styleUrls: ['./done-calibrations.component.scss']
 })
-export class NextCalibrationsComponent implements OnInit, AfterViewInit {
+export class DoneCalibrationsComponent implements OnInit {
 
   @ViewChild('canvasChart') canvasChart: ElementRef;
 
@@ -19,12 +19,12 @@ export class NextCalibrationsComponent implements OnInit, AfterViewInit {
 
   private data;
 
-  constructor(private alert: AlertService,
-    private charts: ChartsService,
-    private date: DatePipe) { }
+  constructor(private alert : AlertService,
+              private charts: ChartsService,
+              private date  : DatePipe) { }
 
   ngOnInit(): void {
-    this.charts.getNextChart().subscribe(
+    this.charts.getDoneChart().subscribe(
       resp => {
         if (resp) {
           this.initializeData(this.charts.getData());
@@ -49,9 +49,9 @@ export class NextCalibrationsComponent implements OnInit, AfterViewInit {
         plugins: {
           title: {
             display: true,
-            text: 'Número de calibraciones a expirar en los próximos 30 días'
+            text: 'Número de calibraciones hechas en los últimos 30 días'
           }
-        },
+        }
       }
     });
 
@@ -59,7 +59,7 @@ export class NextCalibrationsComponent implements OnInit, AfterViewInit {
 
   private initializeData(data: any) {
     this.data = {
-      labels: data.map(d => this.date.transform(d.fecha, 'yyyy-MM-dd')),
+      labels: data.map(d => this.date.transform(d.fecha,'yyyy-MM-dd')),
       datasets: [
         {
           label: 'Equipos (INT)',
@@ -94,5 +94,6 @@ export class NextCalibrationsComponent implements OnInit, AfterViewInit {
     this.myChart.data = this.data;
     this.myChart.update();
   }
+
 
 }

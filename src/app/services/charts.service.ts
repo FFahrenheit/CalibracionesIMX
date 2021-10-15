@@ -19,6 +19,10 @@ export class ChartsService {
     return this.getChart('next');
   }
 
+  public getDoneChart(){
+    return this.getChart('done');
+  }
+
   private getChart(route : string){
     return this.http.get(base_url + '/charts/' + route)
                .pipe(
