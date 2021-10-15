@@ -23,6 +23,7 @@ import { Error403Component } from './errors/error403/error403.component';
 import { EasterEggComponent } from './errors/easter-egg/easter-egg.component';
 import { Error503Component } from './errors/error503/error503.component';
 import { SimpleComponent } from './layouts/simple/simple.component';
+import { ChartsComponent } from './layouts/charts/charts.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { SimpleComponent } from './layouts/simple/simple.component';
     EasterEggComponent,
     Error503Component,
     SimpleComponent,
+    ChartsComponent,
   ],
   imports: [
     BrowserModule,

@@ -65,6 +65,13 @@ export const AppRoutes: Routes = [
                 )
             },
             {
+                path: 'charts',
+                loadChildren: ()=>
+                import('./charts/charts.module').then(
+                    (m) => m.ChartsModule
+                )
+            },
+            {
                 path: '',
                 pathMatch: 'full',
                 redirectTo: 'equipos'
