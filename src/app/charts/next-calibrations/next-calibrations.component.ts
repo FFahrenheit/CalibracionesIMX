@@ -1,5 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import Chart from 'chart.js/auto';
+import { ChartsService } from 'src/app/services/charts.service';
+import { AlertService } from 'src/app/shared/alert';
 
 @Component({
   selector: 'app-next-calibrations',
@@ -8,33 +11,80 @@ import Chart from 'chart.js/auto';
 })
 export class NextCalibrationsComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('canvasChart') canvasChart : ElementRef;
+  @ViewChild('canvasChart') canvasChart: ElementRef;
 
   private canvas;
   private ctx;
-  private myChart : Chart;
+  private myChart: Chart;
 
-  constructor() { }
+  private data;
+
+  constructor(private alert : AlertService,
+              private charts: ChartsService,
+              private date  : DatePipe) { }
 
   ngOnInit(): void {
+    this.charts.getNextChart().subscribe(
+      resp => {
+        if (resp) {
+          this.initializeData(this.charts.getData());
+        } else {
+          this.alert.error(this.charts.getError());
+        }
+      }, error => {
+        this.alert.error(this.charts.getError());
+      }
+    );
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.canvas = this.canvasChart.nativeElement;
     this.ctx = this.canvas.getContext('2d');
 
     this.myChart = new Chart(this.canvas, {
-      type: 'pie',
-      data:{
-        labels: ['R', 'G', 'B'],
-        datasets: [{
-          label: 'Interest in charts',
-          data: [30, 50, 100],
-          backgroundColor:  ['rgb(255, 99, 132)','rgb(54, 162, 235)','rgb(255, 205, 86)'],
-          hoverOffset: 4
-        }]
+      type: 'line',
+      data: this.data,
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Número de calibraciones en los próximos 30 días'
+          }
+        }
       }
     });
+
+  }
+
+  private initializeData(data: any) {
+    this.data = {
+      labels: data.map(d => this.date.transform(d.fecha,'yyyy-MM-dd')),
+      datasets: [
+        {
+          label: 'Equipos (INT)',
+          data: data.map(d => d.equipos),
+          borderColor: 'rgb(255, 99, 132)',
+          backgroundColor: 'rgba(255, 99, 132, 0.5)'
+        },
+        {
+          label: 'Fixtures (FIX)',
+          data: data.map(d => d.fixtures),
+          borderColor: 'rgb(54, 162, 235)',
+          backgroundColor: 'rgba(54, 162, 235, 0.5)'
+        },
+        {
+          label: 'Dummies (DUM)',
+          data: data.map(d => d.dummies),
+          borderColor: 'rgb(255, 205, 86)',
+          backgroundColor: 'rgba(255, 205, 86, 0.5)'
+        }
+      ]
+    }
+
+    console.log(this.data);
+    this.myChart.data = this.data;
+    this.myChart.update();
   }
 
 }
