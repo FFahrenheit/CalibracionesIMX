@@ -91,9 +91,16 @@ export class SimpleComponent implements OnInit {
       case 'resend':
         this.goToResend();
         break;
+      case 'charts':
+        this.goToCharts();
+        break;
       default:
         console.log('Not yet implemented');
     }
+  }
+
+  private goToCharts() {
+    this.router.navigate(['charts']);
   }
 
   private goToResend() {

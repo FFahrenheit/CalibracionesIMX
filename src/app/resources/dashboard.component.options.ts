@@ -36,6 +36,11 @@ export const mediumOptions = [
 
 export const adminOptions = [
     {
+        title: 'Gráficas y estadísticas',
+        icon: 'fas fa-chart-line',
+        listener: 'charts'
+    },
+    {
         title: 'Administrar encargados',
         icon: 'fas fa-users-cog pr-1',
         listener: 'admins'
