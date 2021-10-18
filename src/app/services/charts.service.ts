@@ -15,6 +15,10 @@ export class ChartsService {
 
   constructor(private http : HttpClient) { }
 
+  public getBorrowsOverallChart(){
+    return this.getChart('borrows');
+  }
+
   public getNextChart(){
     return this.getChart('next');
   }

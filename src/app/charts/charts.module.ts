@@ -4,11 +4,13 @@ import { RouterModule } from '@angular/router';
 import { ChartsRoutes } from './charts.routing';
 import { NextCalibrationsComponent } from './next-calibrations/next-calibrations.component';
 import { DoneCalibrationsComponent } from './done-calibrations/done-calibrations.component';
+import { BorrowsOverallComponent } from './borrows-overall/borrows-overall.component';
 
 @NgModule({
   declarations: [
     NextCalibrationsComponent,
-    DoneCalibrationsComponent
+    DoneCalibrationsComponent,
+    BorrowsOverallComponent
   ],
   imports: [
     CommonModule,

@@ -6,5 +6,9 @@ export const chartOptions = [
     {
         title: 'Últimas calibraciones',
         route: 'hechas'
+    },
+    {
+        title: 'Flujo de préstamos',
+        route: 'prestamos'
     }
 ];

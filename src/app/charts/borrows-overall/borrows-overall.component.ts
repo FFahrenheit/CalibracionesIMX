@@ -5,11 +5,11 @@ import { ChartsService } from 'src/app/services/charts.service';
 import { AlertService } from 'src/app/shared/alert';
 
 @Component({
-  selector: 'app-done-calibrations',
-  templateUrl: './done-calibrations.component.html',
-  styleUrls: ['./done-calibrations.component.scss']
+  selector: 'app-borrows-overall',
+  templateUrl: './borrows-overall.component.html',
+  styleUrls: ['./borrows-overall.component.scss']
 })
-export class DoneCalibrationsComponent implements OnInit {
+export class BorrowsOverallComponent implements OnInit {
 
   @ViewChild('canvasChart') canvasChart: ElementRef;
 
@@ -23,7 +23,7 @@ export class DoneCalibrationsComponent implements OnInit {
               private date  : DatePipe) { }
 
   ngOnInit(): void {
-    this.charts.getDoneChart().subscribe(
+    this.charts.getBorrowsOverallChart().subscribe(
       resp => {
         if (resp) {
           this.initializeData(this.charts.getData());
@@ -47,30 +47,7 @@ export class DoneCalibrationsComponent implements OnInit {
         plugins: {
           title: {
             display: true,
-            text: 'Número de calibraciones hechas en los últimos 30 días'
-          },
-          tooltip: {
-            callbacks: {
-              label: function(context) {
-                var label = context.dataset.label || '';
-                if (label) {
-                    label += ': ';
-                }
-                if (context.parsed.y !== null) {
-                    label += context.parsed.y;
-                }
-                return label;
-            },
-            afterBody: (ttItem) => (`Sum: ${ttItem.reduce((acc, val:any) => (acc + val.raw), 0)}`)
-            }
-          }
-        },
-        scales: {
-          x: {
-            stacked: true,
-          },
-          y: {
-            stacked: true
+            text: 'Flujo de préstamos en los últimos 30 días'
           }
         }
       }
@@ -83,31 +60,23 @@ export class DoneCalibrationsComponent implements OnInit {
       labels: data.map(d => this.date.transform(d.fecha,'yyyy-MM-dd')),
       datasets: [
         {
-          label: 'Equipos (INT)',
-          data: data.map(d => d.equipos),
+          label: 'Equipos prestados',
+          data: data.map(d => d.entregados),
           borderColor: 'rgb(255, 99, 132)',
           backgroundColor: 'rgba(255, 99, 132, 0.5)'
         },
         {
-          label: 'Fixtures (FIX)',
-          data: data.map(d => d.fixtures),
+          label: 'Equipos regresados',
+          data: data.map(d => d.regresados),
           borderColor: 'rgb(54, 162, 235)',
           backgroundColor: 'rgba(54, 162, 235, 0.5)'
         },
         {
-          label: 'Dummies (DUM)',
-          data: data.map(d => d.dummies),
+          label: 'Equipos en préstamo',
+          data: data.map(d => d.prestados),
           borderColor: 'rgb(255, 205, 86)',
           backgroundColor: 'rgba(255, 205, 86, 0.5)'
-        },
-        // {
-        //   label: 'Total',
-        //   data: data.map(d => d.total),
-        //   borderColor: 'rgb(180,180,180)',
-        //   backgroundColor: 'rgba(180,180,180, 0.7)',
-        //   borderDash: [10, 5],
-        //   pointRadius: 2,
-        // }
+        }
       ]
     }
 
@@ -115,6 +84,5 @@ export class DoneCalibrationsComponent implements OnInit {
     this.myChart.data = this.data;
     this.myChart.update();
   }
-
 
 }

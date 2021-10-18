@@ -14,7 +14,6 @@ export class NextCalibrationsComponent implements OnInit, AfterViewInit {
   @ViewChild('canvasChart') canvasChart: ElementRef;
 
   private canvas;
-  private ctx;
   private myChart: Chart;
 
   private data;
@@ -39,7 +38,6 @@ export class NextCalibrationsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.canvas = this.canvasChart.nativeElement;
-    this.ctx = this.canvas.getContext('2d');
 
     this.myChart = new Chart(this.canvas, {
       type: 'line',
