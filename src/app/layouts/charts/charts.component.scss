@@ -1,0 +1,12 @@
+.chart-card {
+    cursor: pointer;
+}
+
+.chart-card:hover {
+    background-color: rgb(240, 240, 240) !important;
+}
+
+.chart-card-active{
+    font-weight: bold;
+    background-color: rgb(240, 240, 240) !important;
+}
