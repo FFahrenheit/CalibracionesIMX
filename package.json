@@ -6,7 +6,8 @@
     "start": "ng serve -o --host 0.0.0.0 --port 4200",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "node service.js"
   },
   "private": true,
   "dependencies": {
@@ -22,6 +23,7 @@
     "@ng-bootstrap/ng-bootstrap": "^9.1.1",
     "chart.js": "^3.5.1",
     "jquery": "^3.6.0",
+    "node-windows": "^1.0.0-beta.6",
     "rxjs": "^6.6.7",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"
