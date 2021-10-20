@@ -1,7 +1,6 @@
 const { exec } = require("child_process");
 
-let path = "C:\\Users\\I.Lopez\\projects\\CalibracionesIMX";
-let command = "npm start --prefix " + path;
+let command = "npm start --prefix " + __dirname;
 
 exec(command, (error, stdout, stderr) => {
     if (error) {
