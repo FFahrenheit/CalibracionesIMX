@@ -17,10 +17,11 @@ export class DoneCalibrationsComponent implements OnInit {
   private myChart: Chart;
 
   private data;
+  
+  constructor(private alert   : AlertService,
+              private charts  : ChartsService,
+              private date    : DatePipe) { }
 
-  constructor(private alert : AlertService,
-              private charts: ChartsService,
-              private date  : DatePipe) { }
 
   ngOnInit(): void {
     this.charts.getDoneChart().subscribe(
@@ -36,7 +37,7 @@ export class DoneCalibrationsComponent implements OnInit {
     );
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInitA() {
     this.canvas = this.canvasChart.nativeElement;
 
     this.myChart = new Chart(this.canvas, {
@@ -51,17 +52,14 @@ export class DoneCalibrationsComponent implements OnInit {
           },
           tooltip: {
             callbacks: {
-              label: function(context) {
-                var label = context.dataset.label || '';
-                if (label) {
-                    label += ': ';
-                }
-                if (context.parsed.y !== null) {
-                    label += context.parsed.y;
-                }
-                return label;
-            },
-            afterBody: (ttItem) => (`Sum: ${ttItem.reduce((acc, val:any) => (acc + val.raw), 0)}`)
+              footer: (items) => {
+                let counter = 0;
+                const index = items[0].parsed.x;
+                this.data.datasets.forEach(d => {
+                  counter += d.data[index];
+                });
+                return 'Total: ' + counter;
+              }
             }
           }
         },
@@ -80,7 +78,7 @@ export class DoneCalibrationsComponent implements OnInit {
 
   private initializeData(data: any) {
     this.data = {
-      labels: data.map(d => this.date.transform(d.fecha,'yyyy-MM-dd')),
+      labels: data.map(d => this.date.transform(d.fecha, 'yyyy-MM-dd')),
       datasets: [
         {
           label: 'Equipos (INT)',
@@ -112,9 +110,9 @@ export class DoneCalibrationsComponent implements OnInit {
     }
 
     console.log(this.data);
-    this.myChart.data = this.data;
-    this.myChart.update();
+    // this.myChart.data = this.data;
+    // this.myChart.update();
+    this.ngAfterViewInitA();
   }
-
 
 }

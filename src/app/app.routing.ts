@@ -8,6 +8,7 @@ import { AdminDeviceGuard } from "./guards/admin-device.guard";
 import { AdminGuard } from "./guards/admin.guard";
 import { LoggedGuard } from "./guards/logged.guard";
 import { LoginGuard } from "./guards/login.guard";
+import { MaintenanceGuard } from "./guards/maintenance.guard";
 import { BlankComponent } from "./layouts/blank/blank.component";
 import { DashboardComponent } from "./layouts/dashboard/dashboard.component";
 import { SimpleComponent } from "./layouts/simple/simple.component";
@@ -95,7 +96,7 @@ export const AppRoutes: Routes = [
     {
         path: '',
         component: BlankComponent,
-        canActivate: [ LoginGuard ],
+        canActivate: [ LoginGuard, MaintenanceGuard ],
         children: [
             {
                 path: 'inicio',
