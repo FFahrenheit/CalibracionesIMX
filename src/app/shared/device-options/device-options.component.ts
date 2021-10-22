@@ -22,7 +22,6 @@ export class DeviceOptionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentRoute = this.router.url.substring(1).split('/');
-    console.log(this.currentRoute);
   }
 
   ngOnChanges(changes : SimpleChanges) : void{

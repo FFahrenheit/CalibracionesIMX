@@ -17,7 +17,7 @@ export class DoneCalibrationsComponent implements OnInit {
   private myChart: Chart;
 
   private data;
-  
+
   constructor(private alert   : AlertService,
               private charts  : ChartsService,
               private date    : DatePipe) { }
@@ -37,7 +37,7 @@ export class DoneCalibrationsComponent implements OnInit {
     );
   }
 
-  ngAfterViewInitA() {
+  ngAfterViewInit() {
     this.canvas = this.canvasChart.nativeElement;
 
     this.myChart = new Chart(this.canvas, {
@@ -110,9 +110,8 @@ export class DoneCalibrationsComponent implements OnInit {
     }
 
     console.log(this.data);
-    // this.myChart.data = this.data;
-    // this.myChart.update();
-    this.ngAfterViewInitA();
+    this.myChart.data = this.data;
+    this.myChart.update();
   }
 
 }

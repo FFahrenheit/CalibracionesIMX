@@ -109,7 +109,6 @@ export class SimpleComponent implements OnInit {
 
   private getMode(): void {
     let opt = this.publicDropdown.filter(p => p.listener == 'dark')[0];
-    console.log(opt);
     if (!opt) {
       return;
     }

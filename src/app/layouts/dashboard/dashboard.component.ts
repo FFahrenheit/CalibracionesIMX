@@ -42,7 +42,6 @@ export class DashboardComponent implements OnInit {
 
     if(this.isAdmin || this.login.isLender()){
       this.publicDropdown = this.publicDropdown.concat(mediumOptions[0]);
-      console.log(this.publicDropdown);
     }
     if(this.isAdmin){
       this.sidebar = this.sidebar.concat(adminSidebar, mediumSidebar)
@@ -120,7 +119,6 @@ export class DashboardComponent implements OnInit {
 
   private getMode() : void{
     let opt = this.publicDropdown.filter(p => p.listener == 'dark')[0];
-    console.log(opt);
     if (!opt){
       return;
     }
