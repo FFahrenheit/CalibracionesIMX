@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChangePasswordService } from 'src/app/services/change-password.service';
 import { LoginService } from 'src/app/services/login.service';
+import { WindowsAuthService } from 'src/app/services/windows-auth.service';
 import { AlertService } from 'src/app/shared/alert';
 
 @Component({
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
               private route   : ActivatedRoute,
               private login   : LoginService,
               private alert   : AlertService,
-              private change  : ChangePasswordService) { }
+              private change  : ChangePasswordService,
+              private winLogin: WindowsAuthService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -76,5 +78,9 @@ export class LoginComponent implements OnInit {
       return '';
     };
     return control.hasError('required') ? 'is-invalid' : 'is-valid';
+  }
+
+  public windowsLogin(){
+    this.winLogin.login();
   }
 }

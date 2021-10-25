@@ -56,3 +56,13 @@ body,html{
     margin-bottom: 10px;
     font-size: 18px;
 }
+
+.windows-login{
+    font-size: 120%;
+    font-weight: 700 !important;
+}
+
+.windows-login:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}

@@ -58,6 +58,12 @@
                             </button>
                         </div>
                     </form>
+                    <p class="windows-login" title="Inicia sesión con tu usuario loggeado"
+                        (click)="windowsLogin()">
+                        <span class="badge badge-success mx-1">Nuevo</span>
+                        Iniciar sesión con Windows
+                        <i class="fab fa-windows windows"></i>
+                    </p>
                     <a [routerLink]="['/inicio/recuperar']" class="login">
                         ¿Olvidaste tu contraseña?
                     </a>
