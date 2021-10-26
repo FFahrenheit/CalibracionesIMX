@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
           } 
           if(resp == null){
             this.change.activateGuard();
-            this.router.navigate(['usuarios','seguridad','cambiar'])
+            this.router.navigate(['usuarios','seguridad','cambiar']);
           }
           else if(resp){
             this.router.navigateByUrl(this.returnUrl);

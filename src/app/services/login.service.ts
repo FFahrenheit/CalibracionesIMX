@@ -86,7 +86,40 @@ export class LoginService {
     return this.errorMessage;
   }
 
-  public refresh(state : RouterStateSnapshot | any){
+  public refresWindows(){
+    return this.http.post(`${ base_url }/auth/refresh`,{})
+    .pipe(
+      map((resp:any)=>{
+        
+       if(resp['ok']){
+
+           let user = resp.usuario;
+
+           localStorage.setItem('username',user.username);
+           localStorage.setItem('token',resp.token);
+           localStorage.setItem('email',user.email); 
+           localStorage.setItem('posicion',user.posicion);
+           
+           this.user = new User(
+             user.username,
+             user.email,
+             user.posicion,
+             user.nombre
+           );
+           if(user['recover']){
+            return null;
+          }           
+           return true;
+       }else{
+         return false;
+       }}),
+      catchError(error=>{
+       return of(false);
+      })
+    );
+  }
+
+  public refresh(state : RouterStateSnapshot){
     
     if(!this.isLogged()){
       this.router.navigate(['inicio','login'],{ queryParams: { returnUrl: state.url }});
