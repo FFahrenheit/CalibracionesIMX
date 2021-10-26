@@ -86,7 +86,7 @@ export class LoginService {
     return this.errorMessage;
   }
 
-  public refresh(state : RouterStateSnapshot){
+  public refresh(state : RouterStateSnapshot | any){
     
     if(!this.isLogged()){
       this.router.navigate(['inicio','login'],{ queryParams: { returnUrl: state.url }});

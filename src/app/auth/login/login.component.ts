@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
       remember: [false, Validators.compose([Validators.required])]
     });
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.winLogin.init();
   }
 
   public onSubmit(){
@@ -81,6 +82,9 @@ export class LoginComponent implements OnInit {
   }
 
   public windowsLogin(){
-    this.winLogin.login();
+    this.alert.info('Intentando autenticación...');
+    setTimeout(()=>{
+      this.winLogin.login();
+    }, 10)
   }
 }
