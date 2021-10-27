@@ -182,4 +182,8 @@ export class LoginService {
                );
   }
 
+  public setUser(user : User){
+    this.user = user;
+  }
+
 }

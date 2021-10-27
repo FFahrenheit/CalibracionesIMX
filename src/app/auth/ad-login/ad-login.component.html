@@ -1,1 +1,69 @@
-<p>ad-login works!</p>
+<div class="login-background">
+    <div class="container">
+        <div class="row">
+            <div class="card mx-auto text-center mt-5 shadow p-3 mb-5 bg-white rounded login-card">
+                <div class="card-body">
+                    <alert></alert>
+                    <img src="../../../assets/logo.png" class="login-logo" alt="Interplex logo">
+                    <br>
+                    <h2 class="title">
+                        <i class="fab fa-windows windows"></i>
+                        Autenticación con Active Directory
+                    </h2>
+                    <button class="btn btn-dark ad-login px-2 my-2" (click)="ADLogin()">
+                        Iniciar sesión con la cuenta actual
+                    </button>
+                    <hr class="divider">
+                    <form [formGroup]="form" class="mx-3 login" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                            <label for="">Nombre de usuario: </label>
+                            <font color="red">*</font>
+                            <input type="text" formControlName="username" placeholder="Ingresa tu usuario de Dominio"
+                                class="form-control" [class]="getClass('username')">
+                            <span
+                                *ngIf="form.controls['username'].hasError('required') && (form.controls['username'].touched)"
+                                class="invalid">
+                                Por favor, ingrese su nombre de usuario del dominio
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Contraseña: </label>
+                            <font color="red">*</font>
+                            <div class="input-group">
+                                <input name="password" [type]="showPassword ? 'text' : 'password'"
+                                    formControlName="password" placeholder="Escriba su contraseña de Windows"
+                                    class="form-control" [class]="getClass('password')">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text show-password" title="Show / hide password"
+                                        (click)="showPassword = !showPassword">
+                                        <i class="fas fa-eye-slash" *ngIf="!showPassword; else show_password"></i>
+                                        <ng-template #show_password>
+                                            <i class="far fa-eye"></i>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <span
+                                *ngIf="form.controls['password'].hasError('required') && (form.controls['password'].touched )"
+                                class="invalid">
+                                La contraseña es requerida
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary px-3 login py-1">
+                                Iniciar sesión con otra cuenta
+                            </button>
+                        </div>
+                    </form>
+                    <a [routerLink]="['/inicio/login']" class="login">
+                        Regresar al inicio de sesión tradicional
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-footer>
+    </app-footer>
+</div>

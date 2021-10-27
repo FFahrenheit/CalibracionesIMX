@@ -1,0 +1,90 @@
+body,html{
+    height: 100% !important;
+}
+
+.login-background{
+    background-image: url("../../../assets/img/background.jpg");
+    height: 100% !important; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login-logo{
+    margin: 5px;
+    width: 60%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title{
+    font-family: 'Source Sans Pro', sans-serif;
+    color: rgb(60,60,60);
+}
+
+.login{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;   
+}
+
+.ad-login{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    background-color: rgb(48,42,69);
+    border: 1px solid rgb(48,42,69);
+}
+
+.ad-login:hover{
+    background-color: rgb(33, 29, 48);
+}
+
+.fake-link:hover{
+    text-decoration: underline !important;
+    cursor: pointer !important;
+    color:black !important;
+}
+
+.invalid{
+    color: rgb(211, 43, 43);
+    font-size: 15px;
+}
+
+.show-password{
+    cursor: pointer;
+}
+
+.remember-label{
+    color: rgb(61, 61, 61);
+}
+
+.remember-label input{
+    margin-top: 10px;
+}
+
+.remember-label label{
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.windows-login{
+    font-size: 120%;
+    font-weight: 700 !important;
+}
+
+.windows-login:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.divider{
+    border-top: 1px solid rgb(221, 221, 221);
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+}
