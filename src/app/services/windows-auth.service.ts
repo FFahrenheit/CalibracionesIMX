@@ -7,6 +7,10 @@ import { LoginService } from './login.service';
 
 const base_url = environment.base_url;
 
+/**
+ * This is a legacy controller.
+ * Dont' use it anymore please
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -22,12 +26,19 @@ export class WindowsAuthService {
   public init() {
     const token = this.route.snapshot.queryParams['token'];
     const error = this.route.snapshot.queryParams['error'];
-    localStorage.setItem('token', token);
 
     if(!token || token == ''){
+      console.log(error);
       switch(error){
         case 'forbidden':
-          this.alert.error("No puede iniciar sesión, debe pertenecer al dominio INTERPLEX");
+          setTimeout(() => {
+            this.alert.error("No puede iniciar sesión, debe pertenecer al dominio INTERPLEX");            
+          }, 100);
+          break;
+        case 'incorrect':
+          setTimeout(() => {
+            this.alert.error("Credenciales incorrectas");            
+          }, 100);
           break;
         default:
           break;
@@ -35,6 +46,7 @@ export class WindowsAuthService {
       return;
     }
 
+    localStorage.setItem('token', token);
     const state = localStorage.getItem('returnUrl') || '/';
 
     console.log({
@@ -69,5 +81,4 @@ export class WindowsAuthService {
     });
     window.location.replace(authRef);
   }
-
 }

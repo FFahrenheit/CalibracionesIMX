@@ -11,9 +11,8 @@
                         <div class="form-group">
                             <label for="">Nombre de usuario: </label>
                             <font color="red">*</font>
-                            <input type="text" formControlName="username"
-                                placeholder="Ingresa tu usuario Interplex" class="form-control"
-                                [class]="getClass('username')">
+                            <input type="text" formControlName="username" placeholder="Ingresa tu usuario Interplex"
+                                class="form-control" [class]="getClass('username')">
                             <span
                                 *ngIf="form.controls['username'].hasError('required') && (form.controls['username'].touched)"
                                 class="invalid">
@@ -25,8 +24,8 @@
                             <font color="red">*</font>
                             <div class="input-group">
                                 <input name="password" [type]="showPassword ? 'text' : 'password'"
-                                    formControlName="password" placeholder="Escriba su contraseña"
-                                    class="form-control" [class]="getClass('password')">
+                                    formControlName="password" placeholder="Escriba su contraseña" class="form-control"
+                                    [class]="getClass('password')">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text show-password" title="Show / hide password"
                                         (click)="showPassword = !showPassword">
@@ -45,8 +44,8 @@
                             </span>
                         </div>
                         <div class="form-check form-switch remember-label">
-                            <input class="form-check-input" type="checkbox" id="remember" 
-                            name="remember" formControlName="remember">
+                            <input class="form-check-input" type="checkbox" id="remember" name="remember"
+                                formControlName="remember">
                             <label class="form-check-label" for="remember">
                                 Recordarme
                             </label>
@@ -58,7 +57,7 @@
                             </button>
                         </div>
                     </form>
-                    <p class="windows-login" title="Inicia sesión con tu usuario loggeado"
+                    <p class="windows-login" title="Inicia sesión con tu usuario de Windows"
                         (click)="windowsLogin()">
                         <span class="badge badge-success mx-1">Nuevo</span>
                         Iniciar sesión con Windows

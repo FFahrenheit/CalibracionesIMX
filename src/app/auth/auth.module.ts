@@ -6,13 +6,15 @@ import { AuthRoutes } from './auth.routing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { RecoverComponent } from './recover/recover.component';
+import { AdLoginComponent } from './ad-login/ad-login.component';
 
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RecoverComponent
+    RecoverComponent,
+    AdLoginComponent
   ],
   imports: [
     CommonModule,
