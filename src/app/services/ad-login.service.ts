@@ -21,6 +21,29 @@ export class AdLoginService {
     this.http = new HttpClient(this.handler);
   }
 
+  public saveCredentials(resp){
+    let user = resp['usuario'];
+
+    localStorage.setItem('username',user.username);
+    localStorage.setItem('token',resp['token']);
+    localStorage.setItem('email',user.email); 
+    localStorage.setItem('posicion',user.posicion);
+
+    this.login.setUser(
+      new User(
+        user.username, 
+        user.email,
+        user.posicion,
+        user.nombre)
+    );
+
+    if(user['recover']){
+      return null;
+    }
+
+    return true;
+  }
+
   public connectWithSSO(){
     return this.http.get(`${ base_url }/auth/sso`,{
       withCredentials: true
@@ -29,26 +52,7 @@ export class AdLoginService {
           console.log(resp);
           
           if(resp['ok']){
-            let user = resp['usuario'];
-
-            localStorage.setItem('username',user.username);
-            localStorage.setItem('token',resp['token']);
-            localStorage.setItem('email',user.email); 
-            localStorage.setItem('posicion',user.posicion);
-
-            this.login.setUser(
-              new User(
-                user.username, 
-                user.email,
-                user.posicion,
-                user.nombre)
-            );
-
-            if(user['recover']){
-              return null;
-            }
-
-            return true;
+            return this.saveCredentials(resp);
           }
 
           this.errorMessage = resp['error'] || 'Error al realizar petición';
@@ -59,6 +63,28 @@ export class AdLoginService {
           return of(false);
         })
       );
+  }
+
+  public connectWithCredentials(login : string, password : string){
+    return this.http.post(`${ base_url }/auth/sso`, {
+      login,
+      password
+    }).pipe(
+      map(resp => {
+        console.log(resp);
+
+        if(resp['ok']){
+          return this.saveCredentials(resp);
+        }
+
+        this.errorMessage = resp['error'] || 'Error al realizar petición';
+        return false;
+      }), catchError(err=> {
+        console.log(err);
+        this.errorMessage = 'No se pudo autenticar con el servidor';
+        return of(false);
+      })
+    );
   }
 
   public getError(){

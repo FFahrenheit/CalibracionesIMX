@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AdLoginService } from 'src/app/services/ad-login.service';
 import { ChangePasswordService } from 'src/app/services/change-password.service';
 import { AlertService } from 'src/app/shared/alert';
@@ -14,21 +14,18 @@ export class AdLoginComponent implements OnInit {
 
   public form : FormGroup;
   public showPassword = false;
-  private returnUrl : string;
 
   constructor(private fb      : FormBuilder,
               private adLogin : AdLoginService,
               private alert   : AlertService,
               private change  : ChangePasswordService,
-              private router  : Router,
-              private route   : ActivatedRoute) { }
+              private router  : Router) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
       username: [localStorage.getItem('remember-user')||'', Validators.compose([Validators.required])],
       password: ['', Validators.compose([Validators.required])]
     });
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   public get(ctrl : string) : AbstractControl{
@@ -43,29 +40,38 @@ export class AdLoginComponent implements OnInit {
     return control.hasError('required') ? 'is-invalid' : 'is-valid';
   }
 
+  public checkLogin(resp){
+    this.alert.clear();
+    if(resp == null){
+      this.change.activateGuard();
+      this.router.navigate(['usuarios','seguridad','cambiar']);
+    }else if(resp){
+      this.alert.success('Autenticación correcta');
+      setTimeout(() => {
+        this.router.navigate(['']);
+      }, 2500);
+    }else{
+      this.alert.error(this.adLogin.getError());
+      this.get('password').setValue('');
+    }
+  }
+
   public ADLogin(){
     this.alert.info('Iniciando autenticación...', { autoClose: false });
     this.adLogin.connectWithSSO().subscribe(resp=>{
-      this.alert.clear();
-      if(resp == null){
-        this.change.activateGuard();
-        this.router.navigate(['usuarios','seguridad','cambiar']);
-      }else if(resp){
-        this.alert.success('Autenticación correcta');
-        setTimeout(() => {
-          this.router.navigateByUrl(this.returnUrl);
-        }, 2500);
-      }else{
-        this.alert.error(this.adLogin.getError());
-        this.get('password').setValue('');
-      }
+      this.checkLogin(resp);
     },error=>{
       this.alert.error(this.adLogin.getError());
     });
   }
 
   public loginAs(username : string, password : string){
-
+    this.adLogin.connectWithCredentials(username, password)
+        .subscribe(resp=> {
+          this.checkLogin(resp);
+        }, error => {
+          this.alert.error(this.adLogin.getError());
+        });
   }
 
   public onSubmit(){
