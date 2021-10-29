@@ -5,12 +5,14 @@ import { ChartsRoutes } from './charts.routing';
 import { NextCalibrationsComponent } from './next-calibrations/next-calibrations.component';
 import { DoneCalibrationsComponent } from './done-calibrations/done-calibrations.component';
 import { BorrowsOverallComponent } from './borrows-overall/borrows-overall.component';
+import { CalibrationComparisonComponent } from './calibration-comparison/calibration-comparison.component';
 
 @NgModule({
   declarations: [
     NextCalibrationsComponent,
     DoneCalibrationsComponent,
-    BorrowsOverallComponent
+    BorrowsOverallComponent,
+    CalibrationComparisonComponent
   ],
   imports: [
     CommonModule,

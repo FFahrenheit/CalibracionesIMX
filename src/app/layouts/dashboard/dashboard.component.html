@@ -1,8 +1,9 @@
 <div id="wrapper" class="d-flex">
     <div class="bg-light bg-gradient order-right border" id="sidebar-wrapper">
         <div (click)="goTo([''],0)" class="sidebar-heading menu-title title-link">
-            <i class="fas fa-cogs"></i>
-            Calibraciones
+            <i *ngIf="title == 'Calibraciones'" class="fas fa-cogs"></i>
+            <i *ngIf="title != 'Calibraciones'" class="fas fa-flask"></i>
+            {{ title }}
         </div>
         <div class="list-group list-group-flush bg-gradient">
             <a *ngFor="let link of sidebar;let i = index"

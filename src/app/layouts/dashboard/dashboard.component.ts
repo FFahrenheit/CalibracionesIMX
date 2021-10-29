@@ -14,6 +14,7 @@ import { profileOptions, adminOptions, mediumOptions } from 'src/app/resources/d
 export class DashboardComponent implements OnInit {
 
   public selectedIndex : number = 0;
+  public title = 'Calibraciones';
   public shown : boolean = true;
   public user : User | undefined = Object.create(null);
   public isAdmin = false;
@@ -50,6 +51,7 @@ export class DashboardComponent implements OnInit {
       this.sidebar = this.sidebar.concat(mediumSidebar);
     }
 
+    this.title = window.location.origin.includes('localhost')? 'Test server' : 'Calibraciones';
     this.getMode();
   }
 

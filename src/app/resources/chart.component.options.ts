@@ -10,5 +10,9 @@ export const chartOptions = [
     {
         title: 'Flujo de préstamos',
         route: 'prestamos'
+    },
+    {
+        title: 'Comparativa de calibraciones',
+        route: 'comparacion'
     }
 ];

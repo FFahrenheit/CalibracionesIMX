@@ -15,6 +15,9 @@ export class ChartsService {
 
   constructor(private http : HttpClient) { }
 
+  public getComparisonChart(){
+    return this.getChart('comparison');
+  }
   public getBorrowsOverallChart(){
     return this.getChart('borrows');
   }

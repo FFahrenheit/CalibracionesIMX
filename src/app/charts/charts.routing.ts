@@ -1,6 +1,7 @@
 import { Routes } from "@angular/router";
 import { ChartsComponent } from "../layouts/charts/charts.component";
 import { BorrowsOverallComponent } from "./borrows-overall/borrows-overall.component";
+import { CalibrationComparisonComponent } from "./calibration-comparison/calibration-comparison.component";
 import { DoneCalibrationsComponent } from "./done-calibrations/done-calibrations.component";
 import { NextCalibrationsComponent } from "./next-calibrations/next-calibrations.component";
 
@@ -28,6 +29,13 @@ export const ChartsRoutes : Routes =  [
                 component: BorrowsOverallComponent,
                 data: {
                     title: 'Flujo de préstamos'
+                }
+            },
+            {
+                path: 'comparacion',
+                component: CalibrationComparisonComponent,
+                data: {
+                    title: 'Comparación de calibraciones hechas'
                 }
             },
             {
