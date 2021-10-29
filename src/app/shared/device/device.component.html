@@ -46,12 +46,19 @@
                         <ng-template #not_available>
                             <attr name="Estado del equipo" value="Prestado" status="not-ok"></attr>
                             <attr *ngIf="device.prestatario != 'operador'; else operador" name="Prestatario"
-                                [value]="device.nombrePrestatario + ' (' + device.prestatario + ')'">
+                                [value]="device.nombrePrestatario">
                             </attr>
                             <ng-template #operador>
-                                <attr name="Prestatario" [value]="device.operador + ' (operador)'">
+                                <attr name="Prestatario" [value]="device.operador + ' (Operador)'">
                                 </attr>
                             </ng-template>
+                            <a *ngIf="device.emailPrestatario.startsWith(device.prestatario)"
+                                title="Enviar mensaje por Teams"
+                                [href]="'https://teams.microsoft.com/l/chat/0/0?users=' + device.emailPrestatario"
+                                target="_blank" class="black-link">
+                                Contactar por Teams
+                                <i class="teams-icon"></i>
+                            </a>
                         </ng-template>
                     </div>
 
@@ -59,7 +66,16 @@
                         <h6 class="text-left subtitle-att">Responsables del equipo</h6>
                         <ul class="dot-list" *ngIf="device.responsables.length > 0; else empty_responsables">
                             <li *ngFor="let r of device.responsables">
-                                {{ r.nombre | titlecase }}
+                                <a *ngIf="r.email.startsWith(r.username); else just_user"
+                                    title="Enviar mensaje por Teams"
+                                    [href]="'https://teams.microsoft.com/l/chat/0/0?users=' + r.email" target="_blank"
+                                    class="black-link">
+                                    {{ r.nombre }}
+                                    <i class="teams-icon"></i>
+                                </a>
+                                <ng-template #just_user>
+                                    {{ r.nombre | titlecase }}
+                                </ng-template>
                             </li>
                         </ul>
                         <ng-template #empty_responsables>

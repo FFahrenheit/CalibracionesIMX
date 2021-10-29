@@ -1,6 +1,6 @@
 <div *ngIf="device != null" class="card my-3 pb-3">
     <div class="container-fluid text-center pt-1">
-        
+
         <div class="row ml-1">
             <div class="col-md-12">
                 <h4 class="text-left my-3">
@@ -13,7 +13,8 @@
             <div class="col-md-4">
 
                 <div>
-                    <a [href]="'/equipos/detalles/' + device.id" target="_blank" class="black-link" title="Ver detalles del equipo">
+                    <a [href]="'/equipos/detalles/' + device.id" target="_blank" class="black-link"
+                        title="Ver detalles del equipo">
                         <h5 class="text-left subtitle-att">
                             Detalles del equipo
                             <i class="fas fa-external-link-alt"></i>
@@ -45,9 +46,8 @@
                             [value]="titleCase.transform(device.nombrePrestatario) + ' (' + device.prestatario + ')'">
                         </attr>
                         <ng-template #operador>
-                            <attr name="Prestatario"
-                            [value]="device.operador + ' (operador)'">
-                        </attr>
+                            <attr name="Prestatario" [value]="device.operador + ' (operador)'">
+                            </attr>
                         </ng-template>
                     </ng-template>
                 </div>
@@ -120,10 +120,8 @@
                                     {{ p.id }}
                                     <i [class]="getIcon(p.estado)"></i>
                                 </td>
-                                <td style="white-space: nowrap">
-                                    <span>
-                                        {{ p.estado }}
-                                    </span>
+                                <td>
+                                    {{ p.estado }}
                                 </td>
                                 <td>
                                     {{ p.fechaEntrega | date:'mediumDate' }}
@@ -132,7 +130,7 @@
                                 <td>
                                     {{ p.fechaCompromiso | date:'mediumDate':'UTC' }}
                                 </td>
-                                <td style="white-space: nowrap">
+                                <td>
                                     <span *ngIf="p.nombrePrestatario != 'operador';else operador">
                                         {{ p.nombrePrestatario | titlecase }}
                                     </span>

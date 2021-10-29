@@ -43,7 +43,16 @@
                         <h6 class="text-left subtitle-att">Responsables del equipo</h6>
                         <ul class="dot-list" *ngIf="device.responsables.length > 0; else empty_responsables">
                             <li *ngFor="let r of device.responsables">
-                                {{ r.nombre | titlecase }}
+                                <a *ngIf="r.email.startsWith(r.username); else just_user"
+                                    title="Enviar mensaje por Teams"
+                                    [href]="'https://teams.microsoft.com/l/chat/0/0?users=' + r.email" target="_blank"
+                                    class="black-link">
+                                    {{ r.nombre }}
+                                    <i class="teams-icon"></i>
+                                </a>
+                                <ng-template #just_user>
+                                    {{ r.nombre | titlecase }}
+                                </ng-template>
                             </li>
                         </ul>
                         <ng-template #empty_responsables>
@@ -66,6 +75,13 @@
                             <attr name="Prestatario" [value]="device.operador + ' (operador)'">
                             </attr>
                         </ng-template>
+                        <a *ngIf="device.emailPrestatario.startsWith(device.prestatario)"
+                            title="Enviar mensaje por Teams"
+                            [href]="'https://teams.microsoft.com/l/chat/0/0?users=' + device.emailPrestatario"
+                            target="_blank" class="black-link">
+                            Contactar por Teams
+                            <i class="teams-icon"></i>
+                        </a>
                     </ng-template>
                 </div>
 
@@ -137,10 +153,8 @@
                                     {{ p.id }}
                                     <i [class]="getIcon(p.estado)"></i>
                                 </td>
-                                <td style="white-space: nowrap">
-                                    <span>
-                                        {{ p.estado }}
-                                    </span>
+                                <td>
+                                    {{ p.estado }}
                                 </td>
                                 <td>
                                     {{ p.fechaEntrega | date:'mediumDate' }}
@@ -149,11 +163,11 @@
                                 <td>
                                     {{ p.fechaCompromiso | date:'mediumDate':'UTC' }}
                                 </td>
-                                <td style="white-space: nowrap">
+                                <td>
                                     <span *ngIf="p.nombrePrestatario != 'operador';else operador">
                                         {{ p.nombrePrestatario | titlecase }}
                                     </span>
-                                    <ng-template #operador>
+                                    <ng-template #operador style="white-space: nowrap">
                                         {{ p.operador }}
                                     </ng-template>
                                 </td>
