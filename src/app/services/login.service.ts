@@ -65,7 +65,11 @@ export class LoginService {
   }
 
   public isAdmin() : boolean{
-    return this.user.posicion == 'encargado';
+    return this.user.posicion == 'encargado' || this.user.posicion == 'administrador';
+  }
+
+  public isSuper() : boolean{
+    return this.user.posicion == 'administrador';
   }
 
   public isLender() : boolean{

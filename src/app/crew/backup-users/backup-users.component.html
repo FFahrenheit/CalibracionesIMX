@@ -23,6 +23,7 @@
                     <option [value]='null' disabled selected>Rol del usuario</option>
                     <option value='encargado'>Encargado</option>
                     <option value='prestador'>Prestador</option>
+                    <option value='gerente'>Gerente</option>
                 </select>
                 </div>
                 <div class="col-md-3">
@@ -69,7 +70,7 @@
                             {{ e.posicion | titlecase }}
                         </td>
                         <td>
-                            <button *ngIf="e.username != myUser && e.posicion != 'gerente'; else no_user" title="Remover encargado"
+                            <button *ngIf="e.username != myUser && e.posicion != 'gerente || isSuper'; else no_user" title="Remover encargado"
                                 class="btn btn-danger fas fa-user-times" (click)="remove(i)">
                             </button>
                             <ng-template #no_user>N/A</ng-template>

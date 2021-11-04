@@ -19,6 +19,7 @@ export class BackupUsersComponent implements OnInit {
   public encargados;
   public myUser;
   public changesDone = 0;
+  public isSuper : boolean;
 
   public validInput = false;
 
@@ -32,7 +33,8 @@ export class BackupUsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.myUser = this.user.getLoggedUser().username;
-
+    this.isSuper = this.user.isSuper();
+    
     this.form = this.fb.group({
       name: ['', Validators.required],
       username: [''],
