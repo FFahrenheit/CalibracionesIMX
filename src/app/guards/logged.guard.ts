@@ -8,8 +8,7 @@ import { LoginService } from '../services/login.service';
 })
 export class LoggedGuard implements CanActivate {
 
-  constructor(private loginService : LoginService,
-              private router : Router){}
+  constructor(private loginService : LoginService){}
   
   canActivate(
     route: ActivatedRouteSnapshot,
