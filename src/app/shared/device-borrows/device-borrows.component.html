@@ -43,7 +43,7 @@
                         <h6 class="text-left subtitle-att">Responsables del equipo</h6>
                         <ul class="dot-list" *ngIf="device.responsables.length > 0; else empty_responsables">
                             <li *ngFor="let r of device.responsables">
-                                <a *ngIf="r.email.startsWith(r.username); else just_user"
+                                <a *ngIf="r.email?.startsWith(r.username); else just_user"
                                     title="Enviar mensaje por Teams"
                                     [href]="'https://teams.microsoft.com/l/chat/0/0?users=' + r.email" target="_blank"
                                     class="black-link">
@@ -75,7 +75,7 @@
                             <attr name="Prestatario" [value]="device.operador + ' (operador)'">
                             </attr>
                         </ng-template>
-                        <a *ngIf="device.emailPrestatario.startsWith(device.prestatario)"
+                        <a *ngIf="device.emailPrestatario?.startsWith(device.prestatario)"
                             title="Enviar mensaje por Teams"
                             [href]="'https://teams.microsoft.com/l/chat/0/0?users=' + device.emailPrestatario"
                             target="_blank" class="black-link">
