@@ -153,6 +153,8 @@ export class EditService {
     }
 
     delete body.equipo.nombrePrestatario;
+    delete body.equipo.operador;
+    delete body.equipo.emailPrestatario;
     delete body.equipo.responsables;
     delete body.equipo.verificadores;
     delete body.equipo.proveedores;
