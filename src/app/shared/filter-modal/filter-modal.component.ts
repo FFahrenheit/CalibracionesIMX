@@ -100,6 +100,10 @@ export class FilterModalComponent implements OnInit {
     }, reason =>{
       this.cancel.emit();
     });
+
+    setTimeout(() => {
+      document.getElementById('id_input').focus();
+    }, 100);
   }
 
   public resetForm(): void {
