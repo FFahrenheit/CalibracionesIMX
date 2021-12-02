@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
 
     this.isAdmin = this.login.isAdmin();
 
-    this.sidebar = publicSidebar;
+    this.sidebar = [];
     this.publicDropdown = profileOptions;
 
 
@@ -45,10 +45,12 @@ export class DashboardComponent implements OnInit {
       this.publicDropdown = this.publicDropdown.concat(mediumOptions[0]);
     }
     if(this.isAdmin){
-      this.sidebar = this.sidebar.concat(adminSidebar, mediumSidebar)
+      this.sidebar = adminSidebar;
       this.adminDropdown = adminOptions;
     }else if(this.login.isLender()){
-      this.sidebar = this.sidebar.concat(mediumSidebar);
+      this.sidebar = mediumSidebar;
+    }else{
+      this.sidebar = publicSidebar;
     }
 
     this.title = window.location.origin.includes('localhost')? 'Test server' : 'Calibraciones';

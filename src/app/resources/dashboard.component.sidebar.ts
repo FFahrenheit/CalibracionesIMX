@@ -5,9 +5,19 @@ export const publicSidebar = [
         route: ['equipos','ver'],
         detail: 'Ver equipos'
     },
+    {
+        name: 'Acreditación proveedores',
+        route: ['usuarios','proveedores','ver'],
+        detail: 'Agregar y ver proveedores certificados'
+    }
 ];
 
 export const adminSidebar = [
+    {
+        name: 'Consultar equipos',
+        route: ['equipos','ver'],
+        detail: 'Ver equipos'
+    },
     {
         name: 'Calibraciones próximas',
         route: ['equipos','proximos'],
@@ -49,13 +59,28 @@ export const adminSidebar = [
         detail: 'Agregar archivos de referencia' 
     },
     {
-        name: 'Administrar proveedores',
+        name: 'Acreditación proveedores',
         route: ['usuarios','proveedores','ver'],
         detail: 'Agregar y ver proveedores certificados'
+    },
+    {
+        name: 'Prestar equipos',
+        route: ['equipos','prestar'],
+        detail: 'Prestar equipos'
+    },
+    {
+        name: 'Equipos prestados',
+        route: ['equipos','prestados'],
+        detail: 'Equipos prestados'
     }
 ];
 
 export const mediumSidebar = [
+    {
+        name: 'Consultar equipos',
+        route: ['equipos','ver'],
+        detail: 'Ver equipos'
+    },
     {
         name: 'Prestar equipos',
         route: ['equipos','prestar'],
@@ -66,4 +91,9 @@ export const mediumSidebar = [
         route: ['equipos','prestados'],
         detail: 'Equipos prestados'
     },
+    {
+        name: 'Acreditación proveedores',
+        route: ['usuarios','proveedores','ver'],
+        detail: 'Agregar y ver proveedores certificados'
+    }
 ];
