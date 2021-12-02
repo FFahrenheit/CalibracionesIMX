@@ -5,6 +5,7 @@ import { GetDeviceService } from 'src/app/services/get-device.service';
 import { LoginService } from 'src/app/services/login.service';
 import { ProvidersService } from 'src/app/services/providers.service';
 import { AlertService } from 'src/app/shared/alert';
+import { IconsAlert } from 'src/app/util/icons.alert';
 
 @Component({
   selector: 'app-see-providers',
@@ -15,6 +16,7 @@ export class SeeProvidersComponent implements OnInit {
 
   public proveedores = [];
   public isAdmin : boolean;
+  public icons = IconsAlert;
 
   constructor(private alert     : AlertService,
               private getDevice : GetDeviceService,

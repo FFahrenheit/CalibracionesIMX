@@ -22,7 +22,7 @@
                     Aquí puede consultar la lista de los proveedores certificados para las calibraciones.
                     También puede consultar su certificado 
                     <span style="font-weight: bold">ISO17025</span>.<br>
-                    Existen {{ proveedores.length }} proveedores certificados registrados dados de alta.
+                    Hay {{ proveedores.length }} proveedores certificados registrados.
                 </span></div>
 
             <div class="col-md-12">
@@ -35,17 +35,24 @@
                                 *ngIf="proveedores.length > 0;else empty_calibradores">
                                 <thead>
                                     <tr class="header">
-                                        <th scope="col">
+                                        <th scope="col" [appSort]="proveedores" data-order="desc" data-name="id" class="align-middle">
+                                            <i class="fas fa-sort float-left"></i>
                                             ID
                                         </th>
-                                        <th scope="col">
+                                        <th scope="col" [appSort]="proveedores" data-order="desc" data-name="nombre" class="align-middle">
+                                            <i class="fas fa-sort float-left"></i>
                                             Nombre del proveedor
                                         </th>
                                         <th scope="col">
                                             Certificado ISO17025
                                         </th>
-                                        <th scope="col">
+                                        <th scope="col" [appSort]="proveedores" data-order="desc" data-name="agregado" class="align-middle">
+                                            <i class="fas fa-sort float-left"></i>
                                             Agregado
+                                        </th>
+                                        <th scope="col" [appSort]="proveedores" data-order="desc" data-name="agregado" class="align-middle">
+                                            <i class="fas fa-sort float-left"></i>
+                                            Fecha de expiración
                                         </th>
                                     </tr>
                                 </thead>
@@ -62,7 +69,7 @@
                                         </td>
                                         <td *ngIf="p.certificado && !isFile(p.certificado)">
                                             <a class="black-link" target="_blank" [href]="seeCertificate(p)">
-                                                <i class="fas fa-file-download"></i>
+                                                <i class="fas fa-file-pdf"></i>
                                                 Ver certificado
                                             </a>
                                         </td>
@@ -71,6 +78,10 @@
                                         </td>
                                         <td>
                                             {{ p.agregado | date:'medium' }}
+                                        </td>
+                                        <td>
+                                            <i [class]="icons.calibrado(p.expiracion)"></i>
+                                            {{ p.expiracion | date:'shortDate':'UTC' }}
                                         </td>
                                     </tr>
                                 </tbody>

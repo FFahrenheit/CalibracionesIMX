@@ -22,16 +22,19 @@
                                 *ngIf="proveedores.length > 0;else empty_calibradores">
                                 <thead>
                                     <tr class="header">
-                                        <th scope="col">
+                                        <th scope="col" class="align-middle">
                                             ID
                                         </th>
-                                        <th scope="col">
+                                        <th scope="col" class="align-middle">
                                             Proveedor
                                         </th>
-                                        <th scope="col">
+                                        <th scope="col" class="align-middle">
                                             Certificado
                                         </th>
-                                        <th scope="col">
+                                        <th scope="col" class="align-middle">
+                                            Fecha expiración
+                                        </th>
+                                        <th scope="col" class="align-middle">
                                             Acciones
                                         </th>
                                     </tr>
@@ -57,6 +60,9 @@
                                             No se adjuntó
                                         </td>
                                         <td>
+                                            {{ p.expiracion | date:'shortDate':'UTC' }}
+                                        </td>
+                                        <td>
                                             <button title="Remover calibrador" class="btn btn-danger fas fa-trash-alt"
                                                 (click)="removeProveedor(i)">
                                             </button>
@@ -72,11 +78,22 @@
 
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label for="" class="col-md-5 col-form-label has-error has-feedback">Nombre del
-                                proveedor</label>
+                            <label for="" class="col-md-5 col-form-label has-error has-feedback">
+                                Nombre del proveedor
+                            </label>
                             <div class="col-md-7">
                                 <input formControlName="nombre" type="text" class="form-control" placeholder="Proveedor"
                                     [class]="getClass('nombre')">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-md-5 col-form-label has-error has-feedback">
+                                Fecha de expiración
+                            </label>
+                            <div class="col-md-7">
+                                <input formControlName="expiracion" type="date" class="form-control"
+                                    [class]="getClass('expiracion')">
                             </div>
                         </div>
 

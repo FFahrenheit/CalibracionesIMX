@@ -28,7 +28,8 @@ export class ProviderListComponent implements OnInit {
     this.form = this.fb.group({
       nombre : ['',Validators.required],
       hasCertificado : [false, Validators.required],
-      certificado : ['', Validators.required]
+      certificado : ['', Validators.required],
+      expiracion: ['', Validators.required]
     });
 
     this.loadProveedores();
@@ -115,6 +116,7 @@ export class ProviderListComponent implements OnInit {
     if(this.isValid()){
       let repeated = false;
       let nombre = this.get('nombre').value;
+      let expiracion = this.get('expiracion').value;
       
       this.proveedores.forEach(p=>{
         if(p.nombre == nombre){
@@ -126,6 +128,8 @@ export class ProviderListComponent implements OnInit {
         let proveedor = Object.create(null);
         proveedor.nombre = nombre;
         proveedor.new = true;
+        proveedor.expiracion = expiracion;
+
         if(this.get('hasCertificado').value){
           proveedor.certificado = this.archivo;
         }
