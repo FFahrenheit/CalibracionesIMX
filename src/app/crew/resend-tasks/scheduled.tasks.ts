@@ -52,5 +52,23 @@ export const tasks = [
         trigger: 'Respaldar',
         link: 'backup/weekly',
         icon: 'fas fa-history'
+    },
+    {
+        task: 'Expiración de certificado de proveedor próxima',
+        description: 'Envía un correo sobre los certificados de proveedores cuya calibración expira ' 
+        + 'dentro de 20 días',
+        frequency: 'Todos los días a las 6:50AM',
+        trigger: 'Reenviar',
+        link: 'providers/notice',
+        icon: 'far fa-envelope'
+    },
+    {
+        task: 'Expiración de certificado de proveedor',
+        description: 'Envía un correo sobre los certificados de proveedores cuya calibración ha ' 
+        + 'expirado',
+        frequency: 'Todos los días a las 6:55AM',
+        trigger: 'Reenviar',
+        link: 'providers/expired',
+        icon: 'far fa-envelope'
     }
 ];
